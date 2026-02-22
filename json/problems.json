@@ -2,15 +2,23 @@
   {
     "title": "Add Two Numbers",
     "problemID": "c1a2b3d4-e5f6-4a7b-8c9d-123456789abc",
+    "description": "Get the sum of two integers.",
     "difficulty": "EASY",
-    "timer": 10,
-    "comments": []
+    "type": "ARRAY",
+    "tags": ["math", "basic"],
+    "timer": 15,
+    "comments": [],
+    "answer": "a + b"
   },
   {
     "title": "Print Hello World",
     "problemID": "d9e8f7a6-b5c4-4d3e-9f8a-abcdef123456",
+    "description": "Print Hello World to the console.",
     "difficulty": "EASY",
-    "timer": 5,
-    "comments": []
+    "type": "STRING",
+    "tags": ["math", "basic","intro"],
+    "timer": 10,
+    "comments": [],
+    "answer": "System.out.println(\"Hello World\");"
   }
 ]
