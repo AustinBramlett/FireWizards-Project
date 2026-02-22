@@ -1,0 +1,22 @@
+[
+  {
+    "id": "3f8f2c8e-5c1a-4a7a-9d4f-1b2e7c9d1234",
+    "firstName": "Jordan",
+    "lastName": "Miller",
+    "username": "jmiller",
+    "email": "jmiller@email.com",
+    "password": "pass123",
+    "accountType": "STUDENT",
+    "muted": false
+  },
+  {
+    "id": "7a2b9d4c-8e3f-4b1c-9f2d-6e7a8b3c5678",
+    "firstName": "Jeff",
+    "lastName": "Richardson",
+    "username": "jrichardson",
+    "email": "jeff@email.com",
+    "password": "admin456",
+    "accountType": "ADMINISTRATOR",
+    "muted": false
+  }
+]
