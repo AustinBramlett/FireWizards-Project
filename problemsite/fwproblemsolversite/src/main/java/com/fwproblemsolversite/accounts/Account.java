@@ -22,8 +22,14 @@ public class Account {
                    String username, String email) {
     }
 
-    public Account(String firstName, String lastName, String username,
-                   String email, String password, AccountType accountType) {
+    public Account(UUID id, String firstName, String lastName, String username,
+                   String email, String password) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.email = email;
+        this.password = password;
     }
 
     public void comment(String comment) {

@@ -33,7 +33,7 @@ public class Problem {
                    ProblemType type,
                    ArrayList<String> tags,
                    double timer,
-                   String answer) {
+                   String answer, Difficulty difficulty) {
     }
 
     public void displayProblem() {

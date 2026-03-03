@@ -1,8 +1,15 @@
 package com.fwproblemsolversite.accounts;
 
+import java.util.UUID;
+
 public class Student extends Account {
 
     private String rank;
+
+    public Student(UUID id, String firstName, String lastName, String username,
+                   String email, String password) {
+        super(id, firstName, lastName, username, email, password);
+    }
 
     public void viewProblem(Object problem) {
     }

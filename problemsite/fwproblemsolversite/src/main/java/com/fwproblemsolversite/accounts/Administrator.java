@@ -8,6 +8,13 @@ public class Administrator extends Account {
     private ArrayList<UUID> adminBanLog;
     private ArrayList<UUID> adminMuteLog;
     private ArrayList<String> adminTermLog;
+    public Administrator(UUID id, String firstName, String lastName,
+                   String username, String email, String password, ArrayList<UUID> adminBanLog, ArrayList<UUID> adminMuteLog, ArrayList<String> adminTermLog) {
+        super(id, firstName, lastName, username, email, password);
+        this.adminBanLog = adminBanLog;
+        this.adminMuteLog = adminMuteLog;
+        this.adminTermLog = adminTermLog;
+    }
 
     public boolean ban(UUID accountID) {
         return false;

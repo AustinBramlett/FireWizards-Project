@@ -8,6 +8,11 @@ import com.fwproblemsolversite.enums.ProblemType;
 public class Contributor extends Account {
 
     private ArrayList<UUID> questionsMade;
+    public Contributor(UUID id, String firstName, String lastName, String username,
+                   String email, String password, ArrayList<UUID> questionsMade) {
+        super(id, firstName, lastName, username, email, password);
+        this.questionsMade = questionsMade;
+    }
 
     public boolean addProblem(String title, String description,
                               ArrayList<String> constraints,
