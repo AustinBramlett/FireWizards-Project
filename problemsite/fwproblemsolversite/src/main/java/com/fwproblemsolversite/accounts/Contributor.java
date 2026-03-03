@@ -5,6 +5,8 @@ import java.util.UUID;
 import com.fwproblemsolversite.enums.Language;
 import com.fwproblemsolversite.enums.ProblemType;
 
+import com.fwproblemsolversite.enums.AccountType;
+
 public class Contributor extends Account {
 
     private ArrayList<UUID> questionsMade;
@@ -28,5 +30,13 @@ public class Contributor extends Account {
 
     public boolean removeProblem(UUID problemID) {
         return false;
+    }
+    /**
+     * Returns the AccountType of this instance.
+     * @return CONTRIBUTOR
+     */
+    @Override
+    public AccountType getAccountType(){
+        return AccountType.CONTRIBUTOR;
     }
 }

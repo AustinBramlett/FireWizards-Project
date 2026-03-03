@@ -3,6 +3,8 @@ package com.fwproblemsolversite.accounts;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import com.fwproblemsolversite.enums.AccountType;
+
 public class Administrator extends Account {
 
     private ArrayList<UUID> adminBanLog;
@@ -14,6 +16,7 @@ public class Administrator extends Account {
         this.adminBanLog = adminBanLog;
         this.adminMuteLog = adminMuteLog;
         this.adminTermLog = adminTermLog;
+        
     }
 
     public boolean ban(UUID accountID) {
@@ -35,5 +38,13 @@ public class Administrator extends Account {
     }
 
     public void seeAllReports() {
+    }
+    /**
+     * Returns the AccountType of this instance.
+     * @return ADMIN
+     */
+    @Override
+    public AccountType getAccountType() {
+        return AccountType.ADMIN;
     }
 }

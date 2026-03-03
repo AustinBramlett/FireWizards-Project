@@ -11,13 +11,13 @@ import java.util.UUID;
 import java.io.FileReader;
 import java.io.IOException;
 //This class is responsible for loading data from JSON files and converting them into the appropriate Java objects (Accounts, Problems, Reports).
-//Prepare for a lot of type casting.
+//Prepare for a lot of type casting. We're coming back to this later by the way.
 
 public class dataLoader {
     private static JSONParser parser = new JSONParser();
     public static ArrayList<Report> LoadReports(){
         ArrayList<Report> reports = new ArrayList<>();
-        try (FileReader reader = new FileReader("reports.json")) {
+        try (FileReader reader = new FileReader("json/reports.json")) {
             JSONArray jsonObject = (JSONArray) parser.parse(reader);
             for(Object obj : jsonObject) {
                 JSONObject reportObj = (JSONObject) obj;
@@ -36,7 +36,7 @@ public class dataLoader {
     }
     public static ArrayList<Problem> LoadProblems(){
         ArrayList<Problem> problems = new ArrayList<>();
-        try (FileReader reader = new FileReader("problems.json")) {
+        try (FileReader reader = new FileReader("json/problems.json")) {
             JSONArray jsonObject = (JSONArray) parser.parse(reader);
             for(Object obj : jsonObject) {
                 JSONObject problemObj = (JSONObject) obj;
@@ -117,7 +117,7 @@ public class dataLoader {
     }
     public static ArrayList<Account> LoadAccounts(){
         ArrayList<Account> accounts = new ArrayList<>();
-        try (FileReader reader = new FileReader("accounts.json")) {
+        try (FileReader reader = new FileReader("json/accounts.json")) {
             JSONArray jsonObj = (JSONArray) parser.parse(reader);
             // Parse the JSON and create the proper Account instances based on the account type
             for(Object obj : jsonObj) {
@@ -159,5 +159,25 @@ public class dataLoader {
             e.printStackTrace();
         }
         return accounts; // Return the list of accounts
+    }
+    public static void main(String[] args){
+        ArrayList<Account> accounts = LoadAccounts();
+        ArrayList<Problem> problems = LoadProblems();
+        ArrayList<Report> reports = LoadReports();
+        //Print out the loaded data to verify it was loaded correctly
+        System.out.println("Loaded Accounts:");
+        for (Account account : accounts) {
+            System.out.println(account); //Verifies it exists, there's no toString currently.
+            System.out.println(account.getUsername());
+        }
+        System.out.println("\nLoaded Problems:");
+        for (Problem problem : problems) {
+            System.out.println(problem); //Same here, no toString
+            System.out.println(problem.getID());
+        }
+        System.out.println("\nLoaded Reports:");
+        for (Report report : reports) {
+            System.out.println(report); //Surprisingly, this one has a toString. But it looks really close to raw JSON...
+        }
     }
 }
