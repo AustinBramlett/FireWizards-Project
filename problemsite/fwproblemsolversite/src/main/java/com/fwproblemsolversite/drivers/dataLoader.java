@@ -75,14 +75,14 @@ public class dataLoader {
             String accountType = (String) accountObj.get("accountType");
             //Switch to determine which type of account to create
             switch (accountType) {
-                case "USER":
-                    // Create a User account instance
+                case "STUDENT":
+                    // Create a Student account instance
                     break;
-                case "ADMIN":
-                    // Create an Admin account instance
+                case "ADMINISTRATOR":
+                    // Create an Administrator account instance
                     break;
-                case "MODERATOR":
-                    // Create a Moderator account instance
+                case "CONTRIBUTOR":
+                    // Create a Contributor account instance
                     break;
                 default:
                     System.out.println("Unknown account type: " + accountType);
