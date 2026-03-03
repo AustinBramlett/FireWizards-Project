@@ -40,12 +40,12 @@ public class dataWriter {
                         break;
                 }
                 item.put("muted", account.getMuted()); //I suggest moving this above type in the JSON.
-                writer.write(item.toJSONString());
-                writer.flush(); //We might want to switch to BufferedWriter? It's fine for now though.
+                writer.write(item.toJSONString() + System.lineSeparator());
                 //We can turn this part into a comment later.
                 System.out.println("Successfully saved account " + account.getUsername() + "!");
                 System.out.println("Contents: " + item.toJSONString());
             }
+            writer.close(); //We might want to switch to BufferedWriter? It's fine for now though.
         } catch(IOException e){
             e.printStackTrace();
             return false; //Something definitely went wrong here!
@@ -64,11 +64,11 @@ public class dataWriter {
                 item.put("examples", problem.getExamples());
                 item.put("notes", problem.getNotes());
                 item.put("type", problem.getType().toString());
-                writer.write(item.toJSONString());
-                writer.flush();
+                writer.write(item.toJSONString() + System.lineSeparator());
                 System.out.println("Successfully saved problem " + problem.getID() + "!");
                 System.out.println("Contents: " + item.toJSONString());
             }
+            writer.close();
         } catch(IOException e){
             e.printStackTrace();
             return false;
@@ -83,11 +83,11 @@ public class dataWriter {
                 item.put("accused", report.getAccused());
                 item.put("reason", report.getReason());
                 item.put("sender", report.getSender());
-                writer.write(item.toJSONString());
-                writer.flush();
+                writer.write(item.toJSONString() + System.lineSeparator());
                 System.out.println("Successfully saved report " + report.getID() + "!");
                 System.out.println("Contents: " + item.toJSONString());
             }
+            writer.close();
         } catch(IOException e){
             e.printStackTrace();
             return false;
