@@ -1,6 +1,6 @@
 package com.fwproblemsolversite.drivers;
 import com.fwproblemsolversite.accounts.Account;
-import com.fwproblemsolversite.problems.Problem;
+import com.fwproblemsolversite.problems.*;
 import com.fwproblemsolversite.accounts.Report;
 import com.fwproblemsolversite.problems.Comment;
 import com.fwproblemsolversite.enums.*;
@@ -57,7 +57,7 @@ public class dataLoader {
                 Comment commentInstance = new Comment(sender, commentText, score);
                 comments.add(commentInstance);
             }
-            int timer = ((Long) jsonObject.get("timer")).intValue();
+            double timer = ((Long) jsonObject.get("timer")).intValue();
             Problem problem = new Problem(title, id, description, null, null, null, null, 
                 null, tags, timer, answer);
             //We're missing a lot.
