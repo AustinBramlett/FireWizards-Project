@@ -8,14 +8,16 @@ public class ProblemData {
     private ArrayList<Problem> problems;
     private static ProblemData problemData;
 
-    private ProblemData() {
+    public ProblemData() {
+        problems = new ArrayList<>();
     }
 
     public ArrayList<Problem> getProblems() {
-        return null;
+        return problems;
     }
 
     public void add(Problem problem) {
+        problems.add(problem);
     }
 
     public void remove(String id) {
