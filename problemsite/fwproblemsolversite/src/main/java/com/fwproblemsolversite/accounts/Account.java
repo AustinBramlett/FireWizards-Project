@@ -1,6 +1,7 @@
 package com.fwproblemsolversite.accounts;
 
 import java.util.UUID;
+
 import com.fwproblemsolversite.data.Progress;
 import com.fwproblemsolversite.enums.AccountType;
 public class Account {
@@ -18,10 +19,6 @@ public class Account {
     public Account() {
     }
     
-   public Account(UUID id, String firstName, String lastName,
-                   String username, String email) {
-    }
-
     public Account(UUID id, String firstName, String lastName, String username,
                    String email, String password) {
         this.id = id;
@@ -45,6 +42,16 @@ public class Account {
         return username;
     }
 
+    public UUID getId() {
+    return id;
+    }
+
+    public String getPassword() {
+    return password;
+    }
+    
     public void sendReport(String reason, String accused) {
     }
+    
+    
 }
