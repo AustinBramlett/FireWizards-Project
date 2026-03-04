@@ -28,4 +28,20 @@ public class Report {
                 ", id=" + id +
                 '}';
     }
+    public Object getID() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getID'");
+    }
+    public Object getAccused() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getAccused'");
+    }
+    public Object getReason() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getReason'");
+    }
+    public Object getSender() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getSender'");
+    }
 }

@@ -1,25 +1,17 @@
 package com.fwproblemsolversite.drivers;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.UUID;
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+import com.fwproblemsolversite.problems.*;
+import com.fwproblemsolversite.accounts.*;
+import com.fwproblemsolversite.enums.*;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
-import com.fwproblemsolversite.accounts.Account;
-import com.fwproblemsolversite.accounts.Administrator;
-import com.fwproblemsolversite.accounts.Contributor;
-import com.fwproblemsolversite.accounts.Report;
-import com.fwproblemsolversite.accounts.Student;
-import com.fwproblemsolversite.enums.Difficulty;
-import com.fwproblemsolversite.enums.ProblemType;
-import com.fwproblemsolversite.problems.Comment;
-import com.fwproblemsolversite.problems.Problem;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
+import java.util.ArrayList;
+import java.util.UUID;
+import java.io.FileReader;
+import java.io.IOException;
+//This class is responsible for loading data from JSON files and converting them into the appropriate Java objects (Accounts, Problems, Reports).
+//Prepare for a lot of type casting.
 
 public class dataLoader {
     private static JSONParser parser = new JSONParser();
@@ -125,13 +117,8 @@ public class dataLoader {
     }
     public static ArrayList<Account> LoadAccounts(){
         ArrayList<Account> accounts = new ArrayList<>();
-        try {
-        InputStream input = dataLoader.class.getClassLoader()
-            .getResourceAsStream("accounts.json");
-
-        JSONArray jsonObj = (JSONArray) parser.parse(
-             new InputStreamReader(input));
-
+        try (FileReader reader = new FileReader("accounts.json")) {
+            JSONArray jsonObj = (JSONArray) parser.parse(reader);
             // Parse the JSON and create the proper Account instances based on the account type
             for(Object obj : jsonObj) {
                 JSONObject accountObj = (JSONObject) obj;
