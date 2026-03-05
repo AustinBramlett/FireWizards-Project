@@ -44,7 +44,7 @@ public class dataLoader {
     }
     public static ArrayList<Problem> LoadProblems(){
         ArrayList<Problem> problems = new ArrayList<>();
-        try (FileReader reader = new FileReader("problems.json")) {
+        try (FileReader reader = new FileReader("json/problems.json")) {
             JSONArray jsonObject = (JSONArray) parser.parse(reader);
             for(Object obj : jsonObject) {
                 JSONObject problemObj = (JSONObject) obj;
