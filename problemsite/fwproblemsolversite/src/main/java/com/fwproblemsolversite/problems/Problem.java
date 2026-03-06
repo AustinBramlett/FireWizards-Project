@@ -39,6 +39,10 @@ public class Problem {
     public void displayProblem() {
     }
 
+    public String getTitle() {
+        return title;
+    }
+
     public ArrayList<String> getTags() {
         return null;
     }
