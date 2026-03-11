@@ -42,7 +42,7 @@ public class ProblemApplication {
     // Logout Method
     public void logout() {
         currentUser = null;
-        System.out.println("Logout complete.");
+        System.out.println("User has logged out successfully.");
     }
 
     // Create Account Method
