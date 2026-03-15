@@ -7,7 +7,11 @@
     "email": "jmiller@email.com",
     "password": "pass123",
     "accountType": "STUDENT",
-    "muted": false
+    "muted": false,
+    "progress": {
+      "problemsSolved": 3,
+      "points": 150
+    }
   },
   {
     "id": "7a2b9d4c-8e3f-4b1c-9f2d-6e7a8b3c5678",
@@ -17,6 +21,10 @@
     "email": "jeff@email.com",
     "password": "admin456",
     "accountType": "ADMINISTRATOR",
-    "muted": false
+    "muted": false,
+    "progress": {
+      "problemsSolved": 4,
+      "points": 200
+    }
   }
 ]

@@ -71,14 +71,25 @@ public class AccountData {
     }
 
     public void ban(Account account) {
+        if (account == null) return;
+        accounts.remove(account);
     }
 
     public void unban(Account account) {
+        if (account == null) return;
+       
+        if (!accounts.contains(account)) {
+            accounts.add(account);
+        }
     }
 
     public void mute(Account account) {
+        if (account == null) return;
+        account.setMuted(true);
     }
 
     public void unmute(Account account) {
+        if (account == null) return;
+        account.setMuted(false);
     }
 }
