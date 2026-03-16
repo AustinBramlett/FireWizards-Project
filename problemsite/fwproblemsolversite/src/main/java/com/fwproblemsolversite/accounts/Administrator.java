@@ -2,6 +2,7 @@ package com.fwproblemsolversite.accounts;
 
 import java.util.ArrayList;
 import java.util.UUID;
+import com.fwproblemsolversite.enums.AccountType;
 
 public class Administrator extends Account {
 
@@ -35,5 +36,9 @@ public class Administrator extends Account {
     }
 
     public void seeAllReports() {
+    }
+    @Override
+    public AccountType getAccountType() {
+        return AccountType.ADMIN;
     }
 }

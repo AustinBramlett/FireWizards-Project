@@ -1,6 +1,7 @@
 package com.fwproblemsolversite.accounts;
 
 import java.util.UUID;
+import com.fwproblemsolversite.enums.AccountType;
 
 public class Student extends Account {
 
@@ -18,5 +19,9 @@ public class Student extends Account {
     }
 
     public void submit(String code, String result) {
+    }
+    @Override
+    public AccountType getAccountType() {
+        return AccountType.STUDENT;
     }
 }

@@ -77,7 +77,7 @@ public class Account {
     }
 
     public UUID getId() {
-    return id;
+        return id;
     }
 
     public String getFirstName() {
@@ -93,7 +93,7 @@ public class Account {
     }
 
     public String getPassword() {
-    return password;
+        return password;
     }
 
     public AccountType getAccountType() {

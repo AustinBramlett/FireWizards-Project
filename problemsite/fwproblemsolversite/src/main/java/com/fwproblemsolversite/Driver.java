@@ -1,9 +1,9 @@
 package com.fwproblemsolversite;
 
 import java.util.ArrayList;
-import com.fwproblemsolversite.data.ProblemData;
-import com.fwproblemsolversite.problems.Problem;
+
 import com.fwproblemsolversite.accounts.Account;
+import com.fwproblemsolversite.problems.Problem;
 //Driver class to test the login function for the system.
 public class Driver {
 
@@ -19,6 +19,7 @@ public class Driver {
         } else {
             System.out.println("Login failed.");
         }
+        
         //Test the getAllQuestions function to ensure that the questions are being loaded correctly.
         ArrayList<Problem> questions = app.getAllQuestions();
 
@@ -30,18 +31,21 @@ public class Driver {
         } else {
             System.out.println("No questions were loaded.");
         }
+
         //Test the createAccount function to ensure that new accounts can be created successfully.
         if (app.createAccount("John", "Smith", "jsmith", "jsmith@email.com", "pass123")) {
             System.out.println("Account created successfully.");
         } else {
             System.out.println("Account creation failed.");
         }
+
         //Test the createAccount function with an empty username to ensure that account creation fails.
         if (app.createAccount("Jane", "Smith", "", "jane@email.com", "pass123")) {
             System.out.println("Account created successfully.");
         } else {
             System.out.println("Account creation failed.");
         }
+
         //Logout the user to ensure that the logout function works correctly.
         app.logout();
     }

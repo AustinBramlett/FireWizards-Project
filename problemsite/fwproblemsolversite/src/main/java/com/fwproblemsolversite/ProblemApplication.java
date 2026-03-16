@@ -42,7 +42,7 @@ public class ProblemApplication {
     // Logout Method
     public void logout() {
         currentUser = null;
-        System.out.println("Logout complete.");
+        System.out.println("User has logged out successfully.");
     }
 
     // Create Account Method
@@ -64,6 +64,8 @@ public class ProblemApplication {
             username,
             email,
             password
+            // AccountType will be set in the specific account classes (Student, Contributor, Administrator.) 
+            // In typical usage, do not use the Account constructor under any circumstances.
         );
 
         accountData.addAccount(newAccount);

@@ -34,9 +34,42 @@ public class Problem {
                    ArrayList<String> tags,
                    double timer,
                    String answer, Difficulty difficulty) {
+        this.title = title;
+        this.problemID = problemID;
+        this.description = description;
+        this.constraints = constraints;
+        this.language = language;
+        this.examples = examples;
+        this.notes = notes;
+        this.type = type;
+        this.tags = tags;
+        this.timer = new Timer(timer);
+        this.answer = answer;
+        this.difficulty = difficulty;
+        this.comments = new ArrayList<>();
+        this.submissions = new ArrayList<>();
     }
-
+    @Override
+    public String toString() {
+        return "Problem{" +
+                "title='" + title + '\'' +
+                ", problemID=" + problemID +
+                ", description='" + description + '\'' +
+                ", difficulty=" + difficulty +
+                ", type=" + type +
+                ", tags=" + tags +
+                ", timer=" + timer +
+                ", comments=" + comments +
+                ", submissions=" + submissions +
+                ", answer='" + answer + '\'' +
+                ", notes=" + notes +
+                ", examples=" + examples +
+                ", language=" + language +
+                ", constraints=" + constraints +
+                '}';
+    }
     public void displayProblem() {
+        System.out.println(this); //placeholder
     }
 
     public String getTitle() {
@@ -44,14 +77,53 @@ public class Problem {
     }
 
     public ArrayList<String> getTags() {
-        return null;
+        return tags;
     }
 
     public Difficulty getDifficulty() {
-        return null;
+        return difficulty;
     }
 
     public UUID getID() {
-        return null;
+        return problemID;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public ArrayList<String> getConstraints() {
+        return constraints;
+    }
+
+    public Language getLanguage() {
+        return language;
+    }
+
+    public ArrayList<String[]> getExamples() {
+        return examples;
+    }
+
+    public ArrayList<String> getNotes() {
+        return notes;
+    }
+
+    public ProblemType getType() {
+        return type;
+    }
+
+    public Timer getTimer() {
+        return timer;
+    }
+
+    public ArrayList<Comment> getComments() {
+        return comments;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+    public ArrayList<Submission> getSubmissions() {
+        return submissions;
     }
 }
