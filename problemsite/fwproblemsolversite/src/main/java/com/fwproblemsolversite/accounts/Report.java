@@ -1,24 +1,49 @@
 package com.fwproblemsolversite.accounts;
+
 import java.util.UUID;
+
 public class Report {
+
+    private UUID id;
     private String reason;
     private String accused;
     private String sender;
-    private UUID id;
+
     public Report(String reason, String accused, String sender) {
+        this.id = UUID.randomUUID();
         this.reason = reason;
         this.accused = accused;
         this.sender = sender;
-        this.id = UUID.randomUUID();
+        
     }
     public Report(String reason, String accused, String sender, String id) {
+        this.id = UUID.fromString(id);
         this.reason = reason;
         this.accused = accused;
         this.sender = sender;
-        this.id = UUID.fromString(id);
+        
     }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public String getAccused() {
+        return accused;
+    }
+
+    public String getSender() {
+        return sender;
+    }
+
     public void submitReport() {
+        System.out.println("Report submitted by " + sender + " against " + accused + " for reason: " + reason);
     }
+
     @Override
     public String toString() {
         return "Report{" +
