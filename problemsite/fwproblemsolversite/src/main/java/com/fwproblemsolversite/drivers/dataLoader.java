@@ -20,12 +20,14 @@ import com.fwproblemsolversite.enums.Difficulty;
 import com.fwproblemsolversite.enums.ProblemType;
 import com.fwproblemsolversite.problems.Comment;
 import com.fwproblemsolversite.problems.Problem;
+import com.fwproblemsolversite.enums.AccountType;
+import com.fwproblemsolversite.enums.Language;
 
 public class dataLoader {
     private static JSONParser parser = new JSONParser();
     public static ArrayList<Report> LoadReports(){
         ArrayList<Report> reports = new ArrayList<>();
-        try (FileReader reader = new FileReader("reports.json")) {
+        try (FileReader reader = new FileReader("problemsite\\fwproblemsolversite\\target\\classes\\reports.json")) {
             JSONArray jsonObject = (JSONArray) parser.parse(reader);
             for(Object obj : jsonObject) {
                 JSONObject reportObj = (JSONObject) obj;
@@ -44,7 +46,7 @@ public class dataLoader {
     }
     public static ArrayList<Problem> LoadProblems(){
         ArrayList<Problem> problems = new ArrayList<>();
-        try (FileReader reader = new FileReader("json/problems.json")) {
+        try (FileReader reader = new FileReader("problemsite\\fwproblemsolversite\\target\\classes\\problems.json")) {
             JSONArray jsonObject = (JSONArray) parser.parse(reader);
             for(Object obj : jsonObject) {
                 JSONObject problemObj = (JSONObject) obj;
@@ -54,7 +56,15 @@ public class dataLoader {
                 String description = (String) problemObj.get("description");
                 String difficultyString = (String) problemObj.get("difficulty");
                 Difficulty difficulty;
-                switch(difficultyString) {
+                if(title == null) {
+                    System.out.println("Title not specified for a problem, skipping to prevent further error!");
+                    continue; // Skip this problem since title is essential
+                }
+                if(difficultyString == null) {
+                    System.out.println("Difficulty not specified for problem " + title);
+                    difficulty = null;
+                } else {
+                    switch(difficultyString) {
                     case "EASY":
                         difficulty = Difficulty.EASY;
                         break;
@@ -67,10 +77,14 @@ public class dataLoader {
                     default:
                         System.out.println("Unknown difficulty: " + difficultyString);
                         difficulty = null;
+                    }
                 }
                 String typeString = (String) problemObj.get("type");
-                ProblemType type;
-                switch(typeString) {
+                ProblemType type = null;
+                if(typeString == null) {
+                    System.out.println("Problem type not specified for problem " + title);
+                } else {
+                    switch(typeString) {
                     case "ARRAY":
                         type = ProblemType.ARRAY;
                         break;
@@ -95,27 +109,85 @@ public class dataLoader {
                     default:
                         System.out.println("Unknown problem type: " + typeString);
                         type = null;
+                    }
+                }
+                String languageString = (String) problemObj.get("language");
+                Language language = null;
+                if(languageString ==null) {
+                    System.out.println("Language not specified for problem " + title);
+                } else {
+                    switch(languageString) {
+                    case "JAVA":
+                        language = Language.JAVA;
+                        break;
+                    case "PYTHON":
+                        language = Language.PYTHON;
+                        break;
+                    case "CPP":
+                        language = Language.CPP;
+                        break;
+                    default:
+                        System.out.println("Unknown language: " + languageString);
+                    }
                 }
                 JSONArray tagsArray = (JSONArray) problemObj.get("tags");
-                ArrayList<String> tags = new ArrayList<>();
-                for (Object tag : tagsArray) {
-                    tags.add((String) tag);
-                }
-                String answer = (String) problemObj.get("answer");
+                JSONArray constraintsArray = (JSONArray) problemObj.get("constraints");
+                JSONArray examplesArray = (JSONArray) problemObj.get("examples");
+                JSONArray notesArray = (JSONArray) problemObj.get("notes");
                 JSONArray commentsArray = (JSONArray) problemObj.get("comments");
+                String answer = (String) problemObj.get("answer");
+                ArrayList<String> tags = new ArrayList<>();
+                if(tagsArray != null) {
+                    for (Object tag : tagsArray) {
+                        tags.add((String) tag);
+                    }
+                } else {
+                    System.out.println("No tags specified for problem " + title);
+                }
+                ArrayList<String> constraints = new ArrayList<>();
+                if(constraintsArray != null) {
+                    for (Object constraint : constraintsArray) {
+                        constraints.add((String) constraint);
+                    }
+                } else {
+                    System.out.println("No constraints specified for problem " + title);
+                }
+                ArrayList<String[]> examples = new ArrayList<>();
+                if(examplesArray != null) {
+                    for (Object example : examplesArray) {
+                        JSONArray exampleObj = (JSONArray) example;
+                        String input = (String) exampleObj.get(0);
+                        String output = (String) exampleObj.get(1);
+                        examples.add(new String[]{input, output});
+                    }
+                } else {
+                    System.out.println("No examples specified for problem " + title);
+                }
+                ArrayList<String> notes = new ArrayList<>();
+                if(notesArray != null) {
+                    for (Object note : notesArray) {
+                        notes.add((String) note);
+                    }
+                } else {
+                    System.out.println("No notes specified for problem " + title);
+                }
                 ArrayList<Comment> comments = new ArrayList<>();
-                for (Object comment : commentsArray) {
-                    JSONObject commentObj = (JSONObject) comment;
-                    String commentText = (String) commentObj.get("commentText");
-                    UUID sender = UUID.fromString((String) commentObj.get("sender"));
-                    int score = ((Long) commentObj.get("score")).intValue();
-                    Comment commentInstance = new Comment(sender, commentText, score);
-                    comments.add(commentInstance);
+                if(commentsArray != null) {   
+                    for (Object comment : commentsArray) {
+                        JSONObject commentObj = (JSONObject) comment;
+                        String commentText = (String) commentObj.get("commentText");
+                        UUID sender = UUID.fromString((String) commentObj.get("sender"));
+                        int score = ((Long) commentObj.get("score")).intValue();
+                        Comment commentInstance = new Comment(sender, commentText, score);
+                        comments.add(commentInstance);
+                    }
+                } else {
+                    System.out.println("No comments specified for problem " + title);
                 }
                 double timer = ((Long) problemObj.get("timer")).intValue();
-                Problem problem = new Problem(title, id, description, null, null, null, null, 
+                Problem problem = new Problem(title, id, description, constraints, language, examples, notes, 
                     type, tags, timer, answer, difficulty);
-                //We're missing a lot.
+                //We're missing submissions and comments at the moment.
                 problems.add(problem);
             }
         } catch (IOException | ParseException e) {
@@ -125,13 +197,8 @@ public class dataLoader {
     }
     public static ArrayList<Account> LoadAccounts(){
         ArrayList<Account> accounts = new ArrayList<>();
-        try {
-        InputStream input = dataLoader.class.getClassLoader()
-            .getResourceAsStream("accounts.json");
-
-        JSONArray jsonObj = (JSONArray) parser.parse(
-             new InputStreamReader(input));
-
+        try (FileReader reader = new FileReader("problemsite\\fwproblemsolversite\\target\\classes\\accounts.json")) {
+            JSONArray jsonObj = (JSONArray) parser.parse(reader);
             // Parse the JSON and create the proper Account instances based on the account type
             for(Object obj : jsonObj) {
                 JSONObject accountObj = (JSONObject) obj;
@@ -145,7 +212,10 @@ public class dataLoader {
                 String username = (String) accountObj.get("username");
                 String email = (String) accountObj.get("email");
                 String password = (String) accountObj.get("password");
-                switch (accountType) {
+                if(accountType == null){
+                    System.out.println("Type not specified for this account, skipping to prevent further error!");
+                } else {
+                    switch (accountType) {
                     case "STUDENT":
                         accountInstance = new Student(id, firstName, lastName, username, email, password);
                         break;
@@ -163,14 +233,33 @@ public class dataLoader {
                     default:
                         System.out.println("Unknown account type: " + accountType);
                         accountInstance = null;
+                    }
+                     // Add the created account instance to the accounts list
+                    accounts.add(accountInstance); 
+                    //We're missing some info to create the account instance for anybody other than students. We'll have to fix that soon.
                 }
-                // Add the created account instance to the accounts list
-                accounts.add(accountInstance); 
-                //We're missing some info to create the account instance for anybody other than students. We'll have to fix that soon.
             }
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
         return accounts; // Return the list of accounts
+    }
+    public static void main(String[] args) {
+        ArrayList<Account> accounts = LoadAccounts();
+        ArrayList<Problem> problems = LoadProblems();
+        ArrayList<Report> reports = LoadReports();
+        // Print loaded data for verification
+        System.out.println("Loaded Accounts:");
+        for (Account account : accounts) {
+            System.out.println(account.getUsername() + " (" + account.getPassword() + ", " + account.getEmail() + ")");
+        }
+        System.out.println("\nLoaded Problems:");
+        for (Problem problem : problems) {
+            System.out.println(problem.getTitle() + " - " + problem.getDifficulty());
+        }
+        System.out.println("\nLoaded Reports:");
+        for (Report report : reports) {
+            System.out.println(report.getReason() + " - " + report.getAccused());
+        }
     }
 }

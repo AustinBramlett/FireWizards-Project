@@ -64,6 +64,8 @@ public class ProblemApplication {
             username,
             email,
             password
+            // AccountType will be set in the specific account classes (Student, Contributor, Administrator.) 
+            // In typical usage, do not use the Account constructor under any circumstances.
         );
 
         accountData.addAccount(newAccount);

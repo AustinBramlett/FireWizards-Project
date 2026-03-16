@@ -27,6 +27,7 @@ public class Account {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.accountType = null; // Default to null if not provided
     }
 
     public void comment(String comment) {
@@ -43,14 +44,38 @@ public class Account {
     }
 
     public UUID getId() {
-    return id;
+        return id;
     }
 
     public String getPassword() {
-    return password;
+        return password;
     }
     
     public void sendReport(String reason, String accused) {
+    }
+
+    public boolean getMuted() {
+        return muted;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public UUID getID() {
+        return id;
+    }
+
+    public AccountType getAccountType() {
+        return null; // Placeholder, should return the actual account type
     }
     
     
