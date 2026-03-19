@@ -14,7 +14,11 @@ import java.io.IOException;
 public class dataWriter {
     //Makes everything significantly less messy and easier to edit.
     private static boolean writeToJSON(Object obj, JSONObject json, String header, String contents) {
+        if(contents == null) {
+            System.out.print("dataWriter(writeToJSON): "); //Traces the error to this method for easier debugging.
+        }
         if(obj == null || json == null || header == null){
+            System.out.println("A field outside of constraints was null! Check your code and try again.");
             return false;
         }
         switch(obj){
@@ -23,7 +27,7 @@ public class dataWriter {
                 switch(header){
                     case "username":
                         if(contents == null) {
-                            System.out.println("(!!!): An Account has no username!");
+                            System.out.println("An Account has no username! (!!!)");
                             return false;
                         } else {
                             json.put("username", contents);
@@ -283,8 +287,8 @@ public class dataWriter {
                 //Still waiting for Progress to be implemented.. We'll add it later when it is.
                 writer.write(item.toJSONString() + System.lineSeparator());
                 //We can turn this part into a comment later.
-                System.out.println("Successfully saved account " + account.getUsername() + "!");
-                System.out.println("Contents: " + item.toJSONString());
+                System.out.println("dataWriter(saveAccounts): Successfully saved account " + account.getUsername() + "!");
+                System.out.println("dataWriter(saveAccounts): Contents: " + item.toJSONString());
             }
             writer.close(); //We might want to switch to BufferedWriter? It's fine for now though.
         } catch(IOException e){
@@ -308,13 +312,13 @@ public class dataWriter {
                 writeToJSON(problem, item, "tags", problem.getTags() != null ? problem.getTags().toString() : null);
                 //Noteworthy exception to our formula from above for timer since it's a Double and not an enum or array of some kind.
                 //We still want to save it as a String though to prevent errors. This requires String.valueOf(...) instead of (...).toString().
-                writeToJSON(problem, item, "timer", problem.getTimer() != null ? String.valueOf(problem.getTimer()) : null);
+                writeToJSON(problem, item, "timer", problem.getTimer() != null ? String.valueOf(problem.getTimer().getTimeLimit()) : null);
                 writeToJSON(problem, item, "type", problem.getType() != null ? problem.getType().toString() : null);
                 writeToJSON(problem, item, "constraints", problem.getConstraints() != null ? problem.getConstraints().toString() : null);
                 writeToJSON(problem, item, "answer", problem.getAnswer());
                 writer.write(item.toJSONString() + System.lineSeparator());
-                System.out.println("Successfully saved problem " + problem.getID() + "!");
-                System.out.println("Contents: " + item.toJSONString());
+                System.out.println("dataWriter(saveProblems): Successfully saved problem " + problem.getID() + "!");
+                System.out.println("dataWriter(saveProblems): Contents: " + item.toJSONString());
             }
             writer.close();
         } catch(IOException e){
@@ -332,8 +336,8 @@ public class dataWriter {
                 writeToJSON(report, item, "accused", report.getAccused());
                 writeToJSON(report, item, "sender", report.getSender());
                 writer.write(item.toJSONString() + System.lineSeparator());
-                System.out.println("Successfully saved report " + report.getID() + "!");
-                System.out.println("Contents: " + item.toJSONString());
+                System.out.println("dataWriter(saveReports): Successfully saved report " + report.getID() + "!");
+                System.out.println("dataWriter(saveReports): Contents: " + item.toJSONString());
             }
             writer.close();
         } catch(IOException e){
