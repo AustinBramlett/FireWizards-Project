@@ -1,2 +1,20 @@
-{"firstName":"Jordan","lastName":"Miller","password":"pass123","id":"3f8f2c8e-5c1a-4a7a-9d4f-1b2e7c9d1234","type":"STUDENT","muted":false,"email":"jmiller@email.com","username":"jmiller"}
-{"firstName":"Jeff","lastName":"Richardson","password":"admin456","id":"7a2b9d4c-8e3f-4b1c-9f2d-6e7a8b3c5678","type":"ADMIN","muted":false,"email":"jeff@email.com","username":"jrichardson"}
+{
+    "firstName": "Jordan",
+    "lastName": "Miller",
+    "password": "pass123",
+    "id": "3f8f2c8e-5c1a-4a7a-9d4f-1b2e7c9d1234",
+    "type": "STUDENT",
+    "muted": false,
+    "email": "jmiller@email.com",
+    "username": "jmiller"
+}
+{
+    "firstName": "Jeff",
+    "lastName": "Richardson",
+    "password": "admin456",
+    "id": "7a2b9d4c-8e3f-4b1c-9f2d-6e7a8b3c5678",
+    "type": "ADMIN",
+    "muted": false,
+    "email": "jeff@email.com",
+    "username": "jrichardson"
+}
