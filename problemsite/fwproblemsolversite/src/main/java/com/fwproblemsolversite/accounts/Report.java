@@ -56,13 +56,4 @@ public class Report {
     public UUID getID() {
         return id;
     }
-    public String getAccused() {
-        return accused;
-    }
-    public String getReason() {
-        return reason;
-    }
-    public String getSender() {
-        return sender;
-    }
 }

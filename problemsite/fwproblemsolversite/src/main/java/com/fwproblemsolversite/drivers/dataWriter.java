@@ -52,7 +52,7 @@ public class dataWriter {
                  if(account.getId() == null) {
                     System.out.println("Account " + account.getUsername() + " has no ID!");
                 } else {
-                    item.put("id", account.getID());
+                    item.put("id", account.getId().toString());
                 }
                 if(account.getFirstName() == null) {
                     System.out.println("Account " + account.getUsername() + " has no first name specified!");
@@ -65,7 +65,7 @@ public class dataWriter {
                     item.put("lastName", account.getLastName());
                 }
                 // item.put("progress", account.getProgress()); does not exist since Progress isn't fully implemented yet. We can add it later when it is.
-                item.put("muted", account.getMuted()); //I suggest moving this above type in the JSON.
+                item.put("muted", account.isMuted()); //I suggest moving this above type in the JSON.
                 writer.write(item.toJSONString() + System.lineSeparator());
                 //We can turn this part into a comment later.
                 System.out.println("Successfully saved account " + account.getUsername() + "!");
@@ -90,7 +90,7 @@ public class dataWriter {
                 if(problem.getID() == null) {
                     System.out.println("Problem " + problem.getTitle() + " has no ID!");
                 } else {
-                    item.put("id", problem.getID());
+                    item.put("id", problem.getID().toString());
                 }
                 if(problem.getDescription() == null) {
                     System.out.println("Problem " + problem.getTitle() + " has no description!");
@@ -107,7 +107,7 @@ public class dataWriter {
                 } else {
                     item.put("accountType", problem.getType().toString());
                 }
-                 if(problem.getTags() == null) {
+                if(problem.getTags() == null) {
                     System.out.println("Problem " + problem.getTitle() + " has no tags!");
                 } else {
                     item.put("tags", problem.getTags());
@@ -135,7 +135,7 @@ public class dataWriter {
                 if(problem.getTimer() == null) {
                     System.out.println("Problem " + problem.getTitle() + " has no timer specified!");
                 } else {
-                    item.put("timer", problem.getTimer()); //Edit later, we need this in float format.
+                    item.put("timer", problem.getTimeLimit());
                 }
                 if(problem.getComments() == null) {
                     System.out.println("Problem " + problem.getTitle() + " has no comments array!");

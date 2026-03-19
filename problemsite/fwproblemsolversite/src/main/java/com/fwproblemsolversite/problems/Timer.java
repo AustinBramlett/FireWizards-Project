@@ -37,4 +37,8 @@ public class Timer {
     public boolean isOverLimit() {
         return timeLimit > 0 && elapsedTime > timeLimit;
     }
+
+    public double toDouble() {
+        return timeLimit;
+    }
 }
