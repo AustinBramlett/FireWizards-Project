@@ -21,10 +21,12 @@ public class AccountData {
         return accountData;
     }
 
+    // Method to set the list of accounts 
     public void setAccounts(ArrayList<Account> accounts) {
         this.accounts = (accounts == null) ? new ArrayList<>() : accounts;
     }
 
+    // Method to get an account by its unique ID
     public Account getAccountById(UUID id) {
         if (id == null) return null;
         for (Account account : accounts) {
@@ -35,6 +37,7 @@ public class AccountData {
         return null;
     }
 
+    // Method to get an account by its username
     public Account getAccountByUsername(String username) {
         if (username == null) return null;
         for (Account account : accounts) {
@@ -45,6 +48,7 @@ public class AccountData {
         return null;
     }
 
+    // Method to check if a username already exists in the system
     public boolean usernameExists(String username) {
         if (username == null) return false;
         for (Account account : accounts) {
@@ -55,11 +59,13 @@ public class AccountData {
         return false;
     }
 
+    // Method to add a new account to the system
     public void addAccount(Account account) {
         if (account == null) return;
         accounts.add(account);
     }
 
+    // Method to remove an account from the system
     public void removeAccount(Account account) {
         if (account == null) return;
         accounts.remove(account);
@@ -69,11 +75,13 @@ public class AccountData {
         return accounts;
     }
 
+    // Method to ban an account by removing it from the list of accounts
     public void ban(Account account) {
         if (account == null) return;
         accounts.remove(account);
     }
 
+    // Method to unban an account by adding it back to the list of accounts
     public void unban(Account account) {
         if (account == null) return;
        
