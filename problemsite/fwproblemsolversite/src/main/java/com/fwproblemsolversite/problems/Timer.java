@@ -38,7 +38,7 @@ public class Timer {
         return timeLimit > 0 && elapsedTime > timeLimit;
     }
 
-    public double toDouble() {
+    public double getTimeLimit() {
         return timeLimit;
     }
 }

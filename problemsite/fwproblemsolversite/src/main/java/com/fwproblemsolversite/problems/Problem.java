@@ -117,7 +117,7 @@ public class Problem {
     }
 
     public double getTimeLimit() {
-        return timer.toDouble();
+        return timer.getTimeLimit();
     }
 
     public ArrayList<Comment> getComments() {

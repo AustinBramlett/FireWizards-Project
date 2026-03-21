@@ -1,14 +1,15 @@
-{
-    "firstName": "Jordan",
-    "lastName": "Miller",
-    "password": "pass123",
-    "id": "3f8f2c8e-5c1a-4a7a-9d4f-1b2e7c9d1234",
-    "type": "STUDENT",
-    "muted": false,
-    "email": "jmiller@email.com",
-    "username": "jmiller"
-}
-{
+[
+    {
+        "firstName": "Jordan",
+        "lastName": "Miller",
+        "password": "pass123",
+        "id": "3f8f2c8e-5c1a-4a7a-9d4f-1b2e7c9d1234",
+        "type": "STUDENT",
+        "muted": false,
+        "email": "jmiller@email.com",
+        "username": "jmiller"
+    },
+    {
     "firstName": "Jeff",
     "lastName": "Richardson",
     "password": "admin456",
@@ -17,4 +18,5 @@
     "muted": false,
     "email": "jeff@email.com",
     "username": "jrichardson"
-}
+    }
+]

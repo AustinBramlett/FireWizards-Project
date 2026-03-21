@@ -12,64 +12,283 @@ import java.io.IOException;
 
 //Note everything here saves to a singular line per object.
 public class dataWriter {
+    //Makes everything significantly less messy and easier to edit.
+    private static boolean writeToJSON(Object obj, JSONObject json, String header, String contents) {
+        if(contents == null) {
+            System.out.print("dataWriter(writeToJSON): "); //Traces the error to this method for easier debugging.
+        }
+        if(obj == null || json == null || header == null){
+            System.out.println("A field outside of constraints was null! Check your code and try again.");
+            return false;
+        }
+        switch(obj){
+            //Case for all Account objects.
+            case Account a:
+                switch(header){
+                    case "username":
+                        if(contents == null) {
+                            System.out.println("An Account has no username! (!!!)");
+                            return false;
+                        } else {
+                            json.put("username", contents);
+                            return true;
+                        }
+                    case "password":
+                        if(contents == null) {
+                            System.out.println("Account " + json.get("username") + " has no password specified!");
+                            return false;
+                        } else {
+                            json.put("password", contents);
+                            return true;
+                        }
+                    case "email":
+                        if(contents == null) {
+                            System.out.println("Account " + json.get("username") + " has no email specified!");
+                            return false;
+                        } else {
+                            json.put("email", contents);
+                            return true;
+                        }
+                    case "type":
+                        if(contents == null) {
+                            System.out.println("Account " + json.get("username") + " has no account type specified!");
+                            return false;
+                        } else {
+                            //Account type must be specified! This switch is just to make sure it's valid and to prevent unreadable content in the JSON file.
+                            switch(contents) {
+                                case "ADMIN":
+                                    json.put("type", "ADMIN");
+                                    return true;
+                                case "STUDENT":
+                                    json.put("type", "STUDENT");
+                                    return true;
+                                case "CONTRIBUTOR":
+                                    json.put("type", "CONTRIBUTOR");
+                                    return true;
+                                default:
+                                    System.out.println("Invalid account type detected for " + json.get("username") + "!");
+                                    return false;
+                            }
+                        }
+                    case "id":
+                        if(contents == null) {
+                            System.out.println("Account " + json.get("username") + " has no ID!");
+                            return false;
+                        } else {
+                            json.put("id", contents);
+                            return true;
+                        }
+                    case "firstName":
+                        if(contents == null) {
+                            System.out.println("Account " + json.get("username") + " has no first name specified!");
+                            return false;
+                        } else {
+                            json.put("firstName", contents);
+                            return true;
+                        }
+                    case "lastName":
+                        if(contents == null) {
+                            System.out.println("Account " + json.get("username") + " has no last name specified!");
+                            return false;
+                        } else {
+                            json.put("lastName", contents);
+                            return true;
+                        }
+                    case "muted":
+                        if(contents == null) {
+                            System.out.println("Account " + json.get("username") + " has no muted status specified!");
+                            return false;
+                        } else {
+                            json.put("muted", contents);
+                            return true;
+                        }
+                    default:
+                        System.out.println("Invalid header for this object type. Set one up in writeToJSON!");
+                        return false;
+                }
+            //Case for all Problem objects.
+            case Problem b:
+                switch(header){
+                    case "title":
+                        if(contents == null) {
+                            System.out.println("Problem has no title!");
+                            return false;
+                        } else {
+                            json.put("title", contents);
+                            return true;
+                        }
+                    case "id":
+                        if(contents == null) {
+                            System.out.println("Problem " + json.get("title") + " has no ID!");
+                            return false;
+                        } else {
+                            json.put("id", contents);
+                            return true;
+                        }
+                    case "examples":
+                        if(contents == null) {
+                            System.out.println("Problem " + json.get("title") + " has no examples!");
+                            return false;
+                        } else {
+                            json.put("examples", contents);
+                            return true;
+                        }
+                    case "comments":
+                        if(contents == null) {
+                            System.out.println("Problem " + json.get("title") + " has no comments array!");
+                            return false;
+                        } else {
+                            json.put("comments", contents);
+                            return true;
+                        }
+                    case "difficulty":
+                        if(contents == null) {
+                            System.out.println("Problem " + json.get("title") + " has no difficulty!");
+                            return false;
+                        } else {
+                            json.put("difficulty", contents);
+                            return true;
+                        }
+                    case "description":
+                        if(contents == null) {
+                            System.out.println("Problem " + json.get("title") + " has no description!");
+                            return false;
+                        } else {
+                            json.put("description", contents);
+                            return true;
+                        }
+                    case "language":
+                        if(contents == null) {
+                            System.out.println("Problem " + json.get("title") + " has no language specified!");
+                            return false;
+                        } else {
+                            json.put("language", contents);
+                            return true;
+                        }
+                    case "notes":
+                        if(contents == null) {
+                            System.out.println("Problem " + json.get("title") + " has no notes!");
+                            return false;
+                        } else {
+                            json.put("notes", contents);
+                            return true;
+                        }
+                    case "submissions":
+                        if(contents == null) {
+                            System.out.println("Problem " + json.get("title") + " has no submissions array!");
+                            return false;
+                        } else {
+                            json.put("submissions", contents);
+                            return true;
+                        }
+                    case "tags":
+                        if(contents == null) {
+                            System.out.println("Problem " + json.get("title") + " has no tags!");
+                            return false;
+                        } else {
+                            json.put("tags", contents);
+                            return true;
+                        }
+                    case "timer":
+                        if(contents == null) {
+                            System.out.println("Problem " + json.get("title") + " has no timer specified!");
+                            return false;
+                        } else {
+                            json.put("timer", contents);
+                            return true;
+                        }
+                    case "type":
+                        if(contents == null) {
+                            System.out.println("Problem " + json.get("title") + " has no type!");
+                            return false;
+                        } else {
+                            json.put("type", contents);
+                            return true;
+                        }
+                    case "constraints":
+                        if(contents == null) {
+                            System.out.println("Problem " + json.get("title") + " has no constraints!");
+                            return false;
+                        } else {
+                            json.put("constraints", contents);
+                            return true;
+                        }
+                    case "answer":
+                        if(contents == null) {
+                            System.out.println("Problem " + json.get("title") + " has no answer specified!");
+                            return false;
+                        } else {
+                            json.put("answer", contents);
+                            return true;
+                        }
+                    default:
+                        System.out.println("Invalid header for this object type. Set one up in writeToJSON!");
+                        return false;
+                }
+            //Case for all Report objects.
+            case Report c:
+                switch(header){
+                    case "id":
+                        if(contents == null) {
+                            System.out.println("Report has no ID!");
+                            return false;
+                        } else {
+                            json.put("id", contents);
+                            return true;
+                        }
+                    case "accused":
+                        if(contents == null) {
+                            System.out.println("Report " + json.get("id") + " has no accused specified!");
+                            return false;
+                        } else {
+                            json.put("accused", contents);
+                            return true;
+                        }
+                    case "reason":
+                        if(contents == null) {
+                            System.out.println("Report " + json.get("id") + " has no reason specified!");
+                            return false;
+                        } else {
+                            json.put("reason", contents);
+                            return true;
+                        }
+                    case "sender":
+                        if(contents == null) {
+                            System.out.println("Report " + json.get("id") + " has no sender specified!");
+                            return false;
+                        } else {
+                            json.put("sender", contents);
+                            return true;
+                        }
+                    default:
+                        System.out.println("Invalid header for this object type. Set one up in writeToJSON!");
+                        return false;
+                }
+            default:
+                System.out.println("Invalid object type. Set one up in writeToJSON!");
+                return false;
+        }
+    }
     public static boolean saveAccounts(ArrayList<Account> accounts) {
         try(FileWriter writer = new FileWriter("problemsite\\fwproblemsolversite\\src\\main\\resources\\jsonSamples\\accounts.json")){
             for(Account account : accounts){
                 JSONObject item = new JSONObject();
-                if(account.getUsername() == null) {
-                    System.out.println("Account has no username, skipping to prevent further error!");
-                    continue; // Skip this account since username is essential
-                }
-                item.put("username", account.getUsername());
-                if(account.getAccountType() == null) {
-                    System.out.println("Account " + account.getUsername() + " has no account type, skipping to prevent further error!");
-                    continue; // Skip this account since type is essential
-                }
-                switch(account.getAccountType()) {
-                    case AccountType.ADMIN:
-                        item.put("type", "ADMIN");
-                        break;
-                    case AccountType.STUDENT:
-                        item.put("type", "STUDENT");
-                        break;
-                    case AccountType.CONTRIBUTOR:
-                        item.put("type", "CONTRIBUTOR");
-                        break;
-                    default:
-                        System.out.println("Invalid account type detected for " + account.getUsername() + "!");
-                        continue; // Skip this account since type is essential
-                }
-                if(account.getEmail() == null) {
-                    System.out.println("Account " + account.getUsername() + " has no email specified!");
-                } else {
-                    item.put("email", account.getEmail());
-                }
-                if(account.getPassword() == null) {
-                    System.out.println("Account " + account.getUsername() + " has no password specified!");
-                } else {
-                    item.put("password", account.getPassword());
-                }
-                 if(account.getId() == null) {
-                    System.out.println("Account " + account.getUsername() + " has no ID!");
-                } else {
-                    item.put("id", account.getId().toString());
-                }
-                if(account.getFirstName() == null) {
-                    System.out.println("Account " + account.getUsername() + " has no first name specified!");
-                } else {
-                    item.put("firstName", account.getFirstName());
-                }
-                if(account.getLastName() == null) {
-                    System.out.println("Account " + account.getUsername() + " has no last name specified!");
-                } else {
-                    item.put("lastName", account.getLastName());
-                }
-                // item.put("progress", account.getProgress()); does not exist since Progress isn't fully implemented yet. We can add it later when it is.
-                item.put("muted", account.isMuted()); //I suggest moving this above type in the JSON.
+                writeToJSON(account, item, "username", account.getUsername());
+                //The following ternary is important for getting anything that needs a toString as strings without throwing an error (NullPointerException).
+                //The format is simple: obj.getItem() != null ? obj.getItem().toString() : null.
+                //By doing this we can tell writeToJSON if an object is null without throwing a NPE by trying to turn it into a String.
+                writeToJSON(account, item, "type", account.getAccountType() != null ? account.getAccountType().toString() : null);
+                writeToJSON(account, item, "email", account.getEmail());
+                writeToJSON(account, item, "password", account.getPassword());
+                writeToJSON(account, item, "id", account.getId() != null ? account.getId().toString() : null);
+                writeToJSON(account, item, "firstName", account.getFirstName());
+                writeToJSON(account, item, "lastName", account.getLastName());
+                writeToJSON(account, item, "muted", account.isMuted() ? "true" : "false");
+                //Still waiting for Progress to be implemented.. We'll add it later when it is.
                 writer.write(item.toJSONString() + System.lineSeparator());
                 //We can turn this part into a comment later.
-                System.out.println("Successfully saved account " + account.getUsername() + "!");
-                System.out.println("Contents: " + item.toJSONString());
+                System.out.println("dataWriter(saveAccounts): Successfully saved account " + account.getUsername() + "!");
+                System.out.println("dataWriter(saveAccounts): Contents: " + item.toJSONString());
             }
             writer.close(); //We might want to switch to BufferedWriter? It's fine for now though.
         } catch(IOException e){
@@ -82,79 +301,24 @@ public class dataWriter {
         try(FileWriter writer = new FileWriter("problemsite\\fwproblemsolversite\\src\\main\\resources\\jsonSamples\\problems.json")){
             for(Problem problem : problems){
                 JSONObject item = new JSONObject();
-                if(problem.getTitle() == null) {
-                    System.out.println("Problem has no title, skipping to prevent further error!");
-                    continue; // Skip this problem since title is essential
-                }
-                item.put("title", problem.getTitle());
-                if(problem.getID() == null) {
-                    System.out.println("Problem " + problem.getTitle() + " has no ID!");
-                } else {
-                    item.put("id", problem.getID().toString());
-                }
-                if(problem.getDescription() == null) {
-                    System.out.println("Problem " + problem.getTitle() + " has no description!");
-                } else {
-                    item.put("description", problem.getDescription());
-                }
-                if(problem.getDifficulty() == null) {
-                    System.out.println("Problem " + problem.getTitle() + " has no difficulty!");
-                } else {
-                    item.put("difficulty", problem.getDifficulty().toString());
-                }
-                if(problem.getType() == null) {
-                    System.out.println("Problem " + problem.getTitle() + " has no type!");
-                } else {
-                    item.put("accountType", problem.getType().toString());
-                }
-                if(problem.getTags() == null) {
-                    System.out.println("Problem " + problem.getTitle() + " has no tags!");
-                } else {
-                    item.put("tags", problem.getTags());
-                }
-                 if(problem.getConstraints() == null) {
-                    System.out.println("Problem " + problem.getTitle() + " has no constraints!");
-                } else {
-                    item.put("constraints", problem.getConstraints());
-                }
-                if(problem.getLanguage() == null) {
-                    System.out.println("Problem " + problem.getTitle() + " has no language specified!");
-                } else {
-                    item.put("language", problem.getLanguage().toString());
-                }
-                if (problem.getExamples() == null) {
-                    System.out.println("Problem " + problem.getTitle() + " has no examples!");
-                } else {
-                    item.put("examples", problem.getExamples());
-                }
-                 if(problem.getNotes() == null) {
-                    System.out.println("Problem " + problem.getTitle() + " has no notes!");
-                } else {
-                    item.put("notes", problem.getNotes());
-                }
-                if(problem.getTimer() == null) {
-                    System.out.println("Problem " + problem.getTitle() + " has no timer specified!");
-                } else {
-                    item.put("timer", problem.getTimeLimit());
-                }
-                if(problem.getComments() == null) {
-                    System.out.println("Problem " + problem.getTitle() + " has no comments array!");
-                } else {
-                    item.put("comments", problem.getComments());
-                }
-                if(problem.getSubmissions() == null) {
-                    System.out.println("Problem " + problem.getTitle() + " has no submissions array!");
-                } else {
-                    item.put("submissions", problem.getSubmissions());
-                }
-                 if(problem.getAnswer() == null) {
-                    System.out.println("Problem " + problem.getTitle() + " has no answer specified!");
-                } else {
-                    item.put("answer", problem.getAnswer());
-                }
+                writeToJSON(problem, item, "title", problem.getTitle());
+                writeToJSON(problem, item, "id", problem.getID() != null ? problem.getID().toString() : null);
+                writeToJSON(problem, item, "description", problem.getDescription());
+                writeToJSON(problem, item, "difficulty", problem.getDifficulty() != null ? problem.getDifficulty().toString() : null);
+                writeToJSON(problem, item, "language", problem.getLanguage() != null ? problem.getLanguage().toString() : null);
+                writeToJSON(problem, item, "notes", problem.getNotes() != null ? problem.getNotes().toString() : null);
+                writeToJSON(problem, item, "examples", problem.getExamples() != null ? problem.getExamples().toString() : null);
+                writeToJSON(problem, item, "submissions", problem.getSubmissions() != null ? problem.getSubmissions().toString() : null);
+                writeToJSON(problem, item, "tags", problem.getTags() != null ? problem.getTags().toString() : null);
+                //Noteworthy exception to our formula from above for timer since it's a Double and not an enum or array of some kind.
+                //We still want to save it as a String though to prevent errors. This requires String.valueOf(...) instead of (...).toString().
+                writeToJSON(problem, item, "timer", problem.getTimer() != null ? String.valueOf(problem.getTimer().getTimeLimit()) : null);
+                writeToJSON(problem, item, "type", problem.getType() != null ? problem.getType().toString() : null);
+                writeToJSON(problem, item, "constraints", problem.getConstraints() != null ? problem.getConstraints().toString() : null);
+                writeToJSON(problem, item, "answer", problem.getAnswer());
                 writer.write(item.toJSONString() + System.lineSeparator());
-                System.out.println("Successfully saved problem " + problem.getID() + "!");
-                System.out.println("Contents: " + item.toJSONString());
+                System.out.println("dataWriter(saveProblems): Successfully saved problem " + problem.getID() + "!");
+                System.out.println("dataWriter(saveProblems): Contents: " + item.toJSONString());
             }
             writer.close();
         } catch(IOException e){
@@ -167,28 +331,13 @@ public class dataWriter {
         try(FileWriter writer = new FileWriter("problemsite\\fwproblemsolversite\\src\\main\\resources\\jsonSamples\\reports.json")){
             for(Report report : reports){
                 JSONObject item = new JSONObject();
-                if(report.getID() == null) {
-                    System.out.println("Report has no ID, skipping to prevent further error!");
-                    continue; // Skip this report since ID is essential
-                }
-                 if(report.getAccused() == null) {
-                    System.out.println("Report " + report.getID() + " has no accused specified!");
-                } else {
-                    item.put("accused", report.getAccused());
-                }
-                 if(report.getReason() == null) {
-                    System.out.println("Report " + report.getID() + " has no reason specified!");
-                } else {
-                    item.put("reason", report.getReason());
-                }
-                 if(report.getSender() == null) {
-                    System.out.println("Report " + report.getID() + " has no sender specified!");
-                } else {
-                    item.put("sender", report.getSender());
-                }
+                writeToJSON(report, item, "id", report.getID() != null ? report.getID().toString() : null);
+                writeToJSON(report, item, "reason", report.getReason());
+                writeToJSON(report, item, "accused", report.getAccused());
+                writeToJSON(report, item, "sender", report.getSender());
                 writer.write(item.toJSONString() + System.lineSeparator());
-                System.out.println("Successfully saved report " + report.getID() + "!");
-                System.out.println("Contents: " + item.toJSONString());
+                System.out.println("dataWriter(saveReports): Successfully saved report " + report.getID() + "!");
+                System.out.println("dataWriter(saveReports): Contents: " + item.toJSONString());
             }
             writer.close();
         } catch(IOException e){
