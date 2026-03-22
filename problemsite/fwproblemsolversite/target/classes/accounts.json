@@ -16,7 +16,7 @@
     "username": "jrichardson",
     "email": "jeff@email.com",
     "password": "admin456",
-    "accountType": "ADMINISTRATOR",
+    "accountType": "ADMIN",
     "muted": false
   }
 ]

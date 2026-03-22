@@ -28,7 +28,7 @@ public class dataLoader {
     private static JSONParser parser = new JSONParser();
     public static ArrayList<Report> LoadReports(){
         ArrayList<Report> reports = new ArrayList<>();
-        try (FileReader reader = new FileReader("problemsite\\fwproblemsolversite\\target\\classes\\reports.json")) {
+        try (FileReader reader = new FileReader("problemsite\\fwproblemsolversite\\target\\classes\\jsonSamples\\reports.json")) {
             JSONArray jsonObject = (JSONArray) parser.parse(reader);
             for(Object obj : jsonObject) {
                 JSONObject reportObj = (JSONObject) obj;
@@ -47,12 +47,12 @@ public class dataLoader {
     }
     public static ArrayList<Problem> LoadProblems(){
         ArrayList<Problem> problems = new ArrayList<>();
-        try (FileReader reader = new FileReader("problemsite\\fwproblemsolversite\\target\\classes\\problems.json")) {
+        try (FileReader reader = new FileReader("problemsite\\fwproblemsolversite\\target\\classes\\jsonSamples\\problems.json")) {
             JSONArray jsonObject = (JSONArray) parser.parse(reader);
             for(Object obj : jsonObject) {
                 JSONObject problemObj = (JSONObject) obj;
                 // Parses the JSON and create Problem instances.
-                UUID id = UUID.fromString((String) problemObj.get("problemID"));
+                UUID id = (String) problemObj.get("problemID") != null ? UUID.fromString((String) problemObj.get("problemID")) : null;
                 String title = (String) problemObj.get("title");
                 String description = (String) problemObj.get("description");
                 String difficultyString = (String) problemObj.get("difficulty");
@@ -198,7 +198,8 @@ public class dataLoader {
                 }else{
                     System.out.println("dataLoader(LoadProblems): No submissions array specified for problem " + title);
                 }
-                double timer = ((Long) problemObj.get("timer")).intValue();
+                String timerVal = (String) problemObj.get("timer");
+                double timer = Double.parseDouble(timerVal);
                 Problem problem = new Problem(title, id, description, constraints, language, examples, notes, 
                     type, tags, timer, answer, difficulty, comments, submissions);
                 //We're missing submissions and comments at the moment.
@@ -211,7 +212,7 @@ public class dataLoader {
     }
     public static ArrayList<Account> LoadAccounts(){
         ArrayList<Account> accounts = new ArrayList<>();
-        try (FileReader reader = new FileReader("problemsite\\fwproblemsolversite\\target\\classes\\accounts.json")) {
+        try (FileReader reader = new FileReader("problemsite\\fwproblemsolversite\\target\\classes\\jsonSamples\\accounts.json")) {
             JSONArray jsonObj = (JSONArray) parser.parse(reader);
             // Parse the JSON and create the proper Account instances based on the account type
             for(Object obj : jsonObj) {
@@ -233,7 +234,7 @@ public class dataLoader {
                     case "STUDENT":
                         accountInstance = new Student(id, firstName, lastName, username, email, password);
                         break;
-                    case "ADMINISTRATOR":
+                    case "ADMIN":
                         //logs are currently not in the json, so they'll be empty for now. We don't need them at the moment..
                         ArrayList<UUID> adminBanLog = new ArrayList<>();
                         ArrayList<UUID> adminMuteLog = new ArrayList<>();

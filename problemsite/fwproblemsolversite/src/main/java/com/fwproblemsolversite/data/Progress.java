@@ -26,7 +26,29 @@ public class Progress {
         this.lastActiveDate = LocalDate.now();
         this.achievements = new ArrayList<>();
     }
-
+    // Constructor to initialize progress with saved values
+    public Progress(ArrayList<Integer> data, String date){
+        this.problemsSolved = data.get(0);
+        this.easySolved = data.get(1);
+        this.mediumSolved = data.get(2);
+        this.hardSolved = data.get(3);
+        this.totalPoints = data.get(4);
+        this.dailyStreak = data.get(5);
+        this.lastActiveDate = LocalDate.parse(date);
+    }
+    public ArrayList<Integer> getProgressDataList(){
+        ArrayList<Integer> ProgressData = new ArrayList<Integer>();
+        ProgressData.add(problemsSolved);
+        ProgressData.add(easySolved);
+        ProgressData.add(mediumSolved);
+        ProgressData.add(hardSolved);
+        ProgressData.add(totalPoints);
+        ProgressData.add(dailyStreak);
+        return ProgressData;
+    }
+    public String getLastActiveString() {
+        return lastActiveDate.toString();
+    }
     // Method to get a summary of the user's progress
     public String getProgress() {
         return "Problems Solved: " + problemsSolved + "\n" +
