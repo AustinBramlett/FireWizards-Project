@@ -1,8 +1,6 @@
 package com.fwproblemsolversite.drivers;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -17,15 +15,23 @@ import com.fwproblemsolversite.accounts.Contributor;
 import com.fwproblemsolversite.accounts.Report;
 import com.fwproblemsolversite.accounts.Student;
 import com.fwproblemsolversite.enums.Difficulty;
+import com.fwproblemsolversite.enums.Language;
 import com.fwproblemsolversite.enums.ProblemType;
 import com.fwproblemsolversite.problems.Comment;
 import com.fwproblemsolversite.problems.Problem;
 import com.fwproblemsolversite.problems.Submission;
-import com.fwproblemsolversite.enums.AccountType;
-import com.fwproblemsolversite.enums.Language;
-
+/**
+ * Handles loading data from JSON files into the system.
+ * This class will read accounts, problems, and reports from JSON files.
+ * And then convert them.
+ */
 public class dataLoader {
     private static JSONParser parser = new JSONParser();
+    /**
+     * Loads the reports from the JSON file.
+     * 
+     * @return list of reports
+     */
     public static ArrayList<Report> LoadReports(){
         ArrayList<Report> reports = new ArrayList<>();
         try (FileReader reader = new FileReader("problemsite\\fwproblemsolversite\\target\\classes\\jsonSamples\\reports.json")) {
@@ -45,6 +51,14 @@ public class dataLoader {
         }
         return reports; // Return the list of reports
     }
+    /**
+     * Loads all the problems from the JSON file.
+     * 
+     * will parse through the details like difficulty, type, tags,
+     * comments, and submissions.
+     * 
+     * @return list of problems
+     */
     public static ArrayList<Problem> LoadProblems(){
         ArrayList<Problem> problems = new ArrayList<>();
         try (FileReader reader = new FileReader("problemsite\\fwproblemsolversite\\target\\classes\\jsonSamples\\problems.json")) {
@@ -210,6 +224,12 @@ public class dataLoader {
         }
         return problems; // Return the list of problems
     }
+    /**
+     * Loads all accounts from the JSON file.
+     * Creates different account types based on the stored account type.
+     * 
+     * @return list of accounts
+     */
     public static ArrayList<Account> LoadAccounts(){
         ArrayList<Account> accounts = new ArrayList<>();
         try (FileReader reader = new FileReader("problemsite\\fwproblemsolversite\\target\\classes\\jsonSamples\\accounts.json")) {
@@ -259,6 +279,9 @@ public class dataLoader {
         }
         return accounts; // Return the list of accounts
     }
+    /**
+     * Main method used for testing data loading.
+     */
     public static void main(String[] args) {
         ArrayList<Account> accounts = LoadAccounts();
         ArrayList<Problem> problems = LoadProblems();
