@@ -1,5 +1,5 @@
 package com.model;
 
-public class HelloWorld {
+public class ModelStub {
     //DO NOT REMOVE ME!!!!
 }
