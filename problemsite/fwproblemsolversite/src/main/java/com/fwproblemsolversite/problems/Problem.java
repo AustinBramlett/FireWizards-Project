@@ -6,7 +6,11 @@ import java.util.UUID;
 import com.fwproblemsolversite.enums.Difficulty;
 import com.fwproblemsolversite.enums.ProblemType;
 import com.fwproblemsolversite.enums.Language;
-
+/**
+ * Represents a problem in the system.
+ * 
+ * The problems contain information like description, difficulty, type, tags, and more.
+ */
 public class Problem {
 
     private String title;
@@ -23,7 +27,21 @@ public class Problem {
     private ArrayList<ArrayList<String>> examples;
     private Language language;
     private ArrayList<String> constraints;
-    //New problem constructor with all fields
+    /**
+     * Creates a new problem with a generated ID
+     * 
+     * @param title The title of the problem.
+     * @param description The description of the problem.
+     * @param constraints The constraints of the problem.
+     * @param language The programming language of the problem.
+     * @param examples The examples of the problem.
+     * @param notes The notes for the problem.
+     * @param type The type of the problem.
+     * @param tags The tags associated with the problem.
+     * @param timer The time limit for the problem.
+     * @param answer The answer for the problem.
+     * @param difficulty The difficulty of the problem.
+     */
     public Problem(String title,
                    String description,
                    ArrayList<String> constraints,
@@ -49,7 +67,24 @@ public class Problem {
         this.comments = new ArrayList<>();
         this.submissions = new ArrayList<>();
     }
-    //Saved problem constructor with all fields
+    /**
+     * Creates a problem from the stored data.
+     * 
+     * @param title The title of the problem.
+     * @param problemID The unique identifier for the problem.
+     * @param description The description of the problem.
+     * @param constraints The constraints of the problem.
+     * @param language The programming language of the problem.
+     * @param examples The examples of the problem.
+     * @param notes The notes for the problem.
+     * @param type The type of the problem.
+     * @param tags The tags associated with the problem.
+     * @param timer The time limit for the problem.
+     * @param answer The answer for the problem.
+     * @param difficulty The difficulty of the problem.
+     * @param comments The list of comments on the problem.
+     * @param submissions The list of submissions for the problem.
+     */
     public Problem(String title, UUID problemID,
                    String description,
                    ArrayList<String> constraints,
@@ -75,9 +110,14 @@ public class Problem {
         this.timer = new Timer(timer);
         this.answer = answer;
         this.difficulty = difficulty;
-        this.comments = comments;
-        this.submissions = submissions;
+        this.comments = (comments == null) ? new ArrayList<>() : comments;
+        this.submissions = (submissions == null) ? new ArrayList<>() : submissions;
     }
+    /**
+     * Returns a string representation of the problem.
+     * 
+     * @return string containing the problem details.
+     */
     @Override
     public String toString() {
         return "Problem{" +
@@ -97,6 +137,9 @@ public class Problem {
                 ", constraints=" + constraints +
                 '}';
     }
+    /**
+     * Displays the problem details.
+     */
     public void displayProblem() {
         System.out.println(this); //placeholder
     }
@@ -152,9 +195,15 @@ public class Problem {
     public ArrayList<Comment> getComments() {
         return comments;
     }
-
+    /**
+     * Adds a comment to the problem.
+     * 
+     * @param comment The comment to add to a problem.
+     */
     public void addComment(Comment comment) {
-        comments.add(comment);
+        if(comment != null) {
+            comments.add(comment);
+        }
     }
 
     public String getAnswer() {
@@ -163,6 +212,11 @@ public class Problem {
     public ArrayList<Submission> getSubmissions() {
         return submissions;
     }
+    /**
+     * Converts the submissions into a Arraylist for JSON file.
+     * 
+     * @return list of submissions as arrays
+     */
     public ArrayList<ArrayList<String>> getSubmissionsArray() {
         ArrayList<ArrayList<String>> submissionsArray = new ArrayList<ArrayList<String>>();
         for(int i = 0; i < submissions.size(); i++){
