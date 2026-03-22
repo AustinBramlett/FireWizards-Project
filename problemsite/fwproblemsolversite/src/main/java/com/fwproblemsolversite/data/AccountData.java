@@ -4,29 +4,48 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import com.fwproblemsolversite.accounts.Account;
-
+/**
+ * Manages all the account data in the system.
+ * 
+ * It provides methods for access, adding, removing, and modifying different accounts.
+ */
 public class AccountData {
 
     private ArrayList<Account> accounts;
     private static AccountData accountData;
-
+    /**
+     * Private constructor to prevent external instantiation.
+     * Initializes the account list.
+     */
     private AccountData() {
         accounts = new ArrayList<>();
     }
-
+    /**
+     * Returns the single instance of AccountData.
+     * 
+     * @return The AccountData instance.
+     */
     public static AccountData getInstance() {
         if (accountData == null) {
             accountData = new AccountData();
         }
         return accountData;
     }
-
-    // Method to set the list of accounts 
+    /**
+     * Sets the list of accounts .
+     * 
+     * @param accounts The list of accounts to store
+     */
     public void setAccounts(ArrayList<Account> accounts) {
         this.accounts = (accounts == null) ? new ArrayList<>() : accounts;
     }
 
-    // Method to get an account by its unique ID
+    /**
+     * Retrieves an account by its ID.
+     * 
+     * @param id The ID of the account
+     * @return The Account that matches the ID, null if not found
+     */
     public Account getAccountById(UUID id) {
         if (id == null) return null;
         for (Account account : accounts) {
@@ -37,7 +56,12 @@ public class AccountData {
         return null;
     }
 
-    // Method to get an account by its username
+    /**
+     * Retrieves an account by its username.
+     * 
+     * @param username The username of the account
+     * @return The Account that matches the username, null if not found
+     */
     public Account getAccountByUsername(String username) {
         if (username == null) return null;
         for (Account account : accounts) {
@@ -48,7 +72,12 @@ public class AccountData {
         return null;
     }
 
-    // Method to check if a username already exists in the system
+    /**
+     * Checks if a username already exists in the system.
+     * 
+     * @param username The username to check
+     * @return true if the username exists, if not false.
+     */
     public boolean usernameExists(String username) {
         if (username == null) return false;
         for (Account account : accounts) {
@@ -59,29 +88,49 @@ public class AccountData {
         return false;
     }
 
-    // Method to add a new account to the system
+    /**
+     * Adds a new account to the system.
+     * 
+     * @param account The Account to be added.
+     */
     public void addAccount(Account account) {
         if (account == null) return;
         accounts.add(account);
     }
 
-    // Method to remove an account from the system
+    /**
+     * Removes an account from the system.
+     * 
+     * @param account The Account to be removed.
+     */
     public void removeAccount(Account account) {
         if (account == null) return;
         accounts.remove(account);
     }
-
+    /**
+     * Returns the list of all accounts.
+     * 
+     * @return The list of accounts
+     */
     public ArrayList<Account> getAccounts() {
         return accounts;
     }
 
-    // Method to ban an account by removing it from the list of accounts
+   /**
+    * Bans an account by removing it from the list of accounts.
+     * 
+     * @param account The Account to be banned.
+    */
     public void ban(Account account) {
         if (account == null) return;
         accounts.remove(account);
     }
 
-    // Method to unban an account by adding it back to the list of accounts
+    /**
+     * Unbans an accont by adding it back to the list of accounts.
+      * 
+      * @param account The Account to be unbanned.
+     */
     public void unban(Account account) {
         if (account == null) return;
        
@@ -89,12 +138,20 @@ public class AccountData {
             accounts.add(account);
         }
     }
-
+    /**
+     * Mutes an account by setting its muted status to true.
+      * 
+      * @param account The Account to be muted.
+     */
     public void mute(Account account) {
         if (account == null) return;
         account.setMuted(true);
     }
-
+    /**
+     * Unmutes an account, allowing it to interact again.
+     * 
+     * @param account The Account to be unmuted.
+     */
     public void unmute(Account account) {
         if (account == null) return;
         account.setMuted(false);

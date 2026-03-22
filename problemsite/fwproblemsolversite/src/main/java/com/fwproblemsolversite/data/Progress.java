@@ -3,7 +3,12 @@ package com.fwproblemsolversite.data;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import com.fwproblemsolversite.enums.Difficulty;
-
+/**
+ * Represents the progress of a user in the system.
+ * 
+ * Tracks the problems solved by their difficulty, total points, daily streak,
+ * their last active date, and the achievements the user has earned.
+ */
 public class Progress {
 
     private int problemsSolved;
@@ -15,7 +20,9 @@ public class Progress {
     private LocalDate lastActiveDate;
     private ArrayList<Achievement> achievements;
 
-    // Constructor to initialize progress with default values
+    /**
+     * Creates a new Progress object with all default values.
+     */
     public Progress() {
         this.problemsSolved = 0;
         this.easySolved = 0;
@@ -26,7 +33,12 @@ public class Progress {
         this.lastActiveDate = LocalDate.now();
         this.achievements = new ArrayList<>();
     }
-    // Constructor to initialize progress with saved values
+    /**
+     * Creates a progress object useing saved data.
+     * 
+     * @param data A list of integers that show progress values
+     * @param date The last active date as a string
+     */
     public Progress(ArrayList<Integer> data, String date){
         this.problemsSolved = data.get(0);
         this.easySolved = data.get(1);
@@ -36,6 +48,11 @@ public class Progress {
         this.dailyStreak = data.get(5);
         this.lastActiveDate = LocalDate.parse(date);
     }
+    /**
+     * Returns progress data as a list of integers.
+     * 
+     * @return list containing progress values
+     */
     public ArrayList<Integer> getProgressDataList(){
         ArrayList<Integer> ProgressData = new ArrayList<Integer>();
         ProgressData.add(problemsSolved);
@@ -46,10 +63,19 @@ public class Progress {
         ProgressData.add(dailyStreak);
         return ProgressData;
     }
+    /**
+     * Returns the last active date as a string.
+     * 
+     * @return The last active date as a string.
+     */
     public String getLastActiveString() {
         return lastActiveDate.toString();
     }
-    // Method to get a summary of the user's progress
+    /**
+     * Returns a summary of the users progress.
+     * 
+     * @return string showing progress details
+     */
     public String getProgress() {
         return "Problems Solved: " + problemsSolved + "\n" +
                "Easy Solved: " + easySolved + "\n" +
@@ -60,9 +86,11 @@ public class Progress {
     }
     
     /**
-     * Method to update the user's progress based on the difficulty of the problem solved.
-     * The value parameter is expected to be a string representation of an integer indicating how many problems were solved.
-     * The type parameter indicates the difficulty level of the problems solved (EASY, MEDIUM, HARD).
+     * Updates the users progresss based on the number of problems they solved
+     * as well as their difficulty level.
+     * 
+     * @param value String representing the number of problems solved 
+     * @param type The difficulty level of the problems solved
      */
     public void updateProgress(String value, Difficulty type) {
         if (value == null || type == null) return;
@@ -94,7 +122,11 @@ public class Progress {
             System.out.println("Invalid value for progress update: " + value);
         }
     }
-    
+    /**
+     * Returns the list of achievements the user has earned.
+     * 
+     * @return The list of achievements.
+     */
     public ArrayList<Achievement> getAchievements() {
         return achievements;
     }
@@ -114,7 +146,11 @@ public class Progress {
         lastActiveDate = today;
     }
 
-    // Method to get progress stats as a list of integer arrays
+    /**
+     * Returns progress stats.
+     * 
+     * @return list containing the problems solved and the daily streak
+     */
     public ArrayList<Integer> getStats() {
         ArrayList<Integer> stats = new ArrayList<>();
         stats.add(problemsSolved);
@@ -151,7 +187,11 @@ public class Progress {
         return lastActiveDate;
     }
 
-    // Method to add an achievement to the user's progress
+    /**
+     * Adds an achievement to the users progress.
+     * 
+     * @param achievement The achievement to add
+     */
     public void addAchievement(Achievement achievement) {
         if (achievement != null) {
             achievements.add(achievement);
