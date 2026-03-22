@@ -4,9 +4,14 @@ import java.util.ArrayList;
 
 import com.fwproblemsolversite.accounts.Account;
 import com.fwproblemsolversite.problems.Problem;
-//Driver class to test the login function for the system.
+/**
+ * Driver class used to test the functionality of the application.
+ * 
+ */
 public class Driver {
-
+    /**
+     * Main method used to run the tests on the application.
+     */
     public static void main(String[] args) {
 
         ProblemApplication app = new ProblemApplication();

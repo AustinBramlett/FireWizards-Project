@@ -6,17 +6,23 @@ import com.fwproblemsolversite.accounts.Account;
 import com.fwproblemsolversite.data.AccountData;
 import com.fwproblemsolversite.data.ProblemData;
 import com.fwproblemsolversite.drivers.dataLoader;
-import com.fwproblemsolversite.enums.AccountType;
 import com.fwproblemsolversite.problems.Problem;
 
-// Main application class for the problem-solving platform.
+/**
+ * Main application class for the system.
+ * 
+ * Handles the core functionality of the application.
+ */
 public class ProblemApplication {
 
     private AccountData accountData;
     private ProblemData problemData;
     private Account currentUser;
 
-    // Constructor to initialize the application and load data
+    /**
+     * Initializes the application and loads account and problem data 
+     * from the dataLoader class.
+     */
     public ProblemApplication() {
         accountData = AccountData.getInstance();
         accountData.setAccounts(dataLoader.LoadAccounts());
@@ -27,7 +33,13 @@ public class ProblemApplication {
         currentUser = null;
     }
 
-    // Login Method
+    /**
+     * Logs a user into the system.
+     * 
+     * @param username the username of the account to log in
+     * @param password the password of the account to log in   
+     * @return the logged-in account if successful, null if not.
+     */
     public Account login(String username, String password) {
         Account account = accountData.getAccountByUsername(username);
 
@@ -39,13 +51,24 @@ public class ProblemApplication {
         return null;
     }
 
-    // Logout Method
+    /**
+     * Logs the current user out of the system.
+     */
     public void logout() {
         currentUser = null;
         System.out.println("User has logged out successfully.");
     }
 
-    // Create Account Method
+    /**
+     * Creates a new account in the system.
+     * 
+     * @param firstName the first name of the new account
+     * @param lastName the last name of the new account
+     * @param username the username of the new account
+     * @param email the email of the new account
+     * @param password the password of the new account
+     * @return true if the account was created successfully, false if it was not.
+     */
     public boolean createAccount(String firstName, String lastName, String username,
                                  String email, String password) {
 
@@ -72,15 +95,27 @@ public class ProblemApplication {
         return true;
     }
 
-    // Get Questions Method
+    /**
+     * Retrieves all questions in the system.
+     * 
+     * @return list of problems
+     */
     public ArrayList<Problem> getAllQuestions() {
         return problemData.getProblems();
     }
-
+    /**
+     * Returns the account data manager.
+     * 
+     * @return the account data manager
+     */
     public AccountData getAccountData() {
         return accountData;
     }
-
+    /**
+     * Returns the currently logged-in user.
+     * 
+     * @return current Account, or null if no one is logged in
+     */
     public Account getCurrentUser() {
         return currentUser;
     }
