@@ -20,7 +20,7 @@ public class Problem {
     private ArrayList<Submission> submissions;
     private String answer;
     private ArrayList<String> notes;
-    private ArrayList<String[]> examples;
+    private ArrayList<ArrayList<String>> examples;
     private Language language;
     private ArrayList<String> constraints;
     //New problem constructor with all fields
@@ -28,7 +28,7 @@ public class Problem {
                    String description,
                    ArrayList<String> constraints,
                    Language language,
-                   ArrayList<String[]> examples,
+                   ArrayList<ArrayList<String>> examples,
                    ArrayList<String> notes,
                    ProblemType type,
                    ArrayList<String> tags,
@@ -54,7 +54,7 @@ public class Problem {
                    String description,
                    ArrayList<String> constraints,
                    Language language,
-                   ArrayList<String[]> examples,
+                   ArrayList<ArrayList<String>> examples,
                    ArrayList<String> notes,
                    ProblemType type,
                    ArrayList<String> tags,
@@ -129,7 +129,7 @@ public class Problem {
         return language;
     }
 
-    public ArrayList<String[]> getExamples() {
+    public ArrayList<ArrayList<String>> getExamples() {
         return examples;
     }
 

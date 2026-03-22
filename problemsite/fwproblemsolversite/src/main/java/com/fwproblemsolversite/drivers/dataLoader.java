@@ -153,13 +153,11 @@ public class dataLoader {
                 } else {
                     System.out.println("dataLoader(LoadProblems): No constraints specified for problem " + title);
                 }
-                ArrayList<String[]> examples = new ArrayList<>();
+                ArrayList<ArrayList<String>> examples = new ArrayList<>();
                 if(examplesArray != null) {
                     for (Object example : examplesArray) {
                         JSONArray exampleObj = (JSONArray) example;
-                        String input = (String) exampleObj.get(0);
-                        String output = (String) exampleObj.get(1);
-                        examples.add(new String[]{input, output});
+                        examples.add((ArrayList<String>) example);
                     }
                 } else {
                     System.out.println("dataLoader(LoadProblems): No examples specified for problem " + title);

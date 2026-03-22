@@ -22,7 +22,7 @@ import java.io.IOException;
 //Note everything here saves to a singular line per object.
 public class dataWriter {
     //Makes everything significantly less messy and easier to edit.
-    private static boolean writeToJSON(Object obj, JSONObject json, String header, String contents) {
+    private static boolean writeToJSON(Object obj, JSONObject json, String header, Object contents) {
         if(contents == null) {
             System.out.print("dataWriter(writeToJSON): "); //Traces the error to this method for easier debugging.
         }
@@ -64,7 +64,15 @@ public class dataWriter {
                             return false;
                         } else {
                             //Account type must be specified! This switch is just to make sure it's valid and to prevent unreadable content in the JSON file.
+                            String newContents;
                             switch(contents) {
+                                case String j:
+                                    newContents = contents.toString(); //I.. I don't even know why I have to do this.
+                                    break;
+                                default:
+                                    return false;
+                            }
+                            switch(newContents) {
                                 case "ADMIN":
                                     json.put("type", "ADMIN");
                                     return true;
@@ -315,15 +323,15 @@ public class dataWriter {
                 writeToJSON(problem, item, "description", problem.getDescription());
                 writeToJSON(problem, item, "difficulty", problem.getDifficulty() != null ? problem.getDifficulty().toString() : null);
                 writeToJSON(problem, item, "language", problem.getLanguage() != null ? problem.getLanguage().toString() : null);
-                writeToJSON(problem, item, "notes", problem.getNotes() != null ? problem.getNotes().toString() : null);
-                writeToJSON(problem, item, "examples", problem.getExamples() != null ? problem.getExamples().toString() : null);
+                writeToJSON(problem, item, "notes", problem.getNotes() != null ? problem.getNotes() : null);
+                writeToJSON(problem, item, "examples", problem.getExamples() != null ? problem.getExamples() : null);
                 writeToJSON(problem, item, "submissions", problem.getSubmissions() != null ? problem.getSubmissions().toString() : null);
-                writeToJSON(problem, item, "tags", problem.getTags() != null ? problem.getTags().toString() : null);
+                writeToJSON(problem, item, "tags", problem.getTags() != null ? problem.getTags() : null);
                 //Noteworthy exception to our formula from above for timer since it's a Double and not an enum or array of some kind.
                 //We still want to save it as a String though to prevent errors. This requires String.valueOf(...) instead of (...).toString().
                 writeToJSON(problem, item, "timer", problem.getTimer() != null ? String.valueOf(problem.getTimer().toDouble()) : null);
                 writeToJSON(problem, item, "type", problem.getType() != null ? problem.getType().toString() : null);
-                writeToJSON(problem, item, "constraints", problem.getConstraints() != null ? problem.getConstraints().toString() : null);
+                writeToJSON(problem, item, "constraints", problem.getConstraints() != null ? problem.getConstraints() : null);
                 writeToJSON(problem, item, "answer", problem.getAnswer());
                 writer.write(item.toJSONString() + System.lineSeparator());
                 System.out.println("dataWriter(saveProblems): Successfully saved problem " + problem.getID() + "!");
@@ -370,10 +378,10 @@ public class dataWriter {
         Submission submissionTwo = new Submission("HAHH", "AHAA", UUID.randomUUID().toString());
         ArrayList<Submission> submissions = new ArrayList<>(List.of(submissionOne, submissionTwo)); 
         ArrayList<String> notes = new ArrayList<>(List.of("AAA", "BBB"));
-        String[] example = {"AAAA", "BBBB"};
-        String[] example2 = {"CCCC", "DDDD"};
+        ArrayList<String> example = new ArrayList<>(List.of("AAAA", "BBBB"));
+        ArrayList<String> example2 = new ArrayList<>(List.of("AAA", "BBB"));
 
-        ArrayList<String[]> examples = new ArrayList<>(List.of(example, example2));
+        ArrayList<ArrayList<String>> examples = new ArrayList<>(List.of(example, example2));
         Problem newProblem = new Problem("Test", UUID.randomUUID(), "This is a test problem.", constraints, Language.CPP, examples, notes, ProblemType.ARRAY, tags, timer.toDouble(), "AAA", Difficulty.MEDIUM, comments, submissions);
         problems.add(newProblem);
         saveAccounts(accounts);
