@@ -124,6 +124,10 @@ public class Problem {
         return comments;
     }
 
+    public void addComment(Comment comment) {
+        comments.add(comment);
+    }
+
     public String getAnswer() {
         return answer;
     }
