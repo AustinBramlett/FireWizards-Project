@@ -136,6 +136,7 @@ public class dataLoader {
                 JSONArray examplesArray = (JSONArray) problemObj.get("examples");
                 JSONArray notesArray = (JSONArray) problemObj.get("notes");
                 JSONArray commentsArray = (JSONArray) problemObj.get("comments");
+                JSONArray submissionsArray = (JSONArray) problemObj.get("submissions");
                 String answer = (String) problemObj.get("answer");
                 ArrayList<String> tags = new ArrayList<>();
                 if(tagsArray != null) {
@@ -188,6 +189,15 @@ public class dataLoader {
                     System.out.println("dataLoader(LoadProblems): No comments specified for problem " + title);
                 }
                 ArrayList<Submission> submissions = new ArrayList<>();
+                if(submissionsArray != null){
+                    for(Object submission : submissionsArray){
+                        JSONArray submissionObj = (JSONArray) submission;
+                        Submission newSubmission = new Submission((ArrayList<String>) submission); 
+                        submissions.add(newSubmission);
+                    }
+                }else{
+                    System.out.println("dataLoader(LoadProblems): No submissions array specified for problem " + title);
+                }
                 double timer = ((Long) problemObj.get("timer")).intValue();
                 Problem problem = new Problem(title, id, description, constraints, language, examples, notes, 
                     type, tags, timer, answer, difficulty, comments, submissions);
