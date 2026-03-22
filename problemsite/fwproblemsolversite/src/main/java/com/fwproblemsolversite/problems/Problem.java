@@ -163,4 +163,11 @@ public class Problem {
     public ArrayList<Submission> getSubmissions() {
         return submissions;
     }
+    public ArrayList<ArrayList<String>> getSubmissionsArray() {
+        ArrayList<ArrayList<String>> submissionsArray = new ArrayList<ArrayList<String>>();
+        for(int i = 0; i < submissions.size(); i++){
+            submissionsArray.add(submissions.get(i).asArrayList());
+        }
+        return submissionsArray;
+    }
 }

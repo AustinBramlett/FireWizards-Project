@@ -288,6 +288,7 @@ public class dataWriter {
     }
     public static boolean saveAccounts(ArrayList<Account> accounts) {
         try(FileWriter writer = new FileWriter("problemsite\\fwproblemsolversite\\src\\main\\resources\\jsonSamples\\accounts.json")){
+            JSONArray accountsFile = new JSONArray();
             for(Account account : accounts){
                 JSONObject item = new JSONObject();
                 writeToJSON(account, item, "username", account.getUsername());
@@ -302,11 +303,12 @@ public class dataWriter {
                 writeToJSON(account, item, "lastName", account.getLastName());
                 writeToJSON(account, item, "muted", account.isMuted() ? "true" : "false");
                 //Still waiting for Progress to be implemented.. We'll add it later when it is.
-                writer.write(item.toJSONString() + System.lineSeparator());
+                accountsFile.add(item);
                 //We can turn this part into a comment later.
                 System.out.println("dataWriter(saveAccounts): Successfully saved account " + account.getUsername() + "!");
                 System.out.println("dataWriter(saveAccounts): Contents: " + item.toJSONString());
             }
+            writer.write(accountsFile.toJSONString());
             writer.close(); //We might want to switch to BufferedWriter? It's fine for now though.
         } catch(IOException e){
             e.printStackTrace();
@@ -316,6 +318,7 @@ public class dataWriter {
     }
     public static boolean saveProblems(ArrayList<Problem> problems) {
         try(FileWriter writer = new FileWriter("problemsite\\fwproblemsolversite\\src\\main\\resources\\jsonSamples\\problems.json")){
+            JSONArray problemsFile = new JSONArray();
             for(Problem problem : problems){
                 JSONObject item = new JSONObject();
                 writeToJSON(problem, item, "title", problem.getTitle());
@@ -325,7 +328,7 @@ public class dataWriter {
                 writeToJSON(problem, item, "language", problem.getLanguage() != null ? problem.getLanguage().toString() : null);
                 writeToJSON(problem, item, "notes", problem.getNotes() != null ? problem.getNotes() : null);
                 writeToJSON(problem, item, "examples", problem.getExamples() != null ? problem.getExamples() : null);
-                writeToJSON(problem, item, "submissions", problem.getSubmissions() != null ? problem.getSubmissions().toString() : null);
+                writeToJSON(problem, item, "submissions", problem.getSubmissions() != null ? problem.getSubmissionsArray() : null);
                 writeToJSON(problem, item, "tags", problem.getTags() != null ? problem.getTags() : null);
                 //Noteworthy exception to our formula from above for timer since it's a Double and not an enum or array of some kind.
                 //We still want to save it as a String though to prevent errors. This requires String.valueOf(...) instead of (...).toString().
@@ -333,10 +336,11 @@ public class dataWriter {
                 writeToJSON(problem, item, "type", problem.getType() != null ? problem.getType().toString() : null);
                 writeToJSON(problem, item, "constraints", problem.getConstraints() != null ? problem.getConstraints() : null);
                 writeToJSON(problem, item, "answer", problem.getAnswer());
-                writer.write(item.toJSONString() + System.lineSeparator());
+                problemsFile.add(item);
                 System.out.println("dataWriter(saveProblems): Successfully saved problem " + problem.getID() + "!");
                 System.out.println("dataWriter(saveProblems): Contents: " + item.toJSONString());
             }
+            writer.write(problemsFile.toJSONString());
             writer.close();
         } catch(IOException e){
             e.printStackTrace();
@@ -346,16 +350,18 @@ public class dataWriter {
     }
     public static boolean saveReports(ArrayList<Report> reports) {
         try(FileWriter writer = new FileWriter("problemsite\\fwproblemsolversite\\src\\main\\resources\\jsonSamples\\reports.json")){
+            JSONArray reportsFile = new JSONArray();
             for(Report report : reports){
                 JSONObject item = new JSONObject();
                 writeToJSON(report, item, "id", report.getID() != null ? report.getID().toString() : null);
                 writeToJSON(report, item, "reason", report.getReason());
                 writeToJSON(report, item, "accused", report.getAccused());
                 writeToJSON(report, item, "sender", report.getSender());
-                writer.write(item.toJSONString() + System.lineSeparator());
+                reportsFile.add(item);
                 System.out.println("dataWriter(saveReports): Successfully saved report " + report.getID() + "!");
                 System.out.println("dataWriter(saveReports): Contents: " + item.toJSONString());
             }
+            writer.write(reportsFile.toJSONString());
             writer.close();
         } catch(IOException e){
             e.printStackTrace();

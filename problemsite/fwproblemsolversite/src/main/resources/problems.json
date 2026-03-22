@@ -5,7 +5,10 @@
     "description": "Get the sum of two integers.",
     "difficulty": "EASY",
     "type": "ARRAY",
-    "tags": ["math", "basic"],
+    "tags": [
+      "math",
+      "basic"
+    ],
     "timer": 15,
     "comments": [],
     "answer": "a + b"
@@ -16,7 +19,11 @@
     "description": "Print Hello World to the console.",
     "difficulty": "EASY",
     "type": "STRING",
-    "tags": ["math", "basic","intro"],
+    "tags": [
+      "math",
+      "basic",
+      "intro"
+    ],
     "timer": 10,
     "comments": [],
     "answer": "System.out.println(\"Hello World\");"
