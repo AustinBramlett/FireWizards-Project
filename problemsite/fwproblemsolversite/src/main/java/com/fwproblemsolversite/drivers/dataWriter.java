@@ -312,7 +312,7 @@ public class dataWriter {
                 writeToJSON(problem, item, "tags", problem.getTags() != null ? problem.getTags().toString() : null);
                 //Noteworthy exception to our formula from above for timer since it's a Double and not an enum or array of some kind.
                 //We still want to save it as a String though to prevent errors. This requires String.valueOf(...) instead of (...).toString().
-                writeToJSON(problem, item, "timer", problem.getTimer() != null ? String.valueOf(problem.getTimer().getTimeLimit()) : null);
+                writeToJSON(problem, item, "timer", problem.getTimer() != null ? String.valueOf(problem.getTimer().toDouble()) : null);
                 writeToJSON(problem, item, "type", problem.getType() != null ? problem.getType().toString() : null);
                 writeToJSON(problem, item, "constraints", problem.getConstraints() != null ? problem.getConstraints().toString() : null);
                 writeToJSON(problem, item, "answer", problem.getAnswer());
