@@ -20,6 +20,7 @@ import com.fwproblemsolversite.enums.Difficulty;
 import com.fwproblemsolversite.enums.ProblemType;
 import com.fwproblemsolversite.problems.Comment;
 import com.fwproblemsolversite.problems.Problem;
+import com.fwproblemsolversite.problems.Submission;
 import com.fwproblemsolversite.enums.AccountType;
 import com.fwproblemsolversite.enums.Language;
 
@@ -152,13 +153,11 @@ public class dataLoader {
                 } else {
                     System.out.println("dataLoader(LoadProblems): No constraints specified for problem " + title);
                 }
-                ArrayList<String[]> examples = new ArrayList<>();
+                ArrayList<ArrayList<String>> examples = new ArrayList<>();
                 if(examplesArray != null) {
                     for (Object example : examplesArray) {
                         JSONArray exampleObj = (JSONArray) example;
-                        String input = (String) exampleObj.get(0);
-                        String output = (String) exampleObj.get(1);
-                        examples.add(new String[]{input, output});
+                        examples.add((ArrayList<String>) example);
                     }
                 } else {
                     System.out.println("dataLoader(LoadProblems): No examples specified for problem " + title);
@@ -176,17 +175,22 @@ public class dataLoader {
                     for (Object comment : commentsArray) {
                         JSONObject commentObj = (JSONObject) comment;
                         String commentText = (String) commentObj.get("commentText");
+                        UUID problemID = UUID.fromString((String) commentObj.get("problemID"));
                         UUID sender = UUID.fromString((String) commentObj.get("sender"));
                         int score = ((Long) commentObj.get("score")).intValue();
-                        Comment commentInstance = new Comment(sender, commentText, score);
+                        ArrayList<Comment> replies = new ArrayList();
+                        String date = (String) commentObj.get("date");
+                        Comment commentInstance = new Comment(sender, problemID, commentText, score, replies, date);
+                        System.out.println(commentInstance);
                         comments.add(commentInstance);
                     }
                 } else {
                     System.out.println("dataLoader(LoadProblems): No comments specified for problem " + title);
                 }
+                ArrayList<Submission> submissions = new ArrayList<>();
                 double timer = ((Long) problemObj.get("timer")).intValue();
                 Problem problem = new Problem(title, id, description, constraints, language, examples, notes, 
-                    type, tags, timer, answer, difficulty);
+                    type, tags, timer, answer, difficulty, comments, submissions);
                 //We're missing submissions and comments at the moment.
                 problems.add(problem);
             }

@@ -9,12 +9,14 @@ public class Achievement {
     private String description;
     private ArrayList<Integer> requirements;
 
+    // Constructor to initialize achievement with default values
     public Achievement(ArrayList<Integer> req) {
         this.requirements = (req == null) ? new ArrayList<>() : new ArrayList<>(req);
         this.title = "Achievement";
         this.description = "";  
     }
 
+    // Method to check if the achievement is unlocked based on user progress
     public boolean unlockAchievement(String user) {
         return user != null && !user.trim().isEmpty();
     }

@@ -20,22 +20,22 @@ public class Problem {
     private ArrayList<Submission> submissions;
     private String answer;
     private ArrayList<String> notes;
-    private ArrayList<String[]> examples;
+    private ArrayList<ArrayList<String>> examples;
     private Language language;
     private ArrayList<String> constraints;
-
-    public Problem(String title, UUID problemID,
+    //New problem constructor with all fields
+    public Problem(String title,
                    String description,
                    ArrayList<String> constraints,
                    Language language,
-                   ArrayList<String[]> examples,
+                   ArrayList<ArrayList<String>> examples,
                    ArrayList<String> notes,
                    ProblemType type,
                    ArrayList<String> tags,
                    double timer,
                    String answer, Difficulty difficulty) {
         this.title = title;
-        this.problemID = problemID;
+        this.problemID = UUID.randomUUID();
         this.description = description;
         this.constraints = constraints;
         this.language = language;
@@ -48,6 +48,35 @@ public class Problem {
         this.difficulty = difficulty;
         this.comments = new ArrayList<>();
         this.submissions = new ArrayList<>();
+    }
+    //Saved problem constructor with all fields
+    public Problem(String title, UUID problemID,
+                   String description,
+                   ArrayList<String> constraints,
+                   Language language,
+                   ArrayList<ArrayList<String>> examples,
+                   ArrayList<String> notes,
+                   ProblemType type,
+                   ArrayList<String> tags,
+                   double timer,
+                   String answer, 
+                   Difficulty difficulty, 
+                   ArrayList<Comment> comments, 
+                   ArrayList<Submission> submissions) {
+        this.title = title;
+        this.problemID = problemID;
+        this.description = description;
+        this.constraints = constraints;
+        this.language = language;
+        this.examples = examples;
+        this.notes = notes;
+        this.type = type;
+        this.tags = tags;
+        this.timer = new Timer(timer);
+        this.answer = answer;
+        this.difficulty = difficulty;
+        this.comments = comments;
+        this.submissions = submissions;
     }
     @Override
     public String toString() {
@@ -100,7 +129,7 @@ public class Problem {
         return language;
     }
 
-    public ArrayList<String[]> getExamples() {
+    public ArrayList<ArrayList<String>> getExamples() {
         return examples;
     }
 
@@ -117,11 +146,15 @@ public class Problem {
     }
 
     public double getTimeLimit() {
-        return timer.getTimeLimit();
+        return timer.toDouble();
     }
 
     public ArrayList<Comment> getComments() {
         return comments;
+    }
+
+    public void addComment(Comment comment) {
+        comments.add(comment);
     }
 
     public String getAnswer() {

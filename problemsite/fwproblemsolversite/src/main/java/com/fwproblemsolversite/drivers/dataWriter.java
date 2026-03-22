@@ -1,11 +1,20 @@
 package com.fwproblemsolversite.drivers;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import com.fwproblemsolversite.accounts.Account;
+import com.fwproblemsolversite.problems.Comment;
 import com.fwproblemsolversite.problems.Problem;
+import com.fwproblemsolversite.problems.Submission;
+import com.fwproblemsolversite.problems.Timer;
 import com.fwproblemsolversite.accounts.Report;
 import com.fwproblemsolversite.enums.AccountType;
+import com.fwproblemsolversite.enums.Difficulty;
+import com.fwproblemsolversite.enums.Language;
+import com.fwproblemsolversite.enums.ProblemType;
 
+import java.util.UUID;
 import org.json.simple.*;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,7 +22,7 @@ import java.io.IOException;
 //Note everything here saves to a singular line per object.
 public class dataWriter {
     //Makes everything significantly less messy and easier to edit.
-    private static boolean writeToJSON(Object obj, JSONObject json, String header, String contents) {
+    private static boolean writeToJSON(Object obj, JSONObject json, String header, Object contents) {
         if(contents == null) {
             System.out.print("dataWriter(writeToJSON): "); //Traces the error to this method for easier debugging.
         }
@@ -55,7 +64,15 @@ public class dataWriter {
                             return false;
                         } else {
                             //Account type must be specified! This switch is just to make sure it's valid and to prevent unreadable content in the JSON file.
+                            String newContents;
                             switch(contents) {
+                                case String j:
+                                    newContents = contents.toString(); //I.. I don't even know why I have to do this.
+                                    break;
+                                default:
+                                    return false;
+                            }
+                            switch(newContents) {
                                 case "ADMIN":
                                     json.put("type", "ADMIN");
                                     return true;
@@ -306,15 +323,15 @@ public class dataWriter {
                 writeToJSON(problem, item, "description", problem.getDescription());
                 writeToJSON(problem, item, "difficulty", problem.getDifficulty() != null ? problem.getDifficulty().toString() : null);
                 writeToJSON(problem, item, "language", problem.getLanguage() != null ? problem.getLanguage().toString() : null);
-                writeToJSON(problem, item, "notes", problem.getNotes() != null ? problem.getNotes().toString() : null);
-                writeToJSON(problem, item, "examples", problem.getExamples() != null ? problem.getExamples().toString() : null);
+                writeToJSON(problem, item, "notes", problem.getNotes() != null ? problem.getNotes() : null);
+                writeToJSON(problem, item, "examples", problem.getExamples() != null ? problem.getExamples() : null);
                 writeToJSON(problem, item, "submissions", problem.getSubmissions() != null ? problem.getSubmissions().toString() : null);
-                writeToJSON(problem, item, "tags", problem.getTags() != null ? problem.getTags().toString() : null);
+                writeToJSON(problem, item, "tags", problem.getTags() != null ? problem.getTags() : null);
                 //Noteworthy exception to our formula from above for timer since it's a Double and not an enum or array of some kind.
                 //We still want to save it as a String though to prevent errors. This requires String.valueOf(...) instead of (...).toString().
-                writeToJSON(problem, item, "timer", problem.getTimer() != null ? String.valueOf(problem.getTimer().getTimeLimit()) : null);
+                writeToJSON(problem, item, "timer", problem.getTimer() != null ? String.valueOf(problem.getTimer().toDouble()) : null);
                 writeToJSON(problem, item, "type", problem.getType() != null ? problem.getType().toString() : null);
-                writeToJSON(problem, item, "constraints", problem.getConstraints() != null ? problem.getConstraints().toString() : null);
+                writeToJSON(problem, item, "constraints", problem.getConstraints() != null ? problem.getConstraints() : null);
                 writeToJSON(problem, item, "answer", problem.getAnswer());
                 writer.write(item.toJSONString() + System.lineSeparator());
                 System.out.println("dataWriter(saveProblems): Successfully saved problem " + problem.getID() + "!");
@@ -351,6 +368,22 @@ public class dataWriter {
         ArrayList<Account> accounts = dataLoader.LoadAccounts();
         ArrayList<Problem> problems = dataLoader.LoadProblems();
         ArrayList<Report> reports = dataLoader.LoadReports();
+        ArrayList<String> constraints = new ArrayList<>(List.of("No", "Yes"));
+        ArrayList<String> tags = new ArrayList<>(List.of("Yes", "No", "Maybe"));
+        Timer timer = new Timer(30.0);
+        Comment commentOne = new Comment(UUID.randomUUID(), UUID.randomUUID(), "Blah blah blah...");
+        Comment commentTwo = new Comment(UUID.randomUUID(), UUID.randomUUID(), "Yada yada yada...");
+        ArrayList<Comment> comments = new ArrayList<>(List.of(commentOne, commentTwo));
+        Submission submissionOne = new Submission("HHHH", "AAAA", UUID.randomUUID().toString());
+        Submission submissionTwo = new Submission("HAHH", "AHAA", UUID.randomUUID().toString());
+        ArrayList<Submission> submissions = new ArrayList<>(List.of(submissionOne, submissionTwo)); 
+        ArrayList<String> notes = new ArrayList<>(List.of("AAA", "BBB"));
+        ArrayList<String> example = new ArrayList<>(List.of("AAAA", "BBBB"));
+        ArrayList<String> example2 = new ArrayList<>(List.of("AAA", "BBB"));
+
+        ArrayList<ArrayList<String>> examples = new ArrayList<>(List.of(example, example2));
+        Problem newProblem = new Problem("Test", UUID.randomUUID(), "This is a test problem.", constraints, Language.CPP, examples, notes, ProblemType.ARRAY, tags, timer.toDouble(), "AAA", Difficulty.MEDIUM, comments, submissions);
+        problems.add(newProblem);
         saveAccounts(accounts);
         saveProblems(problems);
         saveReports(reports);
