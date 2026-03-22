@@ -24,13 +24,13 @@ public class Comment {
     }
 
     // Constructor to initialize the comment with sender, body, and score
-    public Comment(UUID sender, UUID problemID, String body, int score) {
+    public Comment(UUID sender, UUID problemID, String body, int score, ArrayList<Comment> replies, String date) {
         this.sender = sender;
         this.problemID = problemID;
         this.commentText = body;
         this.score = score;
-        this.date = LocalDate.now();
-        this.replies = new ArrayList<>();
+        this.date = LocalDate.parse(date);
+        this.replies = replies;
     }
 
     // Method to add a reply to the comment
@@ -77,5 +77,17 @@ public class Comment {
 
     public LocalDate getDate() {
         return date;
+    }
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "commentText='" + commentText + "\'" +
+                ", sender=" + sender +
+                ", problemID=" + problemID +
+                ", score=" + score +
+                ", date=" + date +
+                ", replies=" + replies +
+                '}';
     }
 }

@@ -23,8 +23,8 @@ public class Problem {
     private ArrayList<String[]> examples;
     private Language language;
     private ArrayList<String> constraints;
-
-    public Problem(String title, UUID problemID,
+    //New problem constructor with all fields
+    public Problem(String title,
                    String description,
                    ArrayList<String> constraints,
                    Language language,
@@ -35,7 +35,7 @@ public class Problem {
                    double timer,
                    String answer, Difficulty difficulty) {
         this.title = title;
-        this.problemID = problemID;
+        this.problemID = UUID.randomUUID();
         this.description = description;
         this.constraints = constraints;
         this.language = language;
@@ -48,6 +48,35 @@ public class Problem {
         this.difficulty = difficulty;
         this.comments = new ArrayList<>();
         this.submissions = new ArrayList<>();
+    }
+    //Saved problem constructor with all fields
+    public Problem(String title, UUID problemID,
+                   String description,
+                   ArrayList<String> constraints,
+                   Language language,
+                   ArrayList<String[]> examples,
+                   ArrayList<String> notes,
+                   ProblemType type,
+                   ArrayList<String> tags,
+                   double timer,
+                   String answer, 
+                   Difficulty difficulty, 
+                   ArrayList<Comment> comments, 
+                   ArrayList<Submission> submissions) {
+        this.title = title;
+        this.problemID = problemID;
+        this.description = description;
+        this.constraints = constraints;
+        this.language = language;
+        this.examples = examples;
+        this.notes = notes;
+        this.type = type;
+        this.tags = tags;
+        this.timer = new Timer(timer);
+        this.answer = answer;
+        this.difficulty = difficulty;
+        this.comments = comments;
+        this.submissions = submissions;
     }
     @Override
     public String toString() {

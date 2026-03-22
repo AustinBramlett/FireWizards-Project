@@ -1,11 +1,20 @@
 package com.fwproblemsolversite.drivers;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import com.fwproblemsolversite.accounts.Account;
+import com.fwproblemsolversite.problems.Comment;
 import com.fwproblemsolversite.problems.Problem;
+import com.fwproblemsolversite.problems.Submission;
+import com.fwproblemsolversite.problems.Timer;
 import com.fwproblemsolversite.accounts.Report;
 import com.fwproblemsolversite.enums.AccountType;
+import com.fwproblemsolversite.enums.Difficulty;
+import com.fwproblemsolversite.enums.Language;
+import com.fwproblemsolversite.enums.ProblemType;
 
+import java.util.UUID;
 import org.json.simple.*;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -351,6 +360,22 @@ public class dataWriter {
         ArrayList<Account> accounts = dataLoader.LoadAccounts();
         ArrayList<Problem> problems = dataLoader.LoadProblems();
         ArrayList<Report> reports = dataLoader.LoadReports();
+        ArrayList<String> constraints = new ArrayList<>(List.of("No", "Yes"));
+        ArrayList<String> tags = new ArrayList<>(List.of("Yes", "No", "Maybe"));
+        Timer timer = new Timer(30.0);
+        Comment commentOne = new Comment(UUID.randomUUID(), UUID.randomUUID(), "Blah blah blah...");
+        Comment commentTwo = new Comment(UUID.randomUUID(), UUID.randomUUID(), "Yada yada yada...");
+        ArrayList<Comment> comments = new ArrayList<>(List.of(commentOne, commentTwo));
+        Submission submissionOne = new Submission("HHHH", "AAAA", UUID.randomUUID().toString());
+        Submission submissionTwo = new Submission("HAHH", "AHAA", UUID.randomUUID().toString());
+        ArrayList<Submission> submissions = new ArrayList<>(List.of(submissionOne, submissionTwo)); 
+        ArrayList<String> notes = new ArrayList<>(List.of("AAA", "BBB"));
+        String[] example = {"AAAA", "BBBB"};
+        String[] example2 = {"CCCC", "DDDD"};
+
+        ArrayList<String[]> examples = new ArrayList<>(List.of(example, example2));
+        Problem newProblem = new Problem("Test", UUID.randomUUID(), "This is a test problem.", constraints, Language.CPP, examples, notes, ProblemType.ARRAY, tags, timer.toDouble(), "AAA", Difficulty.MEDIUM, comments, submissions);
+        problems.add(newProblem);
         saveAccounts(accounts);
         saveProblems(problems);
         saveReports(reports);
