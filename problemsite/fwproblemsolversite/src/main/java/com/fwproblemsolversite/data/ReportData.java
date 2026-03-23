@@ -2,7 +2,8 @@ package com.fwproblemsolversite.data;
 
 import java.util.ArrayList;
 
-import com.fwproblemsolversite.Report;
+import com.fwproblemsolversite.accounts.Report;
+
 /**
  * Manages all the reports in the system.
  * 
