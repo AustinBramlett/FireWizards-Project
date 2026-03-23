@@ -7,6 +7,11 @@ import com.fwproblemsolversite.problems.Problem;
 /**
  * Driver class used to test the functionality of the application.
  * 
+ * Scenarios included:
+ * - Account creation
+ * - Contributor creation duplicate and success cases
+ * - Jimmy completes daily challenge
+ * 
  */
 public class Driver {
     /**

@@ -73,11 +73,13 @@ public class ProblemApplication {
 
     /**
      * Creates a new account with the given details.
+     * 
      * @param firstName The first name of the user.
      * @param lastName The last name of the user.
      * @param username The username of the user.
      * @param email The email of the user.
      * @param password The password of the user.
+     * @param type The type of account (Student, Contributor, Admin).
      * @return true if the account is created successfully, false otherwise.
      */
     public boolean createAccount(String firstName, String lastName, String username,
@@ -193,6 +195,9 @@ public class ProblemApplication {
     }
     /**
      * Adds a new problem to the system with the given details.
+     * Only users with Contributor or Admin roles can add problems.
+     * 
+     * @return true if the problem is added successfully, if not false
      */
     public boolean addProblem(
         String title,
