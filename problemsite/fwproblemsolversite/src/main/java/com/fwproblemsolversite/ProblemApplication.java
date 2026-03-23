@@ -274,4 +274,97 @@ public class ProblemApplication {
     public ArrayList<Problem> searchByDifficulty(Difficulty difficulty) {
         return problemData.searchByDifficulty(difficulty);
     }
+
+    /**
+     * Generates default problems for the system if there are no problems currently.
+     * 
+     */
+    public void generateDefaultProblems() {
+    if (!problemData.getProblems().isEmpty()) {
+        return;
+    }
+
+    Account previousUser = currentUser;
+
+    Account tempContributor = new Contributor(
+        java.util.UUID.randomUUID(),
+        "System",
+        "Contributor",
+        "system_contributor",
+        "system@fw.com",
+        "temp123",
+        new ArrayList<UUID>()
+    );
+
+    currentUser = tempContributor;
+
+    ArrayList<String> constraints1 = new ArrayList<>();
+    constraints1.add("Array can contain negative numbers");
+
+    ArrayList<ArrayList<String>> examples1 = new ArrayList<>();
+    ArrayList<String> example1a = new ArrayList<>();
+    example1a.add("[1, -1, 5, -2, 3], k = 3");
+    example1a.add("4");
+
+    ArrayList<String> example1b = new ArrayList<>();
+    example1b.add("[-2, -1, 2, 1], k = 1");
+    example1b.add("2");
+
+    examples1.add(example1a);
+    examples1.add(example1b);
+
+    ArrayList<String> notes1 = new ArrayList<>();
+    notes1.add("Brute force is O(n^2)");
+    notes1.add("HashMap solution is O(n)");
+
+    ArrayList<String> tags1 = new ArrayList<>();
+    tags1.add("Array");
+    tags1.add("HashMap");
+
+    addProblem(
+        "Longest Subarray with Sum K",
+        "Find the length of the longest contiguous subarray whose sum equals k.",
+        constraints1,
+        com.fwproblemsolversite.enums.Language.JAVA,
+        examples1,
+        notes1,
+        com.fwproblemsolversite.enums.ProblemType.ARRAY,
+        tags1,
+        30.0,
+        "Use prefix sums with a HashMap.",
+        Difficulty.MEDIUM
+    );
+
+    ArrayList<String> constraints2 = new ArrayList<>();
+    constraints2.add("Each input has exactly one solution");
+
+    ArrayList<ArrayList<String>> examples2 = new ArrayList<>();
+    ArrayList<String> example2a = new ArrayList<>();
+    example2a.add("[2, 7, 11, 15], target = 9");
+    example2a.add("[0, 1]");
+    examples2.add(example2a);
+
+    ArrayList<String> notes2 = new ArrayList<>();
+    notes2.add("A HashMap can store visited values");
+
+    ArrayList<String> tags2 = new ArrayList<>();
+    tags2.add("Array");
+    tags2.add("HashMap");
+
+    addProblem(
+        "Two Sum",
+        "Return indices of the two numbers such that they add up to target.",
+        constraints2,
+        com.fwproblemsolversite.enums.Language.JAVA,
+        examples2,
+        notes2,
+        com.fwproblemsolversite.enums.ProblemType.ARRAY,
+        tags2,
+        20.0,
+        "Store seen values in a HashMap.",
+        Difficulty.EASY
+    );
+
+    currentUser = previousUser;
+}
 }

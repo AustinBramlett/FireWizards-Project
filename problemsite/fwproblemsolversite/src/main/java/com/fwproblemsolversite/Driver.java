@@ -20,6 +20,8 @@ public class Driver {
     public static void main(String[] args) {
 
         ProblemApplication app = new ProblemApplication();
+
+        app.generateDefaultProblems();
         // Test the login function with the username and password
         Account user = app.login("jmiller", "pass123");
 

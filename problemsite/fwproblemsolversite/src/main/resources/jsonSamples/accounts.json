@@ -100,11 +100,11 @@
         "password": "pass123",
         "accountType": "STUDENT",
         "progress": [
-            3,
+            4,
             0,
-            3,
+            4,
             0,
-            60,
+            80,
             8
         ],
         "id": "c4a9f6e2-1d3b-4f8a-9c72-5e1b8d3a7f44",
