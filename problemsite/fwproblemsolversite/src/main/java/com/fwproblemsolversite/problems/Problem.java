@@ -202,7 +202,7 @@ public class Problem {
      */
     public void addComment(Comment comment) {
         if(comment != null) {
-            comments.add(comment);
+        comments.add(comment);
         }
     }
 
