@@ -1,39 +1,26 @@
 package com.fwproblemsolversite.drivers;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 
 import com.fwproblemsolversite.accounts.Account;
-import com.fwproblemsolversite.accounts.Report;
-import com.fwproblemsolversite.enums.Difficulty;
-import com.fwproblemsolversite.enums.Language;
-import com.fwproblemsolversite.enums.ProblemType;
 import com.fwproblemsolversite.problems.Comment;
 import com.fwproblemsolversite.problems.Problem;
 import com.fwproblemsolversite.problems.Submission;
 import com.fwproblemsolversite.problems.Timer;
-/**
- * Handles writing data to JSON files.
- * 
- * This converts Account, Problem, and Report into JSON format.
- */
+import com.fwproblemsolversite.accounts.Report;
+import com.fwproblemsolversite.enums.AccountType;
+import com.fwproblemsolversite.enums.Difficulty;
+import com.fwproblemsolversite.enums.Language;
+import com.fwproblemsolversite.enums.ProblemType;
+
+import java.util.UUID;
+import org.json.simple.*;
+import java.io.FileWriter;
+import java.io.IOException;
+
 //Note everything here saves to a singular line per object.
 public class dataWriter {
-    /**
-     * method to write an object to JSON format.
-     * 
-     * @param obj The object to write to JSON.
-     * @param json The JSON object to write to.
-     * @param header The header for the JSON field.
-     * @param contents the value to store.
-     * @return true if the write was successful, if not false.
-     */
     //Makes everything significantly less messy and easier to edit.
     private static boolean writeToJSON(Object obj, JSONObject json, String header, Object contents) {
         if(contents == null) {
@@ -304,12 +291,6 @@ public class dataWriter {
                 return false;
         }
     }
-    /**
-     * Saves all accounts to the JSON file.
-     * 
-     * @param accounts The list of accounts to save.
-      * @return true if the save was successful, if not false.
-     */
     public static boolean saveAccounts(ArrayList<Account> accounts) {
         try(FileWriter writer = new FileWriter("problemsite\\fwproblemsolversite\\src\\main\\resources\\jsonSamples\\accounts.json")){
             JSONArray accountsFile = new JSONArray();
@@ -341,12 +322,6 @@ public class dataWriter {
         }
         return accounts != null; //If there's nothing saved, something probably went wrong
     }
-    /**
-     * Saves all problems to the JSON file.
-     * 
-     * @param problems The list of problems to save.
-      * @return true if the save was successful, if not false.
-     */
     public static boolean saveProblems(ArrayList<Problem> problems) {
         try(FileWriter writer = new FileWriter("problemsite\\fwproblemsolversite\\src\\main\\resources\\jsonSamples\\problems.json")){
             JSONArray problemsFile = new JSONArray();
@@ -379,12 +354,6 @@ public class dataWriter {
         }
         return problems != null;
     }
-    /**
-     * Saves all reports to the JSON file.
-     * 
-     * @param reports list of reports to save.
-     * @return true if the save was successful, if not false.
-     */
     public static boolean saveReports(ArrayList<Report> reports) {
         try(FileWriter writer = new FileWriter("problemsite\\fwproblemsolversite\\src\\main\\resources\\jsonSamples\\reports.json")){
             JSONArray reportsFile = new JSONArray();
@@ -406,9 +375,6 @@ public class dataWriter {
         }
         return reports != null;
     }
-    /**
-     * Main method used for testing data writing.
-     */
     public static void main(String[] args) {
         //This is just for testing purposes.
         ArrayList<Account> accounts = dataLoader.LoadAccounts();

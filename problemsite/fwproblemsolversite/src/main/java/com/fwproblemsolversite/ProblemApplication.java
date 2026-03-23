@@ -7,10 +7,12 @@ import com.fwproblemsolversite.data.AccountData;
 import com.fwproblemsolversite.data.ProblemData;
 import com.fwproblemsolversite.drivers.dataLoader;
 import com.fwproblemsolversite.problems.Problem;
+import com.fwproblemsolversite.problems.Comment;
+import com.fwproblemsolversite.enums.Difficulty;
 
 /**
  * Main application class for the system.
- * 
+ *
  * Handles the core functionality of the application.
  */
 public class ProblemApplication {
@@ -20,7 +22,7 @@ public class ProblemApplication {
     private Account currentUser;
 
     /**
-     * Initializes the application and loads account and problem data 
+     * Initializes the application and loads account and problem data
      * from the dataLoader class.
      */
     public ProblemApplication() {
@@ -34,10 +36,11 @@ public class ProblemApplication {
     }
 
     /**
+
      * Logs a user into the system.
-     * 
+     *
      * @param username the username of the account to log in
-     * @param password the password of the account to log in   
+     * @param password the password of the account to log in  
      * @return the logged-in account if successful, null if not.
      */
     public Account login(String username, String password) {
@@ -56,18 +59,17 @@ public class ProblemApplication {
      */
     public void logout() {
         currentUser = null;
-        System.out.println("User has logged out successfully.");
+        System.out.println("Users logged out successfully.");
     }
 
     /**
-     * Creates a new account in the system.
-     * 
-     * @param firstName the first name of the new account
-     * @param lastName the last name of the new account
-     * @param username the username of the new account
-     * @param email the email of the new account
-     * @param password the password of the new account
-     * @return true if the account was created successfully, false if it was not.
+     * Creates a new account with the given details.
+     * @param firstName The first name of the user.
+     * @param lastName The last name of the user.
+     * @param username The username of the user.
+     * @param email The email of the user.
+     * @param password The password of the user.
+     * @return true if the account is created successfully, false otherwise.
      */
     public boolean createAccount(String firstName, String lastName, String username,
                                  String email, String password) {
@@ -87,7 +89,7 @@ public class ProblemApplication {
             username,
             email,
             password
-            // AccountType will be set in the specific account classes (Student, Contributor, Administrator.) 
+            // AccountType will be set in the specific account classes (Student, Contributor, Administrator.)
             // In typical usage, do not use the Account constructor under any circumstances.
         );
 
@@ -96,16 +98,60 @@ public class ProblemApplication {
     }
 
     /**
+     * Solves a problem by its title.
+     * @param problemTitle The title of the problem to solve.
+     * @return true if the problem is solved successfully, false otherwise.
+     */
+    public boolean solveProblem(String problemTitle) {
+        if (currentUser == null) return false;
+
+        for (Problem problem : problemData.getProblems()) {
+            if (problem.getTitle().equalsIgnoreCase(problemTitle)) {
+
+                currentUser.getProgress()
+                    .updateProgress("1", problem.getDifficulty());
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Adds a comment to a problem by its title.
+     * @param problemTitle The title of the problem to comment on.
+     * @param text The text of the comment.
+     * @return true if the comment is added successfully, false otherwise.
+     */
+    public boolean addComment(String problemTitle, String text) {
+        if (currentUser == null) return false;
+        if (text == null || text.trim().isEmpty()) return false;
+
+        for (Problem problem : problemData.getProblems()) {
+            if (problem.getTitle().equalsIgnoreCase(problemTitle)) {
+               
+                Comment comment = new Comment(currentUser.getId(), problem.getId(), text);
+
+                problem.addComment(comment);
+                return true;
+            }
+        }
+        return false;
+    }
+
+   
+    /**
+     * Get Questions Method
      * Retrieves all questions in the system.
-     * 
+     *
      * @return list of problems
      */
+
     public ArrayList<Problem> getAllQuestions() {
         return problemData.getProblems();
     }
     /**
      * Returns the account data manager.
-     * 
+     *
      * @return the account data manager
      */
     public AccountData getAccountData() {
@@ -113,10 +159,22 @@ public class ProblemApplication {
     }
     /**
      * Returns the currently logged-in user.
-     * 
+     *
      * @return current Account, or null if no one is logged in
      */
     public Account getCurrentUser() {
         return currentUser;
+    }
+
+    public ArrayList<Problem> searchByTitle(String query) {
+        return problemData.searchByTitle(query);
+    }
+
+    public ArrayList<Problem> searchByTag(String tag) {
+        return problemData.searchByTag(tag);
+    }
+
+    public ArrayList<Problem> searchByDifficulty(Difficulty difficulty) {
+        return problemData.searchByDifficulty(difficulty);
     }
 }

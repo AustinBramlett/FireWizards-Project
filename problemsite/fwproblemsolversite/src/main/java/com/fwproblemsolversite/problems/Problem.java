@@ -224,4 +224,7 @@ public class Problem {
         }
         return submissionsArray;
     }
+    public UUID getId() {
+        return problemID;
+    }
 }
