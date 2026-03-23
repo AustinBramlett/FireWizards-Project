@@ -66,11 +66,13 @@ public class ProblemApplication {
     public void logout() {
         currentUser = null;
         System.out.println("Users logged out successfully.");
+    }
+
+    public void save() {
         dataWriter.saveAccounts(AccountData.getInstance().getAccounts());
         dataWriter.saveProblems(ProblemData.getInstance().getProblems());
         dataWriter.saveReports(ReportData.getInstance().getReports());
     }
-
     /**
      * Creates a new account with the given details.
      * 

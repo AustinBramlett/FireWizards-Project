@@ -166,8 +166,15 @@ public class dataWriter {
                         if(contents == null) {
                             System.out.println("Problem " + json.get("title") + " has no comments array!");
                             return false;
+                        } else if (!(contents instanceof ArrayList)){
+                            System.out.println("Comments must be provided as an ArrayList of Comments!");
+                            return false;
                         } else {
-                            json.put(header, contents);
+                            JSONArray commentsArray = new JSONArray();
+                            for(Comment comment : (ArrayList<Comment>) contents){
+                                commentsArray.add(commentToJSONObject(comment));
+                            }
+                            json.put(header, commentsArray);
                             return true;
                         }
                     case "difficulty":
@@ -299,6 +306,35 @@ public class dataWriter {
         }
     }
     /**
+    * Converts a single Comment to a JSONObject for JSON serialization.
+    * Handles recursive replies.
+     * @param comment The Comment to convert.
+     * @return JSONObject representing the Comment.
+    */
+    private static JSONObject commentToJSONObject(Comment comment) {
+        if (comment == null) return null;
+        JSONObject jsonComment = new JSONObject();
+        jsonComment.put("commentText", comment.getCommentText());
+        jsonComment.put("id", comment.getProblemID() != null ? comment.getProblemID().toString() : null);
+        jsonComment.put("sender", comment.getSender() != null ? comment.getSender().toString() : null);
+        jsonComment.put("score", comment.getScore());
+        jsonComment.put("date", comment.getDate().toString());
+
+        //Handling replies recursively
+        ArrayList<Comment> replies = comment.getReplies();
+        if (replies != null && !replies.isEmpty()) {
+            JSONArray repliesArray = new JSONArray();
+            for (Comment reply : replies) {
+                repliesArray.add(commentToJSONObject(reply));  //Recursive call
+            }
+            jsonComment.put("replies", repliesArray);
+        } else {
+            jsonComment.put("replies", new JSONArray());  //Empty array if no replies
+        }
+
+        return jsonComment;
+    }
+    /**
      * Saves all accounts to accounts.json.
      * @param accounts The account arraylist to save
      * @return Success = true, failure = false
@@ -359,6 +395,7 @@ public class dataWriter {
                 writeToJSON(problem, item, "type", problem.getType() != null ? problem.getType().toString() : null);
                 writeToJSON(problem, item, "constraints", problem.getConstraints() != null ? problem.getConstraints() : null);
                 writeToJSON(problem, item, "answer", problem.getAnswer());
+                writeToJSON(problem, item, "comments", problem.getComments());
                 problemsFile.add(item);
                 System.out.println("dataWriter(saveProblems): Successfully saved problem " + problem.getID() + "!");
                 System.out.println("dataWriter(saveProblems): Contents: " + item.toJSONString());

@@ -205,7 +205,7 @@ public class Driver {
                 System.out.println("Difficulty: " + p.getDifficulty());
             }
         }else{
-            System.out.println("NO problems were found.");
+            System.out.println("No problems were found.");
         }
 
         //INcrease the streak

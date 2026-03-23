@@ -1,1 +1,119 @@
-[{"difficulty":"EASY","timer":"15.0","notes":[],"examples":[],"answer":"a + b","submissions":[],"description":"Get the sum of two integers.","title":"Add Two Numbers","type":"ARRAY","constraints":[],"tags":["math","basic"]},{"difficulty":"EASY","timer":"10.0","notes":[],"examples":[],"answer":"System.out.println(\"Hello World\");","submissions":[],"description":"Print Hello World to the console.","title":"Print Hello World","type":"STRING","constraints":[],"tags":["math","basic","intro"]},{"difficulty":"MEDIUM","timer":"30.0","notes":["Brute Force )(n^2)","HAshMap 0(n)"],"examples":[["[1, -1, 5, -2, 3], k = 3","4"],["[-2, -1, 2, 1], k = 3","2"]],"answer":"bruteforce.java, hashmap.java","submissions":[],"description":"Find the length of the longest contiguous subarray whose sum equals k.","language":"JAVA","title":"Longest Subarray with Sum K","type":"ARRAY","constraints":["Array can contain negative numbers"],"tags":["Array","HashMap"]},{"difficulty":"EASY","timer":"15.0","notes":["If target is smaller, go left","If target is larger, go right"],"examples":[["Tree: [5,3,7], target = 3","true"],["Tree: [5,3,7], target = 10","false"]],"answer":"solution1.java, solution2.java","submissions":[],"description":"Given a Binary Search Tree and a number, return true if the number exists in the tree.","title":"Check Value in Binary Search Tree","type":"TREE","constraints":[],"tags":["Binary Search Tree"]},{"difficulty":"EASY","timer":"10.0","notes":["The smallest value is on the far left"],"examples":[["Tree: [5,3,7]","3"],["Tree: [10,5,15]","5"]],"answer":"solution.java","submissions":[],"description":"Given a Binary Search Tree, return the smallest value.","title":"Find Smallest Value in Binary Search Tree","type":"TREE","constraints":[],"tags":["Binary Search Tree"]}]
+[
+    {
+        "difficulty": "EASY",
+        "timer": "15.0",
+        "notes": [],
+        "examples": [],
+        "answer": "a + b",
+        "submissions": [],
+        "description": "Get the sum of two integers.",
+        "title": "Add Two Numbers",
+        "type": "ARRAY",
+        "constraints": [],
+        "tags": [
+            "math",
+            "basic"
+        ]
+    },
+    {
+        "difficulty": "EASY",
+        "timer": "10.0",
+        "notes": [],
+        "examples": [],
+        "answer": "System.out.println(\"Hello World\");",
+        "submissions": [],
+        "description": "Print Hello World to the console.",
+        "title": "Print Hello World",
+        "type": "STRING",
+        "constraints": [],
+        "tags": [
+            "math",
+            "basic",
+            "intro"
+        ]
+    },
+    {
+        "difficulty": "MEDIUM",
+        "timer": "30.0",
+        "notes": [
+            "Brute Force )(n^2)",
+            "HAshMap 0(n)"
+        ],
+        "examples": [
+            [
+                "[1, -1, 5, -2, 3], k = 3",
+                "4"
+            ],
+            [
+                "[-2, -1, 2, 1], k = 3",
+                "2"
+            ]
+        ],
+        "answer": "bruteforce.java, hashmap.java",
+        "submissions": [],
+        "description": "Find the length of the longest contiguous subarray whose sum equals k.",
+        "language": "JAVA",
+        "title": "Longest Subarray with Sum K",
+        "type": "ARRAY",
+        "constraints": [
+            "Array can contain negative numbers"
+        ],
+        "tags": [
+            "Array",
+            "HashMap"
+        ]
+    },
+    {
+        "difficulty": "EASY",
+        "timer": "15.0",
+        "notes": [
+            "If target is smaller, go left",
+            "If target is larger, go right"
+        ],
+        "examples": [
+            [
+                "Tree: [5,3,7], target = 3",
+                "true"
+            ],
+            [
+                "Tree: [5,3,7], target = 10",
+                "false"
+            ]
+        ],
+        "answer": "solution1.java, solution2.java",
+        "submissions": [],
+        "description": "Given a Binary Search Tree and a number, return true if the number exists in the tree.",
+        "title": "Check Value in Binary Search Tree",
+        "type": "TREE",
+        "constraints": [],
+        "tags": [
+            "Binary Search Tree"
+        ]
+    },
+    {
+        "difficulty": "EASY",
+        "timer": "10.0",
+        "notes": [
+            "The smallest value is on the far left"
+        ],
+        "examples": [
+            [
+                "Tree: [5,3,7]",
+                "3"
+            ],
+            [
+                "Tree: [10,5,15]",
+                "5"
+            ]
+        ],
+        "answer": "solution.java",
+        "submissions": [],
+        "description": "Given a Binary Search Tree, return the smallest value.",
+        "title": "Find Smallest Value in Binary Search Tree",
+        "type": "TREE",
+        "constraints": [],
+        "tags": [
+            "Binary Search Tree"
+        ]
+    }
+]
