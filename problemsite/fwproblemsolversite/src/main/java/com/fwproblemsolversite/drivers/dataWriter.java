@@ -19,9 +19,16 @@ import org.json.simple.*;
 import java.io.FileWriter;
 import java.io.IOException;
 
-//Note everything here saves to a singular line per object.
 public class dataWriter {
     //Makes everything significantly less messy and easier to edit.
+    /**
+     * A private method to write any object to JSON, if provided settings exist.
+     * @param obj The type of object being saved
+     * @param json The jsonobject storing this data
+     * @param header The header of the data
+     * @param contents The data
+     * @return True if it worked, false if it didn't.
+     */
     private static boolean writeToJSON(Object obj, JSONObject json, String header, Object contents) {
         if(contents == null) {
             System.out.print("dataWriter(writeToJSON): "); //Traces the error to this method for easier debugging.
@@ -291,6 +298,11 @@ public class dataWriter {
                 return false;
         }
     }
+    /**
+     * Saves all accounts to accounts.json.
+     * @param accounts The account arraylist to save
+     * @return Success = true, failure = false
+     */
     public static boolean saveAccounts(ArrayList<Account> accounts) {
         try(FileWriter writer = new FileWriter("problemsite\\fwproblemsolversite\\src\\main\\resources\\jsonSamples\\accounts.json")){
             JSONArray accountsFile = new JSONArray();
@@ -322,6 +334,11 @@ public class dataWriter {
         }
         return accounts != null; //If there's nothing saved, something probably went wrong
     }
+    /**
+     * Saves all problems to problems.json
+     * @param problems The array of problems being saved
+     * @return Success= true, failure= false
+     */
     public static boolean saveProblems(ArrayList<Problem> problems) {
         try(FileWriter writer = new FileWriter("problemsite\\fwproblemsolversite\\src\\main\\resources\\jsonSamples\\problems.json")){
             JSONArray problemsFile = new JSONArray();
@@ -354,6 +371,11 @@ public class dataWriter {
         }
         return problems != null;
     }
+    /**
+     * Saves all reports to reports.json
+     * @param reports The report array list being saved
+     * @return Success status (boolean)
+     */
     public static boolean saveReports(ArrayList<Report> reports) {
         try(FileWriter writer = new FileWriter("problemsite\\fwproblemsolversite\\src\\main\\resources\\jsonSamples\\reports.json")){
             JSONArray reportsFile = new JSONArray();
@@ -375,6 +397,9 @@ public class dataWriter {
         }
         return reports != null;
     }
+    /**
+     * Main method for testing and writing
+     */
     public static void main(String[] args) {
         //This is just for testing purposes.
         ArrayList<Account> accounts = dataLoader.LoadAccounts();
