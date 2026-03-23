@@ -2,6 +2,10 @@ package com.fwproblemsolversite;
 
 import java.util.ArrayList;
 
+import java.util.UUID;
+import com.fwproblemsolversite.accounts.Administrator;
+import com.fwproblemsolversite.accounts.Contributor;
+import com.fwproblemsolversite.accounts.Student;
 import com.fwproblemsolversite.accounts.Account;
 import com.fwproblemsolversite.data.AccountData;
 import com.fwproblemsolversite.data.ProblemData;
@@ -87,20 +91,49 @@ public class ProblemApplication {
             return false;
         }
 
-        Account newAccount = new Account(
-            java.util.UUID.randomUUID(),
-            firstName,
-            lastName,
-            username,
-            email,
-            password
-        
-            // AccountType will be set in the specific account classes (Student, Contributor, Administrator.) 
-            
-            // In typical usage, do not use the Account constructor under any circumstances.
-        );
+        Account newAccount;
 
-        newAccount.setAccountType(type);
+        switch (type){
+            case STUDENT:
+                newAccount = new Student(
+                    java.util.UUID.randomUUID(),
+                    firstName,
+                    lastName,
+                    username,
+                    email,
+                    password
+                );
+                break;
+                
+            case CONTRIBUTOR:
+                newAccount = new Contributor(
+                    java.util.UUID.randomUUID(),
+                    firstName,
+                    lastName,
+                    username,
+                    email,
+                    password,
+                    new ArrayList<UUID>()
+                );
+                break;
+
+            case ADMIN:
+                newAccount = new Administrator(
+                    java.util.UUID.randomUUID(),
+                    firstName,
+                    lastName,
+                    username,
+                    email,
+                    password,
+                    new java.util.ArrayList<UUID>(),
+                    new java.util.ArrayList<UUID>(),
+                    new java.util.ArrayList<String>()
+                );    
+                break;
+
+                default:
+                    return false;
+        }
 
         accountData.addAccount(newAccount);
         return true;

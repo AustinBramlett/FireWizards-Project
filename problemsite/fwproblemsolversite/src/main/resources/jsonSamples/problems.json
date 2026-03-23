@@ -23,7 +23,6 @@
         "answer": "System.out.println(\"Hello World\");",
         "submissions": [],
         "description": "Print Hello World to the console.",
-        "id": "d9e8f7a6-b5c4-4d3e-9f8a-abcdef123456",
         "title": "Print Hello World",
         "type": "STRING",
         "constraints": [],
@@ -37,221 +36,31 @@
         "difficulty": "MEDIUM",
         "timer": "30.0",
         "notes": [
-            "AAA",
-            "BBB"
+            "Brute Force )(n^2)",
+            "HAshMap 0(n)"
         ],
         "examples": [
             [
-                "AAAA",
-                "BBBB"
+                "[1, -1, 5, -2, 3], k = 3",
+                "4"
             ],
             [
-                "AAA",
-                "BBB"
+                "[-2, -1, 2, 1], k = 3",
+                "2"
             ]
         ],
-        "answer": "AAA",
-        "submissions": [
-            [
-                "HHHH",
-                "AAAA",
-                "befc00bb-9970-4799-b387-8d6ba544eea2"
-            ],
-            [
-                "HAHH",
-                "AHAA",
-                "d3c2a4b8-2e0f-4092-91db-1618b121851e"
-            ]
-        ],
-        "description": "This is a test problem.",
-        "language": "CPP",
-        "title": "Test",
+        "answer": "bruteforce.java, hashmap.java",
+        "submissions": [],
+        "description": "Find the length of the longest contiguous subarray whose sum equals k.",
+        "language": "JAVA",
+        "title": "Longest Subarray with Sum K",
         "type": "ARRAY",
         "constraints": [
-            "No",
-            "Yes"
+            "Array can contain negative numbers"
         ],
         "tags": [
-            "Yes",
-            "No",
-            "Maybe"
+            "Array",
+            "HashMap"
         ]
-    },
-    {
-        "difficulty": "MEDIUM",
-        "timer": "30.0",
-        "notes": [
-            "AAA",
-            "BBB"
-        ],
-        "examples": [
-            [
-                "AAAA",
-                "BBBB"
-            ],
-            [
-                "AAA",
-                "BBB"
-            ]
-        ],
-        "answer": "AAA",
-        "submissions": [
-            [
-                "HHHH",
-                "AAAA",
-                "0706c1e5-c3aa-458d-ab99-e34d431e2d18"
-            ],
-            [
-                "HAHH",
-                "AHAA",
-                "fdbd3fb2-c176-4dad-96c2-54634dc162a0"
-            ]
-        ],
-        "description": "This is a test problem.",
-        "language": "CPP",
-        "title": "Test",
-        "type": "ARRAY",
-        "constraints": [
-            "No",
-            "Yes"
-        ],
-        "tags": [
-            "Yes",
-            "No",
-            "Maybe"
-        ]
-    },
-    {
-        "difficulty": "MEDIUM",
-        "timer": "30.0",
-        "notes": [
-            "AAA",
-            "BBB"
-        ],
-        "examples": [
-            [
-                "AAAA",
-                "BBBB"
-            ],
-            [
-                "AAA",
-                "BBB"
-            ]
-        ],
-        "answer": "AAA",
-        "submissions": [
-            [
-                "HHHH",
-                "AAAA",
-                "6311a0ed-ca92-4fe2-9072-3e6c663a2bce"
-            ],
-            [
-                "HAHH",
-                "AHAA",
-                "b663b219-1de6-43cf-a0df-75af761ad752"
-            ]
-        ],
-        "description": "This is a test problem.",
-        "language": "CPP",
-        "title": "Test",
-        "type": "ARRAY",
-        "constraints": [
-            "No",
-            "Yes"
-        ],
-        "tags": [
-            "Yes",
-            "No",
-            "Maybe"
-        ]
-    },
-    {
-        "difficulty": "MEDIUM",
-        "timer": "30.0",
-        "notes": [
-            "AAA",
-            "BBB"
-        ],
-        "examples": [
-            [
-                "AAAA",
-                "BBBB"
-            ],
-            [
-                "AAA",
-                "BBB"
-            ]
-        ],
-        "answer": "AAA",
-        "submissions": [
-            [
-                "HHHH",
-                "AAAA",
-                "2ba80bb9-9d57-47ae-9138-9fc42b84b2c3"
-            ],
-            [
-                "HAHH",
-                "AHAA",
-                "cbdcb843-3f59-40cb-94d3-9d8c645d2149"
-            ]
-        ],
-        "description": "This is a test problem.",
-        "language": "CPP",
-        "title": "Test",
-        "type": "ARRAY",
-        "constraints": [
-            "No",
-            "Yes"
-        ],
-        "tags": [
-            "Yes",
-            "No",
-            "Maybe"
-        ]
-    },
-    {
-        "notes": [
-            "AAA",
-            "BBB"
-        ],
-        "description": "This is a test problem.",
-        "language": "CPP",
-        "title": "Test",
-        "type": "ARRAY",
-        "constraints": [
-            "No",
-            "Yes"
-        ],
-        "tags": [
-            "Yes",
-            "No",
-            "Maybe"
-        ],
-        "difficulty": "MEDIUM",
-        "timer": "30.0",
-        "examples": [
-            [
-                "AAAA",
-                "BBBB"
-            ],
-            [
-                "AAA",
-                "BBB"
-            ]
-        ],
-        "answer": "AAA",
-        "submissions": [
-            [
-                "HHHH",
-                "AAAA",
-                "fe96ab3c-7a7a-4b70-b10b-dc948bca553d"
-            ],
-            [
-                "HAHH",
-                "AHAA",
-                "3f4d2811-1ac4-4958-8215-f0dc6972b9e5"
-            ]
-        ],
-        "id": "5f366f5b-4102-4e86-b14f-1a6e7022ca0d"
     }
 ]

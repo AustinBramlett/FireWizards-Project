@@ -28,7 +28,8 @@ public class Driver {
         System.out.println("\n--- Sally's Scenario ---");
 
         boolean duplicate = app.createAccount(
-            "Sally", "Sparrow","ssparrow","sally@email.com", "pass123"
+            "Sally", "Sparrow","ssparrow","sally@email.com", "pass123",
+            com.fwproblemsolversite.enums.AccountType.CONTRIBUTOR
         );
 
         if(!duplicate){
@@ -37,7 +38,8 @@ public class Driver {
 
         //Create new account (different username)
         boolean created = app.createAccount(
-            "Sally", "Sparrow", "ssparrow2", "sally@email.com", "pass123"
+            "Sally", "Sparrow", "ssparrow2", "sally@email.com", "pass123",
+            com.fwproblemsolversite.enums.AccountType.CONTRIBUTOR
         );
 
         if (created){
@@ -49,6 +51,7 @@ public class Driver {
         Account sally = app.login("ssparrow2", "pass123");
         System.out.println("Welcome " + sally.getUsername() + " to the system!");
 
+        System.out.println("Account Type: " + sally.getClass().getSimpleName());
         //constraints
         ArrayList<String> constraints = new ArrayList<>();
         constraints.add("Array can contain negative numbers");
@@ -78,7 +81,7 @@ public class Driver {
         tags.add("HashMap");
         
         //add problem
-        app.addProblem(
+       boolean added = app.addProblem(
             "Longest Subarray with Sum K",
             "Find the length of the longest contiguous subarray whose sum equals k.",
             constraints,
@@ -91,6 +94,12 @@ public class Driver {
             "bruteforce.java, hashmap.java",
             com.fwproblemsolversite.enums.Difficulty.MEDIUM
         );
+
+        if (added) {
+            System.out.println("Problem added successfully.");
+        } else {
+            System.out.println("Failed to add problem.");
+        }
 
         //show the problems 
         for (Problem p : app.getAllQuestions()){
@@ -113,14 +122,18 @@ public class Driver {
         }
 
         //Test the createAccount function to ensure that new accounts can be created successfully.
-        if (app.createAccount("John", "Smith", "jsmith", "jsmith@email.com", "pass123")) {
+        if (app.createAccount("John", "Smith", "jsmith", "jsmith@email.com", "pass123",
+            com.fwproblemsolversite.enums.AccountType.STUDENT
+        )) {
             System.out.println("Account created successfully.");
         } else {
             System.out.println("Account creation failed.");
         }
 
         //Test the createAccount function with an empty username to ensure that account creation fails.
-        if (app.createAccount("Jane", "Smith", "", "jane@email.com", "pass123")) {
+        if (app.createAccount("Jane", "Smith", "", "jane@email.com", "pass123",
+            com.fwproblemsolversite.enums.AccountType.STUDENT
+        )) {
             System.out.println("Account created successfully.");
         } else {
             System.out.println("Account creation failed.");
