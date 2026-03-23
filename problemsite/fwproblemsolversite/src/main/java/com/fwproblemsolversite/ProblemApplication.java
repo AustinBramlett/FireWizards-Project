@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import com.fwproblemsolversite.accounts.Account;
 import com.fwproblemsolversite.data.AccountData;
 import com.fwproblemsolversite.data.ProblemData;
+import com.fwproblemsolversite.data.ReportData;
 import com.fwproblemsolversite.drivers.dataLoader;
+import com.fwproblemsolversite.drivers.dataWriter;
 import com.fwproblemsolversite.enums.Difficulty;
 import com.fwproblemsolversite.problems.Comment;
 import com.fwproblemsolversite.problems.Problem;
@@ -59,6 +61,9 @@ public class ProblemApplication {
     public void logout() {
         currentUser = null;
         System.out.println("Users logged out successfully.");
+        dataWriter.saveAccounts(AccountData.getInstance().getAccounts());
+        dataWriter.saveProblems(ProblemData.getInstance().getProblems());
+        dataWriter.saveReports(ReportData.getInstance().getReports());
     }
 
     /**
