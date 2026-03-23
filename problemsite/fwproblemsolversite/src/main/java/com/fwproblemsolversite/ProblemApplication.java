@@ -169,6 +169,12 @@ public class ProblemApplication {
         String answer,
         Difficulty difficulty
     ) {
+        if (currentUser == null) return false;
+
+        if (currentUser.getAccountType() != com.fwproblemsolversite.enums.AccountType.CONTRIBUTOR &&
+            currentUser.getAccountType() != com.fwproblemsolversite.enums.AccountType.ADMIN) {
+            return false;
+        }
 
     if (title == null || title.trim().isEmpty()) return false;
 
