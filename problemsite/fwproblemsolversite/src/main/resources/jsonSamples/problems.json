@@ -1,11 +1,7 @@
 [
     {
-        "difficulty": "EASY",
-        "timer": "15.0",
         "notes": [],
-        "examples": [],
-        "answer": "a + b",
-        "submissions": [],
+        "comments": [],
         "description": "Get the sum of two integers.",
         "title": "Add Two Numbers",
         "type": "ARRAY",
@@ -13,15 +9,17 @@
         "tags": [
             "math",
             "basic"
-        ]
+        ],
+        "difficulty": "EASY",
+        "timer": "15.0",
+        "examples": [],
+        "answer": "a + b",
+        "submissions": [],
+        "id": "7ceddaa8-cb28-467a-8bfd-cf9f6bf9f058"
     },
     {
-        "difficulty": "EASY",
-        "timer": "10.0",
         "notes": [],
-        "examples": [],
-        "answer": "System.out.println(\"Hello World\");",
-        "submissions": [],
+        "comments": [],
         "description": "Print Hello World to the console.",
         "title": "Print Hello World",
         "type": "STRING",
@@ -30,46 +28,29 @@
             "math",
             "basic",
             "intro"
-        ]
-    },
-    {
-        "difficulty": "MEDIUM",
-        "timer": "30.0",
-        "notes": [
-            "Brute Force )(n^2)",
-            "HAshMap 0(n)"
         ],
-        "examples": [
-            [
-                "[1, -1, 5, -2, 3], k = 3",
-                "4"
-            ],
-            [
-                "[-2, -1, 2, 1], k = 3",
-                "2"
-            ]
-        ],
-        "answer": "bruteforce.java, hashmap.java",
-        "submissions": [],
-        "description": "Find the length of the longest contiguous subarray whose sum equals k.",
-        "language": "JAVA",
-        "title": "Longest Subarray with Sum K",
-        "type": "ARRAY",
-        "constraints": [
-            "Array can contain negative numbers"
-        ],
-        "tags": [
-            "Array",
-            "HashMap"
-        ]
-    },
-    {
         "difficulty": "EASY",
-        "timer": "15.0",
+        "timer": "10.0",
+        "examples": [],
+        "answer": "System.out.println(\"Hello World\");",
+        "submissions": [],
+        "id": "ccfa5a52-cb0c-40e5-9fd4-6962c48e118c"
+    },
+    {
         "notes": [
             "If target is smaller, go left",
             "If target is larger, go right"
         ],
+        "comments": [],
+        "description": "Given a Binary Search Tree and a number, return true if the number exists in the tree.",
+        "title": "Check Value in Binary Search Tree",
+        "type": "TREE",
+        "constraints": [],
+        "tags": [
+            "Binary Search Tree"
+        ],
+        "difficulty": "EASY",
+        "timer": "15.0",
         "examples": [
             [
                 "Tree: [5,3,7], target = 3",
@@ -82,20 +63,22 @@
         ],
         "answer": "solution1.java, solution2.java",
         "submissions": [],
-        "description": "Given a Binary Search Tree and a number, return true if the number exists in the tree.",
-        "title": "Check Value in Binary Search Tree",
+        "id": "a8f8a910-602a-435d-9bf3-ce9baefb6b11"
+    },
+    {
+        "notes": [
+            "The smallest value is on the far left"
+        ],
+        "comments": [],
+        "description": "Given a Binary Search Tree, return the smallest value.",
+        "title": "Find Smallest Value in Binary Search Tree",
         "type": "TREE",
         "constraints": [],
         "tags": [
             "Binary Search Tree"
-        ]
-    },
-    {
+        ],
         "difficulty": "EASY",
         "timer": "10.0",
-        "notes": [
-            "The smallest value is on the far left"
-        ],
         "examples": [
             [
                 "Tree: [5,3,7]",
@@ -108,12 +91,48 @@
         ],
         "answer": "solution.java",
         "submissions": [],
-        "description": "Given a Binary Search Tree, return the smallest value.",
-        "title": "Find Smallest Value in Binary Search Tree",
-        "type": "TREE",
-        "constraints": [],
+        "id": "03c71d1e-6ad1-49f1-852b-03378f6df9d2"
+    },
+    {
+        "notes": [
+            "Brute Force )(n^2)",
+            "HAshMap 0(n)"
+        ],
+        "comments": [
+            {
+                "date": "2026-03-23",
+                "score": 0,
+                "replies": [],
+                "sender": "c4a9f6e2-1d3b-4f8a-9c72-5e1b8d3a7f44",
+                "id": "f7474239-6706-475a-84f9-4f176328b1ef",
+                "commentText": "Im confused on the second solution. Can someone explain?"
+            }
+        ],
+        "description": "Find the length of the longest contiguous subarray whose sum equals k.",
+        "language": "JAVA",
+        "title": "Longest Subarray with Sum K",
+        "type": "ARRAY",
+        "constraints": [
+            "Array can contain negative numbers"
+        ],
         "tags": [
-            "Binary Search Tree"
-        ]
+            "Array",
+            "HashMap"
+        ],
+        "difficulty": "MEDIUM",
+        "timer": "30.0",
+        "examples": [
+            [
+                "[1, -1, 5, -2, 3], k = 3",
+                "4"
+            ],
+            [
+                "[-2, -1, 2, 1], k = 3",
+                "2"
+            ]
+        ],
+        "answer": "bruteforce.java, hashmap.java",
+        "submissions": [],
+        "id": "f7474239-6706-475a-84f9-4f176328b1ef"
     }
 ]
