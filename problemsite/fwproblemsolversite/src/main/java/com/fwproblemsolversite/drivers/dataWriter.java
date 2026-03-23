@@ -306,8 +306,7 @@ public class dataWriter {
         }
     }
     /**
-    * Converts a single Comment to a JSONObject for JSON serialization.
-    * Handles recursive replies.
+    * Converts a single Comment to a JSONObject to be saved to a JSONArray in dataWriter.
      * @param comment The Comment to convert.
      * @return JSONObject representing the Comment.
     */
@@ -318,7 +317,7 @@ public class dataWriter {
         jsonComment.put("id", comment.getProblemID() != null ? comment.getProblemID().toString() : null);
         jsonComment.put("sender", comment.getSender() != null ? comment.getSender().toString() : null);
         jsonComment.put("score", comment.getScore());
-        jsonComment.put("date", comment.getDate().toString());
+        jsonComment.put("date", comment.getDate() != null ? comment.getDate().toString() : null);
 
         //Handling replies recursively
         ArrayList<Comment> replies = comment.getReplies();
