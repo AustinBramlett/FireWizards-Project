@@ -146,7 +146,7 @@ public class dataWriter {
                         }
                         json.put(header, contents);
                         return true;
-                    case "id":
+                    case "problemID":
                         if(contents == null) {
                             System.out.println("Problem " + json.get("title") + " has no ID!");
                             return false;
@@ -314,7 +314,6 @@ public class dataWriter {
         if (comment == null) return null;
         JSONObject jsonComment = new JSONObject();
         jsonComment.put("commentText", comment.getCommentText());
-        jsonComment.put("id", comment.getProblemID() != null ? comment.getProblemID().toString() : null);
         jsonComment.put("sender", comment.getSender() != null ? comment.getSender().toString() : null);
         jsonComment.put("score", comment.getScore());
         jsonComment.put("date", comment.getDate() != null ? comment.getDate().toString() : null);
@@ -380,7 +379,7 @@ public class dataWriter {
             for(Problem problem : problems){
                 JSONObject item = new JSONObject();
                 writeToJSON(problem, item, "title", problem.getTitle());
-                writeToJSON(problem, item, "id", problem.getID() != null ? problem.getID().toString() : null);
+                writeToJSON(problem, item, "problemID", problem.getID() != null ? problem.getID().toString() : null);
                 writeToJSON(problem, item, "description", problem.getDescription());
                 writeToJSON(problem, item, "difficulty", problem.getDifficulty() != null ? problem.getDifficulty().toString() : null);
                 writeToJSON(problem, item, "language", problem.getLanguage() != null ? problem.getLanguage().toString() : null);

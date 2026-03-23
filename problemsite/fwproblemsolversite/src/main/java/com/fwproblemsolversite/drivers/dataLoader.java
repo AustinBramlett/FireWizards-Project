@@ -66,7 +66,7 @@ public class dataLoader {
             for(Object obj : jsonObject) {
                 JSONObject problemObj = (JSONObject) obj;
                 // Parses the JSON and create Problem instances.
-                UUID id = (String) problemObj.get("problemID") != null ? UUID.fromString((String) problemObj.get("problemID")) : null;
+                UUID id = (String) problemObj.get("problemID") != null ? UUID.fromString((String) problemObj.get("problemID")) : UUID.randomUUID();
                 String title = (String) problemObj.get("title");
                 String description = (String) problemObj.get("description");
                 String difficultyString = (String) problemObj.get("difficulty");
@@ -190,7 +190,7 @@ public class dataLoader {
                     for (Object comment : commentsArray) {
                         JSONObject commentObj = (JSONObject) comment;
                         String commentText = (String) commentObj.get("commentText");
-                        UUID problemID = UUID.fromString((String) commentObj.get("id"));
+                        UUID problemID = id;
                         UUID sender = UUID.fromString((String) commentObj.get("sender"));
                         int score = ((Long) commentObj.get("score")).intValue();
                         ArrayList<Comment> replies = new ArrayList();
