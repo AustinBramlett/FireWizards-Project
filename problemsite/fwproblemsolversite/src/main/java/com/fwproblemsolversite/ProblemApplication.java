@@ -8,6 +8,7 @@ import com.fwproblemsolversite.data.ProblemData;
 import com.fwproblemsolversite.data.ReportData;
 import com.fwproblemsolversite.drivers.dataLoader;
 import com.fwproblemsolversite.drivers.dataWriter;
+import com.fwproblemsolversite.enums.AccountType;
 import com.fwproblemsolversite.enums.Difficulty;
 import com.fwproblemsolversite.problems.Comment;
 import com.fwproblemsolversite.problems.Problem;
@@ -76,7 +77,7 @@ public class ProblemApplication {
      * @return true if the account is created successfully, false otherwise.
      */
     public boolean createAccount(String firstName, String lastName, String username,
-                                 String email, String password) {
+                                 String email, String password, AccountType type) {
 
         if (username == null || username.trim().isEmpty()) {
             return false;
@@ -93,9 +94,13 @@ public class ProblemApplication {
             username,
             email,
             password
+        
             // AccountType will be set in the specific account classes (Student, Contributor, Administrator.) 
+            
             // In typical usage, do not use the Account constructor under any circumstances.
         );
+
+        newAccount.setAccountType(type);
 
         accountData.addAccount(newAccount);
         return true;
