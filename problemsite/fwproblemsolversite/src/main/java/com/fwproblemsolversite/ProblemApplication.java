@@ -277,7 +277,7 @@ public class ProblemApplication {
 
     /**
      * Generates default problems for the system if there are no problems currently.
-     * This is useful for testing and demonstration purposes.
+     * 
      */
     public void generateDefaultProblems() {
     if (!problemData.getProblems().isEmpty()) {
