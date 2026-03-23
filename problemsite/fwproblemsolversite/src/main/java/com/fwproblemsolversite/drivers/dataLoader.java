@@ -190,7 +190,7 @@ public class dataLoader {
                     for (Object comment : commentsArray) {
                         JSONObject commentObj = (JSONObject) comment;
                         String commentText = (String) commentObj.get("commentText");
-                        UUID problemID = UUID.fromString((String) commentObj.get("problemID"));
+                        UUID problemID = UUID.fromString((String) commentObj.get("id"));
                         UUID sender = UUID.fromString((String) commentObj.get("sender"));
                         int score = ((Long) commentObj.get("score")).intValue();
                         ArrayList<Comment> replies = new ArrayList();

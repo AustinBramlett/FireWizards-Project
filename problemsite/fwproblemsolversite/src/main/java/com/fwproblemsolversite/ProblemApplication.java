@@ -5,13 +5,15 @@ import java.util.ArrayList;
 import com.fwproblemsolversite.accounts.Account;
 import com.fwproblemsolversite.data.AccountData;
 import com.fwproblemsolversite.data.ProblemData;
+import com.fwproblemsolversite.data.ReportData;
 import com.fwproblemsolversite.drivers.dataLoader;
+import com.fwproblemsolversite.drivers.dataWriter;
 import com.fwproblemsolversite.enums.Difficulty;
 import com.fwproblemsolversite.problems.Comment;
 import com.fwproblemsolversite.problems.Problem;
 /**
  * Main application class for the system.
- *
+ * 
  * Handles the core functionality of the application.
  */
 public class ProblemApplication {
@@ -21,7 +23,7 @@ public class ProblemApplication {
     private Account currentUser;
 
     /**
-     * Initializes the application and loads account and problem data
+     * Initializes the application and loads account and problem data 
      * from the dataLoader class.
      */
     public ProblemApplication() {
@@ -37,9 +39,9 @@ public class ProblemApplication {
     /**
 
      * Logs a user into the system.
-     *
+     * 
      * @param username the username of the account to log in
-     * @param password the password of the account to log in  
+     * @param password the password of the account to log in   
      * @return the logged-in account if successful, null if not.
      */
     public Account login(String username, String password) {
@@ -59,6 +61,9 @@ public class ProblemApplication {
     public void logout() {
         currentUser = null;
         System.out.println("Users logged out successfully.");
+        dataWriter.saveAccounts(AccountData.getInstance().getAccounts());
+        dataWriter.saveProblems(ProblemData.getInstance().getProblems());
+        dataWriter.saveReports(ReportData.getInstance().getReports());
     }
 
     /**
@@ -88,7 +93,7 @@ public class ProblemApplication {
             username,
             email,
             password
-            // AccountType will be set in the specific account classes (Student, Contributor, Administrator.)
+            // AccountType will be set in the specific account classes (Student, Contributor, Administrator.) 
             // In typical usage, do not use the Account constructor under any circumstances.
         );
 
@@ -127,8 +132,8 @@ public class ProblemApplication {
 
         for (Problem problem : problemData.getProblems()) {
             if (problem.getTitle().equalsIgnoreCase(problemTitle)) {
-               
-                Comment comment = new Comment(currentUser.getId(), problem.getId(), text);
+                
+                Comment comment = new Comment(currentUser.getId(), problem.getId(), text); 
 
                 problem.addComment(comment);
                 return true;
@@ -137,14 +142,14 @@ public class ProblemApplication {
         return false;
     }
 
-   
+    
     /**
      * Get Questions Method
      * Retrieves all questions in the system.
-     *
+     * 
      * @return list of problems
      */
-    
+
     public ArrayList<Problem> getAllQuestions() {
         return problemData.getProblems();
     }
@@ -194,7 +199,7 @@ public class ProblemApplication {
     
     /**
      * Returns the account data manager.
-     *
+     * 
      * @return the account data manager
      */
     public AccountData getAccountData() {
@@ -202,7 +207,7 @@ public class ProblemApplication {
     }
     /**
      * Returns the currently logged-in user.
-     *
+     * 
      * @return current Account, or null if no one is logged in
      */
     public Account getCurrentUser() {
