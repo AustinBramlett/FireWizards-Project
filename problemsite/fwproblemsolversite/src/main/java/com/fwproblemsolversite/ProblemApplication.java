@@ -28,7 +28,7 @@ public class ProblemApplication {
         accountData = AccountData.getInstance();
         accountData.setAccounts(dataLoader.LoadAccounts());
 
-        problemData = new ProblemData();
+        problemData = ProblemData.getInstance();
         problemData.getProblems().addAll(dataLoader.LoadProblems());
 
         currentUser = null;
