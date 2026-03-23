@@ -1,0 +1,8 @@
+===== Daily Challenge =====
+Title: Longest Subarray with Sum K
+Description: Find the length of the longest contiguous subarray whose sum equals k.
+Difficulty: MEDIUM
+Tags: [Array, HashMap]
+
+Solutions:
+bruteforce.java, hashmap.java

@@ -109,6 +109,112 @@ public class Driver {
         app.logout();
         System.out.println("User logged out successfully.");
 
+        //JIMMY SCENARIO
+        System.out.println("\n--- Jimmy Scenario ---");
+        // jimmy login
+        Account jimmy = app.login("jbauer", "pass123");
+
+        if (jimmy != null) {
+            System.out.println("Welcome " + jimmy.getUsername());
+            //shows jimmys streak
+            int streak = jimmy.getProgress().getDailyStreak();
+
+            System.out.println("Current Streak: " + streak);
+
+        //Get a problem for daily challenge
+        Problem daily = null;
+        
+        for (Problem p : app.getAllQuestions()){
+
+            if(streak >= 5 && p.getDifficulty() == com.fwproblemsolversite.enums.Difficulty.MEDIUM){
+                daily = p;
+                break;
+            }
+            if (streak < 5 && p.getDifficulty() == com.fwproblemsolversite.enums.Difficulty.EASY){
+                daily = p;
+                break;
+            }
+        }
+        if (daily == null && app.getAllQuestions().size() > 0){
+            daily = app.getAllQuestions().get(0);
+        }
+    
+        System.out.println("\n--- Daily Challenge ---");
+        System.out.println("Title: " + daily.getTitle());
+        System.out.println("Description: " + daily.getDescription());
+        System.out.println("Difficulty: " + daily.getDifficulty());
+        System.out.println("Tags: " + daily.getTags());
+        System.out.println("Constraints: " + daily.getConstraints());
+        System.out.println("Examples: " + daily.getExamples());
+
+        System.out.println("\nSolutions:");
+        System.out.println(daily.getAnswer());
+
+        // ADDINg a comment 
+        com.fwproblemsolversite.problems.Comment comment =
+        new com.fwproblemsolversite.problems.Comment(
+            jimmy.getId(),
+            daily.getId(),
+            "Im confused on the second solution. Can someone explain?"
+        );
+        daily.addComment(comment);
+        //display comment
+        System.out.println(
+            jimmy.getUsername() + " (" + comment.getDate() + "): " + comment.getCommentText()
+        );
+        try{
+            java.io.PrintWriter writer = new java.io.PrintWriter("jimmy_problem.txt");
+            
+            writer.println("===== Daily Challenge =====");
+            writer.println("Title: " + daily.getTitle());
+            writer.println("Description: " + daily.getDescription());
+            writer.println("Difficulty: " + daily.getDifficulty());
+            writer.println("Tags: " + daily.getTags());
+
+            writer.println("\nSolutions:");
+            writer.println(daily.getAnswer());
+
+            writer.close();
+            System.out.println("Problem exported to jimmy_problem.txt");
+        }catch (Exception e){
+            System.out.println("Error exporting the file");
+        }
+
+        System.out.println("\nSearching for: binary search tree questions");
+
+        ArrayList<Problem> foundProblems = new ArrayList<>();
+
+        for (Problem p : app.getAllQuestions()){
+            if (p.getTitle().toLowerCase().contains("binary search tree")){
+                foundProblems.add(p);   
+            }
+        }
+
+        if(foundProblems.size() > 0){
+            System.out.println("\nFound " + foundProblems.size() + " problms:\n");
+            
+            for(Problem p : foundProblems){
+                System.out.println("Title: " + p.getTitle());
+                System.out.println("Difficulty: " + p.getDifficulty());
+            }
+        }else{
+            System.out.println("NO problems were found.");
+        }
+
+        //INcrease the streak
+        jimmy.getProgress().updateProgress(
+            "1",
+            com.fwproblemsolversite.enums.Difficulty.MEDIUM
+        );
+
+        System.out.println("New Streak: " + jimmy.getProgress().getDailyStreak());
+
+        app.logout();
+        System.out.println("Jimmy logged out.");
+        }
+
+
+
         //Test the getAllQuestions function to ensure that the questions are being loaded correctly.
         ArrayList<Problem> questions = app.getAllQuestions();
 

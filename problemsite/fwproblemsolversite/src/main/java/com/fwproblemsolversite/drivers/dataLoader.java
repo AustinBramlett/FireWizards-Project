@@ -250,6 +250,21 @@ public class dataLoader {
                 if(accountType == null){
                     System.out.println("dataLoader(LoadAccounts): Type not specified for this account, skipping to prevent further error!");
                 } else {
+
+                    ArrayList<Integer> progressData = new ArrayList<>();
+                    JSONArray progressArray = (JSONArray) accountObj.get("progress");
+
+                    if (progressArray != null){
+                        for(Object val : progressArray){
+                            progressData.add(((Long) val).intValue());
+                        }
+                    }
+
+                    String lastDate = (String) accountObj.get("lastDate");
+
+                    com.fwproblemsolversite.data.Progress progress =
+                        new com.fwproblemsolversite.data.Progress(progressData, lastDate);
+
                     switch (accountType) {
                     case "STUDENT":
                         accountInstance = new Student(id, firstName, lastName, username, email, password);
@@ -270,8 +285,11 @@ public class dataLoader {
                         accountInstance = null;
                     }
                      // Add the created account instance to the accounts list
+                    if(accountInstance != null){
+                    accountInstance.setProgress(progress);
                     accounts.add(accountInstance); 
                     //We're missing some info to create the account instance for anybody other than students. We'll have to fix that soon.
+                    }
                 }
             }
         } catch (IOException | ParseException e) {
