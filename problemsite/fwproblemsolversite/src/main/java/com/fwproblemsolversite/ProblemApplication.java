@@ -6,10 +6,9 @@ import com.fwproblemsolversite.accounts.Account;
 import com.fwproblemsolversite.data.AccountData;
 import com.fwproblemsolversite.data.ProblemData;
 import com.fwproblemsolversite.drivers.dataLoader;
-import com.fwproblemsolversite.problems.Problem;
-import com.fwproblemsolversite.problems.Comment;
 import com.fwproblemsolversite.enums.Difficulty;
-
+import com.fwproblemsolversite.problems.Comment;
+import com.fwproblemsolversite.problems.Problem;
 /**
  * Main application class for the system.
  *
@@ -145,10 +144,54 @@ public class ProblemApplication {
      *
      * @return list of problems
      */
-
+    
     public ArrayList<Problem> getAllQuestions() {
         return problemData.getProblems();
     }
+    /**
+     * Adds a new problem to the system with the given details.
+     */
+    public boolean addProblem(
+        String title,
+        String description,
+        ArrayList<String> constraints,
+        com.fwproblemsolversite.enums.Language language,
+        ArrayList<ArrayList<String>> examples,
+        ArrayList<String> notes,
+        com.fwproblemsolversite.enums.ProblemType type,
+        ArrayList<String> tags,
+        double timer,
+        String answer,
+        Difficulty difficulty
+    ) {
+
+    if (title == null || title.trim().isEmpty()) return false;
+
+    for (Problem p : problemData.getProblems()) {
+        if (p.getTitle().equalsIgnoreCase(title)) {
+            return false;
+        }
+    }
+    
+    Problem newProblem = new Problem(
+        title,
+        description,
+        constraints,
+        language,
+        examples,
+        notes,
+        type,
+        tags,
+        timer,
+        answer,
+        difficulty
+    );
+
+    problemData.add(newProblem);
+    return true;
+}
+
+    
     /**
      * Returns the account data manager.
      *
