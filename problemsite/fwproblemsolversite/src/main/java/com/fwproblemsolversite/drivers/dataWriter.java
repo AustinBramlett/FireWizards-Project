@@ -31,7 +31,7 @@ public class dataWriter {
      */
     private static boolean writeToJSON(Object obj, JSONObject json, String header, Object contents) {
         if(contents == null) {
-            System.out.print("dataWriter(writeToJSON): "); //Traces the error to this method for easier debugging.
+            //System.out.print("dataWriter(writeToJSON): "); //Traces the error to this method for easier debugging.
         }
         if(obj == null || json == null || header == null){
             System.out.println("A field outside of constraints was null! Check your code and try again.");
