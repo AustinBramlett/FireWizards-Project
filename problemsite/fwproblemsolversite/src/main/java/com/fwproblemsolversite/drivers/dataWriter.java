@@ -162,6 +162,14 @@ public class dataWriter {
                             json.put(header, contents);
                             return true;
                         }
+                    case "answers":
+                        if(contents == null) {
+                            System.out.println("Problem " + json.get("title") + " has no answers!");
+                            return false;
+                        } else {
+                            json.put(header, contents);
+                            return true;
+                        }
                     case "comments":
                         if(contents == null) {
                             System.out.println("Problem " + json.get("title") + " has no comments array!");
@@ -392,8 +400,8 @@ public class dataWriter {
                 writeToJSON(problem, item, "timer", problem.getTimer() != null ? String.valueOf(problem.getTimer().toDouble()) : null);
                 writeToJSON(problem, item, "type", problem.getType() != null ? problem.getType().toString() : null);
                 writeToJSON(problem, item, "constraints", problem.getConstraints() != null ? problem.getConstraints() : null);
-                writeToJSON(problem, item, "answer", problem.getAnswer());
                 writeToJSON(problem, item, "comments", problem.getComments());
+                writeToJSON(problem, item, "answers", problem.getAnswers() != null ? problem.getAnswers() : null);
                 problemsFile.add(item);
                 System.out.println("dataWriter(saveProblems): Successfully saved problem " + problem.getID() + "!");
                 System.out.println("dataWriter(saveProblems): Contents: " + item.toJSONString());
@@ -454,8 +462,6 @@ public class dataWriter {
         ArrayList<String> example2 = new ArrayList<>(List.of("AAA", "BBB"));
 
         ArrayList<ArrayList<String>> examples = new ArrayList<>(List.of(example, example2));
-        Problem newProblem = new Problem("Test", UUID.randomUUID(), "This is a test problem.", constraints, Language.CPP, examples, notes, ProblemType.ARRAY, tags, timer.toDouble(), "AAA", Difficulty.MEDIUM, comments, submissions);
-        problems.add(newProblem);
         saveAccounts(accounts);
         saveProblems(problems);
         saveReports(reports);

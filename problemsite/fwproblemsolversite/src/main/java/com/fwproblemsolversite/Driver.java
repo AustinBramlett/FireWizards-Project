@@ -76,11 +76,25 @@ public class Driver {
 
         examples.add(example1);
         examples.add(example2);
-
+        
+        //answers
+        ArrayList<ArrayList<String>> answers = new ArrayList<>();
+        ArrayList<String> answer1 = new ArrayList<>();
+        answer1.add("Brute Force Approach");
+        answer1.add("Try every possible subarray and compute its sum.");
+        answer1.add("n^2");
+        answer1.add("bruteforce.java");
+        answers.add(answer1);
+        ArrayList<String> answer2 = new ArrayList<>();
+        answer2.add("HashMap Version");
+        answer2.add("Idea is to keep track of each sum in a HashMap.\nIf: currentPrefixSum = k\nThen: previous PrefixSum = currentPrefixSum - k\nSo while iterating:\nKeep track of prefix sum.\nStore the first occurrence of each prefix sum in a HashMap.\nIf (prefixSum - k) exists in the map -> we found a valid subarray.\nWhy store the first occurrence?\nBecause we want the longest subarray.");
+        answer2.add("n");
+        answer2.add("hashmap.java");
+        answers.add(answer2);
         //notes 
         ArrayList<String> notes = new ArrayList<>();
-        notes.add("Brute Force )(n^2)");
-        notes.add("HAshMap 0(n)");
+        notes.add("What is the time complexity of your algorithm?");
+        notes.add("Can you find a way to make your algorithm faster?");
 
         //tags
         ArrayList<String> tags = new ArrayList<>();
@@ -98,7 +112,7 @@ public class Driver {
             com.fwproblemsolversite.enums.ProblemType.ARRAY,
             tags,
             30.0,
-            "bruteforce.java, hashmap.java",
+            answers,
             com.fwproblemsolversite.enums.Difficulty.MEDIUM
         );
 
@@ -153,9 +167,8 @@ public class Driver {
         System.out.println("Tags: " + daily.getTags());
         System.out.println("Constraints: " + daily.getConstraints());
         System.out.println("Examples: " + daily.getExamples());
-
-        System.out.println("\nSolutions:");
-        System.out.println(daily.getAnswer());
+        System.out.println("Follow-up questions: " + daily.getNotes());
+        System.out.println("\n" + daily.stringAnswers());
 
         // ADDINg a comment 
         com.fwproblemsolversite.problems.Comment comment =
@@ -177,9 +190,7 @@ public class Driver {
             writer.println("Description: " + daily.getDescription());
             writer.println("Difficulty: " + daily.getDifficulty());
             writer.println("Tags: " + daily.getTags());
-
-            writer.println("\nSolutions:");
-            writer.println(daily.getAnswer());
+            writer.println(daily.stringAnswers());
 
             writer.close();
             System.out.println("Problem exported to jimmy_problem.txt");

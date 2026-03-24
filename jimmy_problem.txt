@@ -3,6 +3,24 @@ Title: Longest Subarray with Sum K
 Description: Find the length of the longest contiguous subarray whose sum equals k.
 Difficulty: MEDIUM
 Tags: [Array, HashMap]
+Solution 1 - Brute Force Approach:
+Try every possible subarray and compute its sum.
+Time Complexity: O(n^2)
+Code: 
+bruteforce.java
 
-Solutions:
-bruteforce.java, hashmap.java
+Solution 2 - HashMap Version:
+Idea is to keep track of each sum in a HashMap.
+If: currentPrefixSum = k
+Then: previous PrefixSum = currentPrefixSum - k
+So while iterating:
+Keep track of prefix sum.
+Store the first occurrence of each prefix sum in a HashMap.
+If (prefixSum - k) exists in the map -> we found a valid subarray.
+Why store the first occurrence?
+Because we want the longest subarray.
+Time Complexity: O(n)
+Code: 
+hashmap.java
+
+

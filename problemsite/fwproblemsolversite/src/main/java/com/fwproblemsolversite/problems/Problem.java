@@ -22,7 +22,7 @@ public class Problem {
     private Timer timer;
     private ArrayList<Comment> comments;
     private ArrayList<Submission> submissions;
-    private String answer;
+    private ArrayList<ArrayList<String>> answers;
     private ArrayList<String> notes;
     private ArrayList<ArrayList<String>> examples;
     private Language language;
@@ -39,7 +39,7 @@ public class Problem {
      * @param type The type of the problem.
      * @param tags The tags associated with the problem.
      * @param timer The time limit for the problem.
-     * @param answer The answer for the problem.
+     * @param answers The answers for the problem.
      * @param difficulty The difficulty of the problem.
      */
     public Problem(String title,
@@ -51,7 +51,7 @@ public class Problem {
                    ProblemType type,
                    ArrayList<String> tags,
                    double timer,
-                   String answer, Difficulty difficulty) {
+                   ArrayList<ArrayList<String>> answers, Difficulty difficulty) {
         this.title = title;
         this.problemID = UUID.randomUUID();
         this.description = description;
@@ -62,7 +62,7 @@ public class Problem {
         this.type = type;
         this.tags = tags;
         this.timer = new Timer(timer);
-        this.answer = answer;
+        this.answers = answers;
         this.difficulty = difficulty;
         this.comments = new ArrayList<>();
         this.submissions = new ArrayList<>();
@@ -80,7 +80,7 @@ public class Problem {
      * @param type The type of the problem.
      * @param tags The tags associated with the problem.
      * @param timer The time limit for the problem.
-     * @param answer The answer for the problem.
+     * @param answers The answers for the problem.
      * @param difficulty The difficulty of the problem.
      * @param comments The list of comments on the problem.
      * @param submissions The list of submissions for the problem.
@@ -94,7 +94,7 @@ public class Problem {
                    ProblemType type,
                    ArrayList<String> tags,
                    double timer,
-                   String answer, 
+                   ArrayList<ArrayList<String>> answers, 
                    Difficulty difficulty, 
                    ArrayList<Comment> comments, 
                    ArrayList<Submission> submissions) {
@@ -108,7 +108,7 @@ public class Problem {
         this.type = type;
         this.tags = tags;
         this.timer = new Timer(timer);
-        this.answer = answer;
+        this.answers = answers;
         this.difficulty = difficulty;
         this.comments = (comments == null) ? new ArrayList<>() : comments;
         this.submissions = (submissions == null) ? new ArrayList<>() : submissions;
@@ -130,12 +130,37 @@ public class Problem {
                 ", timer=" + timer +
                 ", comments=" + comments +
                 ", submissions=" + submissions +
-                ", answer='" + answer + '\'' +
+                ", answers='" + answers + '\'' +
                 ", notes=" + notes +
                 ", examples=" + examples +
                 ", language=" + language +
                 ", constraints=" + constraints +
                 '}';
+    }
+    /**
+     * Returns the answers as an ArrayList<ArrayList<String>>
+     * @return The answers.
+     */
+    public ArrayList<ArrayList<String>> getAnswers() {
+        return answers;
+    }
+    /**
+     * Gives a String containing all the answers to this Problem in a readable format.
+     * @apiNote The first value is the title, the second value is the description, the third value is the time complexity, and the fourth value is the code filename.
+     */
+    public String stringAnswers() {
+        String output = "";
+        int index = 0;
+        for(int i = 0; i < answers.size(); i++){
+            index++;
+            output += ("Solution " + index + " - " + answers.get(i).get(0) + ":" + System.lineSeparator()); //Title
+            output += (answers.get(i).get(1) + System.lineSeparator()); //Description
+            output += ("Time Complexity: O(" + answers.get(i).get(2) + ")" + System.lineSeparator()); //Time complexity
+            output += ("Code: " + System.lineSeparator());
+            output += (answers.get(i).get(3) + System.lineSeparator()); //Code file stand-in
+            output += (System.lineSeparator());
+        }
+        return output;
     }
     /**
      * Displays the problem details.
@@ -205,10 +230,10 @@ public class Problem {
         comments.add(comment);
         }
     }
-
-    public String getAnswer() {
-        return answer;
-    }
+    /**
+     * Reutrns the submissions to the problem.
+     * @return An ArrayList of submissions.
+     */
     public ArrayList<Submission> getSubmissions() {
         return submissions;
     }
@@ -224,6 +249,10 @@ public class Problem {
         }
         return submissionsArray;
     }
+    /**
+     * Gets the ID of the problem.
+     * @return The UUID of the problem.
+     */
     public UUID getId() {
         return problemID;
     }

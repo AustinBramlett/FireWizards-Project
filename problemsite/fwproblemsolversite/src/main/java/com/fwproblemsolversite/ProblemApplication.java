@@ -211,7 +211,7 @@ public class ProblemApplication {
         com.fwproblemsolversite.enums.ProblemType type,
         ArrayList<String> tags,
         double timer,
-        String answer,
+        ArrayList<ArrayList<String>> answers,
         Difficulty difficulty
     ) {
         if (currentUser == null) return false;
@@ -239,7 +239,7 @@ public class ProblemApplication {
         type,
         tags,
         timer,
-        answer,
+        answers,
         difficulty
     );
 
@@ -315,6 +315,13 @@ public class ProblemApplication {
     examples1.add(example1a);
     examples1.add(example1b);
 
+    ArrayList<String> answer1a = new ArrayList<>();
+    answer1a.add("Example Answer");
+    answer1a.add("This is an example description!");
+    answer1a.add("n");
+    answer1a.add("ExampleCode.java");
+    ArrayList<ArrayList<String>> answers1 = new ArrayList<>();
+    answers1.add(answer1a);
     ArrayList<String> notes1 = new ArrayList<>();
     notes1.add("Brute force is O(n^2)");
     notes1.add("HashMap solution is O(n)");
@@ -333,7 +340,7 @@ public class ProblemApplication {
         com.fwproblemsolversite.enums.ProblemType.ARRAY,
         tags1,
         30.0,
-        "Use prefix sums with a HashMap.",
+        answers1,
         Difficulty.MEDIUM
     );
 
@@ -345,7 +352,13 @@ public class ProblemApplication {
     example2a.add("[2, 7, 11, 15], target = 9");
     example2a.add("[0, 1]");
     examples2.add(example2a);
-
+    ArrayList<ArrayList<String>> answers2 = new ArrayList<>();
+    ArrayList<String> answer2a = new ArrayList<>();
+    answer2a.add("Example Answer");
+    answer2a.add("This is an example description!");
+    answer2a.add("n");
+    answer2a.add("ExampleCode.java");
+    answers2.add(answer2a);
     ArrayList<String> notes2 = new ArrayList<>();
     notes2.add("A HashMap can store visited values");
 
@@ -363,7 +376,7 @@ public class ProblemApplication {
         com.fwproblemsolversite.enums.ProblemType.ARRAY,
         tags2,
         20.0,
-        "Store seen values in a HashMap.",
+        answers2,
         Difficulty.EASY
     );
 

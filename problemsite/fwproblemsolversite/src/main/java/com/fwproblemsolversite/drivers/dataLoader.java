@@ -148,10 +148,10 @@ public class dataLoader {
                 JSONArray tagsArray = (JSONArray) problemObj.get("tags");
                 JSONArray constraintsArray = (JSONArray) problemObj.get("constraints");
                 JSONArray examplesArray = (JSONArray) problemObj.get("examples");
+                JSONArray answersArray = (JSONArray) problemObj.get("answers");
                 JSONArray notesArray = (JSONArray) problemObj.get("notes");
                 JSONArray commentsArray = (JSONArray) problemObj.get("comments");
                 JSONArray submissionsArray = (JSONArray) problemObj.get("submissions");
-                String answer = (String) problemObj.get("answer");
                 ArrayList<String> tags = new ArrayList<>();
                 if(tagsArray != null) {
                     for (Object tag : tagsArray) {
@@ -176,6 +176,15 @@ public class dataLoader {
                     }
                 } else {
                     System.out.println("dataLoader(LoadProblems): No examples specified for problem " + title);
+                }
+                ArrayList<ArrayList<String>> answers = new ArrayList<>();
+                if(answersArray != null) {
+                    for (Object anAnswer : answersArray) {
+                        JSONArray anAnswerObj = (JSONArray) anAnswer;
+                        answers.add((ArrayList<String>) anAnswer);
+                    }
+                } else {
+                    System.out.println("dataLoader(LoadProblems): No answers specified for problem " + title);
                 }
                 ArrayList<String> notes = new ArrayList<>();
                 if(notesArray != null) {
@@ -215,7 +224,7 @@ public class dataLoader {
                 String timerVal = (String) problemObj.get("timer");
                 double timer = Double.parseDouble(timerVal);
                 Problem problem = new Problem(title, id, description, constraints, language, examples, notes, 
-                    type, tags, timer, answer, difficulty, comments, submissions);
+                    type, tags, timer, answers, difficulty, comments, submissions);
                 //We're missing submissions and comments at the moment.
                 problems.add(problem);
             }
