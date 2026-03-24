@@ -2,6 +2,7 @@ module com.fwproblemsolversite {
     requires javafx.controls;
     requires javafx.fxml;
     requires json.simple;
+    requires junit;
 
     opens com.fwproblemsolversite to javafx.fxml;
     exports com.fwproblemsolversite;
