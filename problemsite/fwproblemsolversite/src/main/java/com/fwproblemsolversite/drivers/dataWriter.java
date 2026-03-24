@@ -43,42 +43,42 @@ public class dataWriter {
                 switch(header){
                     case "progress":
                         if(contents == null) {
-                            System.out.println("An Account has no progress!");
+                            //System.out.println("An Account has no progress!");
                             return false;
                         }
                         json.put("progress", contents);
                         return true;
                     case "lastDate":
                         if(contents == null){
-                            System.out.println("An Account has no last active date!");
+                            //System.out.println("An Account has no last active date!");
                             return false;
                         }
                         json.put(header, contents);
                         return true;
                     case "username":
                         if(contents == null) {
-                            System.out.println("An Account has no username! (!!!)");
+                            //System.out.println("An Account has no username! (!!!)");
                             return false;
                         }
                         json.put(header, contents);
                         return true;
                     case "password":
                         if(contents == null) {
-                            System.out.println("Account " + json.get("username") + " has no password specified!");
+                            //System.out.println("Account " + json.get("username") + " has no password specified!");
                             return false;
                         }
                         json.put(header, contents);
                         return true;
                     case "email":
                         if(contents == null) {
-                            System.out.println("Account " + json.get("username") + " has no email specified!");
+                            //System.out.println("Account " + json.get("username") + " has no email specified!");
                             return false;
                         }
                         json.put(header, contents);
                         return true;
                     case "accountType":
                         if(contents == null) {
-                            System.out.println("Account " + json.get("username") + " has no account type specified!");
+                            //System.out.println("Account " + json.get("username") + " has no account type specified!");
                             return false;
                         }
                         //Account type must be specified! This switch is just to make sure it's valid and to prevent unreadable content in the JSON file.
@@ -101,39 +101,39 @@ public class dataWriter {
                                 json.put(header, "CONTRIBUTOR");
                                 return true;
                             default:
-                                System.out.println("Invalid account type detected for " + json.get("username") + "!");
+                                //System.out.println("Invalid account type detected for " + json.get("username") + "!");
                                 return false;
                         }
                     case "id":
                         if(contents == null) {
-                            System.out.println("Account " + json.get("username") + " has no ID!");
+                            //System.out.println("Account " + json.get("username") + " has no ID!");
                             return false;
                         }
                         json.put(header, contents);
                         return true;
                     case "firstName":
                         if(contents == null) {
-                            System.out.println("Account " + json.get("username") + " has no first name specified!");
+                            //System.out.println("Account " + json.get("username") + " has no first name specified!");
                             return false;
                         }
                         json.put(header, contents);
                         return true;
                     case "lastName":
                         if(contents == null) {
-                            System.out.println("Account " + json.get("username") + " has no last name specified!");
+                            //System.out.println("Account " + json.get("username") + " has no last name specified!");
                             return false;
                         }
                         json.put(header, contents);
                         return true;
                     case "muted":
                         if(contents == null) {
-                            System.out.println("Account " + json.get("username") + " has no muted status specified!");
+                            //System.out.println("Account " + json.get("username") + " has no muted status specified!");
                             return false;
                         }
                         json.put(header, contents);
                         return true;
                     default:
-                        System.out.println("Invalid header for this object type. Set one up in writeToJSON!");
+                        //System.out.println("Invalid header for this object type. Set one up in writeToJSON!");
                         return false;
                 }
             //Case for all Problem objects.
@@ -141,14 +141,14 @@ public class dataWriter {
                 switch(header){
                     case "title":
                         if(contents == null) {
-                            System.out.println("Problem has no title!");
+                            //System.out.println("Problem has no title!");
                             return false;
                         }
                         json.put(header, contents);
                         return true;
                     case "problemID":
                         if(contents == null) {
-                            System.out.println("Problem " + json.get("title") + " has no ID!");
+                            //System.out.println("Problem " + json.get("title") + " has no ID!");
                             return false;
                         } else {
                             json.put(header, contents);
@@ -156,7 +156,7 @@ public class dataWriter {
                         }
                     case "examples":
                         if(contents == null) {
-                            System.out.println("Problem " + json.get("title") + " has no examples!");
+                            //System.out.println("Problem " + json.get("title") + " has no examples!");
                             return false;
                         } else {
                             json.put(header, contents);
@@ -164,7 +164,7 @@ public class dataWriter {
                         }
                     case "answers":
                         if(contents == null) {
-                            System.out.println("Problem " + json.get("title") + " has no answers!");
+                            //System.out.println("Problem " + json.get("title") + " has no answers!");
                             return false;
                         } else {
                             json.put(header, contents);
@@ -172,10 +172,10 @@ public class dataWriter {
                         }
                     case "comments":
                         if(contents == null) {
-                            System.out.println("Problem " + json.get("title") + " has no comments array!");
+                            //System.out.println("Problem " + json.get("title") + " has no comments array!");
                             return false;
                         } else if (!(contents instanceof ArrayList)){
-                            System.out.println("Comments must be provided as an ArrayList of Comments!");
+                            //System.out.println("Comments must be provided as an ArrayList of Comments!");
                             return false;
                         } else {
                             JSONArray commentsArray = new JSONArray();
@@ -187,7 +187,7 @@ public class dataWriter {
                         }
                     case "difficulty":
                         if(contents == null) {
-                            System.out.println("Problem " + json.get("title") + " has no difficulty!");
+                            //System.out.println("Problem " + json.get("title") + " has no difficulty!");
                             return false;
                         } else {
                             json.put(header, contents);
@@ -195,7 +195,7 @@ public class dataWriter {
                         }
                     case "description":
                         if(contents == null) {
-                            System.out.println("Problem " + json.get("title") + " has no description!");
+                            //System.out.println("Problem " + json.get("title") + " has no description!");
                             return false;
                         } else {
                             json.put(header, contents);
@@ -203,7 +203,7 @@ public class dataWriter {
                         }
                     case "language":
                         if(contents == null) {
-                            System.out.println("Problem " + json.get("title") + " has no language specified!");
+                            //System.out.println("Problem " + json.get("title") + " has no language specified!");
                             return false;
                         } else {
                             json.put(header, contents);
@@ -211,7 +211,7 @@ public class dataWriter {
                         }
                     case "notes":
                         if(contents == null) {
-                            System.out.println("Problem " + json.get("title") + " has no notes!");
+                            //System.out.println("Problem " + json.get("title") + " has no notes!");
                             return false;
                         } else {
                             json.put(header, contents);
@@ -219,7 +219,7 @@ public class dataWriter {
                         }
                     case "submissions":
                         if(contents == null) {
-                            System.out.println("Problem " + json.get("title") + " has no submissions array!");
+                            //System.out.println("Problem " + json.get("title") + " has no submissions array!");
                             return false;
                         } else {
                             json.put(header, contents);
@@ -227,7 +227,7 @@ public class dataWriter {
                         }
                     case "tags":
                         if(contents == null) {
-                            System.out.println("Problem " + json.get("title") + " has no tags!");
+                            //System.out.println("Problem " + json.get("title") + " has no tags!");
                             return false;
                         } else {
                             json.put(header, contents);
@@ -235,7 +235,7 @@ public class dataWriter {
                         }
                     case "timer":
                         if(contents == null) {
-                            System.out.println("Problem " + json.get("title") + " has no timer specified!");
+                            //System.out.println("Problem " + json.get("title") + " has no timer specified!");
                             return false;
                         } else {
                             json.put(header, contents);
@@ -243,7 +243,7 @@ public class dataWriter {
                         }
                     case "type":
                         if(contents == null) {
-                            System.out.println("Problem " + json.get("title") + " has no type!");
+                            //System.out.println("Problem " + json.get("title") + " has no type!");
                             return false;
                         } else {
                             json.put(header, contents);
@@ -251,7 +251,7 @@ public class dataWriter {
                         }
                     case "constraints":
                         if(contents == null) {
-                            System.out.println("Problem " + json.get("title") + " has no constraints!");
+                            //System.out.println("Problem " + json.get("title") + " has no constraints!");
                             return false;
                         } else {
                             json.put(header, contents);
@@ -259,14 +259,14 @@ public class dataWriter {
                         }
                     case "answer":
                         if(contents == null) {
-                            System.out.println("Problem " + json.get("title") + " has no answer specified!");
+                            //System.out.println("Problem " + json.get("title") + " has no answer specified!");
                             return false;
                         } else {
                             json.put(header, contents);
                             return true;
                         }
                     default:
-                        System.out.println("Invalid header for this object type. Set one up in writeToJSON!");
+                        //System.out.println("Invalid header for this object type. Set one up in writeToJSON!");
                         return false;
                 }
             //Case for all Report objects.
@@ -274,7 +274,7 @@ public class dataWriter {
                 switch(header){
                     case "id":
                         if(contents == null) {
-                            System.out.println("Report has no ID!");
+                            //System.out.println("Report has no ID!");
                             return false;
                         } else {
                             json.put("id", contents);
@@ -282,7 +282,7 @@ public class dataWriter {
                         }
                     case "accused":
                         if(contents == null) {
-                            System.out.println("Report " + json.get("id") + " has no accused specified!");
+                            //System.out.println("Report " + json.get("id") + " has no accused specified!");
                             return false;
                         } else {
                             json.put("accused", contents);
@@ -290,7 +290,7 @@ public class dataWriter {
                         }
                     case "reason":
                         if(contents == null) {
-                            System.out.println("Report " + json.get("id") + " has no reason specified!");
+                            //System.out.println("Report " + json.get("id") + " has no reason specified!");
                             return false;
                         } else {
                             json.put("reason", contents);
@@ -298,14 +298,14 @@ public class dataWriter {
                         }
                     case "sender":
                         if(contents == null) {
-                            System.out.println("Report " + json.get("id") + " has no sender specified!");
+                            //System.out.println("Report " + json.get("id") + " has no sender specified!");
                             return false;
                         } else {
                             json.put("sender", contents);
                             return true;
                         }
                     default:
-                        System.out.println("Invalid header for this object type. Set one up in writeToJSON!");
+                        //System.out.println("Invalid header for this object type. Set one up in writeToJSON!");
                         return false;
                 }
             default:
@@ -365,8 +365,8 @@ public class dataWriter {
                 writeToJSON(account, item, "lastDate", account.getProgress().getLastActiveString());
                 accountsFile.add(item);
                 //We can turn this part into a comment later.
-                System.out.println("dataWriter(saveAccounts): Successfully saved account " + account.getUsername() + "!");
-                System.out.println("dataWriter(saveAccounts): Contents: " + item.toJSONString());
+                //System.out.println("dataWriter(saveAccounts): Successfully saved account " + account.getUsername() + "!");
+                //System.out.println("dataWriter(saveAccounts): Contents: " + item.toJSONString());
             }
             writer.write(accountsFile.toJSONString());
             writer.close(); //We might want to switch to BufferedWriter? It's fine for now though.
@@ -403,8 +403,8 @@ public class dataWriter {
                 writeToJSON(problem, item, "comments", problem.getComments());
                 writeToJSON(problem, item, "answers", problem.getAnswers() != null ? problem.getAnswers() : null);
                 problemsFile.add(item);
-                System.out.println("dataWriter(saveProblems): Successfully saved problem " + problem.getID() + "!");
-                System.out.println("dataWriter(saveProblems): Contents: " + item.toJSONString());
+                //System.out.println("dataWriter(saveProblems): Successfully saved problem " + problem.getID() + "!");
+                //System.out.println("dataWriter(saveProblems): Contents: " + item.toJSONString());
             }
             writer.write(problemsFile.toJSONString());
             writer.close();
@@ -429,8 +429,8 @@ public class dataWriter {
                 writeToJSON(report, item, "accused", report.getAccused());
                 writeToJSON(report, item, "sender", report.getSender());
                 reportsFile.add(item);
-                System.out.println("dataWriter(saveReports): Successfully saved report " + report.getID() + "!");
-                System.out.println("dataWriter(saveReports): Contents: " + item.toJSONString());
+                //System.out.println("dataWriter(saveReports): Successfully saved report " + report.getID() + "!");
+                //System.out.println("dataWriter(saveReports): Contents: " + item.toJSONString());
             }
             writer.write(reportsFile.toJSONString());
             writer.close();

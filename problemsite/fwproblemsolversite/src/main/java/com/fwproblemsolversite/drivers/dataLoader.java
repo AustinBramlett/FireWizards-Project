@@ -72,11 +72,11 @@ public class dataLoader {
                 String difficultyString = (String) problemObj.get("difficulty");
                 Difficulty difficulty;
                 if(title == null) {
-                    System.out.println("dataLoader(LoadProblems): Title not specified for a problem, skipping to prevent further error!");
+                    //System.out.println("dataLoader(LoadProblems): Title not specified for a problem, skipping to prevent further error!");
                     continue; // Skip this problem since title is essential
                 }
                 if(difficultyString == null) {
-                    System.out.println("dataLoader(LoadProblems): Difficulty not specified for problem " + title);
+                    //System.out.println("dataLoader(LoadProblems): Difficulty not specified for problem " + title);
                     difficulty = null;
                 } else {
                     switch(difficultyString) {
@@ -90,14 +90,14 @@ public class dataLoader {
                         difficulty = Difficulty.HARD;
                         break;
                     default:
-                        System.out.println("dataLoader(LoadProblems): Unknown difficulty: " + difficultyString);
+                        //System.out.println("dataLoader(LoadProblems): Unknown difficulty: " + difficultyString);
                         difficulty = null;
                     }
                 }
                 String typeString = (String) problemObj.get("type");
                 ProblemType type = null;
                 if(typeString == null) {
-                    System.out.println("dataLoader(LoadProblems): Problem type not specified for problem " + title);
+                    //System.out.println("dataLoader(LoadProblems): Problem type not specified for problem " + title);
                 } else {
                     switch(typeString) {
                     case "ARRAY":
@@ -122,14 +122,14 @@ public class dataLoader {
                         type = ProblemType.HASHMAP;
                         break;
                     default:
-                        System.out.println("dataLoader(LoadProblems): Unknown problem type: " + typeString);
+                        //System.out.println("dataLoader(LoadProblems): Unknown problem type: " + typeString);
                         type = null;
                     }
                 }
                 String languageString = (String) problemObj.get("language");
                 Language language = null;
                 if(languageString ==null) {
-                    System.out.println("dataLoader(LoadProblems): Language not specified for problem " + title);
+                    //System.out.println("dataLoader(LoadProblems): Language not specified for problem " + title);
                 } else {
                     switch(languageString) {
                     case "JAVA":
@@ -142,7 +142,7 @@ public class dataLoader {
                         language = Language.CPP;
                         break;
                     default:
-                        System.out.println("dataLoader(LoadProblems): Unknown language: " + languageString);
+                        //System.out.println("dataLoader(LoadProblems): Unknown language: " + languageString);
                     }
                 }
                 JSONArray tagsArray = (JSONArray) problemObj.get("tags");
@@ -158,7 +158,7 @@ public class dataLoader {
                         tags.add((String) tag);
                     }
                 } else {
-                    System.out.println("dataLoader(LoadProblems): No tags specified for problem " + title);
+                    //System.out.println("dataLoader(LoadProblems): No tags specified for problem " + title);
                 }
                 ArrayList<String> constraints = new ArrayList<>();
                 if(constraintsArray != null) {
@@ -166,7 +166,7 @@ public class dataLoader {
                         constraints.add((String) constraint);
                     }
                 } else {
-                    System.out.println("dataLoader(LoadProblems): No constraints specified for problem " + title);
+                    //System.out.println("dataLoader(LoadProblems): No constraints specified for problem " + title);
                 }
                 ArrayList<ArrayList<String>> examples = new ArrayList<>();
                 if(examplesArray != null) {
@@ -175,7 +175,7 @@ public class dataLoader {
                         examples.add((ArrayList<String>) example);
                     }
                 } else {
-                    System.out.println("dataLoader(LoadProblems): No examples specified for problem " + title);
+                    //System.out.println("dataLoader(LoadProblems): No examples specified for problem " + title);
                 }
                 ArrayList<ArrayList<String>> answers = new ArrayList<>();
                 if(answersArray != null) {
@@ -184,7 +184,7 @@ public class dataLoader {
                         answers.add((ArrayList<String>) anAnswer);
                     }
                 } else {
-                    System.out.println("dataLoader(LoadProblems): No answers specified for problem " + title);
+                    //System.out.println("dataLoader(LoadProblems): No answers specified for problem " + title);
                 }
                 ArrayList<String> notes = new ArrayList<>();
                 if(notesArray != null) {
@@ -192,7 +192,7 @@ public class dataLoader {
                         notes.add((String) note);
                     }
                 } else {
-                    System.out.println("dataLoader(LoadProblems): No notes specified for problem " + title);
+                    //System.out.println("dataLoader(LoadProblems): No notes specified for problem " + title);
                 }
                 ArrayList<Comment> comments = new ArrayList<>();
                 if(commentsArray != null) {   
@@ -209,7 +209,7 @@ public class dataLoader {
                         comments.add(commentInstance);
                     }
                 } else {
-                    System.out.println("dataLoader(LoadProblems): No comments specified for problem " + title);
+                    //System.out.println("dataLoader(LoadProblems): No comments specified for problem " + title);
                 }
                 ArrayList<Submission> submissions = new ArrayList<>();
                 if(submissionsArray != null){
@@ -219,7 +219,7 @@ public class dataLoader {
                         submissions.add(newSubmission);
                     }
                 }else{
-                    System.out.println("dataLoader(LoadProblems): No submissions array specified for problem " + title);
+                    //System.out.println("dataLoader(LoadProblems): No submissions array specified for problem " + title);
                 }
                 String timerVal = (String) problemObj.get("timer");
                 double timer = Double.parseDouble(timerVal);
@@ -257,7 +257,7 @@ public class dataLoader {
                 String email = (String) accountObj.get("email");
                 String password = (String) accountObj.get("password");
                 if(accountType == null){
-                    System.out.println("dataLoader(LoadAccounts): Type not specified for this account, skipping to prevent further error!");
+                    //System.out.println("dataLoader(LoadAccounts): Type not specified for this account, skipping to prevent further error!");
                 } else {
 
                     ArrayList<Integer> progressData = new ArrayList<>();
@@ -290,7 +290,7 @@ public class dataLoader {
                         accountInstance = new Contributor(id, firstName, lastName, username, email, password, questionsMade);
                         break;
                     default:
-                        System.out.println("dataLoader(LoadAccounts): Unknown account type: " + accountType);
+                        //System.out.println("dataLoader(LoadAccounts): Unknown account type: " + accountType);
                         accountInstance = null;
                     }
                      // Add the created account instance to the accounts list
