@@ -266,8 +266,8 @@ public class Driver {
         //Logout the user to ensure that the logout function works correctly.
         app.logout();
 
-        com.fwproblemsolversite.drivers.dataWriter writer =
-        new com.fwproblemsolversite.drivers.dataWriter();
+        com.fwproblemsolversite.io.dataWriter writer =
+        new com.fwproblemsolversite.io.dataWriter();
 
         writer.saveAccounts(app.getAccountData().getAccounts());
         writer.saveProblems(app.getAllQuestions());

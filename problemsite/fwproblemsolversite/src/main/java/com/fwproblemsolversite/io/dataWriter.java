@@ -1,4 +1,4 @@
-package com.fwproblemsolversite.drivers;
+package com.fwproblemsolversite.io;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,13 +93,13 @@ public class dataWriter extends DataConstants{
                         }
                         switch(newContents) {
                             case "ADMIN":
-                                json.put(header, "ADMIN");
+                                json.put(header, contents);
                                 return true;
                             case "STUDENT":
-                                json.put(header, "STUDENT");
+                                json.put(header, contents);
                                 return true;
                             case "CONTRIBUTOR":
-                                json.put(header, "CONTRIBUTOR");
+                                json.put(header, contents);
                                 return true;
                             default:
                                 //System.out.println("Invalid account type detected for " + json.get(ACCOUNT_USER_NAME) + "!");
@@ -270,31 +270,31 @@ public class dataWriter extends DataConstants{
                             //System.out.println("Report has no ID!");
                             return false;
                         } else {
-                            json.put(ITEM_ID, contents);
+                            json.put(header, contents);
                             return true;
                         }
-                    case "accused":
+                    case REPORT_ACCUSED:
                         if(contents == null) {
                             //System.out.println("Report " + json.get(ITEM_ID) + " has no accused specified!");
                             return false;
                         } else {
-                            json.put("accused", contents);
+                            json.put(header, contents);
                             return true;
                         }
-                    case "reason":
+                    case REPORT_REASON:
                         if(contents == null) {
                             //System.out.println("Report " + json.get(ITEM_ID) + " has no reason specified!");
                             return false;
                         } else {
-                            json.put("reason", contents);
+                            json.put(header, contents);
                             return true;
                         }
-                    case "sender":
+                    case REPORT_SENDER:
                         if(contents == null) {
                             //System.out.println("Report " + json.get(ITEM_ID) + " has no sender specified!");
                             return false;
                         } else {
-                            json.put("sender", contents);
+                            json.put(header, contents);
                             return true;
                         }
                     default:
@@ -339,7 +339,9 @@ public class dataWriter extends DataConstants{
      * @return Success = true, failure = false
      */
     public static boolean saveAccounts(ArrayList<Account> accounts) {
-        try(FileWriter writer = new FileWriter(ACCOUNT_FILE_NAME)){
+        String fileName = ACCOUNT_FILE_NAME;
+        if(isJUnitTest()) fileName = ACCOUNT_TEMP_FILE_NAME;
+        try(FileWriter writer = new FileWriter(fileName)){
             JSONArray accountsFile = new JSONArray();
             for(Account account : accounts){
                 JSONObject item = new JSONObject();
@@ -375,7 +377,9 @@ public class dataWriter extends DataConstants{
      * @return Success= true, failure= false
      */
     public static boolean saveProblems(ArrayList<Problem> problems) {
-        try(FileWriter writer = new FileWriter(PROBLEM_FILE_NAME)){
+        String fileName = PROBLEM_FILE_NAME;
+        if(isJUnitTest()) fileName = PROBLEM_TEMP_FILE_NAME;
+        try(FileWriter writer = new FileWriter(fileName)){
             JSONArray problemsFile = new JSONArray();
             for(Problem problem : problems){
                 JSONObject item = new JSONObject();
@@ -413,14 +417,16 @@ public class dataWriter extends DataConstants{
      * @return Success status (boolean)
      */
     public static boolean saveReports(ArrayList<Report> reports) {
-        try(FileWriter writer = new FileWriter(REPORT_FILE_NAME)){
+        String fileName = REPORT_FILE_NAME;
+        if(isJUnitTest()) fileName = REPORT_TEMP_FILE_NAME;
+        try(FileWriter writer = new FileWriter(fileName)){
             JSONArray reportsFile = new JSONArray();
             for(Report report : reports){
                 JSONObject item = new JSONObject();
                 writeToJSON(report, item, ITEM_ID, report.getID() != null ? report.getID().toString() : null);
-                writeToJSON(report, item, "reason", report.getReason());
-                writeToJSON(report, item, "accused", report.getAccused());
-                writeToJSON(report, item, "sender", report.getSender());
+                writeToJSON(report, item, REPORT_REASON, report.getReason());
+                writeToJSON(report, item, REPORT_ACCUSED, report.getAccused());
+                writeToJSON(report, item, REPORT_SENDER, report.getSender());
                 reportsFile.add(item);
                 //System.out.println("dataWriter(saveReports): Successfully saved report " + report.getID() + "!");
                 //System.out.println("dataWriter(saveReports): Contents: " + item.toJSONString());

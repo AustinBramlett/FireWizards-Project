@@ -4,9 +4,10 @@ public class DataConstants {
     protected static final String ACCOUNT_FILE_NAME = "problemsite\\fwproblemsolversite\\src\\main\\resources\\json\\accounts.json";
     protected static final String PROBLEM_FILE_NAME = "problemsite\\fwproblemsolversite\\src\\main\\resources\\json\\problems.json";
     protected static final String REPORT_FILE_NAME = "problemsite\\fwproblemsolversite\\src\\main\\resources\\json\\reports.json";
-    protected static final String ACCOUNT_TEMP_FILE_NAME = "problemsite\\fwproblemsolversite\\src\\main\\resources\\temp\\accounts.json";
-    protected static final String PROBLEM_TEMP_FILE_NAME = "problemsite\\fwproblemsolversite\\src\\main\\resources\\temp\\problems.json";
-    protected static final String REPORT_TEMP_FILE_NAME = "problemsite\\fwproblemsolversite\\src\\main\\resources\\temp\\reports.json";
+    //Since tests are in their own folder and junit takes directories with the resources folder (in the test folder) as the root, we shorten the directory.
+    protected static final String ACCOUNT_TEMP_FILE_NAME = "json\\accounts.json";
+    protected static final String PROBLEM_TEMP_FILE_NAME = "json\\problems.json";
+    protected static final String REPORT_TEMP_FILE_NAME = "json\\reports.json";
 
     protected static final String ITEM_ID = "id";
     protected static final String ACCOUNT_USER_NAME = "username";
@@ -38,4 +39,17 @@ public class DataConstants {
     protected static final String COMMENT_DATE = "date";
     protected static final String COMMENT_TEXT = "commentText";
     protected static final String COMMENT_REPLIES = "replies";
+
+    protected static final String REPORT_SENDER = "sender";
+    protected static final String REPORT_REASON = "reason";
+    protected static final String REPORT_ACCUSED = "accused";  
+    
+    public static boolean isJUnitTest() {
+        for(StackTraceElement element : Thread.currentThread().getStackTrace()){
+            if(element.getClassName().startsWith("org.junit.")){
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -1,4 +1,4 @@
-package com.fwproblemsolversite.drivers;
+package com.fwproblemsolversite.io;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,15 +35,17 @@ public class dataLoader extends DataConstants{
      */
     public static ArrayList<Report> LoadReports(){
         ArrayList<Report> reports = new ArrayList<>();
-        try (FileReader reader = new FileReader(REPORT_FILE_NAME)) {
+        String fileName = REPORT_FILE_NAME;
+        if(isJUnitTest()) fileName = REPORT_TEMP_FILE_NAME;
+        try (FileReader reader = new FileReader(fileName)) {
             JSONArray jsonObject = (JSONArray) parser.parse(reader);
             for(Object obj : jsonObject) {
                 JSONObject reportObj = (JSONObject) obj;
                 // Parse the JSON and create Report instances
                 String id = (String) reportObj.get(ITEM_ID);
-                String reason = (String) reportObj.get("reason");
-                String accused = (String) reportObj.get("accused");
-                String sender = (String) reportObj.get("sender");
+                String reason = (String) reportObj.get(REPORT_REASON);
+                String accused = (String) reportObj.get(REPORT_ACCUSED);
+                String sender = (String) reportObj.get(REPORT_SENDER);
                 Report report = new Report(reason, accused, sender, id);
                 reports.add(report);
             }
@@ -62,15 +64,17 @@ public class dataLoader extends DataConstants{
      */
     public static ArrayList<Problem> LoadProblems(){
         ArrayList<Problem> problems = new ArrayList<>();
-        try (FileReader reader = new FileReader(PROBLEM_FILE_NAME)) {
+        String fileName = PROBLEM_FILE_NAME;
+        if(isJUnitTest()) fileName = PROBLEM_TEMP_FILE_NAME;
+        try (FileReader reader = new FileReader(fileName)) {
             JSONArray jsonObject = (JSONArray) parser.parse(reader);
             for(Object obj : jsonObject) {
                 JSONObject problemObj = (JSONObject) obj;
                 // Parses the JSON and create Problem instances.
                 UUID id = (String) problemObj.get(ITEM_ID) != null ? UUID.fromString((String) problemObj.get(ITEM_ID)) : UUID.randomUUID();
-                String title = (String) problemObj.get("title");
-                String description = (String) problemObj.get("description");
-                String difficultyString = (String) problemObj.get("difficulty");
+                String title = (String) problemObj.get(PROBLEM_TITLE);
+                String description = (String) problemObj.get(PROBLEM_DESCRIPTION);
+                String difficultyString = (String) problemObj.get(PROBLEM_DIFFICULTY);
                 Difficulty difficulty;
                 if(title == null) {
                     //System.out.println("dataLoader(LoadProblems): Title not specified for a problem, skipping to prevent further error!");
@@ -95,7 +99,7 @@ public class dataLoader extends DataConstants{
                         difficulty = null;
                     }
                 }
-                String typeString = (String) problemObj.get("type");
+                String typeString = (String) problemObj.get(PROBLEM_TYPE);
                 ProblemType type = null;
                 if(typeString == null) {
                     //System.out.println("dataLoader(LoadProblems): Problem type not specified for problem " + title);
@@ -127,7 +131,7 @@ public class dataLoader extends DataConstants{
                         type = null;
                     }
                 }
-                String languageString = (String) problemObj.get("language");
+                String languageString = (String) problemObj.get(PROBLEM_LANGUAGE);
                 Language language = null;
                 if(languageString ==null) {
                     //System.out.println("dataLoader(LoadProblems): Language not specified for problem " + title);
@@ -146,13 +150,13 @@ public class dataLoader extends DataConstants{
                         //System.out.println("dataLoader(LoadProblems): Unknown language: " + languageString);
                     }
                 }
-                JSONArray tagsArray = (JSONArray) problemObj.get("tags");
-                JSONArray constraintsArray = (JSONArray) problemObj.get("constraints");
-                JSONArray examplesArray = (JSONArray) problemObj.get("examples");
-                JSONArray answersArray = (JSONArray) problemObj.get("answers");
-                JSONArray notesArray = (JSONArray) problemObj.get("notes");
-                JSONArray commentsArray = (JSONArray) problemObj.get("comments");
-                JSONArray submissionsArray = (JSONArray) problemObj.get("submissions");
+                JSONArray tagsArray = (JSONArray) problemObj.get(PROBLEM_TAGS);
+                JSONArray constraintsArray = (JSONArray) problemObj.get(PROBLEM_CONSTRAINTS);
+                JSONArray examplesArray = (JSONArray) problemObj.get(PROBLEM_EXAMPLES);
+                JSONArray answersArray = (JSONArray) problemObj.get(PROBLEM_ANSWERS);
+                JSONArray notesArray = (JSONArray) problemObj.get(PROBLEM_NOTES);
+                JSONArray commentsArray = (JSONArray) problemObj.get(PROBLEM_COMMENTS);
+                JSONArray submissionsArray = (JSONArray) problemObj.get(PROBLEM_SUBMISSIONS);
                 ArrayList<String> tags = new ArrayList<>();
                 if(tagsArray != null) {
                     for (Object tag : tagsArray) {
@@ -199,12 +203,12 @@ public class dataLoader extends DataConstants{
                 if(commentsArray != null) {   
                     for (Object comment : commentsArray) {
                         JSONObject commentObj = (JSONObject) comment;
-                        String commentText = (String) commentObj.get("commentText");
+                        String commentText = (String) commentObj.get(COMMENT_TEXT);
                         UUID problemID = id;
-                        UUID sender = UUID.fromString((String) commentObj.get("sender"));
-                        int score = ((Long) commentObj.get("score")).intValue();
+                        UUID sender = UUID.fromString((String) commentObj.get(COMMENT_SENDER));
+                        int score = ((Long) commentObj.get(COMMENT_SCORE)).intValue();
                         ArrayList<Comment> replies = new ArrayList();
-                        String date = (String) commentObj.get("date");
+                        String date = (String) commentObj.get(COMMENT_DATE);
                         Comment commentInstance = new Comment(sender, problemID, commentText, score, replies, date);
                         System.out.println(commentInstance);
                         comments.add(commentInstance);
@@ -222,7 +226,7 @@ public class dataLoader extends DataConstants{
                 }else{
                     //System.out.println("dataLoader(LoadProblems): No submissions array specified for problem " + title);
                 }
-                String timerVal = (String) problemObj.get("timer");
+                String timerVal = (String) problemObj.get(PROBLEM_TIMER);
                 double timer = Double.parseDouble(timerVal);
                 Problem problem = new Problem(title, id, description, constraints, language, examples, notes, 
                     type, tags, timer, answers, difficulty, comments, submissions);
@@ -241,28 +245,30 @@ public class dataLoader extends DataConstants{
      * @return list of accounts
      */
     public static ArrayList<Account> LoadAccounts(){
+        String fileName = ACCOUNT_FILE_NAME;
+        if(isJUnitTest()) fileName = ACCOUNT_TEMP_FILE_NAME;
         ArrayList<Account> accounts = new ArrayList<>();
-        try (FileReader reader = new FileReader(ACCOUNT_FILE_NAME)) {
+        try (FileReader reader = new FileReader(fileName)) {
             JSONArray jsonObj = (JSONArray) parser.parse(reader);
             // Parse the JSON and create the proper Account instances based on the account type
             for(Object obj : jsonObj) {
                 JSONObject accountObj = (JSONObject) obj;
-                String accountType = (String) accountObj.get("accountType");
+                String accountType = (String) accountObj.get(ACCOUNT_TYPE);
                 //Switch to determine which type of account to create
                 Account accountInstance;
                 //Every account has the follolwing:
                 UUID id = UUID.fromString((String) accountObj.get(ITEM_ID));
-                String firstName = (String) accountObj.get("firstName");
-                String lastName = (String) accountObj.get("lastName");
-                String username = (String) accountObj.get("username");
-                String email = (String) accountObj.get("email");
-                String password = (String) accountObj.get("password");
+                String firstName = (String) accountObj.get(ACCOUNT_FIRST_NAME);
+                String lastName = (String) accountObj.get(ACCOUNT_LAST_NAME);
+                String username = (String) accountObj.get(ACCOUNT_USER_NAME);
+                String email = (String) accountObj.get(ACCOUNT_EMAIL);
+                String password = (String) accountObj.get(ACCOUNT_PASSWORD);
                 if(accountType == null){
                     //System.out.println("dataLoader(LoadAccounts): Type not specified for this account, skipping to prevent further error!");
                 } else {
 
                     ArrayList<Integer> progressData = new ArrayList<>();
-                    JSONArray progressArray = (JSONArray) accountObj.get("progress");
+                    JSONArray progressArray = (JSONArray) accountObj.get(ACCOUNT_PROGRESS);
 
                     if (progressArray != null){
                         for(Object val : progressArray){
@@ -270,7 +276,7 @@ public class dataLoader extends DataConstants{
                         }
                     }
 
-                    String lastDate = (String) accountObj.get("lastDate");
+                    String lastDate = (String) accountObj.get(ACCOUNT_LAST_DATE);
 
                     com.fwproblemsolversite.data.Progress progress =
                         new com.fwproblemsolversite.data.Progress(progressData, lastDate);
