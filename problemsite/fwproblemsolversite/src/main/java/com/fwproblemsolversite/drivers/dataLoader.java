@@ -20,12 +20,13 @@ import com.fwproblemsolversite.enums.ProblemType;
 import com.fwproblemsolversite.problems.Comment;
 import com.fwproblemsolversite.problems.Problem;
 import com.fwproblemsolversite.problems.Submission;
+import com.model.DataConstants;
 /**
  * Handles loading data from JSON files into the system.
  * This class will read accounts, problems, and reports from JSON files.
  * And then convert them.
  */
-public class dataLoader {
+public class dataLoader extends DataConstants{
     private static JSONParser parser = new JSONParser();
     /**
      * Loads the reports from the JSON file.
@@ -34,12 +35,12 @@ public class dataLoader {
      */
     public static ArrayList<Report> LoadReports(){
         ArrayList<Report> reports = new ArrayList<>();
-        try (FileReader reader = new FileReader("problemsite\\fwproblemsolversite\\target\\classes\\jsonSamples\\reports.json")) {
+        try (FileReader reader = new FileReader(REPORT_FILE_NAME)) {
             JSONArray jsonObject = (JSONArray) parser.parse(reader);
             for(Object obj : jsonObject) {
                 JSONObject reportObj = (JSONObject) obj;
                 // Parse the JSON and create Report instances
-                String id = (String) reportObj.get("id");
+                String id = (String) reportObj.get(ITEM_ID);
                 String reason = (String) reportObj.get("reason");
                 String accused = (String) reportObj.get("accused");
                 String sender = (String) reportObj.get("sender");
@@ -61,12 +62,12 @@ public class dataLoader {
      */
     public static ArrayList<Problem> LoadProblems(){
         ArrayList<Problem> problems = new ArrayList<>();
-        try (FileReader reader = new FileReader("problemsite\\fwproblemsolversite\\target\\classes\\jsonSamples\\problems.json")) {
+        try (FileReader reader = new FileReader(PROBLEM_FILE_NAME)) {
             JSONArray jsonObject = (JSONArray) parser.parse(reader);
             for(Object obj : jsonObject) {
                 JSONObject problemObj = (JSONObject) obj;
                 // Parses the JSON and create Problem instances.
-                UUID id = (String) problemObj.get("problemID") != null ? UUID.fromString((String) problemObj.get("problemID")) : UUID.randomUUID();
+                UUID id = (String) problemObj.get(ITEM_ID) != null ? UUID.fromString((String) problemObj.get(ITEM_ID)) : UUID.randomUUID();
                 String title = (String) problemObj.get("title");
                 String description = (String) problemObj.get("description");
                 String difficultyString = (String) problemObj.get("difficulty");
@@ -241,7 +242,7 @@ public class dataLoader {
      */
     public static ArrayList<Account> LoadAccounts(){
         ArrayList<Account> accounts = new ArrayList<>();
-        try (FileReader reader = new FileReader("problemsite\\fwproblemsolversite\\target\\classes\\jsonSamples\\accounts.json")) {
+        try (FileReader reader = new FileReader(ACCOUNT_FILE_NAME)) {
             JSONArray jsonObj = (JSONArray) parser.parse(reader);
             // Parse the JSON and create the proper Account instances based on the account type
             for(Object obj : jsonObj) {
@@ -250,7 +251,7 @@ public class dataLoader {
                 //Switch to determine which type of account to create
                 Account accountInstance;
                 //Every account has the follolwing:
-                UUID id = UUID.fromString((String) accountObj.get("id"));
+                UUID id = UUID.fromString((String) accountObj.get(ITEM_ID));
                 String firstName = (String) accountObj.get("firstName");
                 String lastName = (String) accountObj.get("lastName");
                 String username = (String) accountObj.get("username");
