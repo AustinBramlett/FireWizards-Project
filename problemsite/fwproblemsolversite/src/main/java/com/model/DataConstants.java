@@ -5,9 +5,9 @@ public class DataConstants {
     protected static final String PROBLEM_FILE_NAME = "problemsite\\fwproblemsolversite\\src\\main\\resources\\json\\problems.json";
     protected static final String REPORT_FILE_NAME = "problemsite\\fwproblemsolversite\\src\\main\\resources\\json\\reports.json";
     //Since tests are in their own folder and junit takes directories with the resources folder (in the test folder) as the root, we shorten the directory.
-    protected static final String ACCOUNT_TEMP_FILE_NAME = "json\\accounts.json";
-    protected static final String PROBLEM_TEMP_FILE_NAME = "json\\problems.json";
-    protected static final String REPORT_TEMP_FILE_NAME = "json\\reports.json";
+    protected static final String ACCOUNT_TEMP_FILE_NAME = "src\\main\\resources\\json\\accounts.json";
+    protected static final String PROBLEM_TEMP_FILE_NAME = "src\\main\\resources\\json\\problems.json";
+    protected static final String REPORT_TEMP_FILE_NAME = "src\\main\\resources\\json\\reports.json";
 
     protected static final String ITEM_ID = "id";
     protected static final String ACCOUNT_USER_NAME = "username";
