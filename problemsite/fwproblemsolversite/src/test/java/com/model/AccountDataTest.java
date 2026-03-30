@@ -19,6 +19,12 @@ public class AccountDataTest {
     }
 
     @Test
+    public void testSingleton() {
+        AccountData instance1 = AccountData.getInstance();
+        AccountData instance2 = AccountData.getInstance();
+        assertFalse(instance1 != instance2); // Both instances should be the same
+    }
+    @Test
     public void testGetAccountById() {
         AccountData accountData = AccountData.getInstance();
         Account account = new Account();
