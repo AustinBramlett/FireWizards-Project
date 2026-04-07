@@ -5,10 +5,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.Label;
+import java.util.ArrayList;
 
 import com.fwproblemsolversite.App;
 import com.fwproblemsolversite.accounts.Account;
 import com.fwproblemsolversite.data.AccountData;
+
 
 public class LoginController {
     @FXML
@@ -22,16 +24,27 @@ public class LoginController {
     
     @FXML
     private void handleLogin() throws IOException {
-        String username = usernameField.getText().trim();
+        String loginInput = usernameField.getText().trim();
         String password = passwordField.getText();
 
-        Account account = AccountData.getInstance().getAccountByUsername(username);
+        Account account = findAccountByUsernameOrEmail(loginInput);
         if (account != null && account.getPassword().equals(password)) {
             App.setCurrentUser(account);
             App.setRoot("dashboard");
         } else {
             errorLabel.setText("Invalid username or password.");
         }
+    }
+
+    private Account findAccountByUsernameOrEmail(String loginInput) {
+        ArrayList<Account> accounts = AccountData.getInstance().getAccounts();
+
+        for (Account account : accounts) {
+            if (account.getUsername().equalsIgnoreCase(loginInput) || account.getEmail().equalsIgnoreCase(loginInput)) {
+                return account;
+            }
+        }
+        return null;
     }
 }
 
