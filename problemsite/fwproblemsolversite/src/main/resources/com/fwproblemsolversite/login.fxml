@@ -13,8 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<StackPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fwproblemsolversite.SecondaryController">
+<StackPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.LoginController">
    <children>
       <Pane prefHeight="600.0" prefWidth="900.0" StackPane.alignment="CENTER" />
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
@@ -33,9 +32,10 @@
                   <Font size="38.0" />
                </font>
             </Label>
-            <TextField alignment="CENTER" maxWidth="240.0" prefHeight="25.0" prefWidth="240.0" promptText="Email or Username" />
-            <PasswordField alignment="CENTER" maxWidth="240.0" prefWidth="240.0" promptText="Password" />
-              <Button fx:id="secondaryButton" onAction="#switchToPrimary" text="Login" />
+            <TextField fx:id="usernameField" alignment="CENTER" maxWidth="240.0" prefHeight="25.0" prefWidth="240.0" promptText="Email or Username" />
+            <PasswordField fx:id="passwordField" alignment="CENTER" maxWidth="240.0" prefWidth="240.0" promptText="Password" />
+              <Button onAction="#handleLogin" text="Login" />
+              <Label fx:id="errorLabel" textFill="RED" />
             <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="3.0">
                <children>
                   <Label text="Don't have an account?">
