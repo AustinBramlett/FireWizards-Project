@@ -66,6 +66,20 @@ public class Contributor extends Account {
     public boolean removeProblem(UUID problemID) {
         return false;
     }
+
+    /**
+     * Checks if the contributor is the author of a problem.
+     * @param problemID The ID of the problem
+     * @return true if the contributor is the author of the problem, false otherwise
+     */
+    public boolean checkAuthor(UUID problemID) {
+        for(UUID id : questionsMade) {
+            if (id.equals(problemID)) {
+                return true;
+            }
+        }
+        return false;
+    }
     @Override
     /**
      * Returns the Account type for the user.
