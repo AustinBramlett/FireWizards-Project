@@ -50,7 +50,7 @@
       <HBox alignment="CENTER" spacing="4.0">
          <children>
             <Label text="Don't have an account?" styleClass="small-text" />
-            <Hyperlink text="Create Account" styleClass="link-text"/>
+            <Hyperlink text="Create Account" styleClass="link-text" onAction="#goToCreateAccount"/>
          </children>
       </HBox>
    </children>

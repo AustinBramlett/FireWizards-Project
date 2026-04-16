@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<StackPane prefHeight="600.0" prefWidth="900.0"
+           xmlns="http://javafx.com/javafx/13"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.controllers.CreateAccountController"
+           stylesheets="@styles.css">
+
+    <children>
+
+        <Pane prefHeight="600.0" prefWidth="900.0" styleClass="background-pane" />
+
+        <AnchorPane prefHeight="600.0" prefWidth="900.0">
+            <children>
+                <Label text="FWA" styleClass="app-title"
+                       AnchorPane.leftAnchor="32.0"
+                       AnchorPane.topAnchor="28.0">
+                    <font>
+                        <Font size="22.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+
+        <VBox alignment="CENTER"
+              maxWidth="320.0"
+              prefWidth="320.0"
+              prefHeight="480.0"
+              maxHeight="480.0"
+              spacing="14.0"
+              styleClass="login-card">
+
+            <children>
+
+                <Label text="Create Account" styleClass="app-title">
+                    <font>
+                        <Font size="28.0" />
+                    </font>
+                </Label>
+
+                <TextField fx:id="firstNameField"
+                           promptText="First Name"
+                           alignment="CENTER"
+                           styleClass="input-field"
+                           prefWidth="260.0" />
+
+                <TextField fx:id="lastNameField"
+                           promptText="Last Name"
+                           alignment="CENTER"
+                           styleClass="input-field"
+                           prefWidth="260.0" />
+
+                <TextField fx:id="usernameField"
+                           promptText="Username"
+                           alignment="CENTER"
+                           styleClass="input-field"
+                           prefWidth="260.0" />
+
+                <TextField fx:id="emailField"
+                           promptText="Email"
+                           alignment="CENTER"
+                           styleClass="input-field"
+                           prefWidth="260.0" />
+
+                <PasswordField fx:id="passwordField"
+                               promptText="Password"
+                               alignment="CENTER"
+                               styleClass="input-field"
+                               prefWidth="260.0" />
+
+                <PasswordField fx:id="confirmPasswordField"
+                               promptText="Confirm Password"
+                               alignment="CENTER"
+                               styleClass="input-field"
+                               prefWidth="260.0" />
+
+                <ComboBox fx:id="accountTypeBox"
+                          promptText="Select Account Type"
+                          styleClass="input-field"
+                          prefWidth="260.0" />
+
+                <Label fx:id="errorLabel" text="" styleClass="error-label" />
+
+                <Button text="Create Account"
+                        onAction="#handleCreateAccount"
+                        prefWidth="220.0"
+                        styleClass="primary-button" />
+
+                <Hyperlink text="Back to Login"
+                           onAction="#goToLogin"
+                           styleClass="link-text" />
+
+            </children>
+
+            <padding>
+                <Insets top="30.0" right="30.0" bottom="30.0" left="30.0" />
+            </padding>
+
+        </VBox>
+    </children>
+</StackPane>
