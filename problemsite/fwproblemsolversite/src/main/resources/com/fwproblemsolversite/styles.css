@@ -118,3 +118,95 @@
     -fx-background-radius: 6;
     -fx-text-fill: white;
 }
+
+.dashboard-title {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-opacity: 1;
+}
+
+.small-white-text {
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+.stat-card {
+    -fx-background-color: rgba(255,255,255,0.10);
+    -fx-background-radius: 16;
+    -fx-border-color: rgba(255,255,255,0.08);
+    -fx-border-radius: 16;
+}
+
+.stat-label {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.stat-number {
+    -fx-text-fill: white;
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+}
+
+.section-title {
+    -fx-text-fill: white;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+.problem-card {
+    -fx-background-color: rgba(255,255,255,0.12);
+    -fx-background-radius: 16;
+    -fx-border-color: rgba(255,255,255,0.08);
+    -fx-border-radius: 16;
+}
+
+.problem-title {
+    -fx-text-fill: white;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+.problem-subtext {
+    -fx-text-fill: #d1d5db;
+    -fx-font-size: 14px;
+}
+
+.secondary-button {
+    -fx-background-color: rgba(255,255,255,0.12);
+    -fx-background-radius: 10;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-border-color: rgba(255,255,255,0.18);
+    -fx-border-radius: 10;
+    -fx-cursor: hand;
+}
+
+.user-menu {
+    -fx-background-color: transparent;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+}
+
+.user-menu .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.user-menu .arrow {
+    -fx-background-color: white;
+}
+
+.context-menu {
+    -fx-background-color: #1e293b;
+}
+
+.menu-item .label {
+    -fx-text-fill: white;
+}
+
+.menu-item:focused {
+    -fx-background-color: #334155;
+}
