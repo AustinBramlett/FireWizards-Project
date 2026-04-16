@@ -1,6 +1,7 @@
 package com.fwproblemsolversite.data;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 import com.fwproblemsolversite.accounts.Report;
 
@@ -75,5 +76,15 @@ public class ReportData {
     public void addReport(Report report) {
         if (report == null) return;
         reports.add(report);
+    }
+
+    public Report getReport(UUID reportID) {
+        if (reportID == null) return null;
+        for(Report report : reports) {
+            if (report.getID().equals(reportID)) {
+                return report;
+            }
+        }
+        return null;
     }
 }
