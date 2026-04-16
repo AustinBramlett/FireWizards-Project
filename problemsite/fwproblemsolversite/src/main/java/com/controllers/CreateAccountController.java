@@ -1,11 +1,7 @@
 package com.controllers;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.UUID;
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 
 import com.fwproblemsolversite.App;
 import com.fwproblemsolversite.accounts.Account;
@@ -53,12 +49,24 @@ public class CreateAccountController {
 
     @FXML
     private void handleCreateAccount(javafx.event.ActionEvent event) throws IOException {
+        String firstName = firstNameField.getText().trim();
+        String lastName = lastNameField.getText().trim();
         String username = usernameField.getText().trim();
         String email = emailField.getText().trim();
         String password = passwordField.getText();
+        String confirmPassword = confirmPasswordField.getText();
+        String accountType = accountTypeBox.getValue();
 
-        if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
+        if (firstName.isEmpty() || lastName.isEmpty() || 
+            username.isEmpty() || email.isEmpty() || 
+            password.isEmpty() || confirmPassword.isEmpty() || accountType == null) {
+
             errorLabel.setText("All fields are required.");
+            return;
+        }
+        
+        if (!password.equals(confirmPassword)) {
+            errorLabel.setText("Passwords do not match.");
             return;
         }
 
@@ -75,43 +83,24 @@ public class CreateAccountController {
             username,
             email,
             password,
-            "",
-            ""
+            firstName,
+            lastName
         );
         
+        newAccount.setAccountType(
+            com.fwproblemsolversite.enums.AccountType.valueOf(accountType)
+        );
         AccountData.getInstance().getAccounts().add(newAccount);
 
-        saveAccountsToJSON();
+        com.fwproblemsolversite.io.dataWriter.saveAccounts(
+            AccountData.getInstance().getAccounts()
+        );
 
         App.setCurrentUser(newAccount);
         App.setRoot("dashboard");
     }
 
-    @SuppressWarnings("unchecked")
-    private void saveAccountsToJSON() {
-        JSONArray accountArray = new JSONArray();
-
-        for (Account acc : AccountData.getInstance().getAccounts()) {
-            JSONObject obj = new JSONObject();
-
-            obj.put("id", acc.getId().toString());
-            obj.put("username", acc.getUsername());
-            obj.put("email", acc.getEmail());
-            obj.put("password", acc.getPassword());
-            obj.put("firstName", acc.getFirstName());
-            obj.put("lastName", acc.getLastName());
-
-            accountArray.add(obj);
-        }
-
-        try (FileWriter file = new FileWriter("accounts.json")) {
-            file.write(accountArray.toJSONString());
-            file.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
+   
     @FXML
     private void goToLogin(javafx.event.ActionEvent event) throws IOException {
         App.setRoot("login");
