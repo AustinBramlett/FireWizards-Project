@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import com.fwproblemsolversite.App;
 import com.fwproblemsolversite.accounts.Account;
 import com.fwproblemsolversite.data.AccountData;
+import com.fwproblemsolversite.enums.AccountType;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -36,7 +37,12 @@ public class LoginController {
         Account account = findAccountByUsernameOrEmail(loginInput);
         if (account != null && account.getPassword().equals(password)) {
             App.setCurrentUser(account);
-            App.setRoot("dashboard");
+
+            if (account.getAccountType() == AccountType.CONTRIBUTOR) {
+                App.setRoot("contributordashboard");
+            } else {
+                App.setRoot("dashboard");
+            }
         } else {
             errorLabel.setText("Invalid username or password.");
         }

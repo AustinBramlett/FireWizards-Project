@@ -6,6 +6,7 @@ import java.util.UUID;
 import com.fwproblemsolversite.App;
 import com.fwproblemsolversite.accounts.Account;
 import com.fwproblemsolversite.data.AccountData;
+import com.fwproblemsolversite.enums.AccountType;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -97,7 +98,11 @@ public class CreateAccountController {
         );
 
         App.setCurrentUser(newAccount);
-        App.setRoot("dashboard");
+        if (newAccount.getAccountType() == AccountType.CONTRIBUTOR) {
+            App.setRoot("contributordashboard");
+        } else {
+            App.setRoot("dashboard");
+        }
     }
 
    
