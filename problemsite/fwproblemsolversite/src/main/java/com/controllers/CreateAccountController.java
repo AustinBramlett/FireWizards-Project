@@ -80,11 +80,11 @@ public class CreateAccountController {
 
         Account newAccount = new Account(
             UUID.randomUUID(),
+            firstName,
+            lastName,
             username,
             email,
-            password,
-            firstName,
-            lastName
+            password
         );
         
         newAccount.setAccountType(
