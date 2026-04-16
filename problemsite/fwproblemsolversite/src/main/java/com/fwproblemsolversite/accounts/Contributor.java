@@ -3,9 +3,15 @@ package com.fwproblemsolversite.accounts;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import com.fwproblemsolversite.data.ProblemData;
 import com.fwproblemsolversite.enums.AccountType;
+import com.fwproblemsolversite.enums.Difficulty;
 import com.fwproblemsolversite.enums.Language;
 import com.fwproblemsolversite.enums.ProblemType;
+import com.fwproblemsolversite.problems.Comment;
+import com.fwproblemsolversite.problems.Problem;
+import com.fwproblemsolversite.problems.Submission;
+import com.fwproblemsolversite.problems.Timer;
 /**
  * Represents a contributor account in the system.
  * The Constributor can create and manage problems in the system.
@@ -48,13 +54,22 @@ public class Contributor extends Account {
     public boolean addProblem(String title, String description,
                               ArrayList<String> constraints,
                               Language language,
-                              ArrayList<String[]> examples,
+                              ArrayList<ArrayList<String>> examples,
                               ArrayList<String> notes,
                               ProblemType type,
                               ArrayList<String> tags,
                               double timer,
-                              String answer) {
-        return false;
+                              ArrayList<ArrayList<String>> answers,
+                              Difficulty difficulty) {
+        ProblemData data = ProblemData.getInstance();
+        try{
+            Problem problem = new Problem(title, description, constraints, language, examples, notes, type, tags, timer, answers, difficulty);
+            data.add(problem);
+            questionsMade.add(problem.getID());
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
     /**
      * Removes a problem from the system.
@@ -64,6 +79,12 @@ public class Contributor extends Account {
       *
      */
     public boolean removeProblem(UUID problemID) {
+        if(problemID == null || !this.checkAuthor(problemID)) return false;
+        ProblemData data = ProblemData.getInstance();
+        if(data.remove(problemID)) {
+            questionsMade.remove(problemID);
+            return true;
+        }
         return false;
     }
 
