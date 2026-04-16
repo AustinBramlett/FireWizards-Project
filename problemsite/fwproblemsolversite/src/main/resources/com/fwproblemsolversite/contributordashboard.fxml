@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/13" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.DashboardController" stylesheets="@styles.css">
+<StackPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/13" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.ContributorDashboardController" stylesheets="@styles.css">
 
     <children>
         <Pane prefHeight="700.0" prefWidth="1000.0" styleClass="background-pane" />
@@ -81,7 +81,12 @@
                             </padding>
                         </VBox>
 
-                        <Button fx:id="goToProblemsButton" text="Go to Problems" onAction="#handleGoToProblems" prefWidth="250.0" styleClass="primary-button" />
+                        <HBox alignment="CENTER" spacing="18.0">
+                            <children>
+                                <Button fx:id="goToProblemsButton" text="Go to Problems" onAction="#handleGoToProblems" prefWidth="250.0" styleClass="primary-button" />
+                                <Button fx:id="createProblemButton" text="Create Problem" onAction="#handleCreateProblem" prefWidth="250.0" styleClass="primary-button" />
+                            </children>
+                        </HBox>
 
                         <Label text="View Progress" styleClass="link-text" />
 
