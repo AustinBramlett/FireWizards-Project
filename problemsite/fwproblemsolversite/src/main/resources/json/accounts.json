@@ -112,5 +112,24 @@
         "email": "jbauer@email.com",
         "username": "jbauer",
         "lastDate": "2026-03-23"
+    },
+    {
+        "firstName": "AustinB",
+        "lastName": "Austinzgp@gmail.com",
+        "password": "Bramlett",
+        "accountType": "STUDENT",
+        "progress": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "id": "9e8bf653-21f9-4c3d-92d8-272ea9e50814",
+        "muted": "false",
+        "email": "Austin",
+        "username": "Austin35",
+        "lastDate": "2026-04-15"
     }
 ]
