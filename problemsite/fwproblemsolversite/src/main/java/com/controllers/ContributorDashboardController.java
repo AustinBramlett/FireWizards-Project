@@ -12,8 +12,8 @@ import com.fwproblemsolversite.data.Progress;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 
-public class DashboardController {
-    
+public class ContributorDashboardController {
+
     @FXML private Label welcomeLabel;
     @FXML private Label problemsSolvedLabel;
     @FXML private Label dailyStreakLabel;
@@ -99,7 +99,13 @@ public class DashboardController {
     @FXML
     private void handleGoToProblems() {
         System.out.println("Go to problems clicked");
-}
+    }
+
+    @FXML
+    private void handleCreateProblem() {
+        System.out.println("Create problem clicked");
+        // App.setRoot("createproblem");
+    }
     @FXML
     private void handleProfileSettings() {
         System.out.println("Profile & Settings clicked");
@@ -113,3 +119,6 @@ public class DashboardController {
     }
 
 }
+
+ 
+
