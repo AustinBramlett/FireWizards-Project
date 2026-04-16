@@ -2,14 +2,15 @@ package com.fwproblemsolversite;
 
 import java.io.IOException;
 
+import com.fwproblemsolversite.accounts.Account;
+import com.fwproblemsolversite.data.AccountData;
+import com.fwproblemsolversite.io.dataLoader;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import com.fwproblemsolversite.accounts.Account;
-import com.fwproblemsolversite.data.AccountData;
-import com.fwproblemsolversite.io.dataLoader;
 
 
 /**

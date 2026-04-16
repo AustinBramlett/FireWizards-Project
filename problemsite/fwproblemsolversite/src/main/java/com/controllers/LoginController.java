@@ -1,15 +1,16 @@
 package com.controllers;
 
 import java.io.IOException;
-import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.Label;
 import java.util.ArrayList;
 
 import com.fwproblemsolversite.App;
 import com.fwproblemsolversite.accounts.Account;
 import com.fwproblemsolversite.data.AccountData;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 
 
 public class LoginController {
@@ -21,6 +22,11 @@ public class LoginController {
 
     @FXML
     private Label errorLabel;
+
+    @FXML
+    private void goToCreateAccount() throws IOException {
+    App.setRoot("create_account");
+    }
     
     @FXML
     private void handleLogin() throws IOException {
