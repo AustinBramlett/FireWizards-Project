@@ -4,12 +4,14 @@ import java.io.IOException;
 
 import com.fwproblemsolversite.accounts.Account;
 import com.fwproblemsolversite.data.AccountData;
+import com.fwproblemsolversite.data.ProblemData;
 import com.fwproblemsolversite.io.dataLoader;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart.Data;
 import javafx.stage.Stage;
 
 
@@ -25,7 +27,9 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        dataLoader loader = new dataLoader();
         AccountData.getInstance().setAccounts(dataLoader.LoadAccounts());
+        ProblemData.getInstance().getProblems().addAll(dataLoader.LoadProblems());
 
         scene = new Scene(loadFXML("home"), 640, 480);
         stage.setScene(scene);

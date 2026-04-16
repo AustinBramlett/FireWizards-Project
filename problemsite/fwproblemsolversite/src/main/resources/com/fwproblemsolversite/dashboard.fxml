@@ -3,45 +3,102 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/13" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.DashboardController" stylesheets="@styles.css">
+<StackPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/13" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.DashboardController" stylesheets="@styles.css">
 
     <children>
+        <Pane prefHeight="700.0" prefWidth="1000.0" styleClass="background-pane" />
 
-        <Pane prefHeight="600.0" prefWidth="900.0" styleClass="background-pane" />
-
-        <AnchorPane prefHeight="600.0" prefWidth="900.0">
+        <AnchorPane prefHeight="700.0" prefWidth="1000.0">
             <children>
-                <Label text="FWA" styleClass="app-title" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="28.0">
+                <Label text="FWP" styleClass="app-title" AnchorPane.leftAnchor="28.0" AnchorPane.topAnchor="22.0">
                     <font>
-                        <Font size="22.0" />
+                        <Font size="24.0" />
                     </font>
                 </Label>
+
+                <MenuButton fx:id="userMenu" text="User ⌄" styleClass="user-menu" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="20.0">
+                    <items>
+                        <MenuItem text="Profile &amp; Settings" onAction="#handleProfileSettings" />
+                        <MenuItem text="Logout" onAction="#handleLogout" />
+                    </items>
+                </MenuButton>
+
+                <VBox alignment="TOP_CENTER" spacing="20.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="80.0" AnchorPane.bottomAnchor="40.0">
+                    <children>
+                        <Label fx:id="welcomeLabel" text="Welcome back, User" styleClass="dashboard-title">
+                            <font>
+                                <Font size="30.0" />
+                            </font>
+                        </Label>
+
+                        <HBox alignment="CENTER" spacing="20.0">
+                            <children>
+                                <VBox alignment="CENTER" spacing="8.0" prefWidth="220.0" prefHeight="130.0" styleClass="stat-card">
+                                    <children>
+                                        <Label text="Problems Solved" styleClass="stat-label" />
+                                        <Label fx:id="problemsSolvedLabel" text="0" styleClass="stat-number" />
+                                    </children>
+                                </VBox>
+
+                                <VBox alignment="CENTER" spacing="8.0" prefWidth="220.0" prefHeight="130.0" styleClass="stat-card">
+                                    <children>
+                                        <Label text="Daily Streak" styleClass="stat-label" />
+                                        <Label fx:id="dailyStreakLabel" text="0" styleClass="stat-number" />
+                                    </children>
+                                </VBox>
+
+                                <VBox alignment="CENTER" spacing="8.0" prefWidth="220.0" prefHeight="130.0" styleClass="stat-card">
+                                    <children>
+                                        <Label text="Total Points" styleClass="stat-label" />
+                                        <Label fx:id="totalPointsLabel" text="0" styleClass="stat-number" />
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
+
+                        <Label text="Continue Solving" styleClass="section-title" />
+
+                        <VBox alignment="CENTER_LEFT" spacing="8.0" prefWidth="760.0" prefHeight="120.0" styleClass="problem-card">
+                            <children>
+                                <Label fx:id="continueProblemTitle" text="Problem Title" styleClass="problem-title" />
+                                <Label fx:id="continueProblemInfo" text="Difficulty   Tag   Description" wrapText="true" styleClass="problem-subtext" />
+                            </children>
+                            <padding>
+                                <Insets top="18.0" right="20.0" bottom="18.0" left="20.0" />
+                            </padding>
+                        </VBox>
+
+                        <Button fx:id="goToProblemsButton" text="Go to Problems" onAction="#handleGoToProblems" prefWidth="250.0" styleClass="primary-button" />
+
+                        <Label text="View Progress" styleClass="link-text" />
+
+                        <Label text="Problem of the Day" styleClass="section-title">
+                            <font>
+                                <Font size="22.0" />
+                            </font>
+                        </Label>
+
+                        <VBox alignment="CENTER_LEFT" spacing="8.0" prefWidth="760.0" prefHeight="120.0" styleClass="problem-card">
+                            <children>
+                                <Label fx:id="dailyProblemTitle" text="Problem Title" styleClass="problem-title" />
+                                <Label fx:id="dailyProblemInfo" text="Difficulty   Tag   Description" wrapText="true" styleClass="problem-subtext" />
+                            </children>
+                            <padding>
+                                <Insets top="18.0" right="20.0" bottom="18.0" left="20.0" />
+                            </padding>
+                        </VBox>
+                    </children>
+                </VBox>
             </children>
         </AnchorPane>
-
-        <VBox alignment="CENTER" spacing="15.0" maxWidth="320.0" prefWidth="320.0" prefHeight="250.0" maxHeight="250.0" styleClass="login-card">
-
-            <children>
-                <Label text="Dashboard" styleClass="login-title">
-                    <font>
-                        <Font size="26.0" />
-                    </font>
-                </Label>
-
-                <Label fx:id="welcomeLabel" text="Welcome" styleClass="small-text" />
-
-                <Button text="Logout" onAction="#handleLogout" prefWidth="230.0" styleClass="primary-button" />
-            </children>
-
-            <padding>
-                <Insets top="24.0" right="24.0" bottom="24.0" left="24.0" />
-            </padding>
-        </VBox>
     </children>
 </StackPane>
