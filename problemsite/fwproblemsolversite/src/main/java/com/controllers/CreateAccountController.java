@@ -43,6 +43,15 @@ public class CreateAccountController {
     private Label errorLabel;
 
     @FXML
+    public void initialize(){
+        accountTypeBox.getItems().addAll(
+            "STUDENT",
+            "ADMIN",
+            "CONTRIBUTOR"
+        );
+    }
+
+    @FXML
     private void handleCreateAccount(javafx.event.ActionEvent event) throws IOException {
         String username = usernameField.getText().trim();
         String email = emailField.getText().trim();
@@ -69,7 +78,7 @@ public class CreateAccountController {
             "",
             ""
         );
-
+        
         AccountData.getInstance().getAccounts().add(newAccount);
 
         saveAccountsToJSON();

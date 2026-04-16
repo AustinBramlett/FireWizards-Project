@@ -81,8 +81,9 @@
 
                 <ComboBox fx:id="accountTypeBox"
                           promptText="Select Account Type"
-                          styleClass="input-field"
-                          prefWidth="260.0" />
+                          prefWidth="260.0" 
+                          visibleRowCount="3"
+                          styleClass="input-field"/>
 
                 <Label fx:id="errorLabel" text="" styleClass="error-label" />
 
