@@ -73,10 +73,11 @@ public class Account {
      * @param accountType The type of account example STUDENT, TEACHER, ADMIN.
      * @param progress The progress of the user in the system.
      * @param muted Whether the account is muted or not.
+     * @param banned Whether the account is banned or not.
      */
     public Account(UUID id, String firstName, String lastName, String username,
                    String email, String password, AccountType accountType,
-                   Progress progress, boolean muted) {
+                   Progress progress, boolean muted, boolean banned) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -86,6 +87,7 @@ public class Account {
         this.accountType = accountType;
         this.progress = progress;
         this.muted = muted;
+        this.banned = banned;
     }
     /**
      * Allows the user to leave a comment.
@@ -163,7 +165,12 @@ public class Account {
     public void setMuted(boolean muted) {
         this.muted = muted;
     }
-
+    public boolean isBanned() {
+        return banned;
+    }
+    public void setBanned(boolean banned) {
+        this.banned = banned;
+    }
     public void setId(UUID id) {
         this.id = id;
     }
