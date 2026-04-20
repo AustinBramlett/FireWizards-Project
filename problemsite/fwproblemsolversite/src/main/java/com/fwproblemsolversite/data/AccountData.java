@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import com.fwproblemsolversite.accounts.Account;
+import com.fwproblemsolversite.accounts.Administrator;
 import com.fwproblemsolversite.accounts.Contributor;
 /**
  * Manages all the account data in the system.
@@ -66,7 +67,7 @@ public class AccountData {
     public Account getAuthorById(UUID problemID) {
         if (problemID == null) return null;
         for (Account account : accounts) {
-            if (!(account instanceof Contributor)) continue;
+            if (!(account instanceof Contributor)) continue; //Skip this index
             Contributor contributor = (Contributor) account;
             if (contributor.checkAuthor(problemID)) {
                 return contributor;
@@ -174,5 +175,25 @@ public class AccountData {
     public void unmute(Account account) {
         if (account == null) return;
         account.setMuted(false);
+    }
+
+    public ArrayList<Administrator.ban> getBans() { 
+        ArrayList<Administrator.ban> bans = new ArrayList<>();
+        for(Account account : accounts){
+            if(!(account instanceof Administrator)) continue;
+            Administrator administrator = (Administrator) account;
+            bans.addAll(administrator.getBans());
+        }
+        return bans;
+    }
+
+    public ArrayList<Administrator.mute> getMutes() {
+        ArrayList<Administrator.mute> mutes = new ArrayList<>();
+        for(Account account : accounts){
+            if(!(account instanceof Administrator)) continue;
+            Administrator administrator = (Administrator) account;
+            mutes.addAll(administrator.getMutes());
+        }
+        return mutes;
     }
 }
