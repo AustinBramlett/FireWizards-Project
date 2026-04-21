@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fwproblemsolversite.accounts.Account;
+import com.fwproblemsolversite.accounts.Administrator;
+import com.fwproblemsolversite.accounts.Contributor;
 import com.fwproblemsolversite.problems.Comment;
 import com.fwproblemsolversite.problems.Problem;
 import com.fwproblemsolversite.problems.Submission;
@@ -53,6 +55,72 @@ public class dataWriter extends DataConstants{
             //Case for all Account objects.
             case Account a:
                 switch(header){
+                    case CONTRIBUTOR_QUESTIONS_MADE:
+                        if(contents == null) {
+                            debugOut("Contributor " + json.get(ACCOUNT_USER_NAME) + " has no questions made log specified!");
+                            return false;
+                        }
+                        ArrayList<String> questionsMade = new ArrayList<String>();
+                        for(UUID id : (ArrayList<UUID>) contents){
+                            questionsMade.add(id.toString()); //We have to turn the UUIDs into strings to save them in JSON, but this is fine since we can turn them back into UUIDs when we load the data.
+                        }
+                        json.put(header, questionsMade);
+                        return true;
+                    case ADMINISTRATOR_TERM_LOG:
+                        if(contents == null) {
+                            debugOut("Administrator " + json.get(ACCOUNT_USER_NAME) + " has no termination log specified!");
+                            return false;
+                        }
+                        ArrayList<String> termLog = new ArrayList<String>();
+                        for(UUID id : (ArrayList<UUID>) contents){
+                            termLog.add(id.toString());
+                        }
+                        json.put(header, termLog);
+                        return true;
+                    case ADMINISTRATOR_BAN_LOG:
+                        if(contents == null) {
+                            debugOut("Administrator " + json.get(ACCOUNT_USER_NAME) + " has no ban log specified!");
+                            return false;
+                        }
+                        ArrayList<String> banLog = new ArrayList<String>();
+                        for(Administrator.ban ban : (ArrayList<Administrator.ban>) contents){
+                            banLog.add(ban.accountID().toString());
+                        }
+                        json.put(header, banLog);
+                        return true;
+                    case ADMINISTRATOR_BAN_END_DATES:
+                        if(contents == null) {
+                            debugOut("Administrator " + json.get(ACCOUNT_USER_NAME) + " has no ban end dates specified!");
+                            return false;
+                        }
+                        ArrayList<String> banEndDates = new ArrayList<String>();
+                        for(Administrator.ban ban : (ArrayList<Administrator.ban>) contents){
+                            banEndDates.add(ban.date().toString());
+                        }
+                        json.put(header, banEndDates);
+                        return true;
+                    case ADMINISTRATOR_MUTE_LOG:
+                        if(contents == null) {
+                            debugOut("Administrator " + json.get(ACCOUNT_USER_NAME) + " has no mute log specified!");
+                            return false;
+                        }
+                        ArrayList<String> muteLog = new ArrayList<String>();
+                        for(Administrator.mute mute : (ArrayList<Administrator.mute>) contents){
+                            muteLog.add(mute.accountID().toString());
+                        }
+                        json.put(header, muteLog);
+                        return true;
+                    case ADMINISTRATOR_MUTE_END_DATES:
+                        if(contents == null) {
+                            debugOut("Administrator " + json.get(ACCOUNT_USER_NAME) + " has no mute end dates specified!");
+                            return false;
+                        }
+                        ArrayList<String> muteEndDates = new ArrayList<String>();
+                        for(Administrator.mute mute : (ArrayList<Administrator.mute>) contents){
+                            muteEndDates.add(mute.date().toString());
+                        }
+                        json.put(header, muteEndDates);
+                        return true;
                     case ACCOUNT_PROGRESS:
                         if(contents == null) {
                             debugOut("An Account has no progress!");
@@ -356,6 +424,16 @@ public class dataWriter extends DataConstants{
             JSONArray accountsFile = new JSONArray();
             for(Account account : accounts){
                 JSONObject item = new JSONObject();
+                if(account instanceof Administrator){
+                    writeToJSON(account, item, ADMINISTRATOR_BAN_LOG, ((Administrator) account).getBans());
+                    writeToJSON(account, item, ADMINISTRATOR_MUTE_LOG, ((Administrator) account).getMutes());
+                    writeToJSON(account, item, ADMINISTRATOR_BAN_END_DATES, ((Administrator) account).getBans());
+                    writeToJSON(account, item, ADMINISTRATOR_MUTE_END_DATES, ((Administrator) account).getMutes());
+                    writeToJSON(account, item, ADMINISTRATOR_TERM_LOG, ((Administrator) account).getTermLog());
+                }
+                if(account instanceof Contributor){
+                    writeToJSON(account, item, CONTRIBUTOR_QUESTIONS_MADE, ((Contributor) account).getQuestionsMade());
+                }
                 writeToJSON(account, item, ACCOUNT_USER_NAME, account.getUsername());
                 //The following ternary is important for getting anything that needs a toString as strings without throwing an error (NullPointerException).
                 //The format is simple: obj.getItem() != null ? obj.getItem().toString() : null.
@@ -370,7 +448,6 @@ public class dataWriter extends DataConstants{
                 writeToJSON(account, item, ACCOUNT_PROGRESS, account.getProgress().getProgressDataList());
                 writeToJSON(account, item, ACCOUNT_LAST_DATE, account.getProgress().getLastActiveString());
                 accountsFile.add(item);
-                //We can turn this part into a comment later.
                 debugOut("dataWriter(saveAccounts): Successfully saved account " + account.getUsername() + "!");
                 debugOut("dataWriter(saveAccounts): Contents: " + item.toJSONString());
             }

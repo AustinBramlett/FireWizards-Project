@@ -205,4 +205,8 @@ public class Administrator extends Account {
     public ArrayList<mute> getMutes(){
         return adminMutes;
     }
+
+    public ArrayList<UUID> getTermLog(){
+        return adminTermLog;
+    }
 }
