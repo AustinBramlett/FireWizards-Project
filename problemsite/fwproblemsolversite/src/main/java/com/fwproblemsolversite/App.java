@@ -6,14 +6,13 @@ import com.fwproblemsolversite.accounts.Account;
 import com.fwproblemsolversite.data.AccountData;
 import com.fwproblemsolversite.data.ProblemData;
 import com.fwproblemsolversite.io.dataLoader;
+import com.fwproblemsolversite.problems.Problem;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.PieChart.Data;
 import javafx.stage.Stage;
-
 
 /**
  * Main JavaFX App
@@ -24,6 +23,7 @@ public class App extends Application {
 
     private static Scene scene;
     private static Account currentUser;
+    private static Problem currentProblem;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -51,6 +51,14 @@ public class App extends Application {
 
     public static void setCurrentUser(Account user) {
         currentUser = user;
+    }
+
+    public static void setCurrentProblem(Problem problem) {
+        currentProblem = problem;
+    }
+    
+    public static Problem getCurrentProblem() {
+        return currentProblem;
     }
 
     /**
