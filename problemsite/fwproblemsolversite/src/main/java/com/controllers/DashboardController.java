@@ -2,27 +2,30 @@ package com.controllers;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import javafx.fxml.FXML;   
+   
 import com.fwproblemsolversite.App;
 import com.fwproblemsolversite.accounts.Account;
-import com.fwproblemsolversite.data.AccountData;
 import com.fwproblemsolversite.data.ProblemData;
-import com.fwproblemsolversite.problems.Problem;
 import com.fwproblemsolversite.data.Progress;
+import com.fwproblemsolversite.problems.Problem;
+
+import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
+import javafx.scene.layout.VBox;
 
 public class DashboardController {
     
     @FXML private Label welcomeLabel;
     @FXML private Label problemsSolvedLabel;
-    @FXML private Label dailyStreakLabel;
+    @FXML private Label currentStreakLabel;
     @FXML private Label totalPointsLabel;
     @FXML private Label continueProblemTitle;
     @FXML private Label continueProblemInfo;
     @FXML private Label dailyProblemTitle;
     @FXML private Label dailyProblemInfo;
     @FXML private MenuButton userMenu;
+    @FXML private VBox continueProblemCard;
     @FXML public void initialize(){
         loadUserInfo();
         loadUserStats();
@@ -55,7 +58,7 @@ public class DashboardController {
         }
 
         problemsSolvedLabel.setText(String.valueOf(progress.getProblemsSolved()));
-        dailyStreakLabel.setText(String.valueOf(progress.getDailyStreak()));
+        currentStreakLabel.setText(String.valueOf(progress.getDailyStreak()));
         totalPointsLabel.setText(String.valueOf(progress.getTotalPoints()));
     }
 
@@ -74,10 +77,29 @@ public class DashboardController {
         continueProblemTitle.setText(getProblemTitle(continueProblem));
         continueProblemInfo.setText(buildProblemInfo(continueProblem));
 
+        continueProblemCard.setOnMouseClicked(e -> {
+            try {
+                App.setCurrentProblem(continueProblem);
+                App.setRoot("problem");
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
+    
         if (problems.size() > 1) {
             Problem dailyProblem = problems.get(1);
             dailyProblemTitle.setText(getProblemTitle(dailyProblem));
             dailyProblemInfo.setText(buildProblemInfo(dailyProblem));
+
+            dailyProblemTitle.setOnMouseClicked(e -> {
+                try {
+                    App.setCurrentProblem(dailyProblem);
+                    App.setRoot("problem");
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            });
+
         } else {
             dailyProblemTitle.setText(getProblemTitle(continueProblem));
             dailyProblemInfo.setText(buildProblemInfo(continueProblem));
@@ -97,8 +119,8 @@ public class DashboardController {
     }
 
     @FXML
-    private void handleGoToProblems() {
-        System.out.println("Go to problems clicked");
+    private void handleGoToProblems() throws IOException {
+        App.setRoot("problems");
 }
     @FXML
     private void handleProfileSettings() {

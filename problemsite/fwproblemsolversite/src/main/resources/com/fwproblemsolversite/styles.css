@@ -132,22 +132,47 @@
 }
 
 .stat-card {
-    -fx-background-color: rgba(255,255,255,0.10);
+    -fx-background-color: rgba(255,255,255,0.08);
     -fx-background-radius: 16;
-    -fx-border-color: rgba(255,255,255,0.08);
+    -fx-border-color: rgba(255,255,255,0.12);
     -fx-border-radius: 16;
+
+    -fx-padding: 16;
+
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 12, 0.3, 0, 4);
 }
 
 .stat-label {
-    -fx-text-fill: white;
-    -fx-font-size: 14px;
-    -fx-font-weight: bold;
+    -fx-text-fill: #9ca3af;
+    -fx-font-size: 13px;
+    -fx-font-weight: normal;
 }
 
 .stat-number {
     -fx-text-fill: white;
-    -fx-font-size: 32px;
+    -fx-font-size: 26px;
     -fx-font-weight: bold;
+}
+
+.stat-card:hover {
+    -fx-background-color: rgba(255,255,255,0.14);
+    -fx-scaleX: 1.05;
+    -fx-scaleY: 1.05;
+    -fx-cursor: hand;
+
+    -fx-effect: dropshadow(gaussian, rgba(41,182,246,0.45), 20, 0.5, 0, 8);
+}
+
+.stat-card:nth-child(1):hover {
+    -fx-effect: dropshadow(gaussian, rgba(74,222,128,0.5), 20, 0.5, 0, 8);
+}
+
+.stat-card:nth-child(2):hover {
+    -fx-effect: dropshadow(gaussian, rgba(250,204,21,0.5), 20, 0.5, 0, 8);
+}
+
+.stat-card:nth-child(3):hover {
+    -fx-effect: dropshadow(gaussian, rgba(248,113,113,0.5), 20, 0.5, 0, 8);
 }
 
 .section-title {
@@ -157,10 +182,20 @@
 }
 
 .problem-card {
-    -fx-background-color: rgba(255,255,255,0.12);
-    -fx-background-radius: 16;
-    -fx-border-color: rgba(255,255,255,0.08);
-    -fx-border-radius: 16;
+    -fx-background-color: rgba(255,255,255,0.10);
+    -fx-background-radius: 14;
+    -fx-border-color: rgba(255,255,255,0.10);
+    -fx-border-radius: 14;
+
+    -fx-padding: 12 24 12 24;
+
+    -fx-cursor: hand;
+}
+
+.problem-card:hover {
+    -fx-background-color: rgba(255,255,255,0.18);
+    -fx-scaleX: 1.02;
+    -fx-scaleY: 1.02;
 }
 
 .problem-title {
@@ -209,4 +244,41 @@
 
 .menu-item:focused {
     -fx-background-color: #334155;
+}
+.difficulty {
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-padding: 3 8 3 8;
+}
+
+.easy {
+    -fx-background-color: rgba(74, 222, 128, 0.2);
+    -fx-text-fill: #4ade80;
+}
+
+.medium {
+    -fx-background-color: rgba(250, 204, 21, 0.2);
+    -fx-text-fill: #facc15;
+}
+
+.hard {
+    -fx-background-color: rgba(248, 113, 113, 0.2);
+    -fx-text-fill: #f87171;
+}
+.type-pill {
+    -fx-background-color: rgba(255,255,255,0.12);
+    -fx-text-fill: #e5e7eb;
+    -fx-background-radius: 12;
+    -fx-padding: 4 10 4 10;
+    -fx-font-size: 10px;
+}
+.back-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #7dd3fc;
+    -fx-font-size: 12px;
+}
+
+.back-button:hover {
+    -fx-underline: true;
+    -fx-cursor: hand;
 }
