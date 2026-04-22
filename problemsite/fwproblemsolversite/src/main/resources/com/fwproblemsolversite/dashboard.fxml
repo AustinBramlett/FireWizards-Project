@@ -136,13 +136,35 @@
                               styleClass="problem-card">
 
                             <children>
-                                <Label fx:id="continueProblemTitle" text="Problem Title" styleClass="problem-title" />
-                                <Label fx:id="continueProblemInfo" text="Difficulty   Tag   Description" wrapText="true" styleClass="problem-subtext" />
+
+                                <HBox spacing="12" alignment="CENTER_LEFT">
+                                    <children>
+
+                                        <ImageView fitHeight="28" fitWidth="28">
+                                            <image>
+                                                <Image url="@images/code.png" />
+                                            </image>
+                                        </ImageView>
+
+                                        <Label fx:id="continueProblemTitle" 
+                                               text="Problem Title" 
+                                               styleClass="problem-title" />
+
+                                    </children>
+                                </HBox>
+
+                                <Label fx:id="continueProblemInfo"
+                                       text="Difficulty   Tag   Description" 
+                                       wrapText="true" 
+                                       styleClass="problem-subtext" />
+
                             </children>
+
                             <padding>
                                 <Insets top="18.0" right="20.0" bottom="18.0" left="20.0" />
                             </padding>
                         </VBox>
+                        
 
                         <Button fx:id="goToProblemsButton" text="Go to Problems" onAction="#handleGoToProblems" prefWidth="250.0" styleClass="primary-button" />
 
@@ -156,7 +178,23 @@
 
                         <VBox alignment="CENTER_LEFT" spacing="8.0" prefWidth="760.0" prefHeight="120.0" styleClass="problem-card">
                             <children>
-                                <Label fx:id="dailyProblemTitle" text="Problem Title" styleClass="problem-title" />
+
+                            <HBox spacing="12" alignment="CENTER_LEFT">
+                                    <children>
+
+                                        <ImageView fitHeight="28" fitWidth="28">
+                                            <image>
+                                                <Image url="@images/code.png" />
+                                            </image>
+                                        </ImageView>
+
+                                        <Label fx:id="dailyProblemTitle" 
+                                               text="Problem Title" 
+                                               styleClass="problem-title" />
+
+                                    </children>
+                                </HBox>
+
                                 <Label fx:id="dailyProblemInfo" text="Difficulty   Tag   Description" wrapText="true" styleClass="problem-subtext" />
                             </children>
                             <padding>
