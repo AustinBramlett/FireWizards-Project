@@ -134,4 +134,14 @@ public class DashboardController {
         App.setRoot("login");
     }
 
+   @FXML
+    private void handleGoToProgress() {
+        System.out.println("CLICKED");
+
+         try {
+             App.setRoot("progress");
+        } catch (Exception e) {
+            e.printStackTrace();
+    }
+}
 }
