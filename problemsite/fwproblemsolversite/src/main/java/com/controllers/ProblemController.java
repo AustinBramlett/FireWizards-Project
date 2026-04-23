@@ -28,11 +28,11 @@ public class ProblemController {
             descriptionLabel.setText(problem.getDescription());
 
             //Difficulty 
-            String difficulty = problem.getDifficulty().toString();
-            difficultyLabel.setText(difficulty);
+           
 
-            switch (difficulty) {
-                case "EASY":
+            switch (problem.getDifficulty()) {
+                case EASY:
+                     difficultyLabel.setText("Easy");
                      difficultyLabel.setStyle("-fx-background-color: #2ecc71;" +
                                              "-fx-text-fill: white;" +
                                              "-fx-padding: 4 10;" +
@@ -40,14 +40,16 @@ public class ProblemController {
             );
                     break;
                     
-                case "MEDIUM":
+                case MEDIUM:
+                     difficultyLabel.setText("Medium");
                      difficultyLabel.setStyle("-fx-background-color: #f1c40f;" +
                                              "-fx-text-fill: black;" +
                                              "-fx-padding: 4 10;" +
                                              "-fx-background-radius: 12;"
             );
                     break;
-                case "HARD":
+                case HARD:
+                     difficultyLabel.setText("Hard");
                      difficultyLabel.setStyle("-fx-background-color: #e74c3c;" +
                                              "-fx-text-fill: white;" +
                                              "-fx-padding: 4 10;" +

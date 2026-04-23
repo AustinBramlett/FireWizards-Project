@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.Button?>
+
+<StackPane prefWidth="1000" prefHeight="700"
+           xmlns="http://javafx.com/javafx/13"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.controllers.ProgressController"
+           stylesheets="@styles.css">
+
+    <children>
+
+        <Pane styleClass="background-pane"/>
+
+        <AnchorPane>
+
+            <children>
+
+                <Button text="Back to Dashboard"
+                        styleClass="back-button"
+                        onAction="#handleBackToDashboard"
+                        AnchorPane.topAnchor="20.0"
+                        AnchorPane.leftAnchor="20.0"/>
+
+                <VBox spacing="30"
+                      alignment="TOP_CENTER"
+                      maxWidth="900"
+                      AnchorPane.topAnchor="40"
+                      AnchorPane.leftAnchor="60"
+                      AnchorPane.rightAnchor="60">
+
+                    <!-- TITLE -->
+                    <Label text="Progress Overview" styleClass="section-title"/>
+
+                    <!-- TOP STATS -->
+                    <HBox spacing="20" alignment="CENTER">
+
+                        <VBox styleClass="stat-card" alignment="CENTER" prefWidth="260">
+
+                            <HBox spacing="10" alignment="CENTER">
+                                <ImageView fitHeight="24" fitWidth="24">
+                                  <image>
+                                        <Image url="@images/check.png"/>
+                                  </image>
+                                </ImageView>
+
+                                <VBox alignment="CENTER">
+                                    <Label text="Problems Solved" styleClass="stat-label"/>
+                                    <Label fx:id="problemsSolvedLabel" styleClass="stat-number"/>
+                                </VBox>
+                            </HBox>
+
+                        </VBox>
+
+                        <VBox styleClass="stat-card" alignment="CENTER" prefWidth="260">
+
+                            <HBox spacing="10" alignment="CENTER">
+                                <ImageView fitHeight="24" fitWidth="24">
+                                  <image>
+                                        <Image url="@images/fire.png"/>
+                                  </image>
+                                </ImageView>
+
+                                <VBox alignment="CENTER">
+                                    <Label text="Current Streak" styleClass="stat-label"/>
+                                    <Label fx:id="streakLabel" styleClass="stat-number"/>
+                                </VBox>
+                            </HBox>
+                        </VBox>
+
+                        <VBox styleClass="stat-card" alignment="CENTER" prefWidth="260">
+
+                            <HBox spacing="10" alignment="CENTER">
+                                <ImageView fitHeight="24" fitWidth="24">
+                                  <image>
+                                        <Image url="@images/sparkle.png"/>
+                                  </image>
+                                </ImageView>
+
+                                <VBox alignment="CENTER">
+                                    <Label text="Total Points" styleClass="stat-label"/>
+                                    <Label fx:id="pointsLabel" styleClass="stat-number"/>
+                                </VBox>
+                            </HBox>
+                        </VBox>
+
+                    </HBox>
+
+                    <!-- MIDDLE SECTION -->
+                    <HBox spacing="20" alignment="CENTER">
+
+                        <!-- Difficulty -->
+                        <VBox styleClass="stat-card" spacing="15" prefWidth="400">
+
+                            <Label text="Difficulty Breakdown" styleClass="section-title"/>
+
+                            <Label text="Easy" style="-fx-text-fill: #2ecc71;"/>
+                            <ProgressBar fx:id="easyBar"
+                                         prefWidth="320" 
+                                         prefHeight="12"
+                                         style="-fx-accent: #2ecc71;"/>
+
+                            <Label text="Medium" style="-fx-text-fill: #f1c40f;"/>
+                            <ProgressBar fx:id="mediumBar" 
+                                         prefWidth="320" 
+                                         prefHeight="12" 
+                                         style="-fx-accent: #f1c40f;"/>
+
+                            <Label text="Hard" style="-fx-text-fill: #e74c3c;"/>
+                            <ProgressBar fx:id="hardBar" 
+                                         prefWidth="320" 
+                                         prefHeight="12" 
+                                         style="-fx-accent: #e74c3c;"/>
+
+                        </VBox>
+
+                        <!-- Streak Card -->
+                        <VBox styleClass="stat-card" alignment="CENTER" spacing="15" prefWidth="400">
+
+                            <Label text="Current Streak" styleClass="section-title"/>
+
+                            <Label fx:id="streakBigLabel"
+                                   style="-fx-font-size: 36; -fx-text-fill: white;"/>
+
+                            <Label text="days in a row"
+                                   style="-fx-text-fill: #b0b0b0;"/>
+
+                        </VBox>
+
+                    </HBox>
+
+                    <!-- ACHIEVEMENTS -->
+                    <VBox spacing="10" alignment="CENTER">
+
+                        <Label text="Achievements" styleClass="section-title"/>
+
+                        <FlowPane fx:id="achievementsBox"
+                                  hgap="20"
+                                  vgap="20"
+                                  alignment="CENTER"
+                                  prefWrapLength="850"/>
+
+                    </VBox>
+
+                </VBox>
+
+            </children>
+
+        </AnchorPane>
+
+    </children>
+</StackPane>

@@ -168,7 +168,7 @@
 
                         <Button fx:id="goToProblemsButton" text="Go to Problems" onAction="#handleGoToProblems" prefWidth="250.0" styleClass="primary-button" />
 
-                        <Label text="View Progress" styleClass="link-text" />
+                        <Label text="View Progress" styleClass="link-text" onMouseClicked="#handleGoToProgress"/>
 
                         <Label text="Problem of the Day" styleClass="section-title">
                             <font>
