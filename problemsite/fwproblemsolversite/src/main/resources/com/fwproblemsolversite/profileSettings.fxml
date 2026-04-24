@@ -214,7 +214,7 @@
                                                         </ImageView>
                                                         <Label text="Achievements" styleClass="profile-text" />
                                                         <Pane HBox.hgrow="ALWAYS" />
-                                                        <Label text="1 / 3" styleClass="profile-text" />
+                                                        <Label fx:id="achievementsLabel" text="0" styleClass="profile-text" />
                                                     </children>
                                                 </HBox>
                                             </children>
