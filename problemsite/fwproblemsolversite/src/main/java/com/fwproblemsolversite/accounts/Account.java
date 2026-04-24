@@ -20,6 +20,7 @@ public class Account {
     private AccountType accountType;
     private Progress progress;
     private boolean muted;
+    private String lastDate; // Added field to store the last date of activity
     /**
      * Default constructor for Account class. Initializes all fields with default values.
      * - id is set to a random UUID
@@ -143,6 +144,10 @@ public class Account {
 
     public Progress getProgress() {
         return progress;
+    }
+
+    public String getLastDate() {
+        return lastDate;
     }
     /**
      * Sends a report against another user.
