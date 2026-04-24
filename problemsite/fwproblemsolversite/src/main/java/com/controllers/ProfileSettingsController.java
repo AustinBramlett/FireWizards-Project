@@ -9,6 +9,7 @@ import com.fwproblemsolversite.accounts.Account;
 import com.fwproblemsolversite.data.AccountData;
 import com.fwproblemsolversite.data.Progress;
 import com.fwproblemsolversite.io.dataWriter;
+import com.fwproblemsolversite.data.Achievement;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -35,6 +36,7 @@ public class ProfileSettingsController {
     @FXML private Label totalPointsLabel;
     @FXML private Label dailyStreakLabel;
     @FXML private Label streakBigLabel;
+    @FXML private Label achievementsLabel;
 
     @FXML private HBox streakDaysBox;
 
@@ -78,6 +80,12 @@ public class ProfileSettingsController {
 
             loadStreakDays(progress.getDailyStreak());
         }
+
+        int achievementCount = 0;
+        if (progress.getAchievements() != null) {
+            achievementCount = progress.getAchievements().size();
+        }
+        achievementsLabel.setText(String.valueOf(achievementCount));
     }
 
     private void loadStreakDays(int streak) {
@@ -153,13 +161,13 @@ public class ProfileSettingsController {
     }
 
     @FXML
-    private void handleProblems() {
-        System.out.println("Problems clicked");
+    private void handleProblems() throws IOException {;
+        App.setRoot("problems");
     }
 
     @FXML
-    private void handleProgress() {
-        System.out.println("Progress clicked");
+    private void handleProgress() throws IOException {
+        App.setRoot("progress");
     }
 
     @FXML
@@ -178,6 +186,7 @@ public class ProfileSettingsController {
         progress.setHardSolved(0);
         progress.setTotalPoints(0);
         progress.setDailyStreak(0);
+        progress.setAchievements(new java.util.ArrayList<>());
 
         dataWriter.saveAccounts(AccountData.getInstance().getAccounts());
 

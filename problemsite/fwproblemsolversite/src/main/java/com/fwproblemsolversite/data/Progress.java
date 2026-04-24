@@ -227,4 +227,8 @@ public class Progress {
         this.lastActiveDate = lastActiveDate;
     }
 
+    public void setAchievements(ArrayList<Achievement> achievements) {
+        this.achievements = achievements;
+    }
+
 }
