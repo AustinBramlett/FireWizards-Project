@@ -123,9 +123,9 @@ public class DashboardController {
         App.setRoot("problems");
 }
     @FXML
-    private void handleProfileSettings() {
+    private void handleProfileSettings() throws IOException {
         System.out.println("Profile & Settings clicked");
-        // App.setRoot("profile");
+        App.setRoot("profileSettings");
     }
 
     @FXML

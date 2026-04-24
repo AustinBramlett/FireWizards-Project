@@ -331,3 +331,167 @@
     -fx-text-fill: #d1d5db;
     -fx-font-size: 14px;
 }
+
+.side-bar {
+    -fx-background-color: rgba(10, 15, 25, 0.90);
+}
+
+.nav-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER_LEFT;
+    -fx-cursor: hand;
+}
+
+.nav-button-danger {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ff5b5b;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER_LEFT;
+    -fx-cursor: hand;
+}
+
+.page-scroll {
+    -fx-background: transparent;
+    -fx-background-color: transparent;
+}
+
+.profile-page {
+    -fx-background-color: transparent;
+}
+
+.profile-card {
+    -fx-background-color: rgba(255,255,255,0.12);
+    -fx-background-radius: 18;
+    -fx-border-color: rgba(255,255,255,0.14);
+    -fx-border-radius: 18;
+}
+
+.big-profile-icon {
+    -fx-font-size: 82px;
+    -fx-text-fill: white;
+}
+
+.profile-name {
+    -fx-text-fill: white;
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+}
+
+.profile-text {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.small-text {
+    -fx-text-fill: #d1d5db;
+    -fx-font-size: 11px;
+}
+
+.quote-text {
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-font-style: italic;
+}
+
+.stat-row {
+    -fx-background-color: rgba(255,255,255,0.10);
+    -fx-background-radius: 10;
+    -fx-padding: 12;
+}
+
+.streak-big {
+    -fx-text-fill: white;
+    -fx-font-size: 48px;
+    -fx-font-weight: bold;
+}
+
+.account-badge {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 3 10;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+}
+
+.account-student {
+    -fx-background-color: rgba(37, 99, 235, 0.25);
+    -fx-border-color: #3b82f6;
+}
+
+.account-contributor {
+    -fx-background-color: rgba(34, 197, 94, 0.25);
+    -fx-border-color: #22c55e;
+}
+
+.preference-menu {
+    -fx-background-color: rgba(217, 229, 255, 0.22);
+    -fx-background-radius: 8;
+    -fx-border-color:  #596271;
+    -fx-border-radius: 8;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    -fx-pref-width: 120px;
+}
+
+.preference-menu .label {
+    -fx-text-fill: #ffffff;
+}
+
+.preference-menu .arrow {
+    -fx-background-color: #ffffff;
+}
+
+.preference-menu .context-menu {
+    -fx-background-color: #6b7280;
+}
+
+.preference-menu .menu-item .label {
+    -fx-text-fill: #ffffff;
+}
+
+.preference-menu .menu-item:focused {
+    -fx-background-color: #d1d5db;
+}
+
+.streak-day-label {
+    -fx-text-fill: white;
+    -fx-font-size: 9px;
+    -fx-font-weight: bold;
+}
+
+.danger-card {
+    -fx-background-color: rgba(239, 68, 68, 0.70);
+    -fx-background-radius: 12;
+    -fx-padding: 14;
+}
+
+.danger-icon-circle {
+    -fx-background-color: rgba(255, 115, 115, 0.85);
+    -fx-background-radius: 50;
+    -fx-min-width: 44;
+    -fx-min-height: 44;
+    -fx-max-width: 44;
+    -fx-max-height: 44;
+    -fx-padding: 10;
+}
+
+.danger-button {
+    -fx-background-color: #ef4444;
+    -fx-text-fill: rgb(210, 120, 120);
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-cursor: hand;
+}
+
+.small-pill-button {
+    -fx-background-color: rgba(217, 229, 255, 0.22);
+    -fx-border-color: #596271;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
