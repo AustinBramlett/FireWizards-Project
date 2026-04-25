@@ -1,6 +1,8 @@
 package com.fwproblemsolversite.data;
 
 import java.util.ArrayList;
+import java.util.UUID;
+
 import com.fwproblemsolversite.problems.Problem;
 import com.fwproblemsolversite.enums.Difficulty;
 
@@ -48,7 +50,15 @@ public class ProblemData {
      * 
      * @param id The ID of the problem to remove.
      */
-    public void remove(String id) {
+    public boolean remove(UUID id) {
+        if (id == null) return false;
+        for (Problem problem : problems) {
+            if (problem.getID().equals(id)) {
+                problems.remove(problem);
+                return true;
+            }
+        }
+        return false;
     }
     /**
      * Searches for problems by a tag.

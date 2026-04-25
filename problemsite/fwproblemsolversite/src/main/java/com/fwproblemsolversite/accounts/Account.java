@@ -20,6 +20,7 @@ public class Account {
     private AccountType accountType;
     private Progress progress;
     private boolean muted;
+    private boolean banned;
     private String lastDate; // Added field to store the last date of activity
     /**
      * Default constructor for Account class. Initializes all fields with default values.
@@ -36,6 +37,7 @@ public class Account {
         this.accountType = AccountType.STUDENT;
         this.progress = new Progress();
         this.muted = false;
+        this.banned = false;
     }
     /**
      * Creates an account with basic user information.
@@ -58,6 +60,7 @@ public class Account {
         this.accountType = AccountType.STUDENT;
         this.progress = new Progress();
         this.muted = false;
+        this.banned = false;
     }
     /**
      * Creates a fully initialized account.
