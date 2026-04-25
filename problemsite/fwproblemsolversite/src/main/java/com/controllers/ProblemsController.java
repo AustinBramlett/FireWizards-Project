@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.fwproblemsolversite.App;
 import com.fwproblemsolversite.data.ProblemData;
 import com.fwproblemsolversite.problems.Problem;
+import com.fwproblemsolversite.accounts.Account;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -104,7 +105,12 @@ public class ProblemsController {
     @FXML
     private void handleBackToDashboard(){
         try {
-            App.setRoot("dashboard");
+                Account user = App.getCurrentUser();
+            if (user != null && user.getAccountType().toString().equals("CONTRIBUTOR")) {
+                App.setRoot("contributorDashboard");
+            } else {
+                App.setRoot("dashboard");
+            }
         } catch (Exception e) {
             e.printStackTrace();
     }

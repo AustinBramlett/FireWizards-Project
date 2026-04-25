@@ -91,7 +91,12 @@ public class ProgressController {
     @FXML
     private void handleBackToDashboard() {
         try {
-            App.setRoot("dashboard");
+            Account user = App.getCurrentUser();
+            if (user != null && user.getAccountType().toString().equals("CONTRIBUTOR")) {
+                App.setRoot("contributorDashboard");
+            } else {
+                App.setRoot("dashboard");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
