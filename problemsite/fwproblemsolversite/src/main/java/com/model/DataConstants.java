@@ -26,6 +26,8 @@ public class DataConstants {
     protected static final String ADMINISTRATOR_BAN_END_DATES = "banDates";
     protected static final String ADMINISTRATOR_MUTE_END_DATES = "muteDates";
 
+    protected static final String CONTRIBUTOR_QUESTIONS_MADE = "questionsMade";
+
     protected static final String PROBLEM_TITLE = "title";
     protected static final String PROBLEM_DESCRIPTION = "description";
     protected static final String PROBLEM_DIFFICULTY = "difficulty";

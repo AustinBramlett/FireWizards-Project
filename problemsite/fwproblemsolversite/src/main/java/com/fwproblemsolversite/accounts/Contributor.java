@@ -101,10 +101,16 @@ public class Contributor extends Account {
         }
         return false;
     }
+    /**
+     * Returns the list of problems created by the contributor by ID.
+     * @return An ArrayList of UUIDs representing the problems created by the contributor.
+     */
+    public ArrayList<UUID> getQuestionsMade() {
+        return questionsMade;
+    }
     @Override
     /**
      * Returns the Account type for the user.
-     * 
      * @return The AccountType of the user.
      */
     public AccountType getAccountType() {
