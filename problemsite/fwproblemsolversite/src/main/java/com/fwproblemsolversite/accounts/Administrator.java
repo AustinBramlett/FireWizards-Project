@@ -50,12 +50,42 @@ public class Administrator extends Account {
      * Represents a ban record for an account, containing the ID of the banned account (0) and the date the ban expires (1).
      * Stored as a record for ease of use and immutability, as these values should not be changed once they are set.
      */
-    public record ban(UUID accountID, LocalDate date){};
+    public record ban(UUID accountID, LocalDate date){
+        /**
+         * Gets the ID of the banned account.
+         * @return The UUID of the banned account.
+         */
+        public UUID getID() {
+            return accountID;
+        }
+        /**
+         * Gets the date the ban expires.
+         * @return The LocalDate of when the ban expires.
+         */
+        public LocalDate getDate() {
+            return date;
+        }
+    };
     /**
      * Represents a mute record for an account, containing the ID of the muted account (0) and the date the mute expires (1).
      * Stored as a record for ease of use and immutability, as these values should not be changed once they are set.
      */
-    public record mute(UUID accountID, LocalDate date){};
+    public record mute(UUID accountID, LocalDate date){
+        /**
+         * Gets the ID of the muted account.
+         * @return The UUID of the muted account.
+         */
+        public UUID getID() {
+            return accountID;
+        }
+        /**
+         * Gets the date the mute expires.
+         * @return The LocalDate of when the mute expires.
+         */
+        public LocalDate getDate() {
+            return date;
+        }
+    };
 
     /**
      * Bans an account from the system.

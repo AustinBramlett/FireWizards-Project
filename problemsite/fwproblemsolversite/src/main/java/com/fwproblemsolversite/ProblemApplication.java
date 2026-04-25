@@ -27,21 +27,55 @@ public class ProblemApplication {
     private AccountData accountData;
     private ProblemData problemData;
     private Account currentUser;
+    private ProblemApplication instance;
 
     /**
      * Initializes the application and loads account and problem data 
      * from the dataLoader class.
      */
-    public ProblemApplication() {
+    private ProblemApplication() {
         accountData = AccountData.getInstance();
         accountData.setAccounts(dataLoader.LoadAccounts());
-
+        // Gather all bans and mutes in an arraylist on startup and unban/unmute any that are past due
+        ArrayList<Administrator.ban> bans = new ArrayList<>();
+        ArrayList<Administrator.mute> mutes = new ArrayList<>();
+        for (Account account : accountData.getAccounts()) {
+            if (account instanceof Administrator) {
+                Administrator admin = (Administrator) account;
+                bans.addAll(admin.getBans());
+                mutes.addAll(admin.getMutes());
+            }
+        }
+        LocalDate now = LocalDate.now();
+        for (Administrator.ban ban : bans) {
+            if (ban.getDate().isBefore(now)) {
+                Account bannedAccount = accountData.getAccountById(ban.getID());
+                if (bannedAccount != null) {
+                    bannedAccount.setBanned(false);
+                }
+            }
+        }
+        for(Administrator.mute mute : mutes) {
+            if (mute.getDate().isBefore(now)) {
+                Account mutedAccount = accountData.getAccountById(mute.getID());
+                if (mutedAccount != null) {
+                    mutedAccount.setMuted(false);
+                }
+            }
+         }
         problemData = ProblemData.getInstance();
         problemData.getProblems().addAll(dataLoader.LoadProblems());
 
         currentUser = null;
     }
 
+    public ProblemApplication getInstance() {
+        if(instance == null) {
+            instance = new ProblemApplication();
+            return instance;
+        }
+        return instance;
+    }
     /**
 
      * Logs a user into the system.
@@ -53,7 +87,7 @@ public class ProblemApplication {
     public Account login(String username, String password) {
         Account account = accountData.getAccountByUsername(username);
 
-        if (account != null && account.getPassword().equals(password)) {
+        if (account != null && account.getPassword().equals(password) && !account.isBanned()) {
             currentUser = account;
             return currentUser;
         }
@@ -173,8 +207,7 @@ public class ProblemApplication {
      */
     public boolean addComment(String problemTitle, String text) {
         if (currentUser == null) return false;
-        if (text == null || text.trim().isEmpty()) return false;
-
+        if (text == null || text.trim().isEmpty() || currentUser.isMuted()) return false;
         for (Problem problem : problemData.getProblems()) {
             if (problem.getTitle().equalsIgnoreCase(problemTitle)) {
                 
@@ -285,59 +318,59 @@ public class ProblemApplication {
      * 
      */
     public void generateDefaultProblems() {
-    if (!problemData.getProblems().isEmpty()) {
-        return;
-    }
+        if (!problemData.getProblems().isEmpty()) {
+            return;
+        }
 
-    Account previousUser = currentUser;
+        Account previousUser = currentUser;
 
-    Account tempContributor = new Contributor(
-        java.util.UUID.randomUUID(),
-        "System",
-        "Contributor",
-        "system_contributor",
-        "system@fw.com",
-        "temp123",
-        new ArrayList<UUID>()
-    );
+        Account tempContributor = new Contributor(
+            java.util.UUID.randomUUID(),
+            "System",
+            "Contributor",
+            "system_contributor",
+            "system@fw.com",
+            "temp123",
+            new ArrayList<UUID>()
+        );
 
-    currentUser = tempContributor;
+        currentUser = tempContributor;
 
-    ArrayList<String> constraints1 = new ArrayList<>();
-    constraints1.add("Array can contain negative numbers");
+        ArrayList<String> constraints1 = new ArrayList<>();
+        constraints1.add("Array can contain negative numbers");
 
-    ArrayList<ArrayList<String>> examples1 = new ArrayList<>();
-    ArrayList<String> example1a = new ArrayList<>();
-    example1a.add("[1, -1, 5, -2, 3], k = 3");
-    example1a.add("4");
+        ArrayList<ArrayList<String>> examples1 = new ArrayList<>();
+        ArrayList<String> example1a = new ArrayList<>();
+        example1a.add("[1, -1, 5, -2, 3], k = 3");
+        example1a.add("4");
 
-    ArrayList<String> example1b = new ArrayList<>();
-    example1b.add("[-2, -1, 2, 1], k = 1");
-    example1b.add("2");
+        ArrayList<String> example1b = new ArrayList<>();
+        example1b.add("[-2, -1, 2, 1], k = 1");
+        example1b.add("2");
 
-    examples1.add(example1a);
-    examples1.add(example1b);
+        examples1.add(example1a);
+        examples1.add(example1b);
 
-    ArrayList<String> answer1a = new ArrayList<>();
-    answer1a.add("Example Answer");
-    answer1a.add("This is an example description!");
-    answer1a.add("n");
-    answer1a.add("ExampleCode.java");
-    ArrayList<ArrayList<String>> answers1 = new ArrayList<>();
-    answers1.add(answer1a);
-    ArrayList<String> notes1 = new ArrayList<>();
-    notes1.add("Brute force is O(n^2)");
-    notes1.add("HashMap solution is O(n)");
+        ArrayList<String> answer1a = new ArrayList<>();
+        answer1a.add("Example Answer");
+        answer1a.add("This is an example description!");
+        answer1a.add("n");
+        answer1a.add("ExampleCode.java");
+        ArrayList<ArrayList<String>> answers1 = new ArrayList<>();
+        answers1.add(answer1a);
+        ArrayList<String> notes1 = new ArrayList<>();
+        notes1.add("Brute force is O(n^2)");
+        notes1.add("HashMap solution is O(n)");
 
-    ArrayList<String> tags1 = new ArrayList<>();
-    tags1.add("Array");
-    tags1.add("HashMap");
+        ArrayList<String> tags1 = new ArrayList<>();
+        tags1.add("Array");
+        tags1.add("HashMap");
 
-    addProblem(
+        addProblem(
         "Longest Subarray with Sum K",
         "Find the length of the longest contiguous subarray whose sum equals k.",
         constraints1,
-        com.fwproblemsolversite.enums.Language.JAVA,
+            com.fwproblemsolversite.enums.Language.JAVA,
         examples1,
         notes1,
         com.fwproblemsolversite.enums.ProblemType.ARRAY,
@@ -345,44 +378,44 @@ public class ProblemApplication {
         30.0,
         answers1,
         Difficulty.MEDIUM
-    );
+        );
 
-    ArrayList<String> constraints2 = new ArrayList<>();
-    constraints2.add("Each input has exactly one solution");
+        ArrayList<String> constraints2 = new ArrayList<>();
+        constraints2.add("Each input has exactly one solution");
 
-    ArrayList<ArrayList<String>> examples2 = new ArrayList<>();
-    ArrayList<String> example2a = new ArrayList<>();
-    example2a.add("[2, 7, 11, 15], target = 9");
-    example2a.add("[0, 1]");
-    examples2.add(example2a);
-    ArrayList<ArrayList<String>> answers2 = new ArrayList<>();
-    ArrayList<String> answer2a = new ArrayList<>();
-    answer2a.add("Example Answer");
-    answer2a.add("This is an example description!");
-    answer2a.add("n");
-    answer2a.add("ExampleCode.java");
-    answers2.add(answer2a);
-    ArrayList<String> notes2 = new ArrayList<>();
-    notes2.add("A HashMap can store visited values");
+        ArrayList<ArrayList<String>> examples2 = new ArrayList<>();
+        ArrayList<String> example2a = new ArrayList<>();
+        example2a.add("[2, 7, 11, 15], target = 9");
+        example2a.add("[0, 1]");
+        examples2.add(example2a);
+        ArrayList<ArrayList<String>> answers2 = new ArrayList<>();
+        ArrayList<String> answer2a = new ArrayList<>();
+        answer2a.add("Example Answer");
+        answer2a.add("This is an example description!");
+        answer2a.add("n");
+        answer2a.add("ExampleCode.java");
+        answers2.add(answer2a);
+        ArrayList<String> notes2 = new ArrayList<>();
+        notes2.add("A HashMap can store visited values");
 
-    ArrayList<String> tags2 = new ArrayList<>();
-    tags2.add("Array");
-    tags2.add("HashMap");
+        ArrayList<String> tags2 = new ArrayList<>();
+        tags2.add("Array");
+        tags2.add("HashMap");
 
-    addProblem(
-        "Two Sum",
-        "Return indices of the two numbers such that they add up to target.",
-        constraints2,
-        com.fwproblemsolversite.enums.Language.JAVA,
-        examples2,
-        notes2,
-        com.fwproblemsolversite.enums.ProblemType.ARRAY,
-        tags2,
-        20.0,
-        answers2,
-        Difficulty.EASY
-    );
+        addProblem(
+            "Two Sum",
+            "Return indices of the two numbers such that they add up to target.",
+            constraints2,
+            com.fwproblemsolversite.enums.Language.JAVA,
+            examples2,
+            notes2,
+            com.fwproblemsolversite.enums.ProblemType.ARRAY,
+            tags2,
+            20.0,
+            answers2,
+            Difficulty.EASY
+        );
 
-    currentUser = previousUser;
-}
+        currentUser = previousUser;
+    }
 }

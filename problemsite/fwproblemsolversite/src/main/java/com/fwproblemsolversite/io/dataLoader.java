@@ -301,12 +301,42 @@ public class dataLoader extends DataConstants{
                         accountInstance = new Student(id, firstName, lastName, username, email, password);
                         break;
                     case "ADMIN":
-                        //logs are currently not in the json, so they'll be empty for now. We don't need them at the moment..
+                        //logs are now stored in the json file, so we can load them when we create the admin account instance
                         ArrayList<UUID> adminBanLog = new ArrayList<>();
+                        JSONArray banLogArray = (JSONArray) accountObj.get(ADMINISTRATOR_BAN_LOG);
+                        if(banLogArray != null){
+                            for(Object ban : banLogArray){
+                                adminBanLog.add(UUID.fromString((String) ban));
+                            }
+                        }
                         ArrayList<UUID> adminMuteLog = new ArrayList<>();
+                        JSONArray muteLogArray = (JSONArray) accountObj.get(ADMINISTRATOR_MUTE_LOG);
+                        if(muteLogArray != null){
+                            for(Object mute : muteLogArray){
+                                adminMuteLog.add(UUID.fromString((String) mute));
+                            }
+                        }
                         ArrayList<UUID> adminTermLog = new ArrayList<>();
+                        JSONArray termLogArray = (JSONArray) accountObj.get(ADMINISTRATOR_TERM_LOG);
+                        if(termLogArray != null){
+                            for(Object term : termLogArray){
+                                adminTermLog.add(UUID.fromString((String) term));
+                            }
+                        }
                         ArrayList<LocalDate> adminBanDates = new ArrayList<>();
+                        JSONArray banDatesArray = (JSONArray) accountObj.get(ADMINISTRATOR_BAN_END_DATES);
+                        if(banDatesArray != null){
+                            for(Object banDate : banDatesArray){
+                                adminBanDates.add(LocalDate.parse((String) banDate));
+                            }
+                        }
                         ArrayList<LocalDate> adminMuteDates = new ArrayList<>();
+                        JSONArray muteDatesArray = (JSONArray) accountObj.get(ADMINISTRATOR_MUTE_END_DATES);
+                        if(muteDatesArray != null){
+                            for(Object muteDate : muteDatesArray){
+                                adminMuteDates.add(LocalDate.parse((String) muteDate));
+                            }
+                        }
                         accountInstance = new Administrator(id, firstName, lastName, username, email, password, adminBanLog, adminMuteLog, adminTermLog, adminBanDates, adminMuteDates);
                         break;
                     case "CONTRIBUTOR":
