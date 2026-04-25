@@ -150,7 +150,7 @@ public class ProblemDataTest {
             Difficulty.EASY);
         problemData.add(problem);
         int initialSize = problemData.getProblems().size();
-        problemData.remove(problem.getId().toString());
+        problemData.remove(problem.getId());
         assertEquals(initialSize - 1, problemData.getProblems().size());
     }
 
@@ -158,7 +158,7 @@ public class ProblemDataTest {
     public void testRemoveProblemNonExistent() {
         ProblemData problemData = ProblemData.getInstance();
         int initialSize = problemData.getProblems().size();
-        problemData.remove(UUID.randomUUID().toString());
+        problemData.remove(UUID.randomUUID());
         assertEquals(initialSize, problemData.getProblems().size());
     }
 

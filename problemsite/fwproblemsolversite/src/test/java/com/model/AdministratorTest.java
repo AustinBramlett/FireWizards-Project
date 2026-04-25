@@ -1,5 +1,6 @@
 package com.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -11,6 +12,8 @@ import org.junit.Test;
 
 import com.fwproblemsolversite.accounts.Administrator;
 import com.fwproblemsolversite.enums.AccountType;
+
+import scala.Array;
 
 public class AdministratorTest {
 
@@ -32,6 +35,8 @@ public class AdministratorTest {
             "password123",
             new ArrayList<>(),
             new ArrayList<>(),
+            new ArrayList<>(),
+            new ArrayList<>(),
             new ArrayList<>()
         );
 
@@ -48,6 +53,8 @@ public class AdministratorTest {
             "asmithson",
             "asmithson@email.com",
             "password123",
+            new ArrayList<>(),
+            new ArrayList<>(),
             new ArrayList<>(),
             new ArrayList<>(),
             new ArrayList<>()
@@ -68,10 +75,12 @@ public class AdministratorTest {
             "password123",
             new ArrayList<>(),
             new ArrayList<>(),
+            new ArrayList<>(),
+            new ArrayList<>(),
             new ArrayList<>()
         );
 
-        boolean result = admin.ban(UUID.randomUUID());
+        boolean result = admin.banAccount(UUID.randomUUID(), LocalDate.now());
 
         assertFalse(result);
     }
@@ -88,10 +97,12 @@ public class AdministratorTest {
             "password123",
             new ArrayList<>(),
             new ArrayList<>(),
+            new ArrayList<>(),
+            new ArrayList<>(),
             new ArrayList<>()
         );
 
-        boolean result = admin.mute(UUID.randomUUID());
+        boolean result = admin.muteAccount(UUID.randomUUID(), LocalDate.now());
 
         assertFalse(result);
     }
@@ -108,10 +119,12 @@ public class AdministratorTest {
             "password123",
             new ArrayList<>(),
             new ArrayList<>(),
+            new ArrayList<>(),
+            new ArrayList<>(),
             new ArrayList<>()
         );
 
-        boolean result = admin.terminate(UUID.randomUUID());
+        boolean result = admin.terminateAccount(UUID.randomUUID());
 
         assertFalse(result);
     }
@@ -126,6 +139,8 @@ public class AdministratorTest {
             "asmithson",
             "asmithson@email.com",
             "password123",
+            new ArrayList<>(),
+            new ArrayList<>(),
             new ArrayList<>(),
             new ArrayList<>(),
             new ArrayList<>()
@@ -148,6 +163,8 @@ public class AdministratorTest {
             "password123",
             new ArrayList<>(),
             new ArrayList<>(),
+            new ArrayList<>(),
+            new ArrayList<>(),
             new ArrayList<>()
         );
 
@@ -166,6 +183,8 @@ public class AdministratorTest {
             "asmithson",
             "asmithson@email.com",
             "password123",
+            new ArrayList<>(),
+            new ArrayList<>(),
             new ArrayList<>(),
             new ArrayList<>(),
             new ArrayList<>()
