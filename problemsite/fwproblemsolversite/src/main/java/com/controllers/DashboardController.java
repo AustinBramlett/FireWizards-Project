@@ -4,10 +4,11 @@ import java.io.IOException;
 import java.util.ArrayList;
    
 import com.fwproblemsolversite.App;
+import com.fwproblemsolversite.ProblemApplication;
 import com.fwproblemsolversite.accounts.Account;
-import com.fwproblemsolversite.data.ProblemData;
 import com.fwproblemsolversite.data.Progress;
 import com.fwproblemsolversite.problems.Problem;
+import com.fwproblemsolversite.data.ProblemData;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -15,7 +16,7 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.layout.VBox;
 
 public class DashboardController {
-    
+    private ProblemApplication problemApp = ProblemApplication.getInstance();
     @FXML private Label welcomeLabel;
     @FXML private Label problemsSolvedLabel;
     @FXML private Label currentStreakLabel;
@@ -33,7 +34,7 @@ public class DashboardController {
     }
 
     private void loadUserInfo() {
-        Account currentUser = App.getCurrentUser();
+        Account currentUser = problemApp.getCurrentUser();
         if (currentUser != null) {
             String firstName = currentUser.getFirstName();
             welcomeLabel.setText("Welcome Back, " + firstName);
@@ -45,7 +46,7 @@ public class DashboardController {
     }
 
      private void loadUserStats() {
-        Account currentUser = App.getCurrentUser();
+        Account currentUser = problemApp.getCurrentUser();
 
         if (currentUser == null) {
             return;
@@ -130,7 +131,7 @@ public class DashboardController {
 
     @FXML
     private void handleLogout() throws IOException {
-        App.setCurrentUser(null);
+        problemApp.logout();
         App.setRoot("login");
     }
 

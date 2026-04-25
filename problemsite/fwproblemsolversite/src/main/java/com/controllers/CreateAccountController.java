@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.UUID;
 
 import com.fwproblemsolversite.App;
+import com.fwproblemsolversite.ProblemApplication;
 import com.fwproblemsolversite.accounts.Account;
 import com.fwproblemsolversite.data.AccountData;
 import com.fwproblemsolversite.enums.AccountType;
@@ -15,6 +16,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class CreateAccountController {
+    private ProblemApplication problemApp = ProblemApplication.getInstance();
     @FXML 
     private TextField firstNameField;
 
@@ -57,7 +59,10 @@ public class CreateAccountController {
         String password = passwordField.getText();
         String confirmPassword = confirmPasswordField.getText();
         String accountType = accountTypeBox.getValue();
-
+        if(problemApp.getCurrentUser() != null){
+            errorLabel.setText("Please log out before creating a new account.");
+            throw new IOException("User already logged in during account creation (???)");
+        }
         if (firstName.isEmpty() || lastName.isEmpty() || 
             username.isEmpty() || email.isEmpty() || 
             password.isEmpty() || confirmPassword.isEmpty() || accountType == null) {
@@ -97,7 +102,7 @@ public class CreateAccountController {
             AccountData.getInstance().getAccounts()
         );
 
-        App.setCurrentUser(newAccount);
+        problemApp.login(newAccount.getUsername(), newAccount.getPassword());
         if (newAccount.getAccountType() == AccountType.CONTRIBUTOR) {
             App.setRoot("contributordashboard");
         } else {

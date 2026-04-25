@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import javafx.fxml.FXML;   
 import com.fwproblemsolversite.App;
+import com.fwproblemsolversite.ProblemApplication;
 import com.fwproblemsolversite.accounts.Account;
 import com.fwproblemsolversite.data.ProblemData;
 import com.fwproblemsolversite.problems.Problem;
@@ -12,7 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 
 public class ContributorDashboardController {
-
+    private ProblemApplication problemApp = ProblemApplication.getInstance();
     @FXML private Label welcomeLabel;
     @FXML private Label problemsSolvedLabel;
     @FXML private Label dailyStreakLabel;
@@ -29,7 +30,7 @@ public class ContributorDashboardController {
     }
 
     private void loadUserInfo() {
-        Account currentUser = App.getCurrentUser();
+        Account currentUser = problemApp.getCurrentUser();
         if (currentUser != null) {
             String firstName = currentUser.getFirstName();
             welcomeLabel.setText("Welcome Back, " + firstName);
@@ -41,7 +42,7 @@ public class ContributorDashboardController {
     }
 
      private void loadUserStats() {
-        Account currentUser = App.getCurrentUser();
+        Account currentUser = problemApp.getCurrentUser();
 
         if (currentUser == null) {
             return;
@@ -111,7 +112,7 @@ public class ContributorDashboardController {
 
     @FXML
     private void handleLogout() throws IOException {
-        App.setCurrentUser(null);
+        problemApp.logout();
         App.setRoot("login");
     }
 

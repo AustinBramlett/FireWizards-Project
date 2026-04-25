@@ -1,6 +1,7 @@
 package com.controllers;
 
 import com.fwproblemsolversite.App;
+import com.fwproblemsolversite.ProblemApplication;
 import com.fwproblemsolversite.problems.Problem;
 
 import javafx.fxml.FXML;
@@ -10,7 +11,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class ProblemController {
-
+    private ProblemApplication problemApp = ProblemApplication.getInstance();
     @FXML private Label titleLabel;
     @FXML private Label descriptionLabel;
     @FXML private Label difficultyLabel;

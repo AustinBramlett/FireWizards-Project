@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 import com.fwproblemsolversite.App;
+import com.fwproblemsolversite.ProblemApplication;
 import com.fwproblemsolversite.accounts.Account;
 import com.fwproblemsolversite.data.AccountData;
 import com.fwproblemsolversite.data.Progress;
@@ -23,7 +24,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 
 public class ProfileSettingsController {
-
+    private ProblemApplication problemApp = ProblemApplication.getInstance();
     @FXML private ImageView profileImageView;
 
     @FXML private Label fullNameLabel;
@@ -50,7 +51,7 @@ public class ProfileSettingsController {
     }
 
     private void loadUserInfo() {
-        Account user = App.getCurrentUser();
+        Account user = problemApp.getCurrentUser();
 
         if (user == null) {
             return;
@@ -151,7 +152,7 @@ public class ProfileSettingsController {
 
     @FXML
     private void handleHome() throws IOException {
-        Account user = App.getCurrentUser();
+        Account user = problemApp.getCurrentUser();
 
         if (user != null && user.getAccountType().toString().equals("CONTRIBUTOR")) {
             App.setRoot("contributorDashboard");
@@ -172,7 +173,7 @@ public class ProfileSettingsController {
 
     @FXML
     private void handleResetProgress() {
-        Account user = App.getCurrentUser();
+        Account user = problemApp.getCurrentUser();
 
         if (user == null || user.getProgress() == null) {
             return;
@@ -195,7 +196,7 @@ public class ProfileSettingsController {
 
     @FXML
     private void handleDeleteAccount() throws IOException {
-        Account user = App.getCurrentUser();
+        Account user = problemApp.getCurrentUser();
 
         if (user == null) {
             return;
@@ -204,13 +205,13 @@ public class ProfileSettingsController {
         AccountData.getInstance().getAccounts().remove(user);
         dataWriter.saveAccounts(AccountData.getInstance().getAccounts());
 
-        App.setCurrentUser(null);
+        problemApp.logout();
         App.setRoot("login");
     }
 
     @FXML
     private void handleLogout() throws IOException {
-        App.setCurrentUser(null);
+        problemApp.logout();
         App.setRoot("login");
     }
 
