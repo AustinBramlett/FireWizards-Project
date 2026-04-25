@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import com.fwproblemsolversite.accounts.Contributor;
 import com.fwproblemsolversite.enums.AccountType;
+import com.fwproblemsolversite.enums.Difficulty;
 import com.fwproblemsolversite.enums.Language;
 import com.fwproblemsolversite.enums.ProblemType;
 
@@ -64,7 +65,8 @@ public class ContributorTest {
             ProblemType.ARRAY,
             new ArrayList<>(),
             5.0,
-            "Answer"
+            new ArrayList<>(),
+            Difficulty.EASY
         );
 
         assertFalse(result);
@@ -94,6 +96,7 @@ public void testAddProblemNullValues() {
         null,
         null,
         0.0,
+        null,
         null
     );
 
@@ -116,13 +119,13 @@ public void testMultipleAddProblemCalls() {
     boolean result1 = contributor.addProblem(
         "T1", "D1", new ArrayList<>(), null,
         new ArrayList<>(), new ArrayList<>(),
-        null, new ArrayList<>(), 1.0, "A1"
+        null, new ArrayList<>(), 1.0, new ArrayList<>(), Difficulty.MEDIUM
     );
 
     boolean result2 = contributor.addProblem(
         "T2", "D2", new ArrayList<>(), null,
         new ArrayList<>(), new ArrayList<>(),
-        null, new ArrayList<>(), 2.0, "A2"
+        null, new ArrayList<>(), 2.0, new ArrayList<>(), Difficulty.HARD
     );
 
     assertFalse(result1);

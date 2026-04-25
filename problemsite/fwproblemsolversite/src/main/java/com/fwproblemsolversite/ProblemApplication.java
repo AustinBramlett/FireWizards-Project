@@ -27,7 +27,7 @@ public class ProblemApplication {
     private AccountData accountData;
     private ProblemData problemData;
     private Account currentUser;
-    private ProblemApplication instance;
+    private static ProblemApplication instance;
 
     /**
      * Initializes the application and loads account and problem data 
@@ -68,8 +68,12 @@ public class ProblemApplication {
 
         currentUser = null;
     }
-
-    public ProblemApplication getInstance() {
+    
+    /**
+     * Gets the singleton instance of the ProblemApplication facade.
+     * @return The singleton instance of ProblemApplication.
+     */
+    public static ProblemApplication getInstance() {
         if(instance == null) {
             instance = new ProblemApplication();
             return instance;
