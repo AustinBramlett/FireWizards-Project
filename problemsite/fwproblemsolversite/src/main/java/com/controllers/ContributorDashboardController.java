@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import javafx.fxml.FXML;   
 import com.fwproblemsolversite.App;
 import com.fwproblemsolversite.accounts.Account;
-import com.fwproblemsolversite.data.AccountData;
 import com.fwproblemsolversite.data.ProblemData;
 import com.fwproblemsolversite.problems.Problem;
 import com.fwproblemsolversite.data.Progress;
@@ -114,6 +113,15 @@ public class ContributorDashboardController {
     private void handleLogout() throws IOException {
         App.setCurrentUser(null);
         App.setRoot("login");
+    }
+
+    @FXML
+    private void handleProgress() {
+        try {
+            App.setRoot("progress");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

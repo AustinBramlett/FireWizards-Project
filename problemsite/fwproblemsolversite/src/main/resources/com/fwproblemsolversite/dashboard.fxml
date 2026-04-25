@@ -164,7 +164,6 @@
                                 <Insets top="18.0" right="20.0" bottom="18.0" left="20.0" />
                             </padding>
                         </VBox>
-                        
 
                         <Button fx:id="goToProblemsButton" text="Go to Problems" onAction="#handleGoToProblems" prefWidth="250.0" styleClass="primary-button" />
 
