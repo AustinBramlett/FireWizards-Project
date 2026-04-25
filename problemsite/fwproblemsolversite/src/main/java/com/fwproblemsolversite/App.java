@@ -3,8 +3,6 @@ package com.fwproblemsolversite;
 import java.io.IOException;
 
 import com.fwproblemsolversite.accounts.Account;
-import com.fwproblemsolversite.data.AccountData;
-import com.fwproblemsolversite.data.ProblemData;
 import com.fwproblemsolversite.io.dataLoader;
 import com.fwproblemsolversite.problems.Problem;
 
@@ -28,9 +26,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         dataLoader loader = new dataLoader();
-        AccountData.getInstance().setAccounts(dataLoader.LoadAccounts());
-        ProblemData.getInstance().getProblems().addAll(dataLoader.LoadProblems());
-
+        ProblemApplication problemApp = ProblemApplication.getInstance(); //this will load all data.
         scene = new Scene(loadFXML("home"), 640, 480);
         stage.setScene(scene);
         stage.show();

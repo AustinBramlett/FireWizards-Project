@@ -39,6 +39,7 @@ public class ProblemsController {
         for (Problem problem : problems) {
             VBox card = createProblemCard(problem);
             problemsContainer.getChildren().add(card);
+            System.out.println("Loaded problem: " + problem.getTitle());
         }
     }
 
