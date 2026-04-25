@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import com.fwproblemsolversite.accounts.Account;
+import com.fwproblemsolversite.accounts.Administrator;
+import com.fwproblemsolversite.accounts.Contributor;
 /**
  * Manages all the account data in the system.
  * 
@@ -51,6 +53,24 @@ public class AccountData {
         for (Account account : accounts) {
             if (account.getId().equals(id)) {
                 return account;
+            }
+        }
+        return null;
+    }
+
+    /**
+     *  Retrieves the author of a problem by the problem's ID.
+     *
+     *  @param problemID The ID of the problem
+     *  @return The Account that is the author of the problem, null if not found
+     */
+    public Account getAuthorById(UUID problemID) {
+        if (problemID == null) return null;
+        for (Account account : accounts) {
+            if (!(account instanceof Contributor)) continue; //Skip this index
+            Contributor contributor = (Contributor) account;
+            if (contributor.checkAuthor(problemID)) {
+                return contributor;
             }
         }
         return null;
@@ -155,5 +175,25 @@ public class AccountData {
     public void unmute(Account account) {
         if (account == null) return;
         account.setMuted(false);
+    }
+
+    public ArrayList<Administrator.ban> getBans() { 
+        ArrayList<Administrator.ban> bans = new ArrayList<>();
+        for(Account account : accounts){
+            if(!(account instanceof Administrator)) continue;
+            Administrator administrator = (Administrator) account;
+            bans.addAll(administrator.getBans());
+        }
+        return bans;
+    }
+
+    public ArrayList<Administrator.mute> getMutes() {
+        ArrayList<Administrator.mute> mutes = new ArrayList<>();
+        for(Account account : accounts){
+            if(!(account instanceof Administrator)) continue;
+            Administrator administrator = (Administrator) account;
+            mutes.addAll(administrator.getMutes());
+        }
+        return mutes;
     }
 }

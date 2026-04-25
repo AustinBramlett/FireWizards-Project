@@ -20,6 +20,14 @@ public class DataConstants {
     protected static final String ACCOUNT_PROGRESS = "progress";
     protected static final String ACCOUNT_PASSWORD = "password";
 
+    protected static final String ADMINISTRATOR_BAN_LOG = "banLog";
+    protected static final String ADMINISTRATOR_MUTE_LOG = "muteLog";
+    protected static final String ADMINISTRATOR_TERM_LOG = "termLog";
+    protected static final String ADMINISTRATOR_BAN_END_DATES = "banDates";
+    protected static final String ADMINISTRATOR_MUTE_END_DATES = "muteDates";
+
+    protected static final String CONTRIBUTOR_QUESTIONS_MADE = "questionsMade";
+
     protected static final String PROBLEM_TITLE = "title";
     protected static final String PROBLEM_DESCRIPTION = "description";
     protected static final String PROBLEM_DIFFICULTY = "difficulty";
@@ -42,7 +50,8 @@ public class DataConstants {
 
     protected static final String REPORT_SENDER = "sender";
     protected static final String REPORT_REASON = "reason";
-    protected static final String REPORT_ACCUSED = "accused";  
+    protected static final String REPORT_ACCUSED = "accused"; 
+    
     
     public static boolean isJUnitTest() {
         for(StackTraceElement element : Thread.currentThread().getStackTrace()){

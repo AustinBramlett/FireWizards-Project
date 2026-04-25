@@ -1,6 +1,7 @@
 package com.fwproblemsolversite.io;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -28,6 +29,21 @@ import com.model.DataConstants;
  */
 public class dataLoader extends DataConstants{
     private static JSONParser parser = new JSONParser();
+    private static boolean debug = false;
+    /**
+     * Turns on dataLoader's debug mode.
+     * This will print out extra information about the data loading process to help with debugging.
+     */
+    public static void debugMode() {
+        debug = true;
+    }
+    /**
+     * Prints the output to the console if debug mode is on.
+     * @param output The string to be printed to the console if debug mode is on. Will leave a trace to dataLoader.
+     */
+    private static void debugOut(String output){
+        if(debug) System.out.println("dataLoader: " + output);
+    }
     /**
      * Loads the reports from the JSON file.
      * 
@@ -77,11 +93,11 @@ public class dataLoader extends DataConstants{
                 String difficultyString = (String) problemObj.get(PROBLEM_DIFFICULTY);
                 Difficulty difficulty;
                 if(title == null) {
-                    //System.out.println("dataLoader(LoadProblems): Title not specified for a problem, skipping to prevent further error!");
+                    debugOut("Title not specified for a problem, skipping to prevent further error!");
                     continue; // Skip this problem since title is essential
                 }
                 if(difficultyString == null) {
-                    //System.out.println("dataLoader(LoadProblems): Difficulty not specified for problem " + title);
+                    debugOut("Difficulty not specified for problem " + title);
                     difficulty = null;
                 } else {
                     switch(difficultyString) {
@@ -95,14 +111,14 @@ public class dataLoader extends DataConstants{
                         difficulty = Difficulty.HARD;
                         break;
                     default:
-                        //System.out.println("dataLoader(LoadProblems): Unknown difficulty: " + difficultyString);
+                        debugOut("Unknown difficulty: " + difficultyString);
                         difficulty = null;
                     }
                 }
                 String typeString = (String) problemObj.get(PROBLEM_TYPE);
                 ProblemType type = null;
                 if(typeString == null) {
-                    //System.out.println("dataLoader(LoadProblems): Problem type not specified for problem " + title);
+                    debugOut("Problem type not specified for problem " + title);
                 } else {
                     switch(typeString) {
                     case "ARRAY":
@@ -127,14 +143,14 @@ public class dataLoader extends DataConstants{
                         type = ProblemType.HASHMAP;
                         break;
                     default:
-                        //System.out.println("dataLoader(LoadProblems): Unknown problem type: " + typeString);
+                        debugOut("Unknown problem type: " + typeString);
                         type = null;
                     }
                 }
                 String languageString = (String) problemObj.get(PROBLEM_LANGUAGE);
                 Language language = null;
                 if(languageString ==null) {
-                    //System.out.println("dataLoader(LoadProblems): Language not specified for problem " + title);
+                    debugOut("Language not specified for problem " + title);
                 } else {
                     switch(languageString) {
                     case "JAVA":
@@ -147,7 +163,7 @@ public class dataLoader extends DataConstants{
                         language = Language.CPP;
                         break;
                     default:
-                        //System.out.println("dataLoader(LoadProblems): Unknown language: " + languageString);
+                        debugOut("Unknown language: " + languageString);
                     }
                 }
                 JSONArray tagsArray = (JSONArray) problemObj.get(PROBLEM_TAGS);
@@ -163,7 +179,7 @@ public class dataLoader extends DataConstants{
                         tags.add((String) tag);
                     }
                 } else {
-                    //System.out.println("dataLoader(LoadProblems): No tags specified for problem " + title);
+                    debugOut("No tags specified for problem " + title);
                 }
                 ArrayList<String> constraints = new ArrayList<>();
                 if(constraintsArray != null) {
@@ -171,7 +187,7 @@ public class dataLoader extends DataConstants{
                         constraints.add((String) constraint);
                     }
                 } else {
-                    //System.out.println("dataLoader(LoadProblems): No constraints specified for problem " + title);
+                    debugOut("No constraints specified for problem " + title);
                 }
                 ArrayList<ArrayList<String>> examples = new ArrayList<>();
                 if(examplesArray != null) {
@@ -180,16 +196,15 @@ public class dataLoader extends DataConstants{
                         examples.add((ArrayList<String>) example);
                     }
                 } else {
-                    //System.out.println("dataLoader(LoadProblems): No examples specified for problem " + title);
+                    debugOut("No examples specified for problem " + title);
                 }
                 ArrayList<ArrayList<String>> answers = new ArrayList<>();
                 if(answersArray != null) {
                     for (Object anAnswer : answersArray) {
-                        JSONArray anAnswerObj = (JSONArray) anAnswer;
                         answers.add((ArrayList<String>) anAnswer);
                     }
                 } else {
-                    //System.out.println("dataLoader(LoadProblems): No answers specified for problem " + title);
+                    debugOut("No answers specified for problem " + title);
                 }
                 ArrayList<String> notes = new ArrayList<>();
                 if(notesArray != null) {
@@ -197,7 +212,7 @@ public class dataLoader extends DataConstants{
                         notes.add((String) note);
                     }
                 } else {
-                    //System.out.println("dataLoader(LoadProblems): No notes specified for problem " + title);
+                    debugOut("No notes specified for problem " + title);
                 }
                 ArrayList<Comment> comments = new ArrayList<>();
                 if(commentsArray != null) {   
@@ -214,7 +229,7 @@ public class dataLoader extends DataConstants{
                         comments.add(commentInstance);
                     }
                 } else {
-                    //System.out.println("dataLoader(LoadProblems): No comments specified for problem " + title);
+                    debugOut("No comments specified for problem " + title);
                 }
                 ArrayList<Submission> submissions = new ArrayList<>();
                 if(submissionsArray != null){
@@ -224,7 +239,7 @@ public class dataLoader extends DataConstants{
                         submissions.add(newSubmission);
                     }
                 }else{
-                    //System.out.println("dataLoader(LoadProblems): No submissions array specified for problem " + title);
+                    debugOut("No submissions array specified for problem " + title);
                 }
                 String timerVal = (String) problemObj.get(PROBLEM_TIMER);
                 double timer = Double.parseDouble(timerVal);
@@ -264,7 +279,7 @@ public class dataLoader extends DataConstants{
                 String email = (String) accountObj.get(ACCOUNT_EMAIL);
                 String password = (String) accountObj.get(ACCOUNT_PASSWORD);
                 if(accountType == null){
-                    //System.out.println("dataLoader(LoadAccounts): Type not specified for this account, skipping to prevent further error!");
+                    debugOut("Type not specified for this account, skipping to prevent further error!");
                 } else {
 
                     ArrayList<Integer> progressData = new ArrayList<>();
@@ -286,18 +301,50 @@ public class dataLoader extends DataConstants{
                         accountInstance = new Student(id, firstName, lastName, username, email, password);
                         break;
                     case "ADMIN":
-                        //logs are currently not in the json, so they'll be empty for now. We don't need them at the moment..
+                        //logs are now stored in the json file, so we can load them when we create the admin account instance
                         ArrayList<UUID> adminBanLog = new ArrayList<>();
+                        JSONArray banLogArray = (JSONArray) accountObj.get(ADMINISTRATOR_BAN_LOG);
+                        if(banLogArray != null){
+                            for(Object ban : banLogArray){
+                                adminBanLog.add(UUID.fromString((String) ban));
+                            }
+                        }
                         ArrayList<UUID> adminMuteLog = new ArrayList<>();
-                        ArrayList<String> adminTermLog = new ArrayList<>();
-                        accountInstance = new Administrator(id, firstName, lastName, username, email, password, adminBanLog, adminMuteLog, adminTermLog);
+                        JSONArray muteLogArray = (JSONArray) accountObj.get(ADMINISTRATOR_MUTE_LOG);
+                        if(muteLogArray != null){
+                            for(Object mute : muteLogArray){
+                                adminMuteLog.add(UUID.fromString((String) mute));
+                            }
+                        }
+                        ArrayList<UUID> adminTermLog = new ArrayList<>();
+                        JSONArray termLogArray = (JSONArray) accountObj.get(ADMINISTRATOR_TERM_LOG);
+                        if(termLogArray != null){
+                            for(Object term : termLogArray){
+                                adminTermLog.add(UUID.fromString((String) term));
+                            }
+                        }
+                        ArrayList<LocalDate> adminBanDates = new ArrayList<>();
+                        JSONArray banDatesArray = (JSONArray) accountObj.get(ADMINISTRATOR_BAN_END_DATES);
+                        if(banDatesArray != null){
+                            for(Object banDate : banDatesArray){
+                                adminBanDates.add(LocalDate.parse((String) banDate));
+                            }
+                        }
+                        ArrayList<LocalDate> adminMuteDates = new ArrayList<>();
+                        JSONArray muteDatesArray = (JSONArray) accountObj.get(ADMINISTRATOR_MUTE_END_DATES);
+                        if(muteDatesArray != null){
+                            for(Object muteDate : muteDatesArray){
+                                adminMuteDates.add(LocalDate.parse((String) muteDate));
+                            }
+                        }
+                        accountInstance = new Administrator(id, firstName, lastName, username, email, password, adminBanLog, adminMuteLog, adminTermLog, adminBanDates, adminMuteDates);
                         break;
                     case "CONTRIBUTOR":
                         ArrayList<UUID> questionsMade = new ArrayList<>();
                         accountInstance = new Contributor(id, firstName, lastName, username, email, password, questionsMade);
                         break;
                     default:
-                        //System.out.println("dataLoader(LoadAccounts): Unknown account type: " + accountType);
+                        debugOut("Unknown account type: " + accountType);
                         accountInstance = null;
                     }
                      // Add the created account instance to the accounts list
