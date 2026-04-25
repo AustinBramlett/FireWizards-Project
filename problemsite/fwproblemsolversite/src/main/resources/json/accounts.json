@@ -112,5 +112,24 @@
         "email": "jbauer@email.com",
         "username": "jbauer",
         "lastDate": "2026-03-23"
+    },
+    {
+        "firstName": "Example",
+        "lastName": "Example1",
+        "password": "Example123",
+        "accountType": "STUDENT",
+        "progress": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "id": "fcb0f015-3b09-4027-81bf-c6184a0a5213",
+        "muted": "false",
+        "email": "Example@Example.com",
+        "username": "ExampleGuy",
+        "lastDate": "2026-04-15"
     }
 ]
