@@ -98,19 +98,16 @@ public class ContributorDashboardController {
 
     @FXML
     private void handleGoToProblems() throws IOException {
-        System.out.println("Go to problems clicked");
         App.setRoot("problems");
     }
 
     @FXML
     private void handleCreateProblem() throws IOException {
-        System.out.println("Create problem clicked");
         App.setRoot("createproblem");
     }
     @FXML
     private void handleProfileSettings() throws IOException {
-        System.out.println("Profile & Settings clicked");
-        App.setRoot("profileSettings");
+        App.setRoot("contributorSettings");
     }
 
     @FXML

@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<StackPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/13" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.ContributorSettingsController" stylesheets="@styles.css">
+
+    <children>
+        <Pane prefHeight="700.0" prefWidth="1000.0" styleClass="background-pane" />
+
+        <BorderPane prefHeight="700.0" prefWidth="1000.0">
+
+            <left>
+                <VBox prefWidth="145.0" spacing="20.0" styleClass="side-bar">
+                    <padding>
+                        <Insets top="22.0" right="12.0" bottom="20.0" left="12.0" />
+                    </padding>
+
+                    <children>
+                        <HBox spacing="5.0" alignment="CENTER_LEFT">
+                            <children>
+                                <Label text="FWP" styleClass="app-title" />
+                                <ImageView fitHeight="24.0" fitWidth="24.0" preserveRatio="true">
+                                    <image>
+                                        <Image url="@images/FireSymbol.png" />
+                                    </image>
+                                </ImageView>
+                            </children>
+                        </HBox>
+
+                        <Button text="Home" onAction="#handleHome" styleClass="nav-button">
+                            <graphic>
+                                <ImageView fitHeight="24.0" fitWidth="24.0" preserveRatio="true">
+                                    <image>
+                                        <Image url="@images/home.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+
+                        <Button text="Problems" onAction="#handleProblems" styleClass="nav-button">
+                            <graphic>
+                                <ImageView fitHeight="24.0" fitWidth="24.0" preserveRatio="true">
+                                    <image>
+                                        <Image url="@images/ProblemsGo.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+
+                        <Button text="Progress" onAction="#handleProgress" styleClass="nav-button">
+                            <graphic>
+                                <ImageView fitHeight="24.0" fitWidth="24.0" preserveRatio="true">
+                                    <image>
+                                        <Image url="@images/trending_up.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+
+                        <Button text="Logout" onAction="#handleLogout" styleClass="nav-button-danger">
+                            <graphic>
+                                <ImageView fitHeight="24.0" fitWidth="24.0" preserveRatio="true">
+                                    <image>
+                                        <Image url="@images/logout.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                    </children>
+                </VBox>
+            </left>
+
+            <center>
+                <ScrollPane fitToWidth="true" styleClass="page-scroll">
+                    <content>
+                        <VBox spacing="18.0" styleClass="profile-page">
+                            <padding>
+                                <Insets top="28.0" right="55.0" bottom="40.0" left="55.0" />
+                            </padding>
+
+                            <children>
+                                <Label text="Profile &amp; Settings" styleClass="dashboard-title">
+                                    <font>
+                                        <Font size="30.0" />
+                                    </font>
+                                </Label>
+
+                                <Label text="Manage your account and preferences" styleClass="small-text" />
+
+                                <AnchorPane styleClass="profile-card" prefHeight="175.0">
+                                    <children>
+                                        <Button text="Edit Profile"
+                                                onAction="#handleEditProfile"
+                                                styleClass="small-pill-button"
+                                                AnchorPane.topAnchor="18.0"
+                                                AnchorPane.rightAnchor="18.0">
+                                            <graphic>
+                                                <ImageView fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@images/edit.png" />
+                                                    </image>
+                                                </ImageView>
+                                            </graphic>
+                                        </Button>
+
+                                        <HBox spacing="25.0" alignment="CENTER_LEFT"
+                                              AnchorPane.leftAnchor="24.0"
+                                              AnchorPane.rightAnchor="24.0"
+                                              AnchorPane.topAnchor="24.0"
+                                              AnchorPane.bottomAnchor="24.0">
+
+                                            <children>
+                                                <ImageView fx:id="profileImageView"
+                                                           fitHeight="95.0"
+                                                           fitWidth="95.0"
+                                                           preserveRatio="true"
+                                                           smooth="false">
+                                                    <image>
+                                                        <Image url="@images/Profile.png" />
+                                                    </image>
+                                                </ImageView>
+
+                                                <VBox spacing="6.0">
+                                                    <children>
+                                                        <Label fx:id="fullNameLabel" text="User Name" styleClass="profile-name" />
+                                                        <Label fx:id="emailLabel" text="email@email.com" styleClass="profile-text" />
+
+                                                        <HBox spacing="8.0" alignment="CENTER_LEFT">
+                                                            <children>
+                                                                <Label text="Account Type:" styleClass="profile-text" />
+                                                                <Label fx:id="accountTypeLabel" text="STUDENT" styleClass="account-badge" />
+                                                            </children>
+                                                        </HBox>
+
+                                                        <HBox spacing="8.0" alignment="CENTER_LEFT">
+                                                            <children>
+                                                                <ImageView fitHeight="22.0" fitWidth="22.0" preserveRatio="true">
+                                                                    <image>
+                                                                        <Image url="@images/calendar_today.png" />
+                                                                    </image>
+                                                                </ImageView>
+                                                                <Label fx:id="memberSinceLabel" text="Member since 2026-03-23" styleClass="profile-text" />
+                                                            </children>
+                                                        </HBox>
+
+                                                        <Label fx:id="bioLabel" text="“Code. Learn. Conquer. Repeat”" styleClass="quote-text" />
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </AnchorPane>
+
+                                <HBox spacing="18.0">
+                                    <children>
+                                        <VBox spacing="12.0" styleClass="profile-card" HBox.hgrow="ALWAYS">
+                                            <padding>
+                                                <Insets top="18.0" right="18.0" bottom="18.0" left="18.0" />
+                                            </padding>
+
+                                            <children>
+                                                <Label text="Contribution Stats" styleClass="section-title" />
+
+                                                <HBox alignment="CENTER_LEFT" spacing="8.0" styleClass="stat-row">
+                                                    <ImageView fitHeight="22.0" fitWidth="22.0" preserveRatio="true">
+                                                        <image>
+                                                            <Image url="@images/Review.png" />
+                                                        </image>
+                                                    </ImageView>
+                                                    <Label text="Approved Submissions" styleClass="profile-text" />
+                                                    <Pane HBox.hgrow="ALWAYS" />
+                                                    <Label fx:id="approvedSubmissionsLabel" text="8" styleClass="profile-text" />
+                                                </HBox>
+
+                                                <HBox alignment="CENTER_LEFT" spacing="8.0" styleClass="stat-row">
+                                                    <ImageView fitHeight="22.0" fitWidth="22.0" preserveRatio="true">
+                                                        <image>
+                                                            <Image url="@images/ProblemsCreated.png" />
+                                                        </image>
+                                                    </ImageView>
+                                                    <Label text="Problems Created" styleClass="profile-text" />
+                                                    <Pane HBox.hgrow="ALWAYS" />
+                                                    <Label fx:id="problemsCreatedLabel" text="12" styleClass="profile-text" />
+                                                </HBox>
+
+                                                <HBox alignment="CENTER_LEFT" spacing="8.0" styleClass="stat-row">
+                                                    <ImageView fitHeight="22.0" fitWidth="22.0" preserveRatio="true">
+                                                        <image>
+                                                            <Image url="@images/PendingReviews.png" />
+                                                        </image>
+                                                    </ImageView>
+                                                    <Label text="Pending Reviews" styleClass="profile-text" />
+                                                    <Pane HBox.hgrow="ALWAYS" />
+                                                    <Label fx:id="pendingReviewsLabel" text="3" styleClass="profile-text" />
+                                                </HBox>
+
+                                                <HBox alignment="CENTER_LEFT" spacing="8.0" styleClass="stat-row">
+                                                    <ImageView fitHeight="22.0" fitWidth="22.0" preserveRatio="true">
+                                                        <image>
+                                                            <Image url="@images/TotalUpVotes.png" />
+                                                        </image>
+                                                    </ImageView>
+                                                    <Label text="Total Upvotes" styleClass="profile-text" />
+                                                    <Pane HBox.hgrow="ALWAYS" />
+                                                    <Label fx:id="totalUpvotesLabel" text="45" styleClass="profile-text" />
+                                                </HBox>
+                                            </children>
+                                        </VBox>
+
+                                        <VBox alignment="CENTER" spacing="12.0" styleClass="profile-card" HBox.hgrow="ALWAYS">
+                                            <padding>
+                                                <Insets top="18.0" right="18.0" bottom="18.0" left="18.0" />
+                                            </padding>
+
+                                            <children>
+                                                <Label text="Current Streak" styleClass="section-title" />
+
+                                                <HBox alignment="CENTER" spacing="8.0">
+                                                    <children>
+                                                        <ImageView fitHeight="60.0" fitWidth="60.0" preserveRatio="true">
+                                                            <image>
+                                                                <Image url="@images/fire.png" />
+                                                            </image>
+                                                        </ImageView>
+
+                                                        <Label fx:id="streakBigLabel" text="0" styleClass="streak-big" />
+                                                    </children>
+                                                </HBox>
+
+                                                <Label text="days in a row" styleClass="profile-text" />
+
+                                                <HBox fx:id="streakDaysBox" alignment="CENTER" spacing="12.0" />
+
+                                                <Label text="Solve a problem today to keep your streak!" styleClass="small-text" />
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </HBox>
+
+                                <VBox spacing="12.0" styleClass="profile-card">
+                                    <padding>
+                                        <Insets top="18.0" right="18.0" bottom="18.0" left="18.0" />
+                                    </padding>
+
+                                    <children>
+                                        <Label text="Preferences" styleClass="section-title" />
+
+                                        <HBox alignment="CENTER_LEFT" spacing="14.0" styleClass="stat-row">
+                                            <children>
+                                                <ImageView fitHeight="30.0" fitWidth="30.0" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@images/code.png" />
+                                                    </image>
+                                                </ImageView>
+
+                                                <VBox>
+                                                    <children>
+                                                        <Label text="Language" styleClass="profile-text" />
+                                                        <Label text="Select your preferred programming language" styleClass="small-text" />
+                                                    </children>
+                                                </VBox>
+
+                                                <Pane HBox.hgrow="ALWAYS" />
+
+                                                <MenuButton fx:id="languageMenu" text="Java" styleClass="preference-menu">
+                                                    <graphic>
+                                                        <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true">
+                                                            <image>
+                                                                <Image url="@images/code.png" />
+                                                            </image>
+                                                        </ImageView>
+                                                    </graphic>
+                                                    <items>
+                                                        <MenuItem text="Java" onAction="#handleLanguageJava" />
+                                                        <MenuItem text="Python" onAction="#handleLanguagePython" />
+                                                        <MenuItem text="C++" onAction="#handleLanguageCpp" />
+                                                    </items>
+                                                </MenuButton>
+                                            </children>
+                                        </HBox>
+
+                                        <HBox alignment="CENTER_LEFT" spacing="14.0" styleClass="stat-row">
+                                            <children>
+                                                <ImageView fitHeight="30.0" fitWidth="30.0" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@images/nights_stay.png" />
+                                                    </image>
+                                                </ImageView>
+
+                                                <VBox>
+                                                    <children>
+                                                        <Label text="Difficulty" styleClass="profile-text" />
+                                                        <Label text="Easy | Medium | Hard" styleClass="small-text" />
+                                                    </children>
+                                                </VBox>
+
+                                                <Pane HBox.hgrow="ALWAYS" />
+
+                                                <MenuButton fx:id="difficultyMenu" text="Easy" styleClass="preference-menu">
+                                                    <items>
+                                                        <MenuItem text="Easy" onAction="#handleDifficultyEasy" />
+                                                        <MenuItem text="Medium" onAction="#handleDifficultyMedium" />
+                                                        <MenuItem text="Hard" onAction="#handleDifficultyHard" />
+                                                    </items>
+                                                </MenuButton>
+                                            </children>
+                                        </HBox>
+
+                                        <HBox alignment="CENTER_LEFT" spacing="14.0" styleClass="stat-row">
+                                            <children>
+                                                <ImageView fitHeight="30.0" fitWidth="30.0" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@images/notifications_active.png" />
+                                                    </image>
+                                                </ImageView>
+
+                                                <VBox>
+                                                    <children>
+                                                        <Label text="Auto-Save Drafts" styleClass="profile-text" />
+                                                        <Label text="Automatically save your drafts for future use" styleClass="small-text" />
+                                                    </children>
+                                                </VBox>
+
+                                                <Pane HBox.hgrow="ALWAYS" />
+
+                                                <MenuButton fx:id="autoSaveMenu" text="Enabled" styleClass="preference-menu">
+                                                    <graphic>
+                                                        <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true">
+                                                            <image>
+                                                                <Image url="@images/notifications_active.png" />
+                                                            </image>
+                                                        </ImageView>
+                                                    </graphic>
+                                                    <items>
+                                                        <MenuItem text="Enabled" onAction="#handleAutoSaveEnabled" />
+                                                        <MenuItem text="Disabled" onAction="#handleAutoSaveDisabled" />
+                                                    </items>
+                                                </MenuButton>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+
+                                <HBox spacing="18.0">
+                                    <children>
+
+                                        <VBox spacing="12.0" alignment="TOP_CENTER" styleClass="profile-card" HBox.hgrow="ALWAYS">
+                                            <padding>
+                                                <Insets top="18.0" right="18.0" bottom="18.0" left="18.0" />
+                                            </padding>
+
+                                            <children>
+                                                <Label text="Problem Management" styleClass="section-title" />
+
+                                                <Button text="Create New Problem" onAction="#handleCreateNewProblem" styleClass="tool-button">
+                                                    <graphic>
+                                                        <ImageView fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
+                                                            <image>
+                                                                <Image url="@images/CreateNewProblems.png" />
+                                                            </image>
+                                                        </ImageView>
+                                                    </graphic>
+                                                </Button>
+
+                                                <Button text="My Problems" onAction="#handleMyProblems" styleClass="tool-button">
+                                                    <graphic>
+                                                        <ImageView fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
+                                                            <image>
+                                                                <Image url="@images/MyProblems.png" />
+                                                            </image>
+                                                        </ImageView>
+                                                    </graphic>
+                                                </Button>
+
+                                                <Button text="Drafts" onAction="#handleDrafts" styleClass="tool-button">
+                                                    <graphic>
+                                                        <ImageView fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
+                                                            <image>
+                                                                <Image url="@images/Drafts.png" />
+                                                            </image>
+                                                        </ImageView>
+                                                    </graphic>
+                                                </Button>
+
+                                                <Button text="Review Feedback" onAction="#handleReviewFeedback" styleClass="tool-button">
+                                                    <graphic>
+                                                        <ImageView fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
+                                                            <image>
+                                                                <Image url="@images/Review.png" />
+                                                            </image>
+                                                        </ImageView>
+                                                    </graphic>
+                                                </Button>
+                                            </children>
+                                        </VBox>
+
+                                        <VBox spacing="12.0" alignment="TOP_CENTER" styleClass="profile-card" HBox.hgrow="ALWAYS">
+                                            <padding>
+                                                <Insets top="18.0" right="18.0" bottom="18.0" left="18.0" />
+                                            </padding>
+
+                                            <children>
+                                                <Label text="Submission Review Status" styleClass="section-title" />
+
+                                                <Button text="Approved" styleClass="tool-button">
+                                                    <graphic>
+                                                        <ImageView fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
+                                                            <image>
+                                                                <Image url="@images/check.png" />
+                                                            </image>
+                                                        </ImageView>
+                                                    </graphic>
+                                                </Button>
+
+                                                <Button text="Pending" styleClass="tool-button">
+                                                    <graphic>
+                                                        <ImageView fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
+                                                            <image>
+                                                                <Image url="@images/PendingReviews.png" />
+                                                            </image>
+                                                        </ImageView>
+                                                    </graphic>
+                                                </Button>
+
+                                                <Button text="Rejected" styleClass="tool-button">
+                                                    <graphic>
+                                                        <ImageView fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
+                                                            <image>
+                                                                <Image url="@images/Rejected.png" />
+                                                            </image>
+                                                        </ImageView>
+                                                    </graphic>
+                                                </Button>
+                                            </children>
+                                        </VBox>
+
+                                    </children>
+                                </HBox>
+
+                                <VBox spacing="12.0" styleClass="profile-card">
+                                    <padding>
+                                        <Insets top="18.0" right="18.0" bottom="18.0" left="18.0" />
+                                    </padding>
+
+                                    <children>
+                                        <Label text="Account Actions" styleClass="section-title" />
+
+                                        <HBox spacing="14.0">
+                                            <children>
+                                                <HBox spacing="12.0" alignment="CENTER_LEFT" styleClass="danger-card" HBox.hgrow="ALWAYS">
+                                                    <children>
+                                                        <StackPane styleClass="danger-icon-circle">
+                                                            <children>
+                                                                <ImageView fitHeight="30.0" fitWidth="30.0" preserveRatio="true">
+                                                                    <image>
+                                                                        <Image url="@images/refresh.png" />
+                                                                    </image>
+                                                                </ImageView>
+                                                            </children>
+                                                        </StackPane>
+
+                                                        <VBox spacing="4.0">
+                                                            <children>
+                                                                <Label text="Reset Progress" styleClass="profile-text" />
+                                                                <Label text="This will reset all your progress. This action cannot be undone." wrapText="true" styleClass="small-text" />
+                                                            </children>
+                                                        </VBox>
+
+                                                        <Pane HBox.hgrow="ALWAYS" />
+
+                                                        <Button text="Reset" onAction="#handleResetProgress" styleClass="danger-button" />
+                                                    </children>
+                                                </HBox>
+
+                                                <HBox spacing="12.0" alignment="CENTER_LEFT" styleClass="danger-card" HBox.hgrow="ALWAYS">
+                                                    <children>
+                                                        <StackPane styleClass="danger-icon-circle">
+                                                            <children>
+                                                                <ImageView fitHeight="30.0" fitWidth="30.0" preserveRatio="true">
+                                                                    <image>
+                                                                        <Image url="@images/delete.png" />
+                                                                    </image>
+                                                                </ImageView>
+                                                            </children>
+                                                        </StackPane>
+
+                                                        <VBox spacing="4.0">
+                                                            <children>
+                                                                <Label text="Delete Account" styleClass="profile-text" />
+                                                                <Label text="Permanently delete your account and all your data." wrapText="true" styleClass="small-text" />
+                                                            </children>
+                                                        </VBox>
+
+                                                        <Pane HBox.hgrow="ALWAYS" />
+
+                                                        <Button text="Delete" onAction="#handleDeleteAccount" styleClass="danger-button" />
+                                                    </children>
+                                                </HBox>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </VBox>
+                    </content>
+                </ScrollPane>
+            </center>
+        </BorderPane>
+    </children>
+</StackPane>
