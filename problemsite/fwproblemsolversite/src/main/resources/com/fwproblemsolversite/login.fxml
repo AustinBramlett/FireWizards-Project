@@ -42,6 +42,14 @@
 
       <PasswordField fx:id="passwordField" promptText="Password" alignment="CENTER" styleClass="input-field" prefWidth="260.0" />
 
+      <HBox alignment="CENTER_RIGHT" prefWidth="320.0">
+         <children>
+            <Label text="Forgot Password?"
+                     styleClass="link-text"
+                     onMouseClicked="#handleForgotPassword" />
+         </children>
+      </HBox>
+
 
       <Label fx:id="errorLabel" text="" styleClass="error-label" />
 

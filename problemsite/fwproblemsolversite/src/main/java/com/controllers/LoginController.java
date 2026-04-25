@@ -58,6 +58,11 @@ public class LoginController {
         }
         return null;
     }
+
+    @FXML
+    private void handleForgotPassword() throws IOException {
+        App.setRoot("resetPassword");
+    }
 }
 
         
