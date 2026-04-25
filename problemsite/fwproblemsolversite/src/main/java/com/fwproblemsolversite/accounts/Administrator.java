@@ -63,8 +63,17 @@ public class Administrator extends Account {
      * @param accountID The ID of the account to be banned.
      * @return true if the account was successfully banned, if not then false.
      */
-    public boolean ban(UUID accountID, LocalDate date) {
-        return false;
+    public boolean banAccount(UUID accountID, LocalDate date) {
+        AccountData data = AccountData.getInstance();
+        if(accountID == null || date == null) return false;
+        for(Account account : data.getAccounts()) {
+            if(account.getId().equals(accountID) && account.isBanned()) {
+                return false;
+            }
+        }
+        adminBans.add(new ban(accountID, date));
+        data.getAccountById(accountID).setBanned(true);
+        return true;
     }
 
     /**
@@ -73,7 +82,18 @@ public class Administrator extends Account {
      * @param accountID The ID of the account to be unbanned.
       * @return true if the account was successfully unbanned, if not then false. Cannot unban an account that is not currently banned.
      */
-    public boolean unban(UUID accountID) {
+    public boolean unbanAccount(UUID accountID) {
+        AccountData data = AccountData.getInstance();
+        if(accountID == null) return false;
+        for(Account account : data.getAccounts()) {
+            if(account.getId().equals(accountID) && !account.isBanned()) {
+                return false;
+            } else if(account.getId().equals(accountID) && account.isBanned()) {
+                adminBans.removeIf(ban -> ban.accountID().equals(accountID)); //Removes all bans for the target account regardless of date.
+                data.getAccountById(accountID).setBanned(false); //Internally flags the account as unbanned so they are saved as such.
+                return true;
+            }
+        }
         return false;
     }
 
@@ -83,7 +103,7 @@ public class Administrator extends Account {
      * @param accountID The ID of the account to be muted.
       * @return true if the account was successfully muted, if not then false. Cannot mute an account that is already muted.
      */
-    public boolean mute(UUID accountID, LocalDate date) {
+    public boolean muteAccount(UUID accountID, LocalDate date) {
         AccountData data = AccountData.getInstance();
         if(accountID == null || date == null) return false;
         for(Account account : data.getAccounts()) {
@@ -101,7 +121,7 @@ public class Administrator extends Account {
      * @param accountID The ID of the account to be unmuted,
      * @return true if the account was successfully unmuted, if not then false. Cannot unmute an account that is not currently muted.
      */
-    public boolean unmute(UUID accountID) {
+    public boolean unmuteAccount(UUID accountID) {
         AccountData data = AccountData.getInstance();
         if(accountID == null) return false;
         for(Account account : data.getAccounts()) {
@@ -122,7 +142,7 @@ public class Administrator extends Account {
      * @param accountID The ID of the account to be terminated.
       * @return true if the account was successfully terminated, if not then false.
      */
-    public boolean terminate(UUID accountID) {
+    public boolean terminateAccount(UUID accountID) {
         if(accountID == null) return false;
         AccountData data = AccountData.getInstance();
         for(Account account : data.getAccounts()) {

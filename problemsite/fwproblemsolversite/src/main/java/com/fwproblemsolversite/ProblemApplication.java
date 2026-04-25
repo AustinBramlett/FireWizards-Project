@@ -1,5 +1,6 @@
 package com.fwproblemsolversite;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import java.util.UUID;
@@ -129,9 +130,11 @@ public class ProblemApplication {
                     username,
                     email,
                     password,
-                    new java.util.ArrayList<UUID>(),
-                    new java.util.ArrayList<UUID>(),
-                    new java.util.ArrayList<String>()
+                    new ArrayList<UUID>(),
+                    new ArrayList<UUID>(),
+                    new ArrayList<UUID>(),
+                    new ArrayList<LocalDate>(),
+                    new ArrayList<LocalDate>()
                 );    
                 break;
 

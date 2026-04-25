@@ -21,6 +21,20 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class dataWriter extends DataConstants{
+    private static boolean debug = false;
+    /**
+     * A simple method to print debug messages if debug mode is on.
+     * @param message The message to print.
+     */
+    private static void debugOut(String message) {
+        if(debug) System.out.println("dataWriter: " + message);
+    }
+    /**
+     * A method to turn on debug mode for dataWriter, letting it print debug messages to the console to help with error tracing.
+     */
+    public static void debugMode() {
+        debug = true;
+    }
     //Makes everything significantly less messy and easier to edit.
     /**
      * A private method to write any object to JSON, if provided settings exist.
@@ -31,9 +45,6 @@ public class dataWriter extends DataConstants{
      * @return True if it worked, false if it didn't.
      */
     private static boolean writeToJSON(Object obj, JSONObject json, String header, Object contents) {
-        if(contents == null) {
-            //System.out.print("dataWriter(writeToJSON): "); //Traces the error to this method for easier debugging.
-        }
         if(obj == null || json == null || header == null){
             System.out.println("A field outside of constraints was null! Check your code and try again.");
             return false;
@@ -44,42 +55,42 @@ public class dataWriter extends DataConstants{
                 switch(header){
                     case ACCOUNT_PROGRESS:
                         if(contents == null) {
-                            //System.out.println("An Account has no progress!");
+                            debugOut("An Account has no progress!");
                             return false;
                         }
                         json.put(ACCOUNT_PROGRESS, contents);
                         return true;
                     case ACCOUNT_LAST_DATE:
                         if(contents == null){
-                            //System.out.println("An Account has no last active date!");
+                            debugOut("An Account has no last active date!");
                             return false;
                         }
                         json.put(header, contents);
                         return true;
                     case ACCOUNT_USER_NAME:
                         if(contents == null) {
-                            //System.out.println("An Account has no username! (!!!)");
+                            debugOut("An Account has no username! (!!!)");
                             return false;
                         }
                         json.put(header, contents);
                         return true;
                     case ACCOUNT_PASSWORD:
                         if(contents == null) {
-                            //System.out.println("Account " + json.get(ACCOUNT_USER_NAME) + " has no password specified!");
+                            debugOut("Account " + json.get(ACCOUNT_USER_NAME) + " has no password specified!");
                             return false;
                         }
                         json.put(header, contents);
                         return true;
                     case ACCOUNT_EMAIL:
                         if(contents == null) {
-                            //System.out.println("Account " + json.get(ACCOUNT_USER_NAME) + " has no email specified!");
+                            debugOut("Account " + json.get(ACCOUNT_USER_NAME) + " has no email specified!");
                             return false;
                         }
                         json.put(header, contents);
                         return true;
                     case ACCOUNT_TYPE:
                         if(contents == null) {
-                            //System.out.println("Account " + json.get(ACCOUNT_USER_NAME) + " has no account type specified!");
+                            debugOut("Account " + json.get(ACCOUNT_USER_NAME) + " has no account type specified!");
                             return false;
                         }
                         //Account type must be specified! This switch is just to make sure it's valid and to prevent unreadable content in the JSON file.
@@ -102,39 +113,39 @@ public class dataWriter extends DataConstants{
                                 json.put(header, contents);
                                 return true;
                             default:
-                                //System.out.println("Invalid account type detected for " + json.get(ACCOUNT_USER_NAME) + "!");
+                                debugOut("Invalid account type detected for " + json.get(ACCOUNT_USER_NAME) + "!");
                                 return false;
                         }
                     case ITEM_ID:
                         if(contents == null) {
-                            //System.out.println("Account " + json.get(ACCOUNT_USER_NAME) + " has no ID!");
+                            debugOut("Account " + json.get(ACCOUNT_USER_NAME) + " has no ID!");
                             return false;
                         }
                         json.put(header, contents);
                         return true;
                     case ACCOUNT_FIRST_NAME:
                         if(contents == null) {
-                            //System.out.println("Account " + json.get(ACCOUNT_USER_NAME) + " has no first name specified!");
+                            debugOut("Account " + json.get(ACCOUNT_USER_NAME) + " has no first name specified!");
                             return false;
                         }
                         json.put(header, contents);
                         return true;
                     case ACCOUNT_LAST_NAME:
                         if(contents == null) {
-                            //System.out.println("Account " + json.get(ACCOUNT_USER_NAME) + " has no last name specified!");
+                            debugOut("Account " + json.get(ACCOUNT_USER_NAME) + " has no last name specified!");
                             return false;
                         }
                         json.put(header, contents);
                         return true;
                     case ACCOUNT_MUTED:
                         if(contents == null) {
-                            //System.out.println("Account " + json.get(ACCOUNT_USER_NAME) + " has no muted status specified!");
+                            debugOut("Account " + json.get(ACCOUNT_USER_NAME) + " has no muted status specified!");
                             return false;
                         }
                         json.put(header, contents);
                         return true;
                     default:
-                        //System.out.println("Invalid header for this object type. Set one up in writeToJSON!");
+                        debugOut("Invalid header for this object type. Set one up in writeToJSON!");
                         return false;
                 }
             //Case for all Problem objects.
@@ -142,14 +153,14 @@ public class dataWriter extends DataConstants{
                 switch(header){
                     case PROBLEM_TITLE:
                         if(contents == null) {
-                            //System.out.println("Problem has no title!");
+                            debugOut("Problem has no title!");
                             return false;
                         }
                         json.put(header, contents);
                         return true;
                     case ITEM_ID:
                         if(contents == null) {
-                            //System.out.println("Problem " + json.get(PROBLEM_TITLE) + " has no ID!");
+                            debugOut("Problem " + json.get(PROBLEM_TITLE) + " has no ID!");
                             return false;
                         } else {
                             json.put(header, contents);
@@ -157,7 +168,7 @@ public class dataWriter extends DataConstants{
                         }
                     case PROBLEM_EXAMPLES:
                         if(contents == null) {
-                            //System.out.println("Problem " + json.get(PROBLEM_TITLE) + " has no examples!");
+                            debugOut("Problem " + json.get(PROBLEM_TITLE) + " has no examples!");
                             return false;
                         } else {
                             json.put(header, contents);
@@ -165,7 +176,7 @@ public class dataWriter extends DataConstants{
                         }
                     case PROBLEM_ANSWERS:
                         if(contents == null) {
-                            //System.out.println("Problem " + json.get(PROBLEM_TITLE) + " has no answers!");
+                            debugOut("Problem " + json.get(PROBLEM_TITLE) + " has no answers!");
                             return false;
                         } else {
                             json.put(header, contents);
@@ -173,10 +184,10 @@ public class dataWriter extends DataConstants{
                         }
                     case PROBLEM_COMMENTS:
                         if(contents == null) {
-                            //System.out.println("Problem " + json.get(PROBLEM_TITLE) + " has no comments array!");
+                            debugOut("Problem " + json.get(PROBLEM_TITLE) + " has no comments array!");
                             return false;
                         } else if (!(contents instanceof ArrayList)){
-                            //System.out.println("Comments must be provided as an ArrayList of Comments!");
+                            debugOut("Comments must be provided as an ArrayList of Comments!");
                             return false;
                         } else {
                             JSONArray commentsArray = new JSONArray();
@@ -188,7 +199,7 @@ public class dataWriter extends DataConstants{
                         }
                     case PROBLEM_DIFFICULTY:
                         if(contents == null) {
-                            //System.out.println("Problem " + json.get(PROBLEM_TITLE) + " has no difficulty!");
+                            debugOut("Problem " + json.get(PROBLEM_TITLE) + " has no difficulty!");
                             return false;
                         } else {
                             json.put(header, contents);
@@ -196,7 +207,7 @@ public class dataWriter extends DataConstants{
                         }
                     case PROBLEM_DESCRIPTION:
                         if(contents == null) {
-                            //System.out.println("Problem " + json.get(PROBLEM_TITLE) + " has no description!");
+                            debugOut("Problem " + json.get(PROBLEM_TITLE) + " has no description!");
                             return false;
                         } else {
                             json.put(header, contents);
@@ -204,7 +215,7 @@ public class dataWriter extends DataConstants{
                         }
                     case PROBLEM_LANGUAGE:
                         if(contents == null) {
-                            //System.out.println("Problem " + json.get(PROBLEM_TITLE) + " has no language specified!");
+                            debugOut("Problem " + json.get(PROBLEM_TITLE) + " has no language specified!");
                             return false;
                         } else {
                             json.put(header, contents);
@@ -212,7 +223,7 @@ public class dataWriter extends DataConstants{
                         }
                     case PROBLEM_NOTES:
                         if(contents == null) {
-                            //System.out.println("Problem " + json.get(PROBLEM_TITLE) + " has no notes!");
+                            debugOut("Problem " + json.get(PROBLEM_TITLE) + " has no notes!");
                             return false;
                         } else {
                             json.put(header, contents);
@@ -220,7 +231,7 @@ public class dataWriter extends DataConstants{
                         }
                     case PROBLEM_SUBMISSIONS:
                         if(contents == null) {
-                            //System.out.println("Problem " + json.get(PROBLEM_TITLE) + " has no submissions array!");
+                            debugOut("Problem " + json.get(PROBLEM_TITLE) + " has no submissions array!");
                             return false;
                         } else {
                             json.put(header, contents);
@@ -228,7 +239,7 @@ public class dataWriter extends DataConstants{
                         }
                     case PROBLEM_TAGS:
                         if(contents == null) {
-                            //System.out.println("Problem " + json.get(PROBLEM_TITLE) + " has no tags!");
+                            debugOut("Problem " + json.get(PROBLEM_TITLE) + " has no tags!");
                             return false;
                         } else {
                             json.put(header, contents);
@@ -236,7 +247,7 @@ public class dataWriter extends DataConstants{
                         }
                     case PROBLEM_TIMER:
                         if(contents == null) {
-                            //System.out.println("Problem " + json.get(PROBLEM_TITLE) + " has no timer specified!");
+                            debugOut("Problem " + json.get(PROBLEM_TITLE) + " has no timer specified!");
                             return false;
                         } else {
                             json.put(header, contents);
@@ -244,7 +255,7 @@ public class dataWriter extends DataConstants{
                         }
                     case PROBLEM_TYPE:
                         if(contents == null) {
-                            //System.out.println("Problem " + json.get(PROBLEM_TITLE) + " has no type!");
+                            debugOut("Problem " + json.get(PROBLEM_TITLE) + " has no type!");
                             return false;
                         } else {
                             json.put(header, contents);
@@ -252,14 +263,14 @@ public class dataWriter extends DataConstants{
                         }
                     case PROBLEM_CONSTRAINTS:
                         if(contents == null) {
-                            //System.out.println("Problem " + json.get(PROBLEM_TITLE) + " has no constraints!");
+                            debugOut("Problem " + json.get(PROBLEM_TITLE) + " has no constraints!");
                             return false;
                         } else {
                             json.put(header, contents);
                             return true;
                         }
                     default:
-                        //System.out.println("Invalid header for this object type. Set one up in writeToJSON!");
+                        debugOut("Invalid header for this object type. Set one up in writeToJSON!");
                         return false;
                 }
             //Case for all Report objects.
@@ -267,7 +278,7 @@ public class dataWriter extends DataConstants{
                 switch(header){
                     case ITEM_ID:
                         if(contents == null) {
-                            //System.out.println("Report has no ID!");
+                            debugOut("Report has no ID!");
                             return false;
                         } else {
                             json.put(header, contents);
@@ -275,7 +286,7 @@ public class dataWriter extends DataConstants{
                         }
                     case REPORT_ACCUSED:
                         if(contents == null) {
-                            //System.out.println("Report " + json.get(ITEM_ID) + " has no accused specified!");
+                            debugOut("Report " + json.get(ITEM_ID) + " has no accused specified!");
                             return false;
                         } else {
                             json.put(header, contents);
@@ -283,7 +294,7 @@ public class dataWriter extends DataConstants{
                         }
                     case REPORT_REASON:
                         if(contents == null) {
-                            //System.out.println("Report " + json.get(ITEM_ID) + " has no reason specified!");
+                            debugOut("Report " + json.get(ITEM_ID) + " has no reason specified!");
                             return false;
                         } else {
                             json.put(header, contents);
@@ -291,14 +302,14 @@ public class dataWriter extends DataConstants{
                         }
                     case REPORT_SENDER:
                         if(contents == null) {
-                            //System.out.println("Report " + json.get(ITEM_ID) + " has no sender specified!");
+                            debugOut("Report " + json.get(ITEM_ID) + " has no sender specified!");
                             return false;
                         } else {
                             json.put(header, contents);
                             return true;
                         }
                     default:
-                        //System.out.println("Invalid header for this object type. Set one up in writeToJSON!");
+                        debugOut("Invalid header for this object type. Set one up in writeToJSON!");
                         return false;
                 }
             default:
@@ -360,8 +371,8 @@ public class dataWriter extends DataConstants{
                 writeToJSON(account, item, ACCOUNT_LAST_DATE, account.getProgress().getLastActiveString());
                 accountsFile.add(item);
                 //We can turn this part into a comment later.
-                //System.out.println("dataWriter(saveAccounts): Successfully saved account " + account.getUsername() + "!");
-                //System.out.println("dataWriter(saveAccounts): Contents: " + item.toJSONString());
+                debugOut("dataWriter(saveAccounts): Successfully saved account " + account.getUsername() + "!");
+                debugOut("dataWriter(saveAccounts): Contents: " + item.toJSONString());
             }
             writer.write(accountsFile.toJSONString());
             writer.close(); //We might want to switch to BufferedWriter? It's fine for now though.
@@ -400,8 +411,8 @@ public class dataWriter extends DataConstants{
                 writeToJSON(problem, item, PROBLEM_COMMENTS, problem.getComments());
                 writeToJSON(problem, item, PROBLEM_ANSWERS, problem.getAnswers() != null ? problem.getAnswers() : null);
                 problemsFile.add(item);
-                //System.out.println("dataWriter(saveProblems): Successfully saved problem " + problem.getID() + "!");
-                //System.out.println("dataWriter(saveProblems): Contents: " + item.toJSONString());
+                debugOut("dataWriter(saveProblems): Successfully saved problem " + problem.getID() + "!");
+                debugOut("dataWriter(saveProblems): Contents: " + item.toJSONString());
             }
             writer.write(problemsFile.toJSONString());
             writer.close();
@@ -428,8 +439,8 @@ public class dataWriter extends DataConstants{
                 writeToJSON(report, item, REPORT_ACCUSED, report.getAccused());
                 writeToJSON(report, item, REPORT_SENDER, report.getSender());
                 reportsFile.add(item);
-                //System.out.println("dataWriter(saveReports): Successfully saved report " + report.getID() + "!");
-                //System.out.println("dataWriter(saveReports): Contents: " + item.toJSONString());
+                debugOut("dataWriter(saveReports): Successfully saved report " + report.getID() + "!");
+                debugOut("dataWriter(saveReports): Contents: " + item.toJSONString());
             }
             writer.write(reportsFile.toJSONString());
             writer.close();
