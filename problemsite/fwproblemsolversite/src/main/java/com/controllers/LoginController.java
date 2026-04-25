@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 import com.fwproblemsolversite.App;
 import com.fwproblemsolversite.accounts.Account;
-import com.fwproblemsolversite.data.AccountData;
 import com.fwproblemsolversite.enums.AccountType;
+import com.fwproblemsolversite.ProblemApplication;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -15,6 +15,8 @@ import javafx.scene.control.TextField;
 
 
 public class LoginController {
+    private ProblemApplication problemApp = ProblemApplication.getInstance();
+    private ArrayList<Account> accounts = problemApp.getAccountData().getAccounts();
     @FXML
     private TextField usernameField;
 
@@ -33,11 +35,9 @@ public class LoginController {
     private void handleLogin() throws IOException {
         String loginInput = usernameField.getText().trim();
         String password = passwordField.getText();
-
-        Account account = findAccountByUsernameOrEmail(loginInput);
-        if (account != null && account.getPassword().equals(password)) {
-            App.setCurrentUser(account);
-
+        loginInput = getUsernameByInput(loginInput);
+        Account account = problemApp.login(loginInput, password);
+        if (account != null) {
             if (account.getAccountType() == AccountType.CONTRIBUTOR) {
                 App.setRoot("contributordashboard");
             } else {
@@ -47,13 +47,11 @@ public class LoginController {
             errorLabel.setText("Invalid username or password.");
         }
     }
-
-    private Account findAccountByUsernameOrEmail(String loginInput) {
-        ArrayList<Account> accounts = AccountData.getInstance().getAccounts();
+    private String getUsernameByInput(String loginInput) {
 
         for (Account account : accounts) {
             if (account.getUsername().equalsIgnoreCase(loginInput) || account.getEmail().equalsIgnoreCase(loginInput)) {
-                return account;
+                return account.getUsername();
             }
         }
         return null;

@@ -3,6 +3,7 @@ package com.controllers;
 import java.util.ArrayList;
 
 import com.fwproblemsolversite.App;
+import com.fwproblemsolversite.ProblemApplication;
 import com.fwproblemsolversite.data.ProblemData;
 import com.fwproblemsolversite.problems.Problem;
 import com.fwproblemsolversite.accounts.Account;
@@ -16,7 +17,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 public class ProblemsController {
-
+    private ProblemApplication problemApp = ProblemApplication.getInstance();
     @FXML
     private VBox problemsContainer;
 
@@ -105,7 +106,7 @@ public class ProblemsController {
     @FXML
     private void handleBackToDashboard(){
         try {
-                Account user = App.getCurrentUser();
+                Account user = problemApp.getCurrentUser();
             if (user != null && user.getAccountType().toString().equals("CONTRIBUTOR")) {
                 App.setRoot("contributorDashboard");
             } else {

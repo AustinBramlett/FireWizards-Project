@@ -45,14 +45,6 @@ public class App extends Application {
         return fxmlLoader.load();
     }
 
-    public static Account getCurrentUser() {
-        return currentUser;
-    }
-
-    public static void setCurrentUser(Account user) {
-        currentUser = user;
-    }
-
     public static void setCurrentProblem(Problem problem) {
         currentProblem = problem;
     }

@@ -1,6 +1,7 @@
 package com.controllers;
 
 import com.fwproblemsolversite.App;
+import com.fwproblemsolversite.ProblemApplication;
 import com.fwproblemsolversite.accounts.Account;
 import com.fwproblemsolversite.data.Achievement;
 import com.fwproblemsolversite.data.Progress;
@@ -12,7 +13,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 
 public class ProgressController {
-
+    private ProblemApplication problemApp = ProblemApplication.getInstance();
     @FXML private Label problemsSolvedLabel;
     @FXML private Label streakLabel;
     @FXML private Label pointsLabel;
@@ -27,7 +28,7 @@ public class ProgressController {
     @FXML
     public void initialize() {
 
-        Account user = App.getCurrentUser();
+        Account user = problemApp.getCurrentUser();
         if (user == null) return;
 
         Progress progress = user.getProgress();
@@ -91,7 +92,7 @@ public class ProgressController {
     @FXML
     private void handleBackToDashboard() {
         try {
-            Account user = App.getCurrentUser();
+            Account user = problemApp.getCurrentUser();
             if (user != null && user.getAccountType().toString().equals("CONTRIBUTOR")) {
                 App.setRoot("contributorDashboard");
             } else {

@@ -42,8 +42,8 @@ public class ProblemApplication {
         for (Account account : accountData.getAccounts()) {
             if (account instanceof Administrator) {
                 Administrator admin = (Administrator) account;
-                bans.addAll(admin.getBans());
-                mutes.addAll(admin.getMutes());
+                if(admin.getBans() != null) bans.addAll(admin.getBans());
+                if(admin.getMutes() != null) mutes.addAll(admin.getMutes());
             }
         }
         LocalDate now = LocalDate.now();
