@@ -45,17 +45,6 @@ public class App extends Application {
         return fxmlLoader.load();
     }
 
-<<<<<<< HEAD
-    public static Account getCurrentUser() {
-        return currentUser;
-    }
-
-    public static void setCurrentUser(Account user) {
-        currentUser = user;
-    }
-
-=======
->>>>>>> cst-FrontendFacadePatch
     public static void setCurrentProblem(Problem problem) {
         currentProblem = problem;
     }
