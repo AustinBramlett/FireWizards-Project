@@ -223,6 +223,7 @@
     -fx-background-color: transparent;
     -fx-font-size: 14px;
     -fx-cursor: hand;
+    -fx-graphic-text-gap: 8;
 }
 
 .user-menu .label {
