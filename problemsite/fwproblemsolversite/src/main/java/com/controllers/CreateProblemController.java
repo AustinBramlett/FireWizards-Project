@@ -3,15 +3,8 @@ package com.controllers;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.UUID;
 
 import com.fwproblemsolversite.App;
-import com.fwproblemsolversite.data.ProblemData;
-import com.fwproblemsolversite.io.dataWriter;
-import com.fwproblemsolversite.enums.Difficulty;
-import com.fwproblemsolversite.enums.Language;
-import com.fwproblemsolversite.enums.ProblemType;
-import com.fwproblemsolversite.problems.Problem;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -49,6 +42,7 @@ public class CreateProblemController {
     @FXML private TextArea answerDescriptionArea;
 
     @FXML private Label messageLabel;
+    @FXML private Label userNameLabel;
 
     private File selectedFile;
 
@@ -56,17 +50,26 @@ public class CreateProblemController {
     private final ArrayList<String> constraints = new ArrayList<>();
     private final ArrayList<String> exampleOutputs = new ArrayList<>();
     private final ArrayList<String> notes = new ArrayList<>();
-    private final ArrayList<String> answerOutputs = new ArrayList<>();
+    private final ArrayList<String> answers = new ArrayList<>();
 
     @FXML
     public void initialize() {
         difficultyBox.setValue("Easy");
-        typeBox.setValue("LinkedList");
+        typeBox.setValue("String");
         timerBox.setValue("None");
+
+        if (userNameLabel != null) {
+            userNameLabel.setText("Contributor");
+        }        
     }
 
     @FXML
     private void handleBackToDashboard() throws IOException {
+        App.setRoot("contributorDashboard");
+    }
+
+    @FXML
+    private void handleCancelCreation() throws IOException {
         App.setRoot("contributorDashboard");
     }
 
@@ -91,6 +94,10 @@ public class CreateProblemController {
     }
 
     private void addItem(TextField field, ArrayList<String> list, Pane box) {
+        if (field == null || box == null) {
+            return;
+        }
+
         String text = field.getText().trim();
 
         if (text.isEmpty()) {
@@ -99,11 +106,15 @@ public class CreateProblemController {
 
         list.add(text);
 
-        Label label = new Label(text);
-        label.getStyleClass().add("tag-pill");
+        Label itemLabel = new Label(text);
+        itemLabel.getStyleClass().add("tag-pill");
 
-        box.getChildren().add(label);
+        box.getChildren().add(itemLabel);
         field.clear();
+
+        if (messageLabel != null) {
+            messageLabel.setText("");
+        }
     }
 
     @FXML
@@ -113,7 +124,7 @@ public class CreateProblemController {
 
         selectedFile = fileChooser.showOpenDialog(null);
 
-        if (selectedFile != null) {
+        if (selectedFile != null && messageLabel != null) {
             messageLabel.setText("Selected file: " + selectedFile.getName());
         }
     }
@@ -124,12 +135,28 @@ public class CreateProblemController {
         String complexity = timeComplexityField.getText().trim();
         String expectedOutput = answerDescriptionArea.getText().trim();
 
-        if (title.isEmpty() || complexity.isEmpty() || expectedOutput.isEmpty()) {
-            messageLabel.setText("Answer title, complexity, and expected output are required.");
+        if (title.isEmpty()) {
+            messageLabel.setText("Enter an answer title.");
             return;
         }
 
-        answerOutputs.add(expectedOutput);
+        if (complexity.isEmpty()) {
+            messageLabel.setText("Enter the time complexity.");
+            return;
+        }
+
+        if (expectedOutput.isEmpty()) {
+            messageLabel.setText("Enter the expected output.");
+            return;
+        }
+
+        String answerText = title + " | " + complexity + " | " + expectedOutput;
+
+        if (selectedFile != null) {
+            answerText += " | File: " + selectedFile.getName();
+        }
+
+        answers.add(answerText);
 
         Label answerLabel = new Label(title + " (" + complexity + ")");
         answerLabel.getStyleClass().add("tag-pill");
@@ -149,129 +176,66 @@ public class CreateProblemController {
         String description = descriptionArea.getText().trim();
         String summary = summaryField.getText().trim();
 
-        if (title.isEmpty() || description.isEmpty()) {
-            messageLabel.setText("Title and description are required.");
+        if (title.isEmpty()) {
+            messageLabel.setText("Please enter a problem title.");
+            return;
+        }
+
+        if (description.isEmpty()) {
+            messageLabel.setText("Please enter a description.");
             return;
         }
 
         if (summary.isEmpty()) {
-            messageLabel.setText("Summary is required.");
+            messageLabel.setText("Please enter a summary.");
             return;
         }
 
         if (tags.isEmpty()) {
-            messageLabel.setText("Add at least one tag.");
+            messageLabel.setText("Please add at least one tag.");
             return;
         }
 
-        if (answerOutputs.isEmpty()) {
-            messageLabel.setText("Add at least one expected output answer.");
+        if (answers.isEmpty()) {
+            messageLabel.setText("Please add at least one answer.");
             return;
         }
 
-        try {
-            Difficulty difficulty = parseDifficulty(difficultyBox.getValue());
-            ProblemType type = parseProblemType(typeBox.getValue());
-            double timer = parseTimer(timerBox.getValue());
-            Language language = Language.JAVA;
+        messageLabel.setText("Problem created successfully!");
 
-            ArrayList<ArrayList<String>> examples = buildExamples();
-            ArrayList<ArrayList<String>> answers = buildAnswers();
-
-            String fullDescription = description + "\n\nSummary: " + summary;
-
-            Problem newProblem = new Problem(
-                title,
-                UUID.randomUUID(),
-                fullDescription,
-                constraints,
-                language,
-                examples,
-                notes,
-                type,
-                tags,
-                timer,
-                answers,
-                difficulty,
-                new ArrayList<>(),
-                new ArrayList<>()
-            );
-
-            ProblemData.getInstance().add(newProblem);
-            dataWriter.saveProblems(ProblemData.getInstance().getProblems());
-
-            messageLabel.setText("Problem created successfully!");
-            App.setRoot("problems");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            messageLabel.setText("Error creating problem. Check difficulty/type values.");
-        }
+        clearForm();
     }
 
-    private Difficulty parseDifficulty(String value) {
-        if (value == null) {
-            return Difficulty.EASY;
-        }
-        return Difficulty.valueOf(value.toUpperCase());
-    }
+    private void clearForm() {
+        titleField.clear();
+        descriptionArea.clear();
+        summaryField.clear();
 
-    private ProblemType parseProblemType(String value) {
-        if (value == null) {
-            return ProblemType.LINKEDLIST;
-        }
+        tagField.clear();
+        constraintField.clear();
+        exampleOutputField.clear();
+        noteField.clear();
 
-        String cleanedValue = value.toUpperCase().replace(" ", "");
-        return ProblemType.valueOf(cleanedValue);
-    }
+        answerTitleField.clear();
+        timeComplexityField.clear();
+        answerDescriptionArea.clear();
 
-    private double parseTimer(String value) {
-        if (value == null || value.equalsIgnoreCase("None")) {
-            return 0.0;
-        }
+        tags.clear();
+        constraints.clear();
+        exampleOutputs.clear();
+        notes.clear();
+        answers.clear();
 
-        if (value.contains("5")) return 5.0;
-        if (value.contains("10")) return 10.0;
-        if (value.contains("15")) return 15.0;
-        if (value.contains("30")) return 30.0;
+        tagsBox.getChildren().clear();
+        constraintsBox.getChildren().clear();
+        exampleOutputsBox.getChildren().clear();
+        notesBox.getChildren().clear();
+        answersBox.getChildren().clear();
 
-        return 0.0;
-    }
+        selectedFile = null;
 
-    private ArrayList<ArrayList<String>> buildExamples() {
-        ArrayList<ArrayList<String>> examples = new ArrayList<>();
-
-        for (String output : exampleOutputs) {
-            ArrayList<String> example = new ArrayList<>();
-            example.add("");
-            example.add(output);
-            examples.add(example);
-        }
-
-        if (examples.isEmpty()) {
-            ArrayList<String> defaultExample = new ArrayList<>();
-            defaultExample.add("");
-            defaultExample.add("No example provided.");
-            examples.add(defaultExample);
-        }
-
-        return examples;
-    }
-
-    private ArrayList<ArrayList<String>> buildAnswers() {
-        ArrayList<ArrayList<String>> answers = new ArrayList<>();
-
-        for (String output : answerOutputs) {
-            ArrayList<String> answer = new ArrayList<>();
-            answer.add(output);
-            answers.add(answer);
-        }
-
-        return answers;
-    }
-
-    @FXML
-    private void handleCancelCreation() throws IOException {
-        App.setRoot("contributorDashboard");
+        difficultyBox.setValue("Easy");
+        typeBox.setValue("String");
+        timerBox.setValue("None");
     }
 }
