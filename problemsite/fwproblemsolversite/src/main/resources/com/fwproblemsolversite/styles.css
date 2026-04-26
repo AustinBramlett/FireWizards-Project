@@ -540,3 +540,12 @@
 .tool-button:hover {
     -fx-background-color: rgba(255,255,255,0.20);
 }
+
+.outline-button {
+    -fx-background-color: transparent;
+    -fx-border-color: #5ee7ff;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
