@@ -1,1 +1,136 @@
-[{"firstName":"Jordan","lastName":"Miller","password":"pass123","accountType":"STUDENT","progress":[0,0,0,0,0,0],"id":"3f8f2c8e-5c1a-4a7a-9d4f-1b2e7c9d1234","muted":"false","email":"jmiller@email.com","username":"jmiller","lastDate":"2026-03-23"},{"firstName":"Jeff","lastName":"Richardson","password":"admin456","accountType":"ADMIN","progress":[0,0,0,0,0,0],"id":"7a2b9d4c-8e3f-4b1c-9f2d-6e7a8b3c5678","muted":"false","email":"jeff@email.com","username":"jrichardson","lastDate":"2026-03-23"},{"firstName":"Sullivan","lastName":"Sparrow","password":"pass123","accountType":"STUDENT","progress":[16,4,6,2,320,9],"id":"a12e5c9b-6d73-4f8a-b2e1-9c4d7a6f2b31","muted":"false","email":"sullivan@email.com","username":"ssparrow","lastDate":"2026-03-23"},{"firstName":"Sally","lastName":"Sparrow","password":"pass123","accountType":"CONTRIBUTOR","progress":[0,0,0,0,0,0],"id":"39cea688-464d-4ab8-8f30-81477083d187","questionsMade":[],"muted":"false","email":"sally@email.com","username":"ssparrow2","lastDate":"2026-03-23"},{"firstName":"John","lastName":"Smith","password":"pass123","accountType":"STUDENT","progress":[0,0,0,0,0,0],"id":"c17be5c2-c1dc-493d-bd41-52a09d0fdbdd","muted":"false","email":"jsmith@email.com","username":"jsmith","lastDate":"2026-03-23"},{"firstName":"Jimmy","lastName":"Bauer","password":"pass123","accountType":"STUDENT","progress":[16,0,16,0,320,9],"id":"c4a9f6e2-1d3b-4f8a-9c72-5e1b8d3a7f44","muted":"false","email":"jbauer@email.com","username":"jbauer","lastDate":"2026-03-23"},{"firstName":"Example","lastName":"Example1","password":"Example123","accountType":"STUDENT","progress":[0,0,0,0,0,0],"id":"fcb0f015-3b09-4027-81bf-c6184a0a5213","muted":"false","email":"Example@Example.com","username":"ExampleGuy","lastDate":"2026-04-15"}]
+[
+    {
+        "firstName": "Jordan",
+        "lastName": "Miller",
+        "password": "pass123",
+        "accountType": "STUDENT",
+        "progress": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "id": "3f8f2c8e-5c1a-4a7a-9d4f-1b2e7c9d1234",
+        "muted": "false",
+        "email": "jmiller@email.com",
+        "username": "jmiller",
+        "lastDate": "2026-03-23"
+    },
+    {
+        "firstName": "Jeff",
+        "lastName": "Richardson",
+        "password": "admin456",
+        "accountType": "ADMIN",
+        "progress": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "id": "7a2b9d4c-8e3f-4b1c-9f2d-6e7a8b3c5678",
+        "muted": "false",
+        "email": "jeff@email.com",
+        "username": "jrichardson",
+        "lastDate": "2026-03-23"
+    },
+    {
+        "firstName": "Sullivan",
+        "lastName": "Sparrow",
+        "password": "pass123",
+        "accountType": "STUDENT",
+        "progress": [
+            17,
+            5,
+            6,
+            2,
+            330,
+            1
+        ],
+        "id": "a12e5c9b-6d73-4f8a-b2e1-9c4d7a6f2b31",
+        "muted": "false",
+        "email": "sullivan@email.com",
+        "username": "ssparrow",
+        "lastDate": "2026-04-26"
+    },
+    {
+        "firstName": "Sally",
+        "lastName": "Sparrow",
+        "password": "pass123",
+        "accountType": "CONTRIBUTOR",
+        "progress": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "id": "39cea688-464d-4ab8-8f30-81477083d187",
+        "questionsMade": [],
+        "muted": "false",
+        "email": "sally@email.com",
+        "username": "ssparrow2",
+        "lastDate": "2026-03-23"
+    },
+    {
+        "firstName": "John",
+        "lastName": "Smith",
+        "password": "pass123",
+        "accountType": "STUDENT",
+        "progress": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "id": "c17be5c2-c1dc-493d-bd41-52a09d0fdbdd",
+        "muted": "false",
+        "email": "jsmith@email.com",
+        "username": "jsmith",
+        "lastDate": "2026-03-23"
+    },
+    {
+        "firstName": "Jimmy",
+        "lastName": "Bauer",
+        "password": "pass123",
+        "accountType": "STUDENT",
+        "progress": [
+            16,
+            0,
+            16,
+            0,
+            320,
+            9
+        ],
+        "id": "c4a9f6e2-1d3b-4f8a-9c72-5e1b8d3a7f44",
+        "muted": "false",
+        "email": "jbauer@email.com",
+        "username": "jbauer",
+        "lastDate": "2026-03-23"
+    },
+    {
+        "firstName": "Example",
+        "lastName": "Example1",
+        "password": "Example123",
+        "accountType": "STUDENT",
+        "progress": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "id": "fcb0f015-3b09-4027-81bf-c6184a0a5213",
+        "muted": "false",
+        "email": "Example@Example.com",
+        "username": "ExampleGuy",
+        "lastDate": "2026-04-15"
+    }
+]

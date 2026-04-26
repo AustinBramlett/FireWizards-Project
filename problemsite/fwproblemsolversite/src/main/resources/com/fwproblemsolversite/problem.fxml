@@ -87,6 +87,7 @@
 
                             <TextArea fx:id="codeArea" 
                                       prefHeight="380" 
+                                      editable="false"
                                       styleClass="code-area"/>
 
                             <Label text="Answer" styleClass="section-title" />
@@ -94,7 +95,22 @@
                             <TextArea fx:id="answerArea" 
                                       prefHeight="70" 
                                       styleClass="code-area"/>
-                                             
+
+                            <Button text="Run Code" 
+                                    onAction="#handleRunCode"
+                                    styleClass="submit-button"/>
+
+                            <VBox fx:id="resultBox"
+                                  spacing="5"
+                                  visible="false"
+                                  style="-fx-padding: 10; -fx-background-radius: 8;">
+
+                                <Label fx:id="resultLabel" 
+                                       wrapText="true" 
+                                       style="-fx-font-size: 14; -fx-text-fill: white;"/>
+                            
+                            </VBox>
+                                    
 
                         </children>
                     </VBox>

@@ -17,9 +17,10 @@ import com.fwproblemsolversite.io.dataLoader;
 import com.fwproblemsolversite.io.dataWriter;
 import com.fwproblemsolversite.problems.Comment;
 import com.fwproblemsolversite.problems.Problem;
+
 /**
  * Main application class for the system.
- * 
+ *
  * Handles the core functionality of the application.
  */
 public class ProblemApplication {
@@ -31,8 +32,8 @@ public class ProblemApplication {
     private static ProblemApplication instance;
 
     /**
-     * Initializes the application and loads account and problem data 
-     * from the dataLoader class.
+     * Initializes the application and loads account and problem data from the
+     * dataLoader class.
      */
     private ProblemApplication() {
         accountData = AccountData.getInstance();
@@ -43,8 +44,12 @@ public class ProblemApplication {
         for (Account account : accountData.getAccounts()) {
             if (account instanceof Administrator) {
                 Administrator admin = (Administrator) account;
-                if(admin.getBans() != null) bans.addAll(admin.getBans());
-                if(admin.getMutes() != null) mutes.addAll(admin.getMutes());
+                if (admin.getBans() != null) {
+                    bans.addAll(admin.getBans());
+                }
+                if (admin.getMutes() != null) {
+                    mutes.addAll(admin.getMutes());
+                }
             }
         }
         LocalDate now = LocalDate.now();
@@ -56,37 +61,39 @@ public class ProblemApplication {
                 }
             }
         }
-        for(Administrator.mute mute : mutes) {
+        for (Administrator.mute mute : mutes) {
             if (mute.getDate().isBefore(now)) {
                 Account mutedAccount = accountData.getAccountById(mute.getID());
                 if (mutedAccount != null) {
                     mutedAccount.setMuted(false);
                 }
             }
-         }
+        }
         problemData = ProblemData.getInstance();
         problemData.getProblems().addAll(dataLoader.LoadProblems());
 
         currentUser = null;
     }
-    
+
     /**
      * Gets the singleton instance of the ProblemApplication facade.
+     *
      * @return The singleton instance of ProblemApplication.
      */
     public static ProblemApplication getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new ProblemApplication();
             return instance;
         }
         return instance;
     }
-    /**
 
+    /**
+     *
      * Logs a user into the system.
-     * 
+     *
      * @param username the username of the account to log in
-     * @param password the password of the account to log in   
+     * @param password the password of the account to log in
      * @return the logged-in account if successful, null if not.
      */
     public Account login(String username, String password) {
@@ -113,9 +120,10 @@ public class ProblemApplication {
         dataWriter.saveProblems(ProblemData.getInstance().getProblems());
         dataWriter.saveReports(ReportData.getInstance().getReports());
     }
+
     /**
      * Creates a new account with the given details.
-     * 
+     *
      * @param firstName The first name of the user.
      * @param lastName The last name of the user.
      * @param username The username of the user.
@@ -125,7 +133,7 @@ public class ProblemApplication {
      * @return true if the account is created successfully, false otherwise.
      */
     public boolean createAccount(String firstName, String lastName, String username,
-                                 String email, String password, AccountType type) {
+            String email, String password, AccountType type) {
 
         if (username == null || username.trim().isEmpty()) {
             return false;
@@ -137,48 +145,48 @@ public class ProblemApplication {
 
         Account newAccount;
 
-        switch (type){
+        switch (type) {
             case STUDENT:
                 newAccount = new Student(
-                    java.util.UUID.randomUUID(),
-                    firstName,
-                    lastName,
-                    username,
-                    email,
-                    password
+                        java.util.UUID.randomUUID(),
+                        firstName,
+                        lastName,
+                        username,
+                        email,
+                        password
                 );
                 break;
-                
+
             case CONTRIBUTOR:
                 newAccount = new Contributor(
-                    java.util.UUID.randomUUID(),
-                    firstName,
-                    lastName,
-                    username,
-                    email,
-                    password,
-                    new ArrayList<UUID>()
+                        java.util.UUID.randomUUID(),
+                        firstName,
+                        lastName,
+                        username,
+                        email,
+                        password,
+                        new ArrayList<UUID>()
                 );
                 break;
 
             case ADMIN:
                 newAccount = new Administrator(
-                    java.util.UUID.randomUUID(),
-                    firstName,
-                    lastName,
-                    username,
-                    email,
-                    password,
-                    new ArrayList<UUID>(),
-                    new ArrayList<UUID>(),
-                    new ArrayList<UUID>(),
-                    new ArrayList<LocalDate>(),
-                    new ArrayList<LocalDate>()
-                );    
+                        java.util.UUID.randomUUID(),
+                        firstName,
+                        lastName,
+                        username,
+                        email,
+                        password,
+                        new ArrayList<UUID>(),
+                        new ArrayList<UUID>(),
+                        new ArrayList<UUID>(),
+                        new ArrayList<LocalDate>(),
+                        new ArrayList<LocalDate>()
+                );
                 break;
 
-                default:
-                    return false;
+            default:
+                return false;
         }
 
         accountData.addAccount(newAccount);
@@ -187,33 +195,44 @@ public class ProblemApplication {
 
     /**
      * Attempts to solve the current problem.
+     *
      * @param solution The title of the problem to solve.
      * @return true if the problem is solved successfully, false otherwise.
      */
     public boolean solveProblem(String solution) {
-        if (currentUser == null || currentProblem == null || solution == null) return false;
+        if (currentUser == null || currentProblem == null || solution == null) {
+            return false;
+        }
+
         ArrayList<ArrayList<String>> correctAnswers = currentProblem.getAnswers();
-        for(ArrayList<String> answer : correctAnswers) {
-            if (answer.contains(solution)) {
+
+        for (ArrayList<String> answer : correctAnswers) {
+            if (solution.trim().equalsIgnoreCase(answer.get(0))) {
                 currentUser.getProgress().updateProgress("1", currentProblem.getDifficulty());
                 return true;
             }
         }
+
         return false;
     }
 
     /**
      * Adds a comment to the current problem by its title.
+     *
      * @param text The text of the comment.
      * @return true if the comment is added successfully, false otherwise.
      */
     public boolean addComment(String text) {
-        if (currentUser == null) return false;
-        if (text == null || text.trim().isEmpty() || currentUser.isMuted()) return false;
+        if (currentUser == null) {
+            return false;
+        }
+        if (text == null || text.trim().isEmpty() || currentUser.isMuted()) {
+            return false;
+        }
         for (Problem problem : problemData.getProblems()) {
             if (problem.getTitle().equalsIgnoreCase(currentProblem.getTitle())) {
-                
-                Comment comment = new Comment(currentUser.getId(), problem.getId(), text); 
+
+                Comment comment = new Comment(currentUser.getId(), problem.getId(), text);
 
                 problem.addComment(comment);
                 save();
@@ -223,83 +242,85 @@ public class ProblemApplication {
         return false;
     }
 
-    
     /**
-     * Get Questions Method
-     * Retrieves all questions in the system.
-     * 
+     * Get Questions Method Retrieves all questions in the system.
+     *
      * @return list of problems
      */
-
     public ArrayList<Problem> getAllQuestions() {
         return problemData.getProblems();
     }
+
     /**
-     * Adds a new problem to the system with the given details.
-     * Only users with Contributor or Admin roles can add problems.
-     * 
+     * Adds a new problem to the system with the given details. Only users with
+     * Contributor or Admin roles can add problems.
+     *
      * @return true if the problem is added successfully, if not false
      */
     public boolean addProblem(
-        String title,
-        String description,
-        ArrayList<String> constraints,
-        com.fwproblemsolversite.enums.Language language,
-        ArrayList<ArrayList<String>> examples,
-        ArrayList<String> notes,
-        com.fwproblemsolversite.enums.ProblemType type,
-        ArrayList<String> tags,
-        double timer,
-        ArrayList<ArrayList<String>> answers,
-        Difficulty difficulty,
-        String code
+            String title,
+            String description,
+            ArrayList<String> constraints,
+            com.fwproblemsolversite.enums.Language language,
+            ArrayList<ArrayList<String>> examples,
+            ArrayList<String> notes,
+            com.fwproblemsolversite.enums.ProblemType type,
+            ArrayList<String> tags,
+            double timer,
+            ArrayList<ArrayList<String>> answers,
+            Difficulty difficulty,
+            String code
     ) {
-        if (currentUser == null) return false;
-
-        if (currentUser.getAccountType() != com.fwproblemsolversite.enums.AccountType.CONTRIBUTOR &&
-            currentUser.getAccountType() != com.fwproblemsolversite.enums.AccountType.ADMIN) {
+        if (currentUser == null) {
             return false;
         }
 
-    if (title == null || title.trim().isEmpty()) return false;
-
-    for (Problem p : problemData.getProblems()) {
-        if (p.getTitle().equalsIgnoreCase(title)) {
+        if (currentUser.getAccountType() != com.fwproblemsolversite.enums.AccountType.CONTRIBUTOR
+                && currentUser.getAccountType() != com.fwproblemsolversite.enums.AccountType.ADMIN) {
             return false;
         }
+
+        if (title == null || title.trim().isEmpty()) {
+            return false;
+        }
+
+        for (Problem p : problemData.getProblems()) {
+            if (p.getTitle().equalsIgnoreCase(title)) {
+                return false;
+            }
+        }
+
+        Problem newProblem = new Problem(
+                title,
+                description,
+                constraints,
+                language,
+                examples,
+                notes,
+                type,
+                tags,
+                timer,
+                answers,
+                difficulty,
+                code
+        );
+
+        problemData.add(newProblem);
+        return true;
     }
-    
-    Problem newProblem = new Problem(
-        title,
-        description,
-        constraints,
-        language,
-        examples,
-        notes,
-        type,
-        tags,
-        timer,
-        answers,
-        difficulty,
-        code
-    );
 
-    problemData.add(newProblem);
-    return true;
-}
-
-    
     /**
      * Returns the account data manager.
-     * 
+     *
      * @return the account data manager
      */
     public AccountData getAccountData() {
         return accountData;
     }
+
     /**
      * Returns the currently logged-in user.
-     * 
+     *
      * @return current Account, or null if no one is logged in
      */
     public Account getCurrentUser() {
@@ -325,9 +346,11 @@ public class ProblemApplication {
     public Problem getCurrentProblem() {
         return currentProblem;
     }
+
     /**
-     * Generates default problems for the system if there are no problems currently.
-     * 
+     * Generates default problems for the system if there are no problems
+     * currently.
+     *
      */
     public void generateDefaultProblems() {
         if (!problemData.getProblems().isEmpty()) {
@@ -337,13 +360,13 @@ public class ProblemApplication {
         Account previousUser = currentUser;
 
         Account tempContributor = new Contributor(
-            java.util.UUID.randomUUID(),
-            "System",
-            "Contributor",
-            "system_contributor",
-            "system@fw.com",
-            "temp123",
-            new ArrayList<UUID>()
+                java.util.UUID.randomUUID(),
+                "System",
+                "Contributor",
+                "system_contributor",
+                "system@fw.com",
+                "temp123",
+                new ArrayList<UUID>()
         );
 
         currentUser = tempContributor;
@@ -379,18 +402,18 @@ public class ProblemApplication {
         tags1.add("HashMap");
 
         addProblem(
-        "Longest Subarray with Sum K",
-        "Find the length of the longest contiguous subarray whose sum equals k.",
-        constraints1,
-            com.fwproblemsolversite.enums.Language.JAVA,
-        examples1,
-        notes1,
-        com.fwproblemsolversite.enums.ProblemType.ARRAY,
-        tags1,
-        30.0,
-        answers1,
-        Difficulty.MEDIUM,
-        """
+                "Longest Subarray with Sum K",
+                "Find the length of the longest contiguous subarray whose sum equals k.",
+                constraints1,
+                com.fwproblemsolversite.enums.Language.JAVA,
+                examples1,
+                notes1,
+                com.fwproblemsolversite.enums.ProblemType.ARRAY,
+                tags1,
+                30.0,
+                answers1,
+                Difficulty.MEDIUM,
+                """
         public int longestSubarrayWithSumK(int[] nums, int k) {
             Map<Integer, Integer> prefixSumIndices = new HashMap<>();
             int prefixSum = 0;
@@ -431,18 +454,18 @@ public class ProblemApplication {
         tags2.add("HashMap");
 
         addProblem(
-            "Two Sum",
-            "Return indices of the two numbers such that they add up to target.",
-            constraints2,
-            com.fwproblemsolversite.enums.Language.JAVA,
-            examples2,
-            notes2,
-            com.fwproblemsolversite.enums.ProblemType.ARRAY,
-            tags2,
-            20.0,
-            answers2,
-            Difficulty.EASY,
-            """
+                "Two Sum",
+                "Return indices of the two numbers such that they add up to target.",
+                constraints2,
+                com.fwproblemsolversite.enums.Language.JAVA,
+                examples2,
+                notes2,
+                com.fwproblemsolversite.enums.ProblemType.ARRAY,
+                tags2,
+                20.0,
+                answers2,
+                Difficulty.EASY,
+                """
             public int[] twoSum(int[] nums, int target) {
                 Map<Integer, Integer> numToIndex = new HashMap<>();
                 for (int i = 0; i < nums.length; i++) {

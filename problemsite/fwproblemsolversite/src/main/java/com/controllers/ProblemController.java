@@ -2,6 +2,8 @@ package com.controllers;
 
 import com.fwproblemsolversite.App;
 import com.fwproblemsolversite.ProblemApplication;
+import com.fwproblemsolversite.data.AccountData;
+import com.fwproblemsolversite.io.dataWriter;
 import com.fwproblemsolversite.problems.Comment;
 import com.fwproblemsolversite.problems.Problem;
 
@@ -33,6 +35,12 @@ public class ProblemController {
     private VBox commentsBox;
     @FXML
     private TextArea commentInput;
+    @FXML
+    private TextArea answerArea;
+    @FXML
+    private VBox resultBox;
+    @FXML
+    private Label resultLabel;
 
     @FXML
     public void initialize() {
@@ -130,10 +138,10 @@ public class ProblemController {
     @FXML
     private void handleSubmitComment() {
 
-       System.out.println("Comment by: " + 
-            ProblemApplication.getInstance()
-                .getCurrentUser()
-                .getUsername()
+        System.out.println("Comment by: "
+                + ProblemApplication.getInstance()
+                        .getCurrentUser()
+                        .getUsername()
         );
 
         String text = commentInput.getText();
@@ -189,10 +197,10 @@ public class ProblemController {
 
     public void handleReply(Comment parentComment) {
 
-        System.out.println("Reply by: " + 
-            ProblemApplication.getInstance()
-                .getCurrentUser()
-                .getUsername()
+        System.out.println("Reply by: "
+                + ProblemApplication.getInstance()
+                        .getCurrentUser()
+                        .getUsername()
         );
 
         String text = commentInput.getText();
@@ -213,5 +221,39 @@ public class ProblemController {
 
         loadComments(problemApp.getCurrentProblem());
         commentInput.clear();
+    }
+    
+    @FXML
+    private void handleRunCode() {
+
+        String userAnswer = answerArea.getText().trim();
+
+        boolean correct = problemApp.solveProblem(userAnswer);
+
+        resultBox.setVisible(true);
+        
+        //Style the result box based on whether the answer is correct or not
+        if (correct) {
+            resultBox.setStyle("-fx-background-color: #1e3d2f;");
+            resultLabel.setText("✅ Accepted");
+            resultLabel.setStyle("-fx-text-fill: #2ecc71;");
+
+            answerArea.setStyle("-fx-border-color: green;");
+
+            dataWriter.saveAccounts(AccountData.getInstance().getAccounts());
+
+        } else {
+            String correctAnswer = problemApp
+                    .getCurrentProblem()
+                    .getAnswers()
+                    .get(0)
+                    .get(0);
+
+            resultBox.setStyle("-fx-background-color: #3d1e1e;");
+            resultLabel.setText("❌ Wrong Answer (Correct: " + correctAnswer + ")");
+            resultLabel.setStyle("-fx-text-fill: #e74c3c;");
+
+            answerArea.setStyle("-fx-border-color: red;");
+        }
     }
 }
