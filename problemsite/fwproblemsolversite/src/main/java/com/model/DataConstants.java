@@ -41,6 +41,7 @@ public class DataConstants {
     protected static final String PROBLEM_ANSWERS = "answers";
     protected static final String PROBLEM_COMMENTS = "comments";
     protected static final String PROBLEM_EXAMPLES = "examples";
+    protected static final String PROBLEM_CODE = "code";
 
     protected static final String COMMENT_SENDER = "sender";
     protected static final String COMMENT_SCORE = "score";

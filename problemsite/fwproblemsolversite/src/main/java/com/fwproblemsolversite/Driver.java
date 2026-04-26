@@ -113,7 +113,8 @@ public class Driver {
             tags,
             30.0,
             answers,
-            com.fwproblemsolversite.enums.Difficulty.MEDIUM
+            com.fwproblemsolversite.enums.Difficulty.MEDIUM,
+            "System.out.println(\"Hello, world!\");"
         );
 
         if (added) {

@@ -251,7 +251,8 @@ public class ProblemApplication {
         ArrayList<String> tags,
         double timer,
         ArrayList<ArrayList<String>> answers,
-        Difficulty difficulty
+        Difficulty difficulty,
+        String code
     ) {
         if (currentUser == null) return false;
 
@@ -279,7 +280,8 @@ public class ProblemApplication {
         tags,
         timer,
         answers,
-        difficulty
+        difficulty,
+        code
     );
 
     problemData.add(newProblem);
@@ -387,7 +389,23 @@ public class ProblemApplication {
         tags1,
         30.0,
         answers1,
-        Difficulty.MEDIUM
+        Difficulty.MEDIUM,
+        """
+        public int longestSubarrayWithSumK(int[] nums, int k) {
+            Map<Integer, Integer> prefixSumIndices = new HashMap<>();
+            int prefixSum = 0;
+            int maxLength = 0;
+            prefixSumIndices.put(0, -1); // Handle case where subarray starts at index 0
+            for (int i = 0; i < nums.length; i++) {
+                prefixSum += nums[i];
+                if (prefixSumIndices.containsKey(prefixSum - k)) {
+                    maxLength = Math.max(maxLength, i - prefixSumIndices.get(prefixSum - k));
+                }
+                prefixSumIndices.putIfAbsent(prefixSum, i);
+            }
+            return maxLength;
+        }
+        """ //Using text block for code to automatically handle newlines and indentation
         );
 
         ArrayList<String> constraints2 = new ArrayList<>();
@@ -423,7 +441,20 @@ public class ProblemApplication {
             tags2,
             20.0,
             answers2,
-            Difficulty.EASY
+            Difficulty.EASY,
+            """
+            public int[] twoSum(int[] nums, int target) {
+                Map<Integer, Integer> numToIndex = new HashMap<>();
+                for (int i = 0; i < nums.length; i++) {
+                    int complement = target - nums[i];
+                    if (numToIndex.containsKey(complement)) {
+                        return new int[]{numToIndex.get(complement), i};
+                    }
+                    numToIndex.put(nums[i], i);
+                }
+                return new int[]{-1, -1};
+            }
+            """
         );
 
         currentUser = previousUser;

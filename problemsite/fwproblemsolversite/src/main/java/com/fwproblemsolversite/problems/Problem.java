@@ -24,6 +24,7 @@ public class Problem {
     private ArrayList<Submission> submissions;
     private ArrayList<ArrayList<String>> answers;
     private ArrayList<String> notes;
+    private String code; // Placeholder for code file
     private ArrayList<ArrayList<String>> examples;
     private Language language;
     private ArrayList<String> constraints;
@@ -51,7 +52,7 @@ public class Problem {
                    ProblemType type,
                    ArrayList<String> tags,
                    double timer,
-                   ArrayList<ArrayList<String>> answers, Difficulty difficulty) {
+                   ArrayList<ArrayList<String>> answers, Difficulty difficulty, String code) {
         this.title = title;
         this.problemID = UUID.randomUUID();
         this.description = description;
@@ -66,6 +67,7 @@ public class Problem {
         this.difficulty = difficulty;
         this.comments = new ArrayList<>();
         this.submissions = new ArrayList<>();
+        this.code = code;
     }
     /**
      * Creates a problem from the stored data.
@@ -97,7 +99,8 @@ public class Problem {
                    ArrayList<ArrayList<String>> answers, 
                    Difficulty difficulty, 
                    ArrayList<Comment> comments, 
-                   ArrayList<Submission> submissions) {
+                   ArrayList<Submission> submissions,
+                   String code) {
         this.title = title;
         this.problemID = problemID;
         this.description = description;
@@ -112,6 +115,7 @@ public class Problem {
         this.difficulty = difficulty;
         this.comments = (comments == null) ? new ArrayList<>() : comments;
         this.submissions = (submissions == null) ? new ArrayList<>() : submissions;
+        this.code = code;
     }
     /**
      * Returns a string representation of the problem.
@@ -211,6 +215,10 @@ public class Problem {
 
     public Timer getTimer() {
         return timer;
+    }
+
+    public String getCode() {
+        return code;
     }
 
     public double getTimeLimit() {

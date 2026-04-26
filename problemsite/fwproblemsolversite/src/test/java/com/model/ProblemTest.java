@@ -36,7 +36,8 @@ public class ProblemTest {
             new ArrayList<>(),
             5.0,
             new ArrayList<>(),
-            Difficulty.EASY
+            Difficulty.EASY,
+            "System.out.println(\"Hello, world!\");"
         );
 
         assertEquals("Two Sum", problem.getTitle());
@@ -57,7 +58,8 @@ public class ProblemTest {
             new ArrayList<>(),
             5.0,
             new ArrayList<>(),
-            Difficulty.MEDIUM
+            Difficulty.MEDIUM,
+            "System.out.println(\"Hello, world!\");"
         );
 
         assertNotNull(problem.getId());
@@ -77,7 +79,8 @@ public class ProblemTest {
             new ArrayList<>(),
             5.0,
             new ArrayList<>(),
-            Difficulty.MEDIUM
+            Difficulty.MEDIUM,
+            "System.out.println(\"Hello, world!\");"
         );
 
         Comment comment = new Comment(UUID.randomUUID(), UUID.randomUUID(), "Hello");
@@ -101,7 +104,8 @@ public class ProblemTest {
             new ArrayList<>(),
             5.0,
             new ArrayList<>(),
-            Difficulty.MEDIUM
+            Difficulty.MEDIUM,
+            "System.out.println(\"Hello, world!\");"
         );
 
         problem.addComment(null);
@@ -133,7 +137,8 @@ public class ProblemTest {
             new ArrayList<>(),
             5.0,
             answers,
-            Difficulty.MEDIUM
+            Difficulty.MEDIUM,
+            "System.out.println(\"Hello, world!\");"
         );
 
         String result = problem.stringAnswers();
@@ -156,7 +161,8 @@ public class ProblemTest {
             new ArrayList<>(),
             10.0,
             new ArrayList<>(),
-            Difficulty.MEDIUM
+            Difficulty.MEDIUM,
+            "System.out.println(\"Hello, world!\");"
         );
 
         assertEquals(10.0, problem.getTimeLimit(), 0.001);
