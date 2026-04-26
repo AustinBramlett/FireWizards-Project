@@ -22,14 +22,20 @@ public class App extends Application {
     private static Scene scene;
     private static Account currentUser;
     private static Problem currentProblem;
+    private static javafx.application.HostServices hostServices;
 
     @Override
     public void start(Stage stage) throws IOException {
+        hostServices = getHostServices();
         dataLoader loader = new dataLoader();
         ProblemApplication problemApp = ProblemApplication.getInstance(); //this will load all data.
         scene = new Scene(loadFXML("home"), 640, 480);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public static javafx.application.HostServices getHostServicesInstance() {
+        return hostServices;
     }
 
     public static void setRoot(String fxml) throws IOException {

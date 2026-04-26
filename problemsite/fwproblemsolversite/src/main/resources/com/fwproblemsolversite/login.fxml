@@ -42,13 +42,13 @@
       <children>
          <Label text="Login" styleClass="app-title">
             <font>
-               <Font size="30.0" />
+               <Font size="38.0" />
             </font>
          </Label>
 
-      <TextField fx:id="usernameField" promptText="Username or Email" alignment="CENTER" styleClass="input-field" prefWidth="280.0" />
+      <TextField fx:id="usernameField" promptText="Username or Email" alignment="CENTER" styleClass="input-field" prefWidth="280.0" prefHeight="40.0" />
 
-      <PasswordField fx:id="passwordField" promptText="Password" alignment="CENTER" styleClass="input-field" prefWidth="280.0" />
+      <PasswordField fx:id="passwordField" promptText="Password" alignment="CENTER" styleClass="input-field" prefWidth="280.0" prefHeight="40.0" />
 
       <HBox alignment="CENTER_RIGHT" prefWidth="280.0">
          <children>
@@ -58,7 +58,7 @@
 
       <Label fx:id="errorLabel" text="" styleClass="error-label" maxHeight="10.0" />
 
-      <Button text="Login" onAction="#handleLogin" prefWidth="240.0" styleClass="primary-button" />
+      <Button text="Login" onAction="#handleLogin" prefWidth="240.0" prefHeight="40.0" styleClass="primary-button" />
 
       <HBox alignment="CENTER" spacing="4.0">
          <children>
