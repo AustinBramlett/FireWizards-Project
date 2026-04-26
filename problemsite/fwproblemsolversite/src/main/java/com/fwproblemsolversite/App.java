@@ -2,9 +2,7 @@ package com.fwproblemsolversite;
 
 import java.io.IOException;
 
-import com.fwproblemsolversite.accounts.Account;
 import com.fwproblemsolversite.io.dataLoader;
-import com.fwproblemsolversite.problems.Problem;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

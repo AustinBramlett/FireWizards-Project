@@ -37,6 +37,7 @@ public class ProblemController {
     @FXML
     public void initialize() {
         Problem problem = problemApp.getCurrentProblem();
+        codeArea.setText(problem.getCode());
 
         if (problem != null) {
             titleLabel.setText(problem.getTitle());
@@ -193,7 +194,7 @@ public class ProblemController {
                 .getCurrentUser()
                 .getUsername()
         );
-        
+
         String text = commentInput.getText();
 
         if (text == null || text.trim().isEmpty()) {
