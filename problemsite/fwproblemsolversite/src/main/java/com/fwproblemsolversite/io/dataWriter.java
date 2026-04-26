@@ -17,6 +17,7 @@ import com.fwproblemsolversite.enums.Difficulty;
 import com.fwproblemsolversite.enums.Language;
 import com.fwproblemsolversite.enums.ProblemType;
 
+
 import java.util.UUID;
 import org.json.simple.*;
 import java.io.FileWriter;
@@ -337,6 +338,14 @@ public class dataWriter extends DataConstants{
                             json.put(header, contents);
                             return true;
                         }
+                    case PROBLEM_CODE:
+                        if(contents == null) {
+                            debugOut("Problem " + json.get(PROBLEM_TITLE) + " has no code specified!");
+                            return false;
+                        } else {
+                            json.put(header, contents);
+                            return true;
+                        }
                     default:
                         debugOut("Invalid header for this object type. Set one up in writeToJSON!");
                         return false;
@@ -487,6 +496,7 @@ public class dataWriter extends DataConstants{
                 writeToJSON(problem, item, PROBLEM_CONSTRAINTS, problem.getConstraints() != null ? problem.getConstraints() : null);
                 writeToJSON(problem, item, PROBLEM_COMMENTS, problem.getComments());
                 writeToJSON(problem, item, PROBLEM_ANSWERS, problem.getAnswers() != null ? problem.getAnswers() : null);
+                writeToJSON(problem, item, PROBLEM_CODE, problem.getCode() != null ? problem.getCode() : null);
                 problemsFile.add(item);
                 debugOut("dataWriter(saveProblems): Successfully saved problem " + problem.getID() + "!");
                 debugOut("dataWriter(saveProblems): Contents: " + item.toJSONString());

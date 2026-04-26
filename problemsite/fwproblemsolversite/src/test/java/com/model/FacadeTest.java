@@ -199,7 +199,8 @@ public class FacadeTest {
             new ArrayList<>(),
             5.0,
             new ArrayList<>(),
-            Difficulty.EASY
+            Difficulty.EASY,
+            "System.out.println(\"Hello, world!\");"
         ));
         assertFalse(app.solveProblem("Test Problem"));
     }
@@ -221,7 +222,8 @@ public class FacadeTest {
             new ArrayList<>(),
             5.0,
             new ArrayList<>(),
-            Difficulty.EASY
+            Difficulty.EASY,
+            "System.out.println(\"Hello, world!\");"
         ));
          assertTrue(app.solveProblem("Test Problem"));
      }
@@ -257,7 +259,8 @@ public class FacadeTest {
             new ArrayList<>(),
             5.0,
             new ArrayList<>(),
-            Difficulty.EASY
+            Difficulty.EASY,
+            "System.out.println(\"Hello, world!\");"
         ));
         // Test comment without login
         assertFalse(app.addComment("This comment should not be posted."));
@@ -279,7 +282,8 @@ public class FacadeTest {
             new ArrayList<>(),
             5.0,
             new ArrayList<>(),
-            Difficulty.EASY
+            Difficulty.EASY,
+            "System.out.println(\"Hello, world!\");"
         ));
         // Test comment while muted
         app.getCurrentUser().setMuted(true);
@@ -303,7 +307,8 @@ public class FacadeTest {
             new ArrayList<>(),
             5.0,
             new ArrayList<>(),
-            Difficulty.EASY
+            Difficulty.EASY,
+            "System.out.println(\"Hello, world!\");"
          ));
         // Test comment with login
         assertTrue(app.addComment("This comment should be posted."));
@@ -345,7 +350,8 @@ public class FacadeTest {
             new ArrayList<>(),
             5.0,
             new ArrayList<>(),
-            Difficulty.EASY
+            Difficulty.EASY,
+            "System.out.println(\"Hello, world!\");"
         ));
         // Test comment with null comment
         app.setCurrentProblem(problemData.searchByTitle("Test Problem").get(0));
@@ -369,7 +375,8 @@ public class FacadeTest {
             new ArrayList<>(),
             5.0,
             new ArrayList<>(),
-            Difficulty.EASY
+            Difficulty.EASY,
+            "System.out.println(\"Hello, world!\");"
         ));
         // Test comment with empty comment
         app.setCurrentProblem(problemData.searchByTitle("Test Problem").get(0));
@@ -393,7 +400,8 @@ public class FacadeTest {
             new ArrayList<>(),
             5.0,
             new ArrayList<>(),
-            Difficulty.EASY
+            Difficulty.EASY,
+            "System.out.println(\"Hello, world!\");"
         ));
         // Test comment with whitespace comment
         app.setCurrentProblem(problemData.searchByTitle("Test Problem").get(0));
@@ -406,7 +414,7 @@ public class FacadeTest {
         app.createAccount("Test", "User", "I\'M NOT IN THE JSON FILE", "initef@example.com", "pass123", AccountType.CONTRIBUTOR);
         app.login("I\'M NOT IN THE JSON FILE", "pass123");
         // Test add problem with valid data
-        assertTrue(app.addProblem("Test Problem", "This is a test problem.", new ArrayList<>(), Language.JAVA, new ArrayList<>(), new ArrayList<>(), ProblemType.ARRAY, new ArrayList<>(), 5.0, new ArrayList<>(), Difficulty.EASY));
+        assertTrue(app.addProblem("Test Problem", "This is a test problem.", new ArrayList<>(), Language.JAVA, new ArrayList<>(), new ArrayList<>(), ProblemType.ARRAY, new ArrayList<>(), 5.0, new ArrayList<>(), Difficulty.EASY, "System.out.println(\"Hello, world!\");"));
     }
 
     @Test
@@ -415,7 +423,7 @@ public class FacadeTest {
         app.createAccount("Test", "User", "I\'M NOT IN THE JSON FILE", "initef@example.com", "pass123", AccountType.STUDENT);
         app.login("I\'M NOT IN THE JSON FILE", "pass123");
         // Test add problem with valid data but while logged in as a student
-        assertFalse(app.addProblem("Test Problem", "This is a test problem.", new ArrayList<>(), Language.JAVA, new ArrayList<>(), new ArrayList<>(), ProblemType.ARRAY, new ArrayList<>(), 5.0, new ArrayList<>(), Difficulty.EASY));
+        assertFalse(app.addProblem("Test Problem", "This is a test problem.", new ArrayList<>(), Language.JAVA, new ArrayList<>(), new ArrayList<>(), ProblemType.ARRAY, new ArrayList<>(), 5.0, new ArrayList<>(), Difficulty.EASY, "System.out.println(\"Hello, world!\");"));
     }
 
     @Test
@@ -424,7 +432,7 @@ public class FacadeTest {
         app.createAccount("Test", "User", "I\'M NOT IN THE JSON FILE", "initef@example.com", "pass123", AccountType.CONTRIBUTOR);
         app.login("I\'M NOT IN THE JSON FILE", "pass123");
         // Test add problem with null title
-        assertFalse(app.addProblem(null, "This is a test problem.", new ArrayList<>(), Language.JAVA, new ArrayList<>(), new ArrayList<>(), ProblemType.ARRAY, new ArrayList<>(), 5.0, new ArrayList<>(), Difficulty.EASY));
+        assertFalse(app.addProblem(null, "This is a test problem.", new ArrayList<>(), Language.JAVA, new ArrayList<>(), new ArrayList<>(), ProblemType.ARRAY, new ArrayList<>(), 5.0, new ArrayList<>(), Difficulty.EASY, "System.out.println(\"Hello, world!\");"));
     }
     
     @Test
@@ -433,7 +441,7 @@ public class FacadeTest {
         app.createAccount("Test", "User", "I\'M NOT IN THE JSON FILE", "initef@example.com", "pass123", AccountType.CONTRIBUTOR);
         app.login("I\'M NOT IN THE JSON FILE", "pass123");
         // Test add problem with empty title
-        assertFalse(app.addProblem("", "This is a test problem.", new ArrayList<>(), Language.JAVA, new ArrayList<>(), new ArrayList<>(), ProblemType.ARRAY, new ArrayList<>(), 5.0, new ArrayList<>(), Difficulty.EASY));
+        assertFalse(app.addProblem("", "This is a test problem.", new ArrayList<>(), Language.JAVA, new ArrayList<>(), new ArrayList<>(), ProblemType.ARRAY, new ArrayList<>(), 5.0, new ArrayList<>(), Difficulty.EASY, "System.out.println(\"Hello, world!\");"));
     }
     
     @Test
@@ -442,7 +450,7 @@ public class FacadeTest {
         app.createAccount("Test", "User", "I\'M NOT IN THE JSON FILE", "initef@example.com", "pass123", AccountType.CONTRIBUTOR);
         app.login("I\'M NOT IN THE JSON FILE", "pass123");
         // Test add problem with null description
-        assertFalse(app.addProblem("Test Problem", null, new ArrayList<>(), Language.JAVA, new ArrayList<>(), new ArrayList<>(), ProblemType.ARRAY, new ArrayList<>(), 5.0, new ArrayList<>(), Difficulty.EASY));
+        assertFalse(app.addProblem("Test Problem", null, new ArrayList<>(), Language.JAVA, new ArrayList<>(), new ArrayList<>(), ProblemType.ARRAY, new ArrayList<>(), 5.0, new ArrayList<>(), Difficulty.EASY, "System.out.println(\"Hello, world!\");"));
     }
 
     @Test
@@ -451,7 +459,7 @@ public class FacadeTest {
         app.createAccount("Test", "User", "I\'M NOT IN THE JSON FILE", "initef@example.com", "pass123", AccountType.CONTRIBUTOR);
         app.login("I\'M NOT IN THE JSON FILE", "pass123");
         // Test add problem with null language
-        assertFalse(app.addProblem("Test Problem", "This is a test problem.", new ArrayList<>(), null, new ArrayList<>(), new ArrayList<>(), ProblemType.ARRAY, new ArrayList<>(), 5.0, new ArrayList<>(), Difficulty.EASY));
+        assertFalse(app.addProblem("Test Problem", "This is a test problem.", new ArrayList<>(), null, new ArrayList<>(), new ArrayList<>(), ProblemType.ARRAY, new ArrayList<>(), 5.0, new ArrayList<>(), Difficulty.EASY, "System.out.println(\"Hello, world!\");"));
     }
 
     @Test
@@ -460,7 +468,7 @@ public class FacadeTest {
         app.createAccount("Test", "User", "I\'M NOT IN THE JSON FILE", "initef@example.com", "pass123", AccountType.CONTRIBUTOR);
         app.login("I\'M NOT IN THE JSON FILE", "pass123");
         // Test add problem with null problem type
-        assertFalse(app.addProblem("Test Problem", "This is a test problem.", new ArrayList<>(), Language.JAVA, new ArrayList<>(), new ArrayList<>(), null, new ArrayList<>(), 5.0, new ArrayList<>(), Difficulty.EASY));
+        assertFalse(app.addProblem("Test Problem", "This is a test problem.", new ArrayList<>(), Language.JAVA, new ArrayList<>(), new ArrayList<>(), null, new ArrayList<>(), 5.0, new ArrayList<>(), Difficulty.EASY, "System.out.println(\"Hello, world!\");"));
     }
 
     @Test
@@ -469,7 +477,7 @@ public class FacadeTest {
         app.createAccount("Test", "User", "I\'M NOT IN THE JSON FILE", "initef@example.com", "pass123", AccountType.CONTRIBUTOR);
         app.login("I\'M NOT IN THE JSON FILE", "pass123");
         // Test add problem with negative timer
-        assertFalse(app.addProblem("Test Problem", "This is a test problem.", new ArrayList<>(), Language.JAVA, new ArrayList<>(), new ArrayList<>(), ProblemType.ARRAY, new ArrayList<>(), -5.0, new ArrayList<>(), Difficulty.EASY));
+        assertFalse(app.addProblem("Test Problem", "This is a test problem.", new ArrayList<>(), Language.JAVA, new ArrayList<>(), new ArrayList<>(), ProblemType.ARRAY, new ArrayList<>(), -5.0, new ArrayList<>(), Difficulty.EASY, "System.out.println(\"Hello, world!\");"));
     }
 
     @Test
@@ -478,6 +486,6 @@ public class FacadeTest {
         app.createAccount("Test", "User", "I\'M NOT IN THE JSON FILE", "initef@example.com", "pass123", AccountType.CONTRIBUTOR);
         app.login("I\'M NOT IN THE JSON FILE", "pass123");
         // Test add problem with null difficulty
-        assertFalse(app.addProblem("Test Problem", "This is a test problem.", new ArrayList<>(), Language.JAVA, new ArrayList<>(), new ArrayList<>(), ProblemType.ARRAY, new ArrayList<>(), 5.0, new ArrayList<>(), null));
+        assertFalse(app.addProblem("Test Problem", "This is a test problem.", new ArrayList<>(), Language.JAVA, new ArrayList<>(), new ArrayList<>(), ProblemType.ARRAY, new ArrayList<>(), 5.0, new ArrayList<>(), null, "System.out.println(\"Hello, world!\");"));
     }
 }

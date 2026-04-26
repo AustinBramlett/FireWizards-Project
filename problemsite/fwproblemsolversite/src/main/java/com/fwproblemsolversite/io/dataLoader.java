@@ -251,9 +251,10 @@ public class dataLoader extends DataConstants {
                     debugOut("No submissions array specified for problem " + title);
                 }
                 String timerVal = (String) problemObj.get(PROBLEM_TIMER);
+                String code = (String) problemObj.get(PROBLEM_CODE);
                 double timer = Double.parseDouble(timerVal);
                 Problem problem = new Problem(title, id, description, constraints, language, examples, notes,
-                        type, tags, timer, answers, difficulty, comments, submissions);
+                        type, tags, timer, answers, difficulty, comments, submissions, code);
                 //We're missing submissions and comments at the moment.
                 problems.add(problem);
             }

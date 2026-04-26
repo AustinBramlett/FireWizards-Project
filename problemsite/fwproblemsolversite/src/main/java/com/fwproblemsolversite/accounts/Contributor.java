@@ -60,10 +60,11 @@ public class Contributor extends Account {
                               ArrayList<String> tags,
                               double timer,
                               ArrayList<ArrayList<String>> answers,
-                              Difficulty difficulty) {
+                              Difficulty difficulty,
+                              String code) {
         ProblemData data = ProblemData.getInstance();
         try{
-            Problem problem = new Problem(title, description, constraints, language, examples, notes, type, tags, timer, answers, difficulty);
+            Problem problem = new Problem(title, description, constraints, language, examples, notes, type, tags, timer, answers, difficulty, code);
             data.add(problem);
             questionsMade.add(problem.getID());
         } catch (Exception e) {

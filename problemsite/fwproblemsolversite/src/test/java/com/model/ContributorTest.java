@@ -66,7 +66,8 @@ public class ContributorTest {
             new ArrayList<>(),
             5.0,
             new ArrayList<>(),
-            Difficulty.EASY
+            Difficulty.EASY,
+            "System.out.println(\"Hello, world!\");"
         );
 
         assertFalse(result);
@@ -97,6 +98,7 @@ public void testAddProblemNullValues() {
         null,
         0.0,
         null,
+        null,
         null
     );
 
@@ -119,13 +121,15 @@ public void testMultipleAddProblemCalls() {
     boolean result1 = contributor.addProblem(
         "T1", "D1", new ArrayList<>(), null,
         new ArrayList<>(), new ArrayList<>(),
-        null, new ArrayList<>(), 1.0, new ArrayList<>(), Difficulty.MEDIUM
+        null, new ArrayList<>(), 1.0, new ArrayList<>(), Difficulty.MEDIUM,
+        "System.out.println(\"Hello, world!\");"
     );
 
     boolean result2 = contributor.addProblem(
         "T2", "D2", new ArrayList<>(), null,
         new ArrayList<>(), new ArrayList<>(),
-        null, new ArrayList<>(), 2.0, new ArrayList<>(), Difficulty.HARD
+        null, new ArrayList<>(), 2.0, new ArrayList<>(), Difficulty.HARD,
+        "System.out.println(\"Hello, world!\");"
     );
 
     assertFalse(result1);

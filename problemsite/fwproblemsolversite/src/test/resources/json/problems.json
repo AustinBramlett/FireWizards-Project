@@ -15,7 +15,8 @@
         "timer": "15.0",
         "examples": [],
         "submissions": [],
-        "id": "2634e3ea-f99d-4e1c-a90a-ac0d3a52fd5a"
+        "id": "2634e3ea-f99d-4e1c-a90a-ac0d3a52fd5a",
+        "code": "public int addTwoNumbers(int a, int b) \n{ \treturn a + b;\n}"
     },
     {
         "notes": [],
@@ -34,7 +35,8 @@
         "timer": "10.0",
         "examples": [],
         "submissions": [],
-        "id": "d62d5770-6de0-4c67-9b76-a77b94af7e32"
+        "id": "d62d5770-6de0-4c67-9b76-a77b94af7e32",
+        "code": "public void printHelloWorld() \n{ \tSystem.out.println(\"Hello, world!\");\n}"
     },
     {
         "notes": [
@@ -63,7 +65,8 @@
             ]
         ],
         "submissions": [],
-        "id": "f0b916ff-981f-4cb4-b6c6-1f44ad109d25"
+        "id": "f0b916ff-981f-4cb4-b6c6-1f44ad109d25",
+        "code": "public boolean checkValueInBST(TreeNode root, int target) {\n\tif (root == null) return false;\n\tif (root.val == target) return true;\n\tif (target < root.val) return checkValueInBST(root.left, target);\n\telse return checkValueInBST(root.right, target);\n}"
     },
     {
         "notes": [
@@ -91,7 +94,8 @@
             ]
         ],
         "submissions": [],
-        "id": "a5a9684e-a9df-4857-a788-ea0de04eabd2"
+        "id": "a5a9684e-a9df-4857-a788-ea0de04eabd2",
+        "code": "public int findSmallestValueInBST(TreeNode root) {\n\tif (root == null) throw new IllegalArgumentException(\"Tree cannot be empty\");\n\twhile (root.left != null) {\n\t\troot = root.left;\n\t}\n\treturn root.val;\n}"
     },
     {
         "notes": [
@@ -145,6 +149,7 @@
             ]
         ],
         "submissions": [],
-        "id": "f2533b4e-8b16-4842-8d53-81b3b65d39b2"
+        "id": "f2533b4e-8b16-4842-8d53-81b3b65d39b2",
+        "code": "public int longestSubarrayWithSumK(int[] nums, int k) {\n\tMap<Integer, Integer> prefixSumMap = new HashMap<>();\n\tprefixSumMap.put(0, -1); // Base case: prefix sum of 0 at index -1\n\tint prefixSum = 0;\n\tint maxLength = 0;\n\tfor (int i = 0; i < nums.length; i++) {\n\t\tprefixSum += nums[i];\n\t\tif (!prefixSumMap.containsKey(prefixSum)) {\n\t\t\tprefixSumMap.put(prefixSum, i); // Store the first occurrence of this prefix sum\n\t\t}\n\t\tif (prefixSumMap.containsKey(prefixSum - k)) {\n\t\t\tmaxLength = Math.max(maxLength, i - prefixSumMap.get(prefixSum - k));\n\t\t}\n\t}\n\treturn maxLength;\n}"
     }
 ]

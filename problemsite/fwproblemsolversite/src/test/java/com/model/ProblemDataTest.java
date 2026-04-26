@@ -43,7 +43,8 @@ public class ProblemDataTest {
             new ArrayList<>(),
             5.0,
             new ArrayList<>(),
-            Difficulty.EASY));
+            Difficulty.EASY,
+            "System.out.println(\"Hello, world!\");"));
         assertEquals(initialSize + 1, problemData.getProblems().size());
     }
 
@@ -65,7 +66,8 @@ public class ProblemDataTest {
             tags,
             5.0,
             new ArrayList<>(),
-            Difficulty.EASY));
+            Difficulty.EASY,
+            "System.out.println(\"Hello, world!\");"));
         problemData.add(new Problem(
             "Another Problem",
             "This is another test problem.",
@@ -77,7 +79,8 @@ public class ProblemDataTest {
             tags2,
             5.0,
             new ArrayList<>(),
-            Difficulty.EASY));
+            Difficulty.EASY,
+            "System.out.println(\"Hello, world!\");"));
         ArrayList<Problem> results = problemData.searchByTag("THIS IS NOT AN ACTUAL TAG");
         assertEquals(1, results.size());
     }
@@ -109,7 +112,8 @@ public class ProblemDataTest {
             new ArrayList<>(),
             5.0,
             new ArrayList<>(),
-            Difficulty.EASY));
+            Difficulty.EASY,
+            "System.out.println(\"Hello, world!\");"));
         problemData.add(new Problem(
             "Another Problem",
             "This is another test problem.",
@@ -121,7 +125,8 @@ public class ProblemDataTest {
             new ArrayList<>(),
             5.0,
             new ArrayList<>(),
-            Difficulty.HARD));
+            Difficulty.HARD,
+            "System.out.println(\"Hello, world!\");"));
         ArrayList<Problem> results = problemData.searchByDifficulty(Difficulty.EASY);
         assertEquals(1, results.size());
     }
@@ -147,7 +152,8 @@ public class ProblemDataTest {
             new ArrayList<>(),
             5.0,
             new ArrayList<>(),
-            Difficulty.EASY);
+            Difficulty.EASY,
+            "System.out.println(\"Hello, world!\");");
         problemData.add(problem);
         int initialSize = problemData.getProblems().size();
         problemData.remove(problem.getId());
@@ -184,7 +190,8 @@ public class ProblemDataTest {
             new ArrayList<>(),
             5.0,
             new ArrayList<>(),
-            Difficulty.EASY));
+            Difficulty.EASY,
+            "System.out.println(\"Hello, world!\");"));
         problemData.add(new Problem(
             "Special Name",
             "This is another test problem.",
@@ -196,7 +203,8 @@ public class ProblemDataTest {
             new ArrayList<>(),
             5.0,
             new ArrayList<>(),
-            Difficulty.EASY));
+            Difficulty.EASY,
+            "System.out.println(\"Hello, world!\");"));
         ArrayList<Problem> results = problemData.searchByTitle("Unique Title");
         assertEquals(1, results.size());
     }
@@ -222,7 +230,8 @@ public class ProblemDataTest {
             new ArrayList<>(),
             5.0,
             new ArrayList<>(),
-            Difficulty.EASY));
+            Difficulty.EASY,
+            "System.out.println(\"Hello, world!\");"));
         problemData.add(new Problem(
             "Special Name",
             "This is another test problem.",
@@ -234,7 +243,8 @@ public class ProblemDataTest {
             new ArrayList<>(),
             5.0,
             new ArrayList<>(),
-            Difficulty.EASY));
+            Difficulty.EASY,
+            "System.out.println(\"Hello, world!\");"));
         ArrayList<Problem> results = problemData.searchByTitle("Special Name");
         assertEquals(1, results.size());
     }
@@ -253,7 +263,8 @@ public class ProblemDataTest {
             new ArrayList<>(),
             5.0,
             new ArrayList<>(),
-            Difficulty.EASY));
+            Difficulty.EASY,
+            "System.out.println(\"Hello, world!\");"));
         problemData.add(new Problem(
             "Alpha Problem",
             "This is another test problem.",
@@ -265,7 +276,8 @@ public class ProblemDataTest {
             new ArrayList<>(),
             5.0,
             new ArrayList<>(),
-            Difficulty.EASY));
+            Difficulty.EASY,
+            "System.out.println(\"Hello, world!\");"));
         ArrayList<Problem> results = problemData.searchByAlphabet();
         assertEquals("Alpha Problem", results.get(0).getTitle());
         assertEquals("Beta Problem", results.get(1).getTitle());
@@ -292,7 +304,8 @@ public class ProblemDataTest {
             new ArrayList<>(),
             5.0,
             new ArrayList<>(),
-            Difficulty.EASY));
+            Difficulty.EASY,
+            "System.out.println(\"Hello, world!\");"));
         problemData.add(new Problem(
             "Beta Problem",
             "This is another test problem.",
@@ -304,7 +317,8 @@ public class ProblemDataTest {
             new ArrayList<>(),
             5.0,
             new ArrayList<>(),
-            Difficulty.EASY));
+            Difficulty.EASY,
+            "System.out.println(\"Hello, world!\");"));
         ArrayList<Problem> results = problemData.searchByAlphabet();
         assertEquals(1, results.size());
     }
