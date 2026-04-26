@@ -80,7 +80,7 @@ public class DashboardController {
 
         continueProblemCard.setOnMouseClicked(e -> {
             try {
-                App.setCurrentProblem(continueProblem);
+                problemApp.setCurrentProblem(continueProblem);
                 App.setRoot("problem");
             } catch (IOException ex) {
                 ex.printStackTrace();
@@ -94,7 +94,7 @@ public class DashboardController {
 
             dailyProblemTitle.setOnMouseClicked(e -> {
                 try {
-                    App.setCurrentProblem(dailyProblem);
+                    problemApp.setCurrentProblem(dailyProblem);
                     App.setRoot("problem");
                 } catch (Exception ex) {
                     ex.printStackTrace();

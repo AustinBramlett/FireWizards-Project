@@ -17,7 +17,6 @@ import com.fwproblemsolversite.io.dataLoader;
 import com.fwproblemsolversite.io.dataWriter;
 import com.fwproblemsolversite.problems.Comment;
 import com.fwproblemsolversite.problems.Problem;
-
 /**
  * Main application class for the system.
  * 
@@ -28,6 +27,7 @@ public class ProblemApplication {
     private AccountData accountData;
     private ProblemData problemData;
     private Account currentUser;
+    private Problem currentProblem;
     private static ProblemApplication instance;
 
     /**
@@ -186,18 +186,16 @@ public class ProblemApplication {
     }
 
     /**
-     * Solves a problem by its title.
-     * @param problemTitle The title of the problem to solve.
+     * Attempts to solve the current problem.
+     * @param solution The title of the problem to solve.
      * @return true if the problem is solved successfully, false otherwise.
      */
-    public boolean solveProblem(String problemTitle) {
-        if (currentUser == null) return false;
-
-        for (Problem problem : problemData.getProblems()) {
-            if (problem.getTitle().equalsIgnoreCase(problemTitle)) {
-
-                currentUser.getProgress()
-                    .updateProgress("1", problem.getDifficulty());
+    public boolean solveProblem(String solution) {
+        if (currentUser == null || currentProblem == null || solution == null) return false;
+        ArrayList<ArrayList<String>> correctAnswers = currentProblem.getAnswers();
+        for(ArrayList<String> answer : correctAnswers) {
+            if (answer.contains(solution)) {
+                currentUser.getProgress().updateProgress("1", currentProblem.getDifficulty());
                 return true;
             }
         }
@@ -205,23 +203,20 @@ public class ProblemApplication {
     }
 
     /**
-     * Adds a comment to a problem by its title.
-     * @param problemTitle The title of the problem to comment on.
+     * Adds a comment to the current problem by its title.
      * @param text The text of the comment.
      * @return true if the comment is added successfully, false otherwise.
      */
-    public boolean addComment(String problemTitle, String text) {
+    public boolean addComment(String text) {
         if (currentUser == null) return false;
         if (text == null || text.trim().isEmpty() || currentUser.isMuted()) return false;
-
         for (Problem problem : problemData.getProblems()) {
-            if (problem.getTitle().equalsIgnoreCase(problemTitle)) {
+            if (problem.getTitle().equalsIgnoreCase(currentProblem.getTitle())) {
                 
                 Comment comment = new Comment(currentUser.getId(), problem.getId(), text); 
+
                 problem.addComment(comment);
-
                 save();
-
                 return true;
             }
         }
@@ -321,6 +316,13 @@ public class ProblemApplication {
         return problemData.searchByDifficulty(difficulty);
     }
 
+    public void setCurrentProblem(Problem problem) {
+        currentProblem = problem;
+    }
+
+    public Problem getCurrentProblem() {
+        return currentProblem;
+    }
     /**
      * Generates default problems for the system if there are no problems currently.
      * 

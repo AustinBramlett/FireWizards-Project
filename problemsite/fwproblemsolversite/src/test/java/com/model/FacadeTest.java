@@ -260,7 +260,7 @@ public class FacadeTest {
             Difficulty.EASY
         ));
         // Test comment without login
-        assertFalse(app.addComment("Test Problem", "This comment should not be posted."));
+        assertFalse(app.addComment("This comment should not be posted."));
     }
     @Test
     public void testFacadeCommentWhileMuted() {
@@ -283,7 +283,7 @@ public class FacadeTest {
         ));
         // Test comment while muted
         app.getCurrentUser().setMuted(true);
-        assertFalse(app.addComment("Test Problem", "This comment should not be posted."));
+        assertFalse(app.addComment("This comment should not be posted."));
     }
 
     @Test
@@ -306,7 +306,7 @@ public class FacadeTest {
             Difficulty.EASY
          ));
         // Test comment with login
-        assertTrue(app.addComment("Test Problem", "This comment should be posted."));
+        assertTrue(app.addComment("This comment should be posted."));
     }
     
     @Test
@@ -315,16 +315,17 @@ public class FacadeTest {
         app.createAccount("Test", "User", "I\'M NOT IN THE JSON FILE", "initef@example.com", "pass123", AccountType.STUDENT);
         app.login("I\'M NOT IN THE JSON FILE", "pass123");
         // Test comment on nonexistent problem
-        assertFalse(app.addComment("Nonexistent Problem", "This comment should not be posted."));
+        app.setCurrentProblem(null);
+        assertFalse(app.addComment("This comment should not be posted."));
     }
 
     @Test
-    public void testFacadeAddCommentWithNullProblemTitle() {
+    public void testFacadeAddCommentWithNull() {
         ProblemApplication app = ProblemApplication.getInstance();
         app.createAccount("Test", "User", "I\'M NOT IN THE JSON FILE", "initef@example.com", "pass123", AccountType.STUDENT);
         app.login("I\'M NOT IN THE JSON FILE", "pass123");
         // Test comment with null problem title
-        assertFalse(app.addComment(null, "This comment shouldn't invoke a Null Pointer Exception."));
+        assertFalse(app.addComment(null));
     }
 
     @Test
@@ -347,7 +348,8 @@ public class FacadeTest {
             Difficulty.EASY
         ));
         // Test comment with null comment
-        assertFalse(app.addComment("Test Problem", null));
+        app.setCurrentProblem(problemData.searchByTitle("Test Problem").get(0));
+        assertFalse(app.addComment(null));
     }
 
     @Test
@@ -370,7 +372,8 @@ public class FacadeTest {
             Difficulty.EASY
         ));
         // Test comment with empty comment
-        assertFalse(app.addComment("Test Problem", ""));
+        app.setCurrentProblem(problemData.searchByTitle("Test Problem").get(0));
+        assertFalse(app.addComment(""));
     }
 
     @Test
@@ -393,7 +396,8 @@ public class FacadeTest {
             Difficulty.EASY
         ));
         // Test comment with whitespace comment
-        assertFalse(app.addComment("Test Problem", "   ")); //Thought I was being clever here but turns out it still works. Oh well.
+        app.setCurrentProblem(problemData.searchByTitle("Test Problem").get(0));
+        assertFalse(app.addComment("   ")); //Thought I was being clever here but turns out it still works. Oh well.
     }
 
     @Test

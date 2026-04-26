@@ -36,7 +36,7 @@ public class ProblemController {
 
     @FXML
     public void initialize() {
-        Problem problem = App.getCurrentProblem();
+        Problem problem = problemApp.getCurrentProblem();
 
         if (problem != null) {
             titleLabel.setText(problem.getTitle());
@@ -134,9 +134,9 @@ public class ProblemController {
             return;
         }
 
-        Problem problem = App.getCurrentProblem();
+        Problem problem = problemApp.getCurrentProblem();
 
-        boolean success = problemApp.addComment(problem.getTitle(), text);
+        boolean success = problemApp.addComment(text);
 
         if (success) {
             commentInput.clear();
@@ -196,7 +196,7 @@ public class ProblemController {
 
         ProblemApplication.getInstance().save();
 
-        loadComments(App.getCurrentProblem());
+        loadComments(problemApp.getCurrentProblem());
         commentInput.clear();
     }
 }

@@ -87,7 +87,7 @@ public class ProblemsController {
             System.out.println("Clicked on problem: " + problem.getTitle());
 
             try{
-                App.setCurrentProblem(problem);
+                problemApp.setCurrentProblem(problem);
                 App.setRoot("problem");
             }catch(Exception ex){
                 ex.printStackTrace();
