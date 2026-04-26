@@ -12,6 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.Hyperlink?>
 
 <StackPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/13" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.HomeController" stylesheets="@styles.css">
    <children>
@@ -83,6 +84,16 @@
                         <Label text="Description" styleClass="section-title" />
 
                         <Label wrapText="true" styleClass="small-text" text="This is a Java problem solving system where users can create their accounts, solve coding problems, and track their progress. The system allows students to view problems based on difficulty and type, submit solutions, and earn achievements as they improve." />
+
+                        <Label text="Links" styleClass="section-title" />
+
+                        <Label text="Demonstration Video:" styleClass="small-text" />
+
+                        <Hyperlink text="https://youtu.be/qUXdicF84K4" styleClass="link-text" onAction="#openDemoVideo" />
+
+                        <Label text="UML Diagram:" styleClass="small-text" />
+
+                        <Hyperlink text="https://lucid.app/lucidchart/590a60f9-f40d-4f81-b1f5-5562af032aed/edit" styleClass="link-text" onAction="#openUML" />
 
                         <Label text="Features" styleClass="section-title" />
 
