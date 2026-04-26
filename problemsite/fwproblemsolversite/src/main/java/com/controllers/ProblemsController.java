@@ -4,42 +4,60 @@ import java.util.ArrayList;
 
 import com.fwproblemsolversite.App;
 import com.fwproblemsolversite.ProblemApplication;
+import com.fwproblemsolversite.accounts.Account;
 import com.fwproblemsolversite.data.ProblemData;
 import com.fwproblemsolversite.problems.Problem;
-import com.fwproblemsolversite.accounts.Account;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 public class ProblemsController {
+
     private ProblemApplication problemApp = ProblemApplication.getInstance();
     @FXML
     private VBox problemsContainer;
+    @FXML
+    private TextField searchField;
+
+    private String currentFilter = "ALL";
 
     @FXML
     public void initialize() {
-        loadProblems();
+        updateProblemList();
     }
 
-    private void loadProblems() {
+    private void updateProblemList() {
+
         problemsContainer.getChildren().clear();
 
         ArrayList<Problem> problems = ProblemData.getInstance().getProblems();
 
-        if (problems == null || problems.isEmpty()) {
-            System.out.println("No problems loaded");
-            return;
-        }
+        String query = searchField.getText().toLowerCase();
 
         for (Problem problem : problems) {
-            VBox card = createProblemCard(problem);
-            problemsContainer.getChildren().add(card);
-            System.out.println("Loaded problem: " + problem.getTitle());
+
+            boolean matchesDifficulty
+                    = currentFilter.equals("ALL")
+                    || problem.getDifficulty().toString().equals(currentFilter);
+
+            boolean matchesSearch
+                    = problem.getTitle().toLowerCase().contains(query);
+
+            if (matchesDifficulty && matchesSearch) {
+                problemsContainer.getChildren().add(createProblemCard(problem));
+            }
+        }
+
+        if (problemsContainer.getChildren().isEmpty()) {
+            Label empty = new Label("No problems found.");
+            empty.setStyle("-fx-text-fill: gray;");
+            problemsContainer.getChildren().add(empty);
         }
     }
 
@@ -59,7 +77,7 @@ public class ProblemsController {
         HBox.setHgrow(spacer, Priority.ALWAYS);
 
         Label difficulty = new Label(problem.getDifficulty().toString());
-        
+
         String diff = problem.getDifficulty().toString();
 
         difficulty.getStyleClass().add("difficulty");
@@ -86,16 +104,17 @@ public class ProblemsController {
         card.setOnMouseClicked(e -> {
             System.out.println("Clicked on problem: " + problem.getTitle());
 
-            try{
+            try {
                 problemApp.setCurrentProblem(problem);
                 App.setRoot("problem");
-            }catch(Exception ex){
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
         });
         return card;
     }
-     @FXML
+
+    @FXML
     private void handleBackToProblems() {
         try {
             App.setRoot("problems");
@@ -105,9 +124,9 @@ public class ProblemsController {
     }
 
     @FXML
-    private void handleBackToDashboard(){
+    private void handleBackToDashboard() {
         try {
-                Account user = problemApp.getCurrentUser();
+            Account user = problemApp.getCurrentUser();
             if (user != null && user.getAccountType().toString().equals("CONTRIBUTOR")) {
                 App.setRoot("contributorDashboard");
             } else {
@@ -115,6 +134,35 @@ public class ProblemsController {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
     }
+
+    @FXML
+    private void handleShowAll() {
+        currentFilter = "ALL";
+        updateProblemList();
+    }
+
+    @FXML
+    private void handleShowEasy() {
+        currentFilter = "EASY";
+        updateProblemList();
+    }
+
+    @FXML
+    private void handleShowMedium() {
+        currentFilter = "MEDIUM";
+        updateProblemList();
+    }
+
+    @FXML
+    private void handleShowHard() {
+        currentFilter = "HARD";
+        updateProblemList();
+    }
+
+    @FXML
+    private void handleSearch() {
+        updateProblemList();
     }
 }
