@@ -17,6 +17,7 @@ import com.fwproblemsolversite.io.dataLoader;
 import com.fwproblemsolversite.io.dataWriter;
 import com.fwproblemsolversite.problems.Comment;
 import com.fwproblemsolversite.problems.Problem;
+
 /**
  * Main application class for the system.
  * 
@@ -212,12 +213,15 @@ public class ProblemApplication {
     public boolean addComment(String problemTitle, String text) {
         if (currentUser == null) return false;
         if (text == null || text.trim().isEmpty() || currentUser.isMuted()) return false;
+
         for (Problem problem : problemData.getProblems()) {
             if (problem.getTitle().equalsIgnoreCase(problemTitle)) {
                 
                 Comment comment = new Comment(currentUser.getId(), problem.getId(), text); 
-
                 problem.addComment(comment);
+
+                save();
+
                 return true;
             }
         }

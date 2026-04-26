@@ -102,28 +102,15 @@
             {
                 "date": "2026-03-23",
                 "score": 0,
-                "replies": [],
-                "sender": "c4a9f6e2-1d3b-4f8a-9c72-5e1b8d3a7f44",
-                "commentText": "Im confused on the second solution. Can someone explain?"
-            },
-            {
-                "date": "2026-03-23",
-                "score": 0,
-                "replies": [],
-                "sender": "c4a9f6e2-1d3b-4f8a-9c72-5e1b8d3a7f44",
-                "commentText": "Im confused on the second solution. Can someone explain?"
-            },
-            {
-                "date": "2026-03-23",
-                "score": 0,
-                "replies": [],
-                "sender": "c4a9f6e2-1d3b-4f8a-9c72-5e1b8d3a7f44",
-                "commentText": "Im confused on the second solution. Can someone explain?"
-            },
-            {
-                "date": "2026-03-23",
-                "score": 0,
-                "replies": [],
+                "replies": [
+                    {
+                        "date": "2026-04-26",
+                        "score": 0,
+                        "replies": [],
+                        "sender": "c4a9f6e2-1d3b-4f8a-9c72-5e1b8d3a7f44",
+                        "commentText": "what do you need help with?"
+                    }
+                ],
                 "sender": "c4a9f6e2-1d3b-4f8a-9c72-5e1b8d3a7f44",
                 "commentText": "Im confused on the second solution. Can someone explain?"
             }
@@ -168,40 +155,39 @@
         "submissions": [],
         "id": "f2533b4e-8b16-4842-8d53-81b3b65d39b2"
     },
-
     {
-    "notes": [
-        "A path can start and end at any node",
-        "You cannot reuse nodes",
-        "Use DFS and track max path sum"
-    ],
-    "comments": [],
-    "answers": [],
-    "description": "Given a binary tree, find the maximum path sum. A path is any sequence of nodes connected by edges, and it can start and end at any node in the tree.",
-    "title": "Binary Tree Maximum Path Sum",
-    "type": "TREE",
-    "constraints": [
-        "Tree can contain negative values",
-        "Path must contain at least one node"
-    ],
-    "tags": [
-        "Tree",
-        "DFS",
-        "Recursion"
-    ],
-    "difficulty": "HARD",
-    "timer": "45.0",
-    "examples": [
-        [
-            "Tree: [1,2,3]",
-            "6"
+        "notes": [
+            "A path can start and end at any node",
+            "You cannot reuse nodes",
+            "Use DFS and track max path sum"
         ],
-        [
-            "Tree: [-10,9,20,null,null,15,7]",
-            "42"
-        ]
-    ],
-    "submissions": [],
-    "id": "b9c1a9f2-7e6a-4d5c-9a21-9f3d4a8e1abc"
-}
+        "comments": [],
+        "answers": [],
+        "description": "Given a binary tree, find the maximum path sum. A path is any sequence of nodes connected by edges, and it can start and end at any node in the tree.",
+        "title": "Binary Tree Maximum Path Sum",
+        "type": "TREE",
+        "constraints": [
+            "Tree can contain negative values",
+            "Path must contain at least one node"
+        ],
+        "tags": [
+            "Tree",
+            "DFS",
+            "Recursion"
+        ],
+        "difficulty": "HARD",
+        "timer": "45.0",
+        "examples": [
+            [
+                "Tree: [1,2,3]",
+                "6"
+            ],
+            [
+                "Tree: [-10,9,20,null,null,15,7]",
+                "42"
+            ]
+        ],
+        "submissions": [],
+        "id": "b9c1a9f2-7e6a-4d5c-9a21-9f3d4a8e1abc"
+    }
 ]

@@ -30,13 +30,17 @@
                     AnchorPane.topAnchor="20.0"
                     AnchorPane.leftAnchor="20.0"/>
                     
-            <HBox spacing="40"
+            <VBox spacing="40"
                   AnchorPane.topAnchor="80.0"
-                  AnchorPane.bottomAnchor="40.0"
                   AnchorPane.leftAnchor="80.0"
-                  AnchorPane.rightAnchor="80.0">
+                  AnchorPane.rightAnchor="80.0"
+                  AnchorPane.bottomAnchor="20.0">
 
                 <children>
+
+                    <HBox spacing="40">
+                        <children>
+
                     <!-- Left side: Problem details -->
                     <VBox styleClass="problem-container" 
                           HBox.hgrow="ALWAYS" 
@@ -92,10 +96,32 @@
 
                         </children>
                     </VBox>
-
                 </children>
+                </HBox>
 
-            </HBox>
+                <VBox spacing="12">
+                
+                    <Label text="Comments" styleClass="section-title" />
+
+                    <TextArea fx:id="commentInput" 
+                              promptText="Add a comment..."
+                              prefHeight="120" 
+                              styleClass="code-area"/>
+
+                    <Button text="Submit Comment" 
+                            styleClass="submit-button" 
+                            onAction="#handleSubmitComment" 
+                            alignment="CENTER_RIGHT"/>
+
+                    <VBox fx:id="commentsBox" spacing="10"/>
+
+                </VBox>
+
+            </children>
+        </VBox>
+
+           
+                   
 
         </AnchorPane>
     </children>
