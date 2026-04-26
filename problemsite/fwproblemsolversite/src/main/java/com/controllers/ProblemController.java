@@ -128,6 +128,13 @@ public class ProblemController {
 
     @FXML
     private void handleSubmitComment() {
+
+       System.out.println("Comment by: " + 
+            ProblemApplication.getInstance()
+                .getCurrentUser()
+                .getUsername()
+        );
+
         String text = commentInput.getText();
 
         if (text == null || text.trim().isEmpty()) {
@@ -180,6 +187,13 @@ public class ProblemController {
     }
 
     public void handleReply(Comment parentComment) {
+
+        System.out.println("Reply by: " + 
+            ProblemApplication.getInstance()
+                .getCurrentUser()
+                .getUsername()
+        );
+        
         String text = commentInput.getText();
 
         if (text == null || text.trim().isEmpty()) {
@@ -187,7 +201,7 @@ public class ProblemController {
         }
 
         Comment reply = new Comment(
-                parentComment.getSender(),
+                ProblemApplication.getInstance().getCurrentUser().getId(),
                 parentComment.getProblemID(),
                 text
         );

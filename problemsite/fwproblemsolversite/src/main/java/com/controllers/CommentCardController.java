@@ -1,5 +1,6 @@
 package com.controllers;
 
+import com.fwproblemsolversite.ProblemApplication;
 import com.fwproblemsolversite.problems.Comment;
 
 import javafx.fxml.FXML;
@@ -19,7 +20,13 @@ public class CommentCardController {
     public void setData(Comment c, ProblemController parent) {
         this.comment = c;
         this.parentController = parent;
-        usernameLabel.setText("User"); // you can replace with real username later
+
+        usernameLabel.setText(
+            ProblemApplication.getInstance()
+                .getAccountData()
+                .getAccountById(c.getSender())
+                .getUsername()
+        );
         dateLabel.setText(c.getDate().toString());
         commentText.setText(c.getCommentText());
     }

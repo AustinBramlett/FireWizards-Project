@@ -316,6 +316,7 @@
     -fx-control-inner-background: #1e1e1e;
     -fx-background-color: #2a2a2a;
     -fx-text-fill: white;
+    -fx-prompt-text-fill: #d1d5db;
 
     -fx-background-radius: 12;
     -fx-border-radius: 12;
@@ -548,4 +549,18 @@
     -fx-background-radius: 8;
     -fx-text-fill: white;
     -fx-font-weight: bold;
+}
+
+.submit-button {
+    -fx-background-color: #3b82f6;
+    -fx-text-fill: white;
+    -fx-background-radius: 20;
+    -fx-padding: 6 16;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.submit-button:hover {
+    -fx-background-color: #2563eb;
 }
