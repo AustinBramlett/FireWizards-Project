@@ -353,8 +353,26 @@ public class dataLoader extends DataConstants {
                             accountInstance = new Administrator(id, firstName, lastName, username, email, password, adminBanLog, adminMuteLog, adminTermLog, adminBanDates, adminMuteDates);
                             break;
                         case "CONTRIBUTOR":
+
                             ArrayList<UUID> questionsMade = new ArrayList<>();
-                            accountInstance = new Contributor(id, firstName, lastName, username, email, password, questionsMade);
+
+                            JSONArray qArray = (JSONArray) accountObj.get("questionsMade");
+
+                            if (qArray != null) {
+                                for (Object obj2 : qArray) {
+                                    questionsMade.add(UUID.fromString((String) obj2));
+                                }
+                            }
+
+                            accountInstance = new Contributor(
+                                    id,
+                                    firstName,
+                                    lastName,
+                                    username,
+                                    email,
+                                    password,
+                                    questionsMade
+                            );
                             break;
                         default:
                             debugOut("Unknown account type: " + accountType);
