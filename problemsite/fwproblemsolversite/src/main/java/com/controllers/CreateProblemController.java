@@ -5,7 +5,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import com.fwproblemsolversite.App;
+import com.fwproblemsolversite.ProblemApplication;
 import com.fwproblemsolversite.data.ProblemData;
+import com.fwproblemsolversite.enums.Difficulty;
+import com.fwproblemsolversite.enums.Language;
+import com.fwproblemsolversite.enums.ProblemType;
 import com.fwproblemsolversite.problems.Problem;
 
 import javafx.fxml.FXML;
@@ -53,8 +57,10 @@ public class CreateProblemController {
     private final ArrayList<String> tags = new ArrayList<>();
     private final ArrayList<String> constraints = new ArrayList<>();
     private final ArrayList<String> exampleOutputs = new ArrayList<>();
+    private final ArrayList<String> exampleTitles = new ArrayList<>();
     private final ArrayList<String> notes = new ArrayList<>();
     private final ArrayList<String> answers = new ArrayList<>();
+    private ProblemApplication problemApp = ProblemApplication.getInstance();
 
     @FXML
     public void initialize() {
@@ -207,7 +213,7 @@ public class CreateProblemController {
         String description = descriptionArea.getText().trim();
         String summary = summaryField.getText().trim();
         String code = codeArea.getText().trim();
-
+        ArrayList<ArrayList<String>> examples = new ArrayList<>();
         if (title.isEmpty()) {
             messageLabel.setText("Please enter a problem title.");
             return;
@@ -227,14 +233,39 @@ public class CreateProblemController {
             messageLabel.setText("Please enter the code users will see.");
             return;
         }
-
+        if(exampleOutputs.size() == exampleTitles.size()){
+            for (int i = 0; i < exampleOutputs.size(); i++) {
+                ArrayList<String> example = new ArrayList<>();
+                example.add(exampleTitles.get(i));
+                example.add(exampleOutputs.get(i));
+                examples.add(example);
+            }
+        }
+        Difficulty difficulty = Difficulty.valueOf(difficultyBox.getValue().toUpperCase());
+        ProblemType type = ProblemType.valueOf(typeBox.getValue().toUpperCase());
+        ArrayList<ArrayList<String>> answersAdj = new ArrayList<>();
+        answersAdj.add(answers);
+        problemApp.addProblem(
+            title,
+            description,
+            constraints,
+            Language.JAVA,
+            examples,
+            notes,
+            type,
+            tags,
+            Double.valueOf(timerBox.getValue()),
+            answersAdj,
+            difficulty,
+            code
+        );
         Problem newProblem = new Problem(
             title,
             java.util.UUID.randomUUID(),
             description,
-            new ArrayList<>(),
+            constraints,
             com.fwproblemsolversite.enums.Language.JAVA,
-            new ArrayList<>(),
+            examples,
             new ArrayList<>(),
             com.fwproblemsolversite.enums.ProblemType.STRING,
             new ArrayList<>(),
