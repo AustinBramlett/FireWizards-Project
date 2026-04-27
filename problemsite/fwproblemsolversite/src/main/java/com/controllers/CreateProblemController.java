@@ -38,12 +38,16 @@ public class CreateProblemController {
     @FXML private TextField constraintField;
     @FXML private TextField exampleOutputField;
     @FXML private TextField noteField;
+    @FXML private TextField exampleTitleField;
+    @FXML private TextField answerField;
 
     @FXML private HBox tagsBox;
     @FXML private VBox constraintsBox;
     @FXML private VBox exampleOutputsBox;
     @FXML private VBox notesBox;
     @FXML private VBox answersBox;
+    @FXML private VBox exampleTitlesBox;
+
 
     @FXML private TextField answerTitleField;
     @FXML private TextField timeComplexityField;
@@ -61,6 +65,11 @@ public class CreateProblemController {
     private final ArrayList<String> notes = new ArrayList<>();
     private final ArrayList<String> answers = new ArrayList<>();
     private ProblemApplication problemApp = ProblemApplication.getInstance();
+
+    @FXML
+    private void handleAddExampleTitle() {
+        addItem(exampleTitleField, exampleTitles, exampleTitlesBox);
+    }
 
     @FXML
     public void initialize() {

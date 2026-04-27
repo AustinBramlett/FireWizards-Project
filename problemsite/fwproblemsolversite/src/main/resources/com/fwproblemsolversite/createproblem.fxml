@@ -61,10 +61,10 @@
                         <TextField fx:id="titleField" promptText="Problem Title..." styleClass="input-field" />
 
                         <Label text="Description:" styleClass="profile-text" />
-                        <TextArea fx:id="descriptionArea"  promptText="Enter your discription here..." prefHeight="130.0" wrapText="true" styleClass="input-area" />
+                        <TextArea fx:id="descriptionArea" promptText="Enter your description here..." prefHeight="130.0" wrapText="true" styleClass="input-area" />
 
                         <Label text="Summary:" styleClass="profile-text" />
-                        <TextField fx:id="summaryField" promptText="Enter summary of your discription here..." styleClass="input-field" />
+                        <TextField fx:id="summaryField" promptText="Enter summary of your description here..." styleClass="input-field" />
 
                         <Label text="Code to Display:" styleClass="profile-text" />
                         <TextArea fx:id="codeArea" promptText="Enter the code users will see..." prefHeight="120.0" wrapText="true" styleClass="input-area" />
@@ -148,6 +148,16 @@
 
                         <HBox spacing="10.0">
                             <children>
+                                <Label text="Example Title:" styleClass="profile-text" />
+                                <TextField fx:id="exampleTitleField" prefWidth="300.0" styleClass="input-field" />
+                                <Button text="+" onAction="#handleAddExampleTitle" styleClass="primary-button" />
+                            </children>
+                        </HBox>
+
+                        <VBox fx:id="exampleTitlesBox" spacing="8.0" />
+
+                        <HBox spacing="10.0">
+                            <children>
                                 <Label text="Example Outputs:" styleClass="profile-text" />
                                 <TextField fx:id="exampleOutputField" prefWidth="300.0" styleClass="input-field" />
                                 <Button text="+" onAction="#handleAddExampleOutput" styleClass="primary-button" />
@@ -170,28 +180,40 @@
                 </VBox>
 
                 <VBox spacing="12.0" maxWidth="780.0" styleClass="profile-card">
-                    <padding><Insets top="18" right="22" bottom="18" left="22"/></padding>
+                    <padding>
+                        <Insets top="18" right="22" bottom="18" left="22"/>
+                    </padding>
 
                     <children>
                         <Label text="Create Answers" styleClass="section-title">
                             <font><Font size="22"/></font>
                         </Label>
-                        <Label text="Answer:" styleClass="profile-text"/>
-                        <TextField fx:id="answerTitleField" styleClass="input-field"/>
 
-                        <Button text="Add Answer" onAction="#handleAddAnswer" styleClass="primary-button"/>
-                        <VBox fx:id="notesBox" spacing="8.0" />
+                        <Label text="Expected Output:" styleClass="profile-text"/>
+
+                        <HBox spacing="10.0" alignment="CENTER_LEFT">
+                            <children>
+                                <TextField fx:id="answerField"
+                                           promptText="Enter expected output..."
+                                           styleClass="input-field"
+                                           HBox.hgrow="ALWAYS" />
+
+                                <Button text="Add Answer"
+                                        onAction="#handleAddAnswer"
+                                        styleClass="primary-button"/>
+                            </children>
+                        </HBox>
+
+                        <VBox fx:id="answersBox" spacing="8.0" />
                     </children>
-                    
                 </VBox>
 
                 <VBox spacing="12.0" maxWidth="780.0" styleClass="profile-card">
-                    <padding><Insets top="18" right="22" bottom="18" left="22"/></padding>
+                    <padding>
+                        <Insets top="18" right="22" bottom="18" left="22"/>
+                    </padding>
 
                     <children>
-                        
-                        <VBox fx:id="answersBox" spacing="8.0"/>
-
                         <HBox alignment="CENTER" spacing="220.0">
                             <children>
                                 <Button text="Cancel Creation" onAction="#handleCancelCreation" styleClass="danger-button"/>
@@ -204,8 +226,8 @@
                     </children>
                 </VBox>
 
-                </VBox>
-            </content>
-        </ScrollPane>
-    </children>
+            </VBox>
+        </content>
+    </ScrollPane>
+</children>
 </StackPane>
