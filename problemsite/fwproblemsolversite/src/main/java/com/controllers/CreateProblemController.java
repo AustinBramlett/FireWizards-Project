@@ -269,7 +269,7 @@ public class CreateProblemController {
 
         messageLabel.setText("Problem created successfully!");
         clearForm();
-
+        problemApp.save();
         App.setRoot("problems");
     }
 
