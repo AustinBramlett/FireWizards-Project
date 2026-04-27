@@ -259,25 +259,6 @@ public class CreateProblemController {
             difficulty,
             code
         );
-        Problem newProblem = new Problem(
-            title,
-            java.util.UUID.randomUUID(),
-            description,
-            constraints,
-            com.fwproblemsolversite.enums.Language.JAVA,
-            examples,
-            new ArrayList<>(),
-            com.fwproblemsolversite.enums.ProblemType.STRING,
-            new ArrayList<>(),
-            0.0,
-            new ArrayList<>(),
-            com.fwproblemsolversite.enums.Difficulty.EASY,
-            new ArrayList<>(),
-            new ArrayList<>(),
-            code
-        );
-
-        ProblemData.getInstance().add(newProblem);
 
         messageLabel.setText("Problem created successfully!");
         clearForm();
