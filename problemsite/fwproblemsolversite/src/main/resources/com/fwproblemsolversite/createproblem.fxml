@@ -176,21 +176,13 @@
                         <Label text="Create Answers" styleClass="section-title">
                             <font><Font size="22"/></font>
                         </Label>
-
-                        <Label text="Title:" styleClass="profile-text"/>
+                        <Label text="Answer:" styleClass="profile-text"/>
                         <TextField fx:id="answerTitleField" styleClass="input-field"/>
 
-                        <Label text="Time Complexity:" styleClass="profile-text"/>
-                        <TextField fx:id="timeComplexityField" styleClass="input-field"/>
-
-                        <Label text="Description:" styleClass="profile-text"/>
-                        <TextArea fx:id="answerDescriptionArea" prefHeight="80" styleClass="input-area"/>
-
-                        <Label text="File:" styleClass="profile-text"/>
-                        <Button fx:id="fileButton" text="Upload solution file" onAction="#handleChooseFile" styleClass="tool-button" maxWidth="Infinity"/>
-
                         <Button text="Add Answer" onAction="#handleAddAnswer" styleClass="primary-button"/>
+                        <VBox fx:id="notesBox" spacing="8.0" />
                     </children>
+                    
                 </VBox>
 
                 <VBox spacing="12.0" maxWidth="780.0" styleClass="profile-card">

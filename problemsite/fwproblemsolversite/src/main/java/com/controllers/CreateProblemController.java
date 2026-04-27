@@ -153,39 +153,14 @@ public class CreateProblemController {
 
     @FXML
     private void handleAddAnswer() {
-        String title = answerTitleField.getText().trim();
-        String complexity = timeComplexityField.getText().trim();
-        String expectedOutput = answerDescriptionArea.getText().trim();
-
-        if (title.isEmpty()) {
-            messageLabel.setText("Enter an answer title.");
-            return;
-        }
-
-        if (complexity.isEmpty()) {
-            messageLabel.setText("Enter the time complexity.");
-            return;
-        }
-
-        if (expectedOutput.isEmpty()) {
-            messageLabel.setText("Enter the expected output.");
-            return;
-        }
-
-        String temp = title + " | " + complexity + " | " + expectedOutput;
-
-        if (selectedFile != null) {
-            temp += " | File: " + selectedFile.getName();
-        }
-
-        final String answerText = temp;
+        final String answerText = answerTitleField.getText().trim();
 
         answers.add(answerText);
 
         HBox answerRow = new HBox(8.0);
         answerRow.setStyle("-fx-alignment: center-left;");
 
-        Label answerLabel = new Label(title + " (" + complexity + ")");
+        Label answerLabel = new Label(answerText);
         answerLabel.getStyleClass().add("tag-pill");
 
         Button removeButton = new Button("x");
@@ -199,8 +174,6 @@ public class CreateProblemController {
         answersBox.getChildren().add(answerRow);
 
         answerTitleField.clear();
-        timeComplexityField.clear();
-        answerDescriptionArea.clear();
         selectedFile = null;
 
         messageLabel.setText("Answer added.");
@@ -285,8 +258,6 @@ public class CreateProblemController {
         noteField.clear();
 
         answerTitleField.clear();
-        timeComplexityField.clear();
-        answerDescriptionArea.clear();
 
         tags.clear();
         constraints.clear();
