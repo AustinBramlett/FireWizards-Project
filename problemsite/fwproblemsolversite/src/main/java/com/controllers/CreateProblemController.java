@@ -245,6 +245,13 @@ public class CreateProblemController {
         ProblemType type = ProblemType.valueOf(typeBox.getValue().toUpperCase());
         ArrayList<ArrayList<String>> answersAdj = new ArrayList<>();
         answersAdj.add(answers);
+        double timerValue = 0.0;
+        switch(timerBox.getValue()) {
+            case "5 min" -> timerValue = 5.00;
+            case "10 min" -> timerValue = 10.00;
+            case "15 min" -> timerValue = 15.00;
+            case "30 min" -> timerValue = 30.00;
+        }
         problemApp.addProblem(
             title,
             description,
@@ -254,7 +261,7 @@ public class CreateProblemController {
             notes,
             type,
             tags,
-            Double.valueOf(timerBox.getValue()),
+            timerValue,
             answersAdj,
             difficulty,
             code
