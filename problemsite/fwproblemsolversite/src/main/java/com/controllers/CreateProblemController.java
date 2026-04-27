@@ -47,9 +47,6 @@ public class CreateProblemController {
     @FXML private VBox notesBox;
     @FXML private VBox answersBox;
     @FXML private VBox exampleTitlesBox;
-
-
-    @FXML private TextField answerTitleField;
     @FXML private TextField timeComplexityField;
     @FXML private TextArea answerDescriptionArea;
 
@@ -58,12 +55,12 @@ public class CreateProblemController {
 
     private File selectedFile;
 
-    private final ArrayList<String> tags = new ArrayList<>();
-    private final ArrayList<String> constraints = new ArrayList<>();
-    private final ArrayList<String> exampleOutputs = new ArrayList<>();
-    private final ArrayList<String> exampleTitles = new ArrayList<>();
-    private final ArrayList<String> notes = new ArrayList<>();
-    private final ArrayList<String> answers = new ArrayList<>();
+    private ArrayList<String> tags = new ArrayList<>();
+    private ArrayList<String> constraints = new ArrayList<>();
+    private ArrayList<String> exampleOutputs = new ArrayList<>();
+    private ArrayList<String> exampleTitles = new ArrayList<>();
+    private ArrayList<String> notes = new ArrayList<>();
+    private ArrayList<String> answers = new ArrayList<>();
     private ProblemApplication problemApp = ProblemApplication.getInstance();
 
     @FXML
@@ -162,7 +159,7 @@ public class CreateProblemController {
 
     @FXML
     private void handleAddAnswer() {
-        final String answerText = answerTitleField.getText().trim();
+        final String answerText = answerField.getText().trim();
 
         answers.add(answerText);
 
@@ -182,7 +179,7 @@ public class CreateProblemController {
         answerRow.getChildren().addAll(answerLabel, removeButton);
         answersBox.getChildren().add(answerRow);
 
-        answerTitleField.clear();
+        answerField.clear();
         selectedFile = null;
 
         messageLabel.setText("Answer added.");
@@ -266,13 +263,14 @@ public class CreateProblemController {
         exampleOutputField.clear();
         noteField.clear();
 
-        answerTitleField.clear();
+        answerField.clear();
 
-        tags.clear();
-        constraints.clear();
-        exampleOutputs.clear();
-        notes.clear();
-        answers.clear();
+        tags = new ArrayList<>();
+        constraints = new ArrayList<>();
+        exampleOutputs = new ArrayList<>();
+        exampleTitles = new ArrayList<>();
+        notes = new ArrayList<>();
+        answers = new ArrayList<>();
 
         tagsBox.getChildren().clear();
         constraintsBox.getChildren().clear();
