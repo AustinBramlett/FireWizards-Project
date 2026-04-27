@@ -189,10 +189,7 @@
                     <padding><Insets top="18" right="22" bottom="18" left="22"/></padding>
 
                     <children>
-                        <Label text="Answers" styleClass="section-title">
-                            <font><Font size="22"/></font>
-                        </Label>
-
+                        
                         <VBox fx:id="answersBox" spacing="8.0"/>
 
                         <HBox alignment="CENTER" spacing="220.0">
