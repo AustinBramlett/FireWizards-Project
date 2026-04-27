@@ -59,6 +59,7 @@ public class CreateAccountController {
         String password = passwordField.getText();
         String confirmPassword = confirmPasswordField.getText();
         String accountType = accountTypeBox.getValue();
+        ProblemApplication problemApp = ProblemApplication.getInstance();
         if(problemApp.getCurrentUser() != null){
             errorLabel.setText("Please log out before creating a new account.");
             throw new IOException("User already logged in during account creation (???)");
@@ -96,7 +97,7 @@ public class CreateAccountController {
         newAccount.setAccountType(
             com.fwproblemsolversite.enums.AccountType.valueOf(accountType)
         );
-        AccountData.getInstance().getAccounts().add(newAccount);
+        AccountData.getInstance().addAccount(newAccount);
 
         com.fwproblemsolversite.io.dataWriter.saveAccounts(
             AccountData.getInstance().getAccounts()
