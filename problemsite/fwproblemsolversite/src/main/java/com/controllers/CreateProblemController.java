@@ -5,8 +5,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import com.fwproblemsolversite.App;
+import com.fwproblemsolversite.data.ProblemData;
+import com.fwproblemsolversite.problems.Problem;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -21,6 +24,7 @@ public class CreateProblemController {
     @FXML private TextField titleField;
     @FXML private TextArea descriptionArea;
     @FXML private TextField summaryField;
+    @FXML private TextArea codeArea;
 
     @FXML private ComboBox<String> difficultyBox;
     @FXML private ComboBox<String> typeBox;
@@ -60,7 +64,7 @@ public class CreateProblemController {
 
         if (userNameLabel != null) {
             userNameLabel.setText("Contributor");
-        }        
+        }
     }
 
     @FXML
@@ -106,10 +110,22 @@ public class CreateProblemController {
 
         list.add(text);
 
+        HBox itemRow = new HBox(8.0);
+        itemRow.setStyle("-fx-alignment: center-left;");
+
         Label itemLabel = new Label(text);
         itemLabel.getStyleClass().add("tag-pill");
 
-        box.getChildren().add(itemLabel);
+        Button removeButton = new Button("-");
+        removeButton.getStyleClass().add("danger-button");
+        removeButton.setOnAction(event -> {
+            list.remove(text);
+            box.getChildren().remove(itemRow);
+        });
+
+        itemRow.getChildren().addAll(itemLabel, removeButton);
+        box.getChildren().add(itemRow);
+
         field.clear();
 
         if (messageLabel != null) {
@@ -150,17 +166,31 @@ public class CreateProblemController {
             return;
         }
 
-        String answerText = title + " | " + complexity + " | " + expectedOutput;
+        String temp = title + " | " + complexity + " | " + expectedOutput;
 
         if (selectedFile != null) {
-            answerText += " | File: " + selectedFile.getName();
+            temp += " | File: " + selectedFile.getName();
         }
+
+        final String answerText = temp;
 
         answers.add(answerText);
 
+        HBox answerRow = new HBox(8.0);
+        answerRow.setStyle("-fx-alignment: center-left;");
+
         Label answerLabel = new Label(title + " (" + complexity + ")");
         answerLabel.getStyleClass().add("tag-pill");
-        answersBox.getChildren().add(answerLabel);
+
+        Button removeButton = new Button("x");
+        removeButton.getStyleClass().add("danger-button");
+        removeButton.setOnAction(event -> {
+            answers.remove(answerText);
+            answersBox.getChildren().remove(answerRow);
+        });
+
+        answerRow.getChildren().addAll(answerLabel, removeButton);
+        answersBox.getChildren().add(answerRow);
 
         answerTitleField.clear();
         timeComplexityField.clear();
@@ -168,13 +198,15 @@ public class CreateProblemController {
         selectedFile = null;
 
         messageLabel.setText("Answer added.");
-    }
+}
 
     @FXML
-    private void handleCreateProblem() {
+    private void handleCreateProblem() throws IOException {
+
         String title = titleField.getText().trim();
         String description = descriptionArea.getText().trim();
         String summary = summaryField.getText().trim();
+        String code = codeArea.getText().trim();
 
         if (title.isEmpty()) {
             messageLabel.setText("Please enter a problem title.");
@@ -191,25 +223,42 @@ public class CreateProblemController {
             return;
         }
 
-        if (tags.isEmpty()) {
-            messageLabel.setText("Please add at least one tag.");
+        if (code.isEmpty()) {
+            messageLabel.setText("Please enter the code users will see.");
             return;
         }
 
-        if (answers.isEmpty()) {
-            messageLabel.setText("Please add at least one answer.");
-            return;
-        }
+        Problem newProblem = new Problem(
+            title,
+            java.util.UUID.randomUUID(),
+            description,
+            new ArrayList<>(),
+            com.fwproblemsolversite.enums.Language.JAVA,
+            new ArrayList<>(),
+            new ArrayList<>(),
+            com.fwproblemsolversite.enums.ProblemType.STRING,
+            new ArrayList<>(),
+            0.0,
+            new ArrayList<>(),
+            com.fwproblemsolversite.enums.Difficulty.EASY,
+            new ArrayList<>(),
+            new ArrayList<>(),
+            code
+        );
+
+        ProblemData.getInstance().add(newProblem);
 
         messageLabel.setText("Problem created successfully!");
-
         clearForm();
+
+        App.setRoot("problems");
     }
 
     private void clearForm() {
         titleField.clear();
         descriptionArea.clear();
         summaryField.clear();
+        codeArea.clear();
 
         tagField.clear();
         constraintField.clear();

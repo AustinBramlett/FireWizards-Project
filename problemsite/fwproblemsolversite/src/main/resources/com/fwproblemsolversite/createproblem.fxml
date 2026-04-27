@@ -52,7 +52,7 @@
                                         </Label>
                                     </children>
                                 </StackPane>
-                                
+
                                 <Pane HBox.hgrow="ALWAYS" />
                             </children>
                         </HBox>
@@ -61,10 +61,14 @@
                         <TextField fx:id="titleField" promptText="Problem Title..." styleClass="input-field" />
 
                         <Label text="Description:" styleClass="profile-text" />
-                        <TextArea fx:id="descriptionArea" prefHeight="130.0" wrapText="true" styleClass="input-area" />
+                        <TextArea fx:id="descriptionArea"  promptText="Enter your discription here..." prefHeight="130.0" wrapText="true" styleClass="input-area" />
 
                         <Label text="Summary:" styleClass="profile-text" />
-                        <TextField fx:id="summaryField" styleClass="input-field" />
+                        <TextField fx:id="summaryField" promptText="Enter summary of your discription here..." styleClass="input-field" />
+
+                        <Label text="Code to Display:" styleClass="profile-text" />
+                        <TextArea fx:id="codeArea" promptText="Enter the code users will see..." prefHeight="120.0" wrapText="true" styleClass="input-area" />
+
                     </children>
                 </VBox>
 
